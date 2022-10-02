@@ -1,0 +1,235 @@
+#include <iostream> //Для case1
+#include <locale>   //Для вывода русским
+#include <cmath>    //Для вычисления уравнений
+#include <windows.h>//Для ввода русским
+#include <string>   //Для перевода string -> int/float
+#include "Chek.h"   //Модуль проверки
+
+using namespace std;
+
+// Д/з 1
+
+//Задание "Имя"
+void Name()
+{
+    string i = "no";
+    system("cls");
+    cout << "Задание 'имя'\n" << "Тимофей\n";
+    
+    //Модуль выхода в меню
+    do
+    {
+        cout << "Чтобы вернутся, введите любой символ.";
+        cin >> i;
+    } while (i == "no");
+}
+
+//Задание "Арифметика"
+void arithmetic()
+{
+    system("cls");
+    string i = "no";
+    float a = 0, b = 0;
+
+    cout << "Задание 'Арифметика' (Дробные числа писать через запятую.)\n";
+    
+
+    cout << "Введите числа a, b: ";
+    cin >> a >> b;
+
+    
+
+    cout << "a+b=" << a + b << endl << "a-b=" << a - b << endl << "a*b=" << a * b << endl;
+    if (b != 0) cout << "a/b=" << a / b << endl;
+    else cout << "Делить на ноль нельзя.\n";
+
+    //Модуль выхода в меню
+    do
+    {
+        cout << "Чтобы вернутся, введите любой символ.";
+        cin >> i;
+    } while (i == "no");
+}
+
+//Задание "Уравнение"
+void equation()
+{
+    system("cls");
+    string i = "no";
+    float b = 0, c = 0;
+
+
+    cout << "Задание 'Уравнение' (Дробные числа писать через запятую.)\n";
+    
+
+    cout << "Введите значения для переменных b, c: ";
+    cin >> b >> c;
+    
+    if (b == 0 && c == 0) cout << "x может принимать любое значение.\n";
+    else if (b == 0) cout << "Нет решения.\n";
+    else cout << "x=" << -c / b << endl;
+
+
+    
+    //Модуль выхода в меню
+    do
+    {
+        cout << "Чтобы вернутся, введите любой символ.";
+        cin >> i;
+    } while (i == "no");
+}
+
+//Задание "Ещё уравнение"
+void another_equation()
+{
+    system("cls");
+    string i = "no";
+    float a = 0, b = 0, c = 0;
+    double D;
+
+    cout << "Задание 'Ещё уравнение'\n";
+
+    cout << "Введите значения для переменных a, b, c: ";
+    cin >> a >> b >> c;
+    
+    if (a == 0 && b == 0 && c == 0) cout << "x может принимать любое значение.\n";
+    else if (a == 0 && c == 0) cout << "Нет решения.\n";
+    else if (a == 0) cout << "x=" << -c / b << endl;
+    else
+    {
+        D = pow(b, 2) - 4 * a * c;//Расчёт дискриминанта
+
+        if (D > 0) cout << "x1=" << (-b + sqrt(D)) / (2 * a) << endl << "x2=" << (-b - sqrt(D)) / (2 * a) << endl;
+        else if (D == 0) cout << "x=" << -b / (2 * a);
+        else cout << "Нет корней среди вещественных чисел.\n";
+    }
+    
+    //Модуль выхода в меню
+    do
+    {
+        cout << "Чтобы вернутся, введите любой символ.";
+        cin >> i;
+    } while (i == "no");
+}
+
+//Задание "Лампа со шторой"
+void lamp()
+{
+    system("cls");
+    string day, curtains, lamp, d, c, l, i = "no";
+    bool day1 = false, curtains1 = false, lamp1 = false, res, chek_d = false, chek_c = false, chek_l = false;
+    
+    cout << "Задание 'Лампа со шторой'\n";
+    
+    //Модуль проверки корректности ввода day
+    do
+    {
+        cout << "На улице день? (да, нет): ";
+        cin >> d;
+        if (d == "да" || d == "нет")
+        {
+            day = d;
+            chek_d = true;
+        }
+        else cout << "Я просил отвечать да или нет.\n";
+    } while (chek_d == false);
+
+    //Модуль проверки корректности ввода curtains
+    do
+    {
+        cout << "Шторы раздвинуты? (да, нет): ";
+        cin >> c;
+        if (c == "да" || c == "нет")
+        {
+            curtains = c;
+            chek_c = true;
+        }
+        else cout << "Я просил отвечать да или нет.\n";
+    } while (chek_c == false);
+
+    //Модуль проверки корректности ввода lamp
+    do
+    {
+        cout << "Свет включён? (да, нет): ";
+        cin >> l;
+        if (l == "да" || l == "нет")
+        {
+            lamp = l;
+            chek_l = true;
+        }
+        else cout << "Я просил отвечать да или нет.\n";
+    } while (chek_l == false);
+
+    if (day == "да") day1 = true;
+    if (curtains == "да") curtains1 = true;
+    if (lamp == "да") lamp1 = true;
+
+    res = (day1 and curtains1) or lamp1;
+
+    if (res) cout << "В комнате светло.\n";
+    else cout << "В комнате темно.\n";
+
+    //Модуль выхода в меню
+    do
+    {
+        cout << "Чтобы вернутся, введите любой символ.";
+        cin >> i;
+    } while (i == "no");
+}
+
+//Главная часть дз 1
+int case1()
+{
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    setlocale(LC_ALL, "Russian");
+
+    string hw1;
+    bool chek_hw1 = true;
+    system("cls");
+    while (chek_hw1)
+    {
+        cout << "Задание 1 'Имя'\n" << "Задание 2 'Арифметика'\n" << "Задание 3 'Уравнение'\n" << "Задание 4 'Ещё уравнение'\n" << "Задание 5 'Лампа со шторой'\n" << "0 вернуться к выбору д/з.\n" << "Введите номер задания: ";
+        cin >> hw1;
+        if (chek(hw1, true))
+        {
+            switch (stoi(hw1))
+            {
+            default:
+                system("cls");
+                cout << stoi(hw1) << " - нет такого задания.\n";
+                break;
+            case 1:
+                Name();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+            case 2:
+                arithmetic();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+            case 3:
+                equation();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+            case 4:
+                another_equation();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+            case 5:
+                lamp();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+            case 0:
+                system("cls");
+                cout << "Вы вернулись назад.\n";
+                chek_hw1 = false;
+            }
+        }
+    }
+    chek_hw1 = true;
+}
