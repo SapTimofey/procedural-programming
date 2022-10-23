@@ -135,6 +135,7 @@
     <ClCompile Include="HomeWork2.cpp" />
     <ClCompile Include="HomeWork3.cpp" />
     <ClCompile Include="HomeWork4.cpp" />
+    <ClCompile Include="HomeWork5.cpp" />
     <ClCompile Include="procedural programming.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +144,7 @@
     <ClInclude Include="HomeWork2.h" />
     <ClInclude Include="HomeWork3.h" />
     <ClInclude Include="HomeWork4.h" />
+    <ClInclude Include="HomeWork5.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

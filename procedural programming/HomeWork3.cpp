@@ -1,4 +1,4 @@
-#include <iostream> //Для case2
+#include <iostream> //Для case3
 #include <locale>   //Для вывода русским
 #include <windows.h>//Для ввода русским
 #include <cmath>    //Для вычисления уравнений
@@ -13,25 +13,28 @@ using namespace std;
 //Создание файла
 void file()
 {
-    ofstream fout("test_HW3.txt");
+    ofstream fout("test_HW.txt");
     fout.close();
 }
 
 // Д/з 3
 
-//Задание "Заём"
+//Задание 1 "Заём"
 void loan()
 {
     system("cls");
     string i = "no";
-    float S = 0, n = 0, p = 0, r = 0, m = 0;
-
+    float S = 0, n = 0, p = 0, r = 0, m = 0, n_chek = 0, n_chek2 = 0;
     cout << "Задание 'Заём'\n";
 
-    cout << "Введите S, n, p: ";
-    cin >> S >> n >> p;
+    S = chek(1, "Введите S: ", false);
+    n = chek(1, "Введите n: ", false);
+    p = chek(0, "Введите p: ", false);
+
+    n_chek = modf(n, &n_chek2);
+
     r = p / 100; //Доли
-    if (S >= 0 && n > 0 && p != 0)
+    if (S >= 0 && n > 0 && ((n_chek == 0 && p != -200) || (n_chek != 0 && p >= -100)))
     {
         m = (S * r * pow((1 + r), n)) / (12 * (pow((1 + r), n) - 1));//Расчёт месячной выплаты
 
@@ -40,6 +43,14 @@ void loan()
     else if (p == 0)
     {
         m = S / (12 * n);
+
+        cout << "Ваша месячная выплата составляет " << m << " рублей.\n";
+    }
+    else if (n == 0) cout << "Ваша выплата составляет " << S << " рублей.\n";
+    else if (n_chek != 0 && p < -100) cout << "При нецелом n и p меньше -100, уравнение не решается.\n";
+    else if (p == -200)
+    {
+        m = (-1) * S / (12 * n);
 
         cout << "Ваша месячная выплата составляет " << m << " рублей.\n";
     }
@@ -53,7 +64,7 @@ void loan()
     } while (i == "no");
 }
 
-//Задание "Ссуда"
+//Задание 2 "Ссуда"
 void loan2()
 {
     
@@ -115,7 +126,7 @@ void loan2()
     } while (i == "no");
 }
 
-//Задание "Копирование файла"
+//Задание 3 "Копирование файла"
 void copying_file()
 {
     file();
@@ -129,12 +140,12 @@ void copying_file()
     
     cin >> str;
     //Запись 1 строки в файл
-    fout.open("test_HW3.txt");
+    fout.open("test_HW.txt");
     fout << str << endl;
     fout.close();
     
     //Чтение 1 строки из файла
-    ifstream fin("test_HW3.txt");
+    ifstream fin("test_HW.txt");
     fin >> f_read;
     fin.close();
     len = str.length();
@@ -143,12 +154,12 @@ void copying_file()
     //Запись 2 строки в файл
     cout << "Введите 2 строку для записи в файл: ";
     cin >> str;
-    fout.open("test_HW3.txt", ios::app);
+    fout.open("test_HW.txt", ios::app);
     fout << str;
     fout.close();
 
     //Чтение 2 строки из файла
-    ifstream fin2("test_HW3.txt");
+    ifstream fin2("test_HW.txt");
     fin2.seekg(len);
     fin2 >> f_read;
     fin2.close();
@@ -162,7 +173,7 @@ void copying_file()
     } while (i == "no");
 }
 
-//Задание "Фильтр"
+//Задание 4 "Фильтр"
 void filter()
 {
     file();
@@ -217,7 +228,7 @@ void filter()
     } while (j == "no");
 }
 
-//Задание "Сортировка букв"
+//Задание 5 "Сортировка букв"
 void sorting_letters()
 {
     file();
@@ -233,12 +244,12 @@ void sorting_letters()
     cin >> str;
 
     //Запись строки в файл
-    fout.open("test_HW3.txt");
+    fout.open("test_HW.txt");
     fout << str;
     fout.close();
 
     //Чтение строки из файла
-    ifstream fin("test_HW3.txt");
+    ifstream fin("test_HW.txt");
     fin >> str_file;
     fin.close();
 
@@ -287,51 +298,46 @@ int case3()
     SetConsoleOutputCP(1251);
     setlocale(LC_ALL, "Russian");
 
-    string hw3;
+    string cons_out = "Задание 1 'Заём'\nЗадание 2 'Ссуда'\nЗадание 3 'Копирование файла'\nЗадание 4 'Фильтр'\nЗадание 5 'Сортировка букв'\n0 вернуться к выбору д/з.\nВведите номер задания: ";
     bool chek_hw3 = true;
     system("cls");
     while (chek_hw3)
     {
-        cout << "Задание 1 'Заём'\n" << "Задание 2 'Ссуда'\n" << "Задание 3 'Копирование файла'\n" << "Задание 4 'Фильтр'\n" << "Задание 5 'Сортировка букв'\n" << "0 вернуться к выбору д/з.\n" << "Введите номер задания: ";
-        cin >> hw3;
-        if (chek(hw3, true))
+        switch ((int)chek(3, cons_out, true))
         {
-            switch (stoi(hw3))
-            {
-            default:
-                system("cls");
-                cout << stoi(hw3) << " - нет такого задания.\n";
-                break;
-            case 1:
-                loan();
-                system("cls");
-                cout << "Вы вернулись к выбору заданий.\n";
-                break;
-            case 2:
-                loan2();
-                system("cls");
-                cout << "Вы вернулись к выбору заданий.\n";
-                break;
-            case 3:
-                copying_file();
-                system("cls");
-                cout << "Вы вернулись к выбору заданий.\n";
-                break;
-            case 4:
-                filter();
-                system("cls");
-                cout << "Вы вернулись к выбору заданий.\n";
-                break;
-            case 5:
-                sorting_letters();
-                system("cls");
-                cout << "Вы вернулись к выбору заданий.\n";
-                break;
-            case 0:
-                system("cls");
-                cout << "Вы вернулись назад.\n";
-                chek_hw3 = false;
-            }
+        default:
+            system("cls");
+            cout << "Нет такого задания.\n";
+            break;
+        case 1:
+            loan();
+            system("cls");
+            cout << "Вы вернулись к выбору заданий.\n";
+            break;
+        case 2:
+            loan2();
+            system("cls");
+            cout << "Вы вернулись к выбору заданий.\n";
+            break;
+        case 3:
+            copying_file();
+            system("cls");
+            cout << "Вы вернулись к выбору заданий.\n";
+            break;
+        case 4:
+            filter();
+            system("cls");
+            cout << "Вы вернулись к выбору заданий.\n";
+            break;
+        case 5:
+            sorting_letters();
+            system("cls");
+            cout << "Вы вернулись к выбору заданий.\n";
+            break;
+        case 0:
+            system("cls");
+            cout << "Вы вернулись назад.\n";
+            chek_hw3 = false;
         }
     }
     chek_hw3 = true;

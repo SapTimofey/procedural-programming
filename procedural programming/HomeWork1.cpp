@@ -9,7 +9,7 @@ using namespace std;
 
 // Д/з 1
 
-//Задание "Имя"
+//Задание 1 "Имя"
 void Name()
 {
     string i = "no";
@@ -24,7 +24,7 @@ void Name()
     } while (i == "no");
 }
 
-//Задание "Арифметика"
+//Задание 2 "Арифметика"
 void arithmetic()
 {
     system("cls");
@@ -51,7 +51,7 @@ void arithmetic()
     } while (i == "no");
 }
 
-//Задание "Уравнение"
+//Задание 3 "Уравнение"
 void equation()
 {
     system("cls");
@@ -79,7 +79,7 @@ void equation()
     } while (i == "no");
 }
 
-//Задание "Ещё уравнение"
+//Задание 4 "Ещё уравнение"
 void another_equation()
 {
     system("cls");
@@ -112,7 +112,7 @@ void another_equation()
     } while (i == "no");
 }
 
-//Задание "Лампа со шторой"
+//Задание 5 "Лампа со шторой"
 void lamp()
 {
     system("cls");
@@ -184,51 +184,46 @@ int case1()
     SetConsoleOutputCP(1251);
     setlocale(LC_ALL, "Russian");
 
-    string hw1;
+    string cons_out = "Задание 1 'Имя'\nЗадание 2 'Арифметика'\nЗадание 3 'Уравнение'\nЗадание 4 'Ещё уравнение'\nЗадание 5 'Лампа со шторой'\n0 вернуться к выбору д/з.\nВведите номер задания: ";
     bool chek_hw1 = true;
     system("cls");
     while (chek_hw1)
     {
-        cout << "Задание 1 'Имя'\n" << "Задание 2 'Арифметика'\n" << "Задание 3 'Уравнение'\n" << "Задание 4 'Ещё уравнение'\n" << "Задание 5 'Лампа со шторой'\n" << "0 вернуться к выбору д/з.\n" << "Введите номер задания: ";
-        cin >> hw1;
-        if (chek(hw1, true))
+        switch ((int)chek(3, cons_out, true))
         {
-            switch (stoi(hw1))
-            {
-            default:
-                system("cls");
-                cout << stoi(hw1) << " - нет такого задания.\n";
-                break;
-            case 1:
-                Name();
-                system("cls");
-                cout << "Вы вернулись к выбору заданий.\n";
-                break;
-            case 2:
-                arithmetic();
-                system("cls");
-                cout << "Вы вернулись к выбору заданий.\n";
-                break;
-            case 3:
-                equation();
-                system("cls");
-                cout << "Вы вернулись к выбору заданий.\n";
-                break;
-            case 4:
-                another_equation();
-                system("cls");
-                cout << "Вы вернулись к выбору заданий.\n";
-                break;
-            case 5:
-                lamp();
-                system("cls");
-                cout << "Вы вернулись к выбору заданий.\n";
-                break;
-            case 0:
-                system("cls");
-                cout << "Вы вернулись назад.\n";
-                chek_hw1 = false;
-            }
+        default:
+            system("cls");
+            cout << "Нет такого задания.\n";
+            break;
+        case 1:
+            Name();
+            system("cls");
+            cout << "Вы вернулись к выбору заданий.\n";
+            break;
+        case 2:
+            arithmetic();
+            system("cls");
+            cout << "Вы вернулись к выбору заданий.\n";
+            break;
+        case 3:
+            equation();
+            system("cls");
+            cout << "Вы вернулись к выбору заданий.\n";
+            break;
+        case 4:
+            another_equation();
+            system("cls");
+            cout << "Вы вернулись к выбору заданий.\n";
+            break;
+        case 5:
+            lamp();
+            system("cls");
+            cout << "Вы вернулись к выбору заданий.\n";
+            break;
+        case 0:
+            system("cls");
+            cout << "Вы вернулись назад.\n";
+            chek_hw1 = false;
         }
     }
     chek_hw1 = true;

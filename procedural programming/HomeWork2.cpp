@@ -9,68 +9,21 @@ using namespace std;
 
 // Д/з 2
 
-//Задание "Конус"
+//Задание 1 "Конус"
 void cone()
 {
     system("cls");
-    string R_test, h_test, r_test, i = "no";
+    string i = "no";
     float R = 0, h = 0, r = 0;
     double l;
-    bool R_TF, h_TF, r_TF;
     const double PI = 3.141592653589793;
 
     cout << "Задание 'Конус'\n";
-    
-    //Модуль проверки корректности ввода R
-    do
-    {
-        cout << "Введите значение для нижнего радиуса R: ";
-        cin >> R_test;
-        R_TF = chek(R_test, false);
-        if (R_TF)
-        {
-            R = stof(R_test);
-            if (R <= 0)
-            {
-                cout << "R должна быть больше 0.\n";
-                R_TF = false;
-            }
-        }
-    } while (R_TF == false);
+    R = chek(1, "Введите значение для нижнего радиуса R: ", false);
 
-    //Модуль проверки корректности ввода r
-    do
-    {
-        cout << "Введите значение для верхнего радиуса r: ";
-        cin >> r_test;
-        r_TF = chek(r_test, false);
-        if (r_TF)
-        {
-            r = stof(r_test);
-            if (r <= 0)
-            {
-                cout << "r должна быть больше 0.\n";
-                r_TF = false;
-            }
-        }
-    } while (r_TF == false);
+    r = chek(1, "Введите значение для верхнего радиуса r: ", false);
 
-    //Модуль проверки корректности ввода h
-    do
-    {
-        cout << "Введите значение для высоты h: ";
-        cin >> h_test;
-        h_TF = chek(h_test, false);
-        if (h_TF)
-        {
-            h = stof(h_test);
-            if (h <= 0)
-            {
-                cout << "h должна быть больше 0.\n";
-                h_TF = false;
-            }
-        }
-    } while (h_TF == false);
+    h = chek(1, "Введите значение для высоты h: ", false);
 
     l = sqrt(pow(h, 2) + pow((R - r), 2)); //Расчёт длины образующей
 
@@ -84,7 +37,7 @@ void cone()
     } while (i == "no");
 }
 
-//Задание "Разветвление"
+//Задание 2 "Разветвление"
 void branching()
 {
     system("cls");
@@ -112,7 +65,7 @@ void branching()
     } while (i == "no");
 }
 
-//Задание "Функция"
+//Задание 3 "Функция"
 void function()
 {
     system("cls");
@@ -139,25 +92,15 @@ void function()
 
 }
 
-//Задание "Порядок"
+//Задание 4 "Порядок"
 void sequence()
 {
-
     system("cls");
-    string N_test, i = "no";
+    string i = "no";
     int N, g;
-    bool N_TF;
 
     cout << "Задание 'Порядок'\n";
-    
-    //Модуль проверки корректности ввода N
-    do
-    {
-        cout << "Введите число N: ";
-        cin >> N_test;
-        N_TF = chek(N_test, false);
-        if (N_TF) N = stoi(N_test);
-    } while (N_TF == false);
+    N = chek(0, "Введите число N: ", false);
 
     cout << "Последовательность из 10 чисел: " << N - 1;
     for (N, g = 0; g <= 8; N++, g++) cout << ", " << N;
@@ -170,7 +113,7 @@ void sequence()
     } while (i == "no");
 }
 
-//Задание "Табуляция"
+//Задание 5 "Табуляция"
 void tabulation()
 {
     system("cls");
@@ -198,51 +141,46 @@ int case2()
     SetConsoleOutputCP(1251);
     setlocale(LC_ALL, "Russian");
 
-    string hw2;
+    string cons_out = "Задание 1 'Конус'\nЗадание 2 'Разветвление'\nЗадание 3 'Функция'\nЗадание 4 'Порядок'\nЗадание 5 'Табуляция'\n0 вернуться к выбору д/з.\nВведите номер задания: ";
     bool chek_hw2 = true;
     system("cls");
     while (chek_hw2)
     {
-        cout << "Задание 1 'Конус'\n" << "Задание 2 'Разветвление'\n" << "Задание 3 'Функция'\n" << "Задание 4 'Порядок'\n" << "Задание 5 'Табуляция'\n" << "0 вернуться к выбору д/з.\n" << "Введите номер задания: ";
-        cin >> hw2;
-        if (chek(hw2, true))
+        switch ((int)chek(3, cons_out, true))
         {
-            switch (stoi(hw2))
-            {
-            default:
-                system("cls");
-                cout << stoi(hw2) << " - нет такого задания.\n";
-                break;
-            case 1:
-                cone();
-                system("cls");
-                cout << "Вы вернулись к выбору заданий.\n";
-                break;
-            case 2:
-                branching();
-                system("cls");
-                cout << "Вы вернулись к выбору заданий.\n";
-                break;
-            case 3:
-                function();
-                system("cls");
-                cout << "Вы вернулись к выбору заданий.\n";
-                break;
-            case 4:
-                sequence();
-                system("cls");
-                cout << "Вы вернулись к выбору заданий.\n";
-                break;
-            case 5:
-                tabulation();
-                system("cls");
-                cout << "Вы вернулись к выбору заданий.\n";
-                break;
-            case 0:
-                system("cls");
-                cout << "Вы вернулись назад.\n";
-                chek_hw2 = false;
-            }
+        default:
+            system("cls");
+            cout << "Нет такого задания.\n";
+            break;
+        case 1:
+            cone();
+            system("cls");
+            cout << "Вы вернулись к выбору заданий.\n";
+            break;
+        case 2:
+            branching();
+            system("cls");
+            cout << "Вы вернулись к выбору заданий.\n";
+            break;
+        case 3:
+            function();
+            system("cls");
+            cout << "Вы вернулись к выбору заданий.\n";
+            break;
+        case 4:
+            sequence();
+            system("cls");
+            cout << "Вы вернулись к выбору заданий.\n";
+            break;
+        case 5:
+            tabulation();
+            system("cls");
+            cout << "Вы вернулись к выбору заданий.\n";
+            break;
+        case 0:
+            system("cls");
+            cout << "Вы вернулись назад.\n";
+            chek_hw2 = false;
         }
     }
     chek_hw2 = true;

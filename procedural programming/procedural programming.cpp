@@ -6,6 +6,7 @@
 #include "HomeWork2.h" //Модуль Д/з 2
 #include "HomeWork3.h" //Модуль Д/з 3
 #include "HomeWork4.h" //Модуль Д/з 4
+#include "HomeWork5.h" //Модуль Д/з 4
 #include "Chek.h"      //Модуль проверки
 
 using namespace std;
@@ -15,36 +16,34 @@ int main()
 {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
-
-    string d;
+    string cons_out = "Д/з 1\nД/з 2\nД/з 3\nД/з 4\nД/з 5\n0 Завершить работу.\nВведите номер д/з: ";
     while (true)
     {
-        cout << "Д/з 1\n" << "Д/з 2\n" << "Д/з 3\n" << "Д/з 4\n" << "0 Завершить работу.\n" << "Введите номер д/з: ";
-        cin >> d;
-        if (chek(d, true))
+        switch ((int)chek(3, cons_out, true))
         {
-            switch (stoi(d))
-            {
-            default:
-                system("cls");
-                cout << stoi(d) << " - нет такого д/з.\n";
-                break;
-            case 1:
-                case1(); //Д/з 1
-                break;
-            case 2:
-                case2(); //Д/з 2
-                break;
-            case 3:
-                case3(); //Д/з 3
-                break;
-            case 4:
-                case4(); //Д/з 4
-                break;
-            case 0:
-                cout << "Вы завершили работу.\n";
-                exit(EXIT_SUCCESS);
-            }
+        default:
+            system("cls");
+            cout << "Нет такого д/з.\n";
+            break;
+        case 1:
+            case1(); //Д/з 1
+            break;
+        case 2:
+            case2(); //Д/з 2
+            break;
+        case 3:
+            case3(); //Д/з 3
+            break;
+        case 4:
+            case4(); //Д/з 4
+            break;
+        case 5:
+            case5();
+            break;
+        case 0:
+            cout << "Вы завершили работу.\n";
+            exit(EXIT_SUCCESS);
         }
     }
+    
 }

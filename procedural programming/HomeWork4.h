@@ -5,5 +5,6 @@ void geometry();
 void glory();
 void recognizer();
 void sin();
+void matrix();
 void number_system();
 int case4();
