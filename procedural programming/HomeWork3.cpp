@@ -60,7 +60,8 @@ void loan()
 void loan2()
 {
     system("cls");
-    float S = 0, n = 0, m = 0, p = 0, m_chek = 0, r = 0.1;
+    float S = 0, n = 0, m = 0, p = 0;
+    double r = 0.1, m_chek = 0;
 
     cout << "Задание 'Ссуда'\n";
 

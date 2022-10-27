@@ -75,7 +75,8 @@ void function()
 void sequence()
 {
     system("cls");
-    int N, g;
+    int g;
+    float N = 0;
 
     cout << "Задание 'Порядок'\n";
     N = chek(0, "Введите число N: ", false);
