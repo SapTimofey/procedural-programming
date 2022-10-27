@@ -44,6 +44,30 @@ float chek(int type, string cons_out, bool main)
                     cout << num << " - число должно быть целым.\n";
                     break;
                 }
+            case 4: // Для системы счисления.
+                if (n == 0 && Fnum > 0) return Fnum;
+                else if (n != 0)
+                {
+                    cout << num << " - СС не может быть дробной.\n";
+                    break;
+                }
+                else
+                {
+                    cout << num << " - СС не может быть отрицательной.\n";
+                    break;
+                }
+            case 5: // Проверка на целое положительное число.
+                if (n == 0 && Fnum > 0) return Fnum;
+                else if (n != 0)
+                {
+                    cout << num << " - Число не может быть дробным.\n";
+                    break;
+                }
+                else
+                {
+                    cout << num << " - Число не может быть отрицательным.\n";
+                    break;
+                }
             default:// Для остальных случаев.
                 return Fnum;
             }

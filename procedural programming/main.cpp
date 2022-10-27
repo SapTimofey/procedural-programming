@@ -38,7 +38,7 @@ int main()
             case4(); //Д/з 4
             break;
         case 5:
-            case5();
+            case5(); //Д/з 5
             break;
         case 0:
             cout << "Вы завершили работу.\n";

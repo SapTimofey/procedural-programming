@@ -762,8 +762,7 @@ void number_system()
     cout << "Задание 'Системы счисления'\n" << "Введите число: ";
     cin >> input_num;
 
-    cout << "Введите систему счисления введённого числа: ";
-    cin >> input_base_from;
+    input_base_from = (int)chek(4, "Введите систему счисления введённого числа: ", false);
 
     for (int j = 0; j < input_num.length(); j++)
     {
@@ -789,8 +788,7 @@ void number_system()
 
     if (flag)
     {
-        cout << "Введите желаемую систему счисления: ";
-        cin >> input_base_to;
+        input_base_to = (int)chek(4, "Введите желаемую систему счисления: ", false);
         cout << endl;
         if (input_base_from == input_base_to) cout << "Число в " << input_base_to << " системе счисления: " << input_num << endl;
         else
@@ -862,7 +860,6 @@ int case4()
         case 5:
             sin();
             system("cls");
-            /*cout << "Не готово.\n";*/
             break;
         case 6:
             recognizer();

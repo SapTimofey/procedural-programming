@@ -254,9 +254,8 @@ string interpreter(int num)
 void rows()
 {
     system("cls");
-    int a = 0;
-    int* num_3 = new int[5] {0};
-    string* num_6 = new string[5] {};
+    int a = 0, n = 0;
+    
 
     string input_num;
     int cnt = 0;
@@ -264,6 +263,11 @@ void rows()
 
 
     cout << "Задание 'Ряды'\n" << "Введите 5 чисел в 3 СС: ";
+
+    n = (int)chek(5, "Введите количество чисел в массиве: ", false);
+    
+    int* num_3 = new int[n] {};
+    string* num_6 = new string[n] {};
 
     while (cnt < 5)
     {

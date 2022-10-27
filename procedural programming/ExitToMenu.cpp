@@ -1,4 +1,4 @@
-#include <iostream> //Для chek
+#include <iostream> //Для ExitToMenu
 #include <locale>   //Для вывода русским
 
 using namespace std;
