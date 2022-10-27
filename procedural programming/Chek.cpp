@@ -7,9 +7,10 @@ using namespace std;
 //Проверка на ввод
 float chek(int type, string cons_out, bool main)
 {
+    setlocale(LC_NUMERIC, "eng");
     string num;
     float Fnum = 0;
-    float s = 0, n1 = 0, n2 = 0;
+    float s = 0, n = 0;
     
     do
     {
@@ -18,15 +19,14 @@ float chek(int type, string cons_out, bool main)
             cout << cons_out;
             cin >> num;
             Fnum = stof(num);
-            n1 = Fnum;
-            n2 = modf(n1, &s);
+            n = modf(Fnum, &s);
             switch (type)
             {
             case 1: // Для числа большего 0.
                 if (Fnum > 0) return Fnum;
                 else
                 {
-                    cout << "Число должно быть больше 0.\n";
+                    cout << num << " - число должно быть больше 0.\n";
                     break;
                 }
             case 2: // Для угла.
@@ -37,11 +37,11 @@ float chek(int type, string cons_out, bool main)
                     break;
                 }
             case 3: // Для меню.
-                if (n2 == 0) return Fnum;
+                if (n == 0) return Fnum;
                 else
                 {
                     system("cls");
-                    cout << "Число должно быть целым.\n";
+                    cout << num << " - число должно быть целым.\n";
                     break;
                 }
             default:// Для остальных случаев.

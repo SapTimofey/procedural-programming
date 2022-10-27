@@ -1,4 +1,5 @@
 #pragma once
+void setColor(unsigned fg, unsigned bg);
 void file_4();
 void number_sign();
 void geometry();

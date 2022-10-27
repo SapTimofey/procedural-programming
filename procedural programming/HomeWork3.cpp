@@ -1,12 +1,13 @@
-#include <iostream> //Для case3
-#include <locale>   //Для вывода русским
-#include <windows.h>//Для ввода русским
-#include <cmath>    //Для вычисления уравнений
-#include <fstream>  //Для работы с файлом
-#include <string>   //Для перевода string -> int/float, int -> string
-#include "Chek.h"   //Модуль провкрки
-#include <ctime>    //Для генерации рандомных чисел
-#include <algorithm>//Для сортировки
+#include <iostream>    //Для case3
+#include <locale>      //Для вывода русским
+#include <windows.h>   //Для ввода русским
+#include <cmath>       //Для вычисления уравнений
+#include <fstream>     //Для работы с файлом
+#include <string>      //Для перевода string -> int/float, int -> string
+#include "Chek.h"      //Модуль провкрки
+#include <ctime>       //Для генерации рандомных чисел
+#include <algorithm>   //Для сортировки
+#include "ExitToMenu.h"//Для выхода
 
 using namespace std;
 
@@ -23,7 +24,6 @@ void file()
 void loan()
 {
     system("cls");
-    string i = "no";
     float S = 0, n = 0, p = 0, r = 0, m = 0, n_chek = 0, n_chek2 = 0;
     cout << "Задание 'Заём'\n";
 
@@ -36,14 +36,12 @@ void loan()
     r = p / 100; //Доли
     if (S >= 0 && n > 0 && ((n_chek == 0 && p != -200) || (n_chek != 0 && p >= -100)))
     {
-        m = (S * r * pow((1 + r), n)) / (12 * (pow((1 + r), n) - 1));//Расчёт месячной выплаты
-
+        m = (S * r * pow((1 + r), n)) / (12 * (pow((1 + r), n) - 1));
         cout << "Ваша месячная выплата составляет " << m << " рублей.\n";
     }
     else if (p == 0)
     {
         m = S / (12 * n);
-
         cout << "Ваша месячная выплата составляет " << m << " рублей.\n";
     }
     else if (n == 0) cout << "Ваша выплата составляет " << S << " рублей.\n";
@@ -51,25 +49,17 @@ void loan()
     else if (p == -200)
     {
         m = (-1) * S / (12 * n);
-
         cout << "Ваша месячная выплата составляет " << m << " рублей.\n";
     }
     else cout << "S, n должны быть больше 0.\n";
 
-    //Модуль выхода в меню
-    do
-    {
-        cout << "Чтобы вернутся, введите любой символ.";
-        cin >> i;
-    } while (i == "no");
+    ExitToMenu();
 }
 
 //Задание 2 "Ссуда"
 void loan2()
 {
-    
     system("cls");
-    string i = "no";
     float S = 0, n = 0, m = 0, p = 0, m_chek = 0, r = 0.1;
 
     cout << "Задание 'Ссуда'\n";
@@ -115,15 +105,10 @@ void loan2()
         }
         cout << "Процент, под который взят заём, равен:  " << r * 100 << endl;
     }
-    else if (S == 0) cout << "Вы не брали кредит. =)\n";
+    else if (S == 0) cout << "Вы не брали кредит.\n";
     else cout << "S должна быть неотрицательной, n, m - больше 0.\n";
 
-    //Модуль выхода в меню
-    do
-    {
-        cout << "Чтобы вернутся, введите любой символ.";
-        cin >> i;
-    } while (i == "no");
+    ExitToMenu();
 }
 
 //Задание 3 "Копирование файла"
@@ -132,7 +117,7 @@ void copying_file()
     file();
     system("cls");
     char f_read[100];
-    string i = "no", str;
+    string str;
     ofstream fout;
     int len = 0;
     
@@ -165,12 +150,7 @@ void copying_file()
     fin2.close();
     cout << "Вторая строка: " << f_read << endl;
 
-    //Модуль выхода в меню
-    do
-    {
-        cout << "Чтобы вернутся, введите любой символ.";
-        cin >> i;
-    } while (i == "no");
+    ExitToMenu();
 }
 
 //Задание 4 "Фильтр"
@@ -179,7 +159,7 @@ void filter()
     file();
     system("cls");
     ofstream fout;
-    string str_output, str_file, j = "no", str;
+    string str_output, str_file, str;
     bool flag = false;
     cout << "Задание 'Фильтр'\n" << "Введите строку: ";
     
@@ -189,8 +169,6 @@ void filter()
     fout.open("test_HW3.txt");
     fout << str;
     fout.close();
-    
-
     
     //Чтение строки из файла
     ifstream fin("test_HW3.txt");
@@ -220,12 +198,7 @@ void filter()
     }
     cout << "Строка после фильтрации: " << str_output;
 
-    //Модуль выхода в меню
-    do
-    {
-        cout << endl << "Чтобы вернутся, введите любой символ.";
-        cin >> j;
-    } while (j == "no");
+    ExitToMenu();
 }
 
 //Задание 5 "Сортировка букв"
@@ -237,7 +210,7 @@ void sorting_letters()
     ofstream fout;
     int const SIZE = 30;
     int arr[SIZE]{}, num_ENG = 65, num_eng = 97, num_RUS = -64, num_rus = -32, flag_ENG = 0, flag_RUS = 0, a = 0;
-    string str_output, h = "no", str, str_file;
+    string str_output, str, str_file;
 
     cout << "Задание 'Сортировка букв'\n" << "Введите строку: ";
 
@@ -283,12 +256,7 @@ void sorting_letters()
         
     cout << "Строка после сортировки: " << str_output;
 
-    //Модуль выхода в меню
-    do
-    {
-        cout << endl << "Чтобы вернутся, введите любой символ.";
-        cin >> h;
-    } while (h == "no");
+    ExitToMenu();
 }
 
 //Главная часть дз 3

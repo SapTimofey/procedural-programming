@@ -8,8 +8,18 @@
 #include <ctime>       //Для генерации рандомных чисел
 #include <algorithm>   //Для сортировки
 #include "HomeWork3.h" //Модуль Д/з 3
+#include "ExitToMenu.h"//Модуль выхода
 
 using namespace std;
+
+enum ConsoleColor {
+    Black, Blue, Green, Cyan, Red, Magenta, Brown, LightGray,
+    DarkGray, LightBlue, LightGreen, LightCyan, LightRed, LightMagenta, Yellow, White
+};
+void setColor(unsigned fg, unsigned bg) {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, (WORD)((bg << 4) | fg));
+}
 
 //Задание 1 "Файл"
 void file_4()
@@ -18,10 +28,8 @@ void file_4()
     system("cls");
     ofstream fout;
     int sum = 0, int_file, num = 0;
-    string j = "no";
 
     cout << "Задание 'Файл'\n";
-
 
     //Генерация и запись в файл случайных чисел
     srand(time(0));
@@ -46,12 +54,7 @@ void file_4()
 
     cout << endl << "Сумма 10 чисел равна: " << sum << endl;
 
-    //Модуль выхода в меню
-    do
-    {
-        cout << "Чтобы вернутся, введите любой символ.";
-        cin >> j;
-    } while (j == "no");
+    ExitToMenu();
 }
 
 //Задание 2 "Знак числа"
@@ -64,7 +67,6 @@ int sign(float x)
 void number_sign()
 {
     system("cls");
-    string i = "no";
     float x = 0;
 
     cout << "Задание 'Знак числа'\n";
@@ -74,12 +76,7 @@ void number_sign()
     else if (sign(x) == 0) cout << "Число равно 0.\n";
     else cout << "Число отрицательное.\n";
 
-    //Модуль выхода в меню
-    do
-    {
-        cout << "Чтобы вернутся, введите любой символ.";
-        cin >> i;
-    } while (i == "no");
+    ExitToMenu();
 }
 
 //Задание 3 "Геометрические фигуры"
@@ -94,7 +91,7 @@ void geometry()
     //Модуль выбора фигур
     while (chek_geo)
     {
-        switch ((int)chek(0, cons_out, true))
+        switch ((int)chek(3, cons_out, true))
         {
         default:
             system("cls");
@@ -178,41 +175,82 @@ void geometry()
 void glory()
 {
     system("cls");
-    string i = "no";
 
     cout << "Задание 'Былая слава'\n";
 
     for (int i = 0; i < 6; i++)
     {
-        for (int i = 0; i < 8; i++) cout << "* ";
-        for (int i = 0; i < 24; i++) cout << "-";
+        setColor(White, Blue);
+        for (int j = 0; j < 8; j++) cout << "* ";
+        for (int j = 0; j < 24; j++)
+        {
+            if (i % 2 == 0)
+            {
+                setColor(Red, Red);
+                cout << "-";
+            }
+            else
+            {
+                setColor(White, White);
+                cout << "-";
+            }
+        }
         cout << endl;
     }
     for (int i = 0; i < 7; i++)
     {
-        for (int i = 0; i < 40; i++) cout << "-";
+        for (int j = 0; j < 40; j++)
+        {
+            if (i % 2 == 0)
+            {
+                setColor(Red, Red);
+                cout << "-";
+            }
+            else
+            {
+                setColor(White, White);
+                cout << "-";
+            }
+        }
         cout << endl;
     }
+    setColor(LightGray, Black);
+    cout << endl << endl;
 
-    //Модуль выхода в меню
-    do
+    setColor(White, White);
+    for (int i = 0; i < 3; i++)
     {
-        cout << "Чтобы вернутся, введите любой символ.";
-        cin >> i;
-    } while (i == "no");
+        for (int j = 0; j < 25; j++) cout << "_";
+        cout << endl;
+    }
+    setColor(Blue, Blue);
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 25; j++) cout << "_";
+        cout << endl;
+    }
+    setColor(Red, Red);
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 25; j++) cout << "_";
+        cout << endl;
+    }
+    setColor(LightGray, Black);
+
+    ExitToMenu();
 }
 
 //Задание 5 "Синусоида"
 void sin()
 {
     system("cls");
-    string i = "no";
     HWND hWnd = GetConsoleWindow();
     HDC hDC = GetDC(hWnd);
     HPEN Pen = CreatePen(PS_SOLID, 2, RGB(255, 255, 255));
 
     cout << "Задание 'Синусоида'\n";
 
+    
     SelectObject(hDC, Pen);
     MoveToEx(hDC, 0, 85, NULL);
     LineTo(hDC, 200, 85);
@@ -220,18 +258,13 @@ void sin()
     LineTo(hDC, 100, 170);
     for (float x = -8.0f; x <= 8.0f; x += 0.01f)
     {
-        MoveToEx(hDC,10 * x + 100, -10 * sin(x) + 85, NULL);
+        MoveToEx(hDC, 10 * x + 100, -10 * sin(x) + 85, NULL);
         LineTo(hDC, 10 * x + 100, -10 * sin(x) + 85);
     }
     ReleaseDC(hWnd, hDC);
     cin.get();
-
-    //Модуль выхода в меню
-    do
-    {
-        cout << "Чтобы вернутся, введите любой символ.";
-        cin >> i;
-    } while (i == "no");
+   
+    ExitToMenu();
 }
 
 //Задание 6 "Автоматный распознаватель"
@@ -239,7 +272,6 @@ void recognizer()
 {
     system("cls");
     string str_input, str_chek, str;
-    string i = "no";
     int num1 = 0, num2 = 0, output_num = 0, c = 0, num_chek = 0;
     cout << "Задание 'Автоматный распознаватель'\n" << "Введите строку: ";
     cin >> str_input;
@@ -452,12 +484,7 @@ void recognizer()
     if (str_chek == str) cout << output_num << endl;
     else cout << "Возможно, вы имели в виду " << str << " равное " << output_num << "." << endl;
 
-    //Модуль выхода в меню
-    do
-    {
-        cout << endl << "Чтобы вернутся, введите любой символ.";
-        cin >> i;
-    } while (i == "no");
+    ExitToMenu();
 }
 
 //Задание 7 "Генератор псевдослучайных чисел"
@@ -474,17 +501,12 @@ void random_num()
 {
     system("cls");
     int s = 0, s1 = 0, m = 37, b = 3, c = 64;
-    string i = "no";
     cout << "Задание 'Генератор псевдослучайных чисел'\n" << "I вариант\n" << "10 сгенерированных чисел: " << endl;
     gen(37, 3, 64, 11, 0);
     cout << endl << "II вариант\n" << "10 сгенерированных чисел: ";
     gen(25173, 13849, 65537, 11, 0);
-    //Модуль выхода в меню
-    do
-    {
-        cout << endl << "Чтобы вернутся, введите любой символ.";
-        cin >> i;
-    } while (i == "no");
+    
+    ExitToMenu();
 }
 
 //Задание 8 "Умножение матриц"
@@ -492,7 +514,6 @@ void matrix()
 {
     system("cls");
     cout << "Задание 'Умножение матриц'\n";
-    string i = "no";
     float arrA[3][4]
     { {5, 2, 0, 10},
       {3, 5, 2, 5},
@@ -540,12 +561,7 @@ void matrix()
         cout << "\n";
     }
     
-    //Модуль выхода в меню
-    do
-    {
-        cout << endl << "Чтобы вернутся, введите любой символ.";
-        cin >> i;
-    } while (i == "no");
+    ExitToMenu();
 }
 
 //Задание 9 "Системы счисления"
@@ -738,7 +754,6 @@ void number_system()
 {
     setlocale(LC_NUMERIC, "eng");
     system("cls");
-    string i = "no";
     string input_num;
     int input_base_from = 0, input_base_to = 0, a = 0;
     bool flag = true;
@@ -803,13 +818,7 @@ void number_system()
         }
     }
 
-
-    //Модуль выхода в меню
-    do
-    {
-        cout << endl << "Чтобы вернутся, введите любой символ.";
-        cin >> i;
-    } while (i == "no");
+    ExitToMenu();
 }
 
 //Главная часть дз 4

@@ -8,15 +8,21 @@
 #include <string>      //Для перевода string -> int/float, int -> string
 #include "Chek.h"      //Модуль провкрки
 #include "HomeWork3.h" //Модуль Д/з 3
+#include "HomeWork4.h" //Модуль Д/з 4
+#include "ExitToMenu.h"//Модуль выхода
 
 using namespace std;
+
+enum ConsoleColor {
+    Black, Blue, Green, Cyan, Red, Magenta, Brown, LightGray,
+    DarkGray, LightBlue, LightGreen, LightCyan, LightRed, LightMagenta, Yellow, White
+};
 
 //Задание 1 "Алгоритм Евклида"
 void euclid()
 {
     system("cls");
     int num1 = 0, num2 = 0, num3 = 0, num4 = 0, num5 = 0, num6 = 0;
-    string i = "no";
 
     cout << "Задание 'Алгоритм Евклида'\n";
     
@@ -51,20 +57,14 @@ void euclid()
     if (num3 != 0) cout << num3 << endl << endl;
     else cout << num4 << endl << endl;
     
-    //Модуль выхода в меню
-    do
-    {
-        cout << "Чтобы вернутся, введите любой символ.";
-        cin >> i;
-    } while (i == "no");
+    ExitToMenu();
 }
 
 //Задание 2 "Решето Эратосфена"
 void eratosthenes()
 {
     system("cls");
-    string j = "no";
-    int n = 0, p = 2, h = 0, p_chek = 0;
+    int n = 0;
     bool flag = false;
 
     cout << "Задание 'Решето Эратосфена'\n";
@@ -79,47 +79,28 @@ void eratosthenes()
         }
         else flag = true;
     } while (flag == false);
-    int* natural_num = new int[n + 2] {0};
+    int* natural_num = new int[n + 1];
 
-    for (int i = 0; i < n + 1; i++)
+    for (int i = 0; i <= n; i++)
     {
-        natural_num[i] = h;
-        h++;
+        natural_num[i] = i;
     }
 
-    while (true)
-    {
-        p_chek = p;
-        cout << p << " ";
-        for (int i = 1; i < n; i++)
-        {
-            if (p * i > n) continue;
-            else if (natural_num[p * i] != 0) natural_num[p * i] = 0;
-        }
-        for (int i = 0; i < n; i++)
-        {
-            if (natural_num[i] != 0 && natural_num[i] != p && natural_num[i] > p_chek)
-            {
-                p = natural_num[i];
-                break;
-            }
-        }
-        if (p_chek == p) break;
-    }
+    for (int i = 2; i * i <= n; i++) if (natural_num[i]) for (int j = i * i; j <= n; j += i) natural_num[j] = 0;
+    int sz = 0;
+    if (n < 100000) for (int i = 2; i < n; i++) if (natural_num[i]) cout << natural_num[i] << " ";
+    else for (int i = 2; i < n; i++) if (natural_num[i]) sz++;
 
-    //Модуль выхода в меню
-    do
-    {
-        cout << endl << "Чтобы вернутся, введите любой символ.";
-        cin >> j;
-    } while (j == "no");
+    if (n >= 100000) cout << "Количество простых чисел: " << sz << endl;
+    else cout << endl;
+
+    ExitToMenu();
 }
 
 //Задание 3.1 "Обработка текстовых файлов"
 void file_read_1()
 {
     system("cls");
-    string j = "no";
     file();
     ofstream fout;
     string str;
@@ -168,14 +149,9 @@ void file_read_1()
         }
     }
 
-    cout << output << " = " << max << endl;
-    
-    //Модуль выхода в меню
-    do
-    {
-        cout << endl << "Чтобы вернутся, введите любой символ.";
-        cin >> j;
-    } while (j == "no");
+    cout << "Часто встречаемые символы: " << output << " = " << max << endl;
+
+    ExitToMenu();
 }
 
 //Задание 3.2 "Обработка текстовых файлов"
@@ -183,9 +159,9 @@ void file_read_2()
 {
     system("cls");
     ofstream fout;
-    string j = "no";
-    string str, f_read, str_find;
-    int len = 0;
+    string str, f_read, str_find, f_read2, f_end, f_read3;
+    int len = 0, len_find = 0;
+    string new_str;
 
     cout << "Задание 3.2 'Обработка текстовых файлов'\n" << "Введите строку для записи в файл: ";
 
@@ -194,6 +170,7 @@ void file_read_2()
 
     cout << "Введите строку, которую нужно найти: ";
     cin >> str_find;
+    len_find = str_find.length();
 
     //Запись строки в файл
     fout.open("test_HW.txt");
@@ -205,31 +182,36 @@ void file_read_2()
     fin >> f_read;
     fin.close();
 
-    if (f_read.find(str_find) == -1) cout << "Такой строки нет в исходной.\n";
-    else cout << "Строка начинается с " << f_read.find(str_find) + 1 << " элемента строки.\n";
+    f_read2 = f_read3 = f_read;
 
-    //Модуль выхода в меню
-    do
+    f_end = f_read3.erase(0, f_read.find(str_find) + len_find);
+    if (f_read.find(str_find) == -1) cout << "Такой строки нет в исходной.\n";
+    else
     {
-        cout << endl << "Чтобы вернутся, введите любой символ.";
-        cin >> j;
-    } while (j == "no");
+        f_read2.erase(f_read.find(str_find), len - f_read.find(str_find));
+        cout << f_read2;
+        setColor(LightGreen, Black);
+        cout << str_find;
+        setColor(LightGray, Black);
+        cout << f_end << endl;
+    }
+    
+
+    ExitToMenu();
 }
 
 void file_read()
 {
     system("cls");
-    int num = 0;
     bool flag = true;
+    string cons_out = "Вариант 1 'Обработка текстовых файлов'\nВариант 2 'Обработка текстовых файлов'\n0 вернуться к выбору заданий.\nВведите вариант задания: ";
     while (flag)
     {
-        cout << "Вариант 1 'Обработка текстовых файлов'\n" << "Вариант 2 'Обработка текстовых файлов'\n" << "0 вернуться к выбору заданий.\n" << "Введите вариант задания: ";
-        cin >> num;
-        switch (num)
+        switch ((int)chek(3, cons_out, true))
         {
         default:
             system("cls");
-            cout << num << " - нет такого задания.\n";
+            cout << "Нет такого задания.\n";
             break;
         case 1:
             file_read_1();
@@ -272,7 +254,6 @@ string interpreter(int num)
 void rows()
 {
     system("cls");
-    string j = "no";
     int a = 0;
     int* num_3 = new int[5] {0};
     string* num_6 = new string[5] {};
@@ -348,12 +329,7 @@ void rows()
     }
     cout << "]" << endl;
 
-    //Модуль выхода в меню
-    do
-    {
-        cout << endl << "Чтобы вернутся, введите любой символ.";
-        cin >> j;
-    } while (j == "no");
+    ExitToMenu();
 }
 
 //Главная часть дз 5

@@ -131,15 +131,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Chek.cpp" />
+    <ClCompile Include="ExitToMenu.cpp" />
     <ClCompile Include="HomeWork1.cpp" />
     <ClCompile Include="HomeWork2.cpp" />
     <ClCompile Include="HomeWork3.cpp" />
     <ClCompile Include="HomeWork4.cpp" />
     <ClCompile Include="HomeWork5.cpp" />
-    <ClCompile Include="procedural programming.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Chek.h" />
+    <ClInclude Include="ExitToMenu.h" />
     <ClInclude Include="HomeWork1.h" />
     <ClInclude Include="HomeWork2.h" />
     <ClInclude Include="HomeWork3.h" />

@@ -1,9 +1,10 @@
-#include <iostream> //Для case1
-#include <locale>   //Для вывода русским
-#include <cmath>    //Для вычисления уравнений
-#include <windows.h>//Для ввода русским
-#include <string>   //Для перевода string -> int/float
-#include "Chek.h"   //Модуль проверки
+#include <iostream>    //Для case1
+#include <locale>      //Для вывода русским
+#include <cmath>       //Для вычисления уравнений
+#include <windows.h>   //Для ввода русским
+#include <string>      //Для перевода string -> int/float
+#include "Chek.h"      //Модуль проверки
+#include "ExitToMenu.h"//Модуль выхода
 
 using namespace std;
 
@@ -12,23 +13,16 @@ using namespace std;
 //Задание 1 "Имя"
 void Name()
 {
-    string i = "no";
     system("cls");
     cout << "Задание 'имя'\n" << "Тимофей\n";
     
-    //Модуль выхода в меню
-    do
-    {
-        cout << "Чтобы вернутся, введите любой символ.";
-        cin >> i;
-    } while (i == "no");
+    ExitToMenu();
 }
 
 //Задание 2 "Арифметика"
 void arithmetic()
 {
     system("cls");
-    string i = "no";
     float a = 0, b = 0;
 
     cout << "Задание 'Арифметика' (Дробные числа писать через запятую.)\n";
@@ -43,25 +37,17 @@ void arithmetic()
     if (b != 0) cout << "a/b=" << a / b << endl;
     else cout << "Делить на ноль нельзя.\n";
 
-    //Модуль выхода в меню
-    do
-    {
-        cout << "Чтобы вернутся, введите любой символ.";
-        cin >> i;
-    } while (i == "no");
+    ExitToMenu();
 }
 
 //Задание 3 "Уравнение"
 void equation()
 {
     system("cls");
-    string i = "no";
     float b = 0, c = 0;
 
-
-    cout << "Задание 'Уравнение' (Дробные числа писать через запятую.)\n";
+    cout << "Задание 'Уравнение'\n";
     
-
     cout << "Введите значения для переменных b, c: ";
     cin >> b >> c;
     
@@ -69,21 +55,13 @@ void equation()
     else if (b == 0) cout << "Нет решения.\n";
     else cout << "x=" << -c / b << endl;
 
-
-    
-    //Модуль выхода в меню
-    do
-    {
-        cout << "Чтобы вернутся, введите любой символ.";
-        cin >> i;
-    } while (i == "no");
+    ExitToMenu();
 }
 
 //Задание 4 "Ещё уравнение"
 void another_equation()
 {
     system("cls");
-    string i = "no";
     float a = 0, b = 0, c = 0;
     double D;
 
@@ -104,19 +82,14 @@ void another_equation()
         else cout << "Нет корней среди вещественных чисел.\n";
     }
     
-    //Модуль выхода в меню
-    do
-    {
-        cout << "Чтобы вернутся, введите любой символ.";
-        cin >> i;
-    } while (i == "no");
+    ExitToMenu();
 }
 
 //Задание 5 "Лампа со шторой"
 void lamp()
 {
     system("cls");
-    string day, curtains, lamp, d, c, l, i = "no";
+    string day, curtains, lamp, d, c, l;
     bool day1 = false, curtains1 = false, lamp1 = false, res, chek_d = false, chek_c = false, chek_l = false;
     
     cout << "Задание 'Лампа со шторой'\n";
@@ -169,12 +142,7 @@ void lamp()
     if (res) cout << "В комнате светло.\n";
     else cout << "В комнате темно.\n";
 
-    //Модуль выхода в меню
-    do
-    {
-        cout << "Чтобы вернутся, введите любой символ.";
-        cin >> i;
-    } while (i == "no");
+    ExitToMenu();
 }
 
 //Главная часть дз 1

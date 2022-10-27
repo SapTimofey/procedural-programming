@@ -1,9 +1,10 @@
-#include <iostream> //Для case2
-#include <locale>   //Для вывода русским
-#include <windows.h>//Для ввода русским
-#include <cmath>    //Для вычисления уравнений
-#include <string>   //Для перевода string -> int/float
-#include "Chek.h"   //Модуль провкрки
+#include <iostream>    //Для case2
+#include <locale>      //Для вывода русским
+#include <windows.h>   //Для ввода русским
+#include <cmath>       //Для вычисления уравнений
+#include <string>      //Для перевода string -> int/float
+#include "Chek.h"      //Модуль провкрки
+#include "ExitToMenu.h"//Модуль выхода
 
 using namespace std;
 
@@ -13,7 +14,6 @@ using namespace std;
 void cone()
 {
     system("cls");
-    string i = "no";
     float R = 0, h = 0, r = 0;
     double l;
     const double PI = 3.141592653589793;
@@ -29,19 +29,13 @@ void cone()
 
     cout << "Объём V = " << 1. / 3 * PI * h * (pow(R, 2) + R * r + pow(r, 2)) << endl << "Площадь S = " << PI * (pow(R, 2) + (R + r) * l + pow(r, 2)) << endl;
     
-    //Модуль выхода в меню
-    do
-    {
-        cout << "Чтобы вернутся, введите любой символ.";
-        cin >> i;
-    } while (i == "no");
+    ExitToMenu();
 }
 
 //Задание 2 "Разветвление"
 void branching()
 {
     system("cls");
-    string i = "no";
     float x = 0, a = 0;
 
     cout << "Задание 'Разветвление' (Дробные числа писать через запятую.)\n";
@@ -57,46 +51,30 @@ void branching()
         else cout << "Корень из отрицательного числа невозможен.\n";
     }
 
-    //Модуль выхода в меню
-    do
-    {
-        cout << "Чтобы вернутся, введите любой символ.";
-        cin >> i;
-    } while (i == "no");
+    ExitToMenu();
 }
 
 //Задание 3 "Функция"
 void function()
 {
     system("cls");
-    string i = "no";
     float x = 0, y = 0, b = 0;
 
+    cout << "Задание 'Функция'\n" << "Введите значения для переменных x, y, b: ";
 
-    cout << "Задание 'Функция'\n";
-
-    cout << "Введите значения для переменных x, y, b: ";
     cin >> x >> y >> b;
-
 
     if (b - y > 0 && b - x >= 0) cout << "z = " << log(b - y) * sqrt(b - x) << endl;
     else if (b - y <= 0) cout << "b-y должна быть больше 0.\n";
     else cout << "b-x должна быть больше, либо равна 0.\n";
 
-    //Модуль выхода в меню
-    do
-    {
-        cout << "Чтобы вернутся, введите любой символ.";
-        cin >> i;
-    } while (i == "no");
-
+    ExitToMenu();
 }
 
 //Задание 4 "Порядок"
 void sequence()
 {
     system("cls");
-    string i = "no";
     int N, g;
 
     cout << "Задание 'Порядок'\n";
@@ -105,12 +83,7 @@ void sequence()
     cout << "Последовательность из 10 чисел: " << N - 1;
     for (N, g = 0; g <= 8; N++, g++) cout << ", " << N;
 
-    //Модуль выхода в меню
-    do
-    {
-        cout << endl << "Чтобы вернутся, введите любой символ.";
-        cin >> i;
-    } while (i == "no");
+    ExitToMenu();
 }
 
 //Задание 5 "Табуляция"
@@ -118,7 +91,6 @@ void tabulation()
 {
     system("cls");
     float x;
-    string i = "no";
 
     cout << "Задание 'Табуляция'\n";
     for (x = -4; x <= 4; x += 0.5)
@@ -126,12 +98,8 @@ void tabulation()
         if (x != 1.0) cout << "При x равном: " << x << " \t" << " Значение выражения равно: " << (pow(x, 2) - 2 * x + 2) / (x - 1) << endl;
         else cout << "При x равном: " << x << " \t" << " Значение выражения неопределено.\n";
     }
-    //Модуль выхода в меню
-    do
-    {
-        cout << "Чтобы вернутся, введите любой символ.";
-        cin >> i;
-    } while (i == "no");
+
+    ExitToMenu();
 }
 
 //Главная часть дз 2
