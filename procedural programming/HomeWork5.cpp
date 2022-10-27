@@ -236,40 +236,40 @@ string interpreter(int num)
     int res_10 = 0;
     string res;
     int a = 0;
-
-    for (j, i; j < numS.length(); i--, j++)
+    if (num == 0) return "0";
+    else
     {
-        char x = numS[j];
-        a = x - 48;
-        res_10 += a * pow(3, i);
+        for (j, i; j < numS.length(); i--, j++)
+        {
+            char x = numS[j];
+            a = x - 48;
+            res_10 += a * pow(3, i);
+        }
+        while (res_10 > 0)
+        {
+            res = to_string(res_10 % 6) + res;
+            res_10 /= 6;
+        }
+        return res;
     }
-    while (res_10 > 0)
-    {
-        res = to_string(res_10 % 6) + res;
-        res_10 /= 6;
-    }
-
-    return res;
 }
 void rows()
 {
     system("cls");
     int a = 0, n = 0;
     
-
     string input_num;
     int cnt = 0;
     bool flag = true;
 
-
-    cout << "Задание 'Ряды'\n" << "Введите 5 чисел в 3 СС: ";
+    cout << "Задание 'Ряды'\n";
 
     n = (int)chek(5, "Введите количество чисел в массиве: ", false);
     
-    int* num_3 = new int[n] {};
+    int* num_3 = new int[n + 1] {};
     string* num_6 = new string[n] {};
 
-    while (cnt < 5)
+    while (cnt < n)
     {
         cin >> input_num;
         for (int j = 0; j < input_num.length(); j++)
@@ -288,9 +288,9 @@ void rows()
             }
             if (a >= 3)
             {
-                cout << "Число не соответствует 3 системе счисления." << endl << "Осталось ввести " << 5 - cnt;
-                if (5 - cnt < 5 && 5 - cnt > 1) cout << " числа: ";
-                else if (5 - cnt == 5) cout << " чисел: ";
+                cout << "Число не соответствует 3 системе счисления." << endl << "Осталось ввести " << n - cnt;
+                if ((n - cnt) % 10 == 0 || (n - cnt) % 10 == 5 || (n - cnt) % 10 == 6 || (n - cnt) % 10 == 7 || (n - cnt) % 10 == 8 || (n - cnt) % 10 == 9 || (n - cnt >=10 && n - cnt <= 19)) cout << " чисел: ";
+                else if ((n - cnt) % 10 == 2 || (n - cnt) % 10 == 3 || (n - cnt) % 10 == 4) cout << " числа: ";
                 else cout << " число: ";
                 flag = false;
                 break;
@@ -300,35 +300,28 @@ void rows()
         {
             num_3[cnt] = stoi(input_num);
             cnt++;
-            if (5 - cnt != 0)
-            {
-                cout << "Осталось ввести " << 5 - cnt;
-                if (5 - cnt < 5 && 5 - cnt > 1) cout << " числа: ";
-                else if (5 - cnt == 5) cout << " чисел: ";
-                else cout << " число: ";
-            }
         }
         flag = true;
     }
 
     cout << "Массив из чисел в 3 СС: [";
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < n; i++)
     {
-        if (i < 4) cout << num_3[i] << ", ";
+        if (i < n - 1) cout << num_3[i] << ", ";
         else cout << num_3[i];
     }
     cout << "]" << endl;
 
 
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < n; i++)
     {
         num_6[i] = interpreter(num_3[i]);
     }
 
     cout << "Массив из чисел в 6 СС: [";
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < n; i++)
     {
-        if (i < 4) cout << num_6[i] << ", ";
+        if (i < n - 1) cout << num_6[i] << ", ";
         else cout << num_6[i];
     }
     cout << "]" << endl;
