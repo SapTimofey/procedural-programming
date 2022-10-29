@@ -11,6 +11,7 @@ float chek(int type, string cons_out, bool main)
     string num;
     float Fnum = 0;
     float s = 0, n = 0;
+    bool flag = true;
     
     do
     {
@@ -18,59 +19,75 @@ float chek(int type, string cons_out, bool main)
         {
             cout << cons_out;
             cin >> num;
-            Fnum = stof(num);
-            n = modf(Fnum, &s);
-            switch (type)
+            for (int i = 0; i < num.length(); i++)
             {
-            case 1: // Для числа большего 0.
-                if (Fnum > 0) return Fnum;
+                if (num[i] == '.' || isdigit(num[i]) || num[i] == '-') continue;
                 else
                 {
-                    cout << num << " - число должно быть больше 0.\n";
+                    flag = false;
+                    if (main) system("cls");
+                    cout << num << " - это не число.\n";
                     break;
                 }
-            case 2: // Для угла.
-                if (Fnum > 0 && Fnum < 180) return Fnum;
-                else
-                {
-                    cout << "Угол должен быть в пределах (0, 180).\n";
-                    break;
-                }
-            case 3: // Для меню.
-                if (n == 0) return Fnum;
-                else
-                {
-                    system("cls");
-                    cout << num << " - число должно быть целым.\n";
-                    break;
-                }
-            case 4: // Для системы счисления.
-                if (n == 0 && Fnum > 0) return Fnum;
-                else if (n != 0)
-                {
-                    cout << num << " - СС не может быть дробной.\n";
-                    break;
-                }
-                else
-                {
-                    cout << num << " - СС не может быть отрицательной.\n";
-                    break;
-                }
-            case 5: // Проверка на целое положительное число.
-                if (n == 0 && Fnum > 0) return Fnum;
-                else if (n != 0)
-                {
-                    cout << num << " - Число не может быть дробным.\n";
-                    break;
-                }
-                else
-                {
-                    cout << num << " - Число не может быть отрицательным.\n";
-                    break;
-                }
-            default:// Для остальных случаев.
-                return Fnum;
             }
+            
+            if (flag)
+            {
+                Fnum = stof(num);
+                n = modf(Fnum, &s);
+                switch (type)
+                {
+                case 1: // Для числа большего 0.
+                    if (Fnum > 0) return Fnum;
+                    else
+                    {
+                        cout << num << " - число должно быть больше 0.\n";
+                        break;
+                    }
+                case 2: // Для угла.
+                    if (Fnum > 0 && Fnum < 180) return Fnum;
+                    else
+                    {
+                        cout << "Угол должен быть в пределах (0, 180).\n";
+                        break;
+                    }
+                case 3: // Для меню.
+                    if (n == 0) return Fnum;
+                    else
+                    {
+                        system("cls");
+                        cout << num << " - число должно быть целым.\n";
+                        break;
+                    }
+                case 4: // Для системы счисления.
+                    if (n == 0 && Fnum > 0) return Fnum;
+                    else if (n != 0)
+                    {
+                        cout << num << " - СС не может быть дробной.\n";
+                        break;
+                    }
+                    else
+                    {
+                        cout << num << " - СС не может быть отрицательной.\n";
+                        break;
+                    }
+                case 5: // Проверка на целое положительное число.
+                    if (n == 0 && Fnum > 0) return Fnum;
+                    else if (n != 0)
+                    {
+                        cout << num << " - Число не может быть дробным.\n";
+                        break;
+                    }
+                    else
+                    {
+                        cout << num << " - Число не может быть отрицательным.\n";
+                        break;
+                    }
+                default:// Для остальных случаев.
+                    return Fnum;
+                }
+            }
+            flag = true;
         }
         catch (out_of_range)
         {
@@ -80,7 +97,7 @@ float chek(int type, string cons_out, bool main)
         catch (...)
         {
             if (main) system("cls");
-            cout << num << " - это не число.\n";
+            cout << num << "Произошла ошибка.\n";
         }
     } while (true);
 }

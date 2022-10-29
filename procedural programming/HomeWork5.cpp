@@ -69,50 +69,50 @@ void eratosthenes()
 
     cout << "Задание 'Решето Эратосфена'\n";
     
-    do
+    while (n < 2)
     {
-        cout << "Введите число, до которого нужно найти простые числа: ";
-        cin >> n;
-        if (n < 2)
-        {
-            cout << "Число должно быть не меньше 2." << endl;
-        }
-        else flag = true;
-    } while (flag == false);
-    int* natural_num = new int[n + 1];
-
-    for (int i = 0; i <= n; i++)
-    {
-        natural_num[i] = i;
+        n = (int)chek(0, "Введите число, до которого нужно найти простые числа: ", false);
+        if (n < 2) cout << "Число должно быть не меньше 2.\n";
     }
 
-    for (int i = 2; i * i <= n; i++) if (natural_num[i]) for (int j = i * i; j <= n; j += i) natural_num[j] = 0;
-    int sz = 0;
-    if (n < 100000) for (int i = 2; i < n; i++) if (natural_num[i]) cout << natural_num[i] << " ";
-    else for (int i = 2; i < n; i++) if (natural_num[i]) sz++;
+    int* natural_num = new int[n + 1];
+    if (n == 2) cout << 2 << "\n";
+    else
+    {
+        for (int i = 0; i <= n; i++)
+        {
+            natural_num[i] = i;
+        }
 
-    if (n >= 100000) cout << "Количество простых чисел: " << sz << endl;
-    else cout << endl;
+        for (int i = 2; i * i <= n; i++) if (natural_num[i]) for (int j = i * i; j <= n; j += i) natural_num[j] = 0;
+        int sz = 0;
+        if (n < 100000) for (int i = 2; i < n; i++) if (natural_num[i]) cout << natural_num[i] << " ";
+        else for (int i = 2; i < n; i++) if (natural_num[i]) sz++;
+
+        if (n >= 100000) cout << "Количество простых чисел: " << sz << endl;
+        else cout << endl;
+    }
 
     ExitToMenu();
 }
 
-//Задание 3.1 "Обработка текстовых файлов"
+//Задание 3 "Обработка текстовых файлов"
 void file_read_1()
 {
     system("cls");
     file();
     ofstream fout;
-    string str;
-    char f_read[100];
+    char str[256];
+    char f_read[256];
     string output;
     map <char, int> arr { {'q', 0}, {'w', 0}, {'r', 0}, {'t', 0}, {'p', 0}, {'s', 0}, {'d', 0}, {'f', 0}, {'g', 0}, {'h', 0}, {'j', 0}, {'k', 0}, {'l', 0}, {'z', 0}, {'x', 0}, {'c', 0}, {'v', 0}, {'b', 0}, {'n', 0}, {'m', 0}};
     int len = 0, max = 0;
 
-    cout << "Задание 3.1 'Обработка текстовых файлов'\n" << "Введите строку для записи в файл: ";
+    cout << "Задание 3.1 'Обработка текстовых файлов'\n" << "Введите строку для записи в файл (для завершения строки введите '.'): ";
 
-    cin >> str;
-    len = str.length();
+    cin.getline(str, 256, '.');
+
+    /*len = str.length();*/
 
     //Запись строки в файл
     fout.open("test_HW.txt");
@@ -124,7 +124,7 @@ void file_read_1()
     fin >> f_read;
     fin.close();
 
-    for (int i = 0; i < len; i++)
+    for (int i = 0; i < 256; i++)
     {
         try
         {
@@ -154,7 +154,7 @@ void file_read_1()
     ExitToMenu();
 }
 
-//Задание 3.2 "Обработка текстовых файлов"
+//Задание 4 "Обработка текстовых файлов"
 void file_read_2()
 {
     system("cls");
@@ -200,35 +200,7 @@ void file_read_2()
     ExitToMenu();
 }
 
-void file_read()
-{
-    system("cls");
-    bool flag = true;
-    string cons_out = "Вариант 1 'Обработка текстовых файлов'\nВариант 2 'Обработка текстовых файлов'\n0 вернуться к выбору заданий.\nВведите вариант задания: ";
-    while (flag)
-    {
-        switch ((int)chek(3, cons_out, true))
-        {
-        default:
-            system("cls");
-            cout << "Нет такого задания.\n";
-            break;
-        case 1:
-            file_read_1();
-            system("cls");
-            break;
-        case 2:
-            file_read_2();
-            system("cls");
-            break;
-        case 0:
-            flag = false;
-            break;
-        }
-    }
-}
-
-//Задание 4 "Ряды"
+//Задание 5 "Ряды"
 string interpreter(int num)
 {
     string numS = to_string(num);
@@ -253,7 +225,7 @@ string interpreter(int num)
         return res;
     }
 }
-void rows()
+void rows_1()
 {
     system("cls");
     int a = 0, n = 0;
@@ -329,6 +301,51 @@ void rows()
     ExitToMenu();
 }
 
+//Задание 6 "Ряды"
+void rows_2()
+{
+    system("cls");
+    int SIZEx = 0, SIZEy = 0;
+    float a = 0;
+    string cons_out;
+
+    cout << "Задание 'Ряды'" << endl;
+
+    SIZEy = (int)chek(5, "Введите количество столбцов в массиве: ", false);
+    SIZEx = (int)chek(5, "Введите количество строк в массиве: ", false);
+
+    float* sum = new float[SIZEx];
+    float** arr = new float*[SIZEy];
+    for (int i = 0; i < SIZEx; i++)
+        arr[i] = new float[SIZEx];
+    for (int i = 0; i < SIZEy; i++)
+        for (int j = 0; j < SIZEx; j++)
+        {
+            cons_out = "Введите элемент [" + to_string(i) + "][" + to_string(j) + "]: ";
+            //a = chek(0, cons_out, false);
+            a = 2;
+            arr[i][j] = a;
+        }
+    for (int i = 0; i < SIZEy; i++)
+    {
+        for (int j = 0; j < SIZEx; j++)
+            cout << arr[i][j] << " ";
+        cout << endl;
+    }
+    
+    for (int j = 0; j < SIZEx; j++)
+        for (int i = 0; i < SIZEy; i++)
+        {
+            sum[j] += arr[i][j];
+        }
+
+    for (int i = 0; i < SIZEx; i++)
+        cout << "Сумма " << i + 1 << " столбца равна: " << sum[i] << endl;
+
+
+    ExitToMenu();
+}
+
 //Главная часть дз 5
 int case5()
 {
@@ -336,7 +353,7 @@ int case5()
     SetConsoleOutputCP(1251);
     setlocale(LC_ALL, "Russian");
 
-    string cons_out = "Задание 1 'Алгоритм Евклида'\nЗадание 2 'Решето Эратосфена'\nЗадание 3 'Обработка текстовых файлов'\nЗадание 4 'Ряды'\n0 вернуться к выбору д/з.\nВведите номер задания: ";
+    string cons_out = "Задание 1 'Алгоритм Евклида'\nЗадание 2 'Решето Эратосфена'\nЗадание 3 'Обработка текстовых файлов'\nЗадание 4 'Обработка текстовых файлов'\nЗадание 5 'Ряды'\nЗадание 6 'Ряды'\n0 вернуться к выбору д/з.\nВведите номер задания: ";
     bool chek_hw3 = true;
     system("cls");
     while (chek_hw3)
@@ -358,12 +375,22 @@ int case5()
             cout << "Вы вернулись назад.\n";
             break;
         case 3:
-            file_read();
+            file_read_1();
             system("cls");
             cout << "Вы вернулись назад.\n";
             break;
         case 4:
-            rows();
+            file_read_2();
+            system("cls");
+            cout << "Вы вернулись назад.\n";
+            break;
+        case 5:
+            rows_1();
+            system("cls");
+            cout << "Вы вернулись назад.\n";
+            break;
+        case 6:
+            rows_2();
             system("cls");
             cout << "Вы вернулись назад.\n";
             break;

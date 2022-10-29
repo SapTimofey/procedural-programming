@@ -3,5 +3,6 @@ void euclid();
 void eratosthenes();
 void file_read_1();
 void file_read_2();
-void rows();
+void rows_1();
+void rows_2();
 int case5();
