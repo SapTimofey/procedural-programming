@@ -71,7 +71,7 @@ void eratosthenes()
     
     while (n < 2)
     {
-        n = (int)chek(0, "Введите число, до которого нужно найти простые числа: ", false);
+        n = (int)chek(5, "Введите число, до которого нужно найти простые числа: ", false);
         if (n < 2) cout << "Число должно быть не меньше 2.\n";
     }
 
@@ -155,47 +155,53 @@ void file_read_1()
 }
 
 //Задание 4 "Обработка текстовых файлов"
+void find_str(string str, string str_find)
+{
+    int len = 0, len_find = 0;
+    string str_begin, str_end;
+
+    len_find = str_find.length();
+    str_begin = str_end = str;
+    len = str.length();
+
+    str_end.erase(0, str.find(str_find) + len_find);
+    str_begin.erase(str.find(str_find), len - str.find(str_find));
+
+    cout << str_begin;
+    setColor(LightGreen, Black);
+    cout << str_find;
+    setColor(LightGray, Black);
+    if (str_end.find(str_find) == -1) cout << str_end << " ";
+    else find_str(str_end, str_find);
+}
 void file_read_2()
 {
     system("cls");
-    ofstream fout;
-    string str, f_read, str_find, f_read2, f_end, f_read3;
-    int len = 0, len_find = 0;
-    string new_str;
+    string str;
+    string str_find;
 
-    cout << "Задание 3.2 'Обработка текстовых файлов'\n" << "Введите строку для записи в файл: ";
-
-    cin >> str;
-    len = str.length();
+    cout << "Задание 'Обработка текстовых файлов'\n" << "Введите строку (для завершения строки введите '.'): ";
+    getline(cin, str, '.');
+    /*cin >> str;*/
 
     cout << "Введите строку, которую нужно найти: ";
+    /*getline(cin, str_find, '.');*/
     cin >> str_find;
-    len_find = str_find.length();
-
-    //Запись строки в файл
-    fout.open("test_HW.txt");
-    fout << str << endl;
-    fout.close();
-
-    //Чтение строки из файла
-    ifstream fin("test_HW.txt");
-    fin >> f_read;
-    fin.close();
-
-    f_read2 = f_read3 = f_read;
-
-    f_end = f_read3.erase(0, f_read.find(str_find) + len_find);
-    if (f_read.find(str_find) == -1) cout << "Такой строки нет в исходной.\n";
-    else
-    {
-        f_read2.erase(f_read.find(str_find), len - f_read.find(str_find));
-        cout << f_read2;
-        setColor(LightGreen, Black);
-        cout << str_find;
-        setColor(LightGray, Black);
-        cout << f_end << endl;
-    }
     
+    if (str.find(str_find) == -1) cout << "Такой строки нет.";
+    else find_str(str, str_find);
+    cout << endl;
+
+        ////Запись строки в файл
+        //fout.open("test_HW.txt");
+        //fout << str << endl;
+        //fout.close();
+
+        ////Чтение строки из файла
+        //ifstream fin("test_HW.txt");
+        //fin >> f_read;
+        //fin.close();
+        //cout << f_read << endl;
 
     ExitToMenu();
 }
@@ -308,39 +314,40 @@ void rows_2()
     int SIZEx = 0, SIZEy = 0;
     float a = 0;
     string cons_out;
-
+    float sum1 = 0;
     cout << "Задание 'Ряды'" << endl;
 
     SIZEy = (int)chek(5, "Введите количество столбцов в массиве: ", false);
     SIZEx = (int)chek(5, "Введите количество строк в массиве: ", false);
 
-    float* sum = new float[SIZEx];
-    float** arr = new float*[SIZEy];
+    float* sum = new float[SIZEx] {0};
+    /*float** arr = new float*[SIZEy];
     for (int i = 0; i < SIZEx; i++)
-        arr[i] = new float[SIZEx];
-    for (int i = 0; i < SIZEy; i++)
-        for (int j = 0; j < SIZEx; j++)
+        arr[i] = new float[SIZEx];*/
+    for (int i = 0; i < SIZEx; i++)
+    {
+        for (int j = 0; j < SIZEy; j++)
         {
-            cons_out = "Введите элемент [" + to_string(i) + "][" + to_string(j) + "]: ";
-            //a = chek(0, cons_out, false);
+            cons_out = "Введите элемент [" + to_string(j) + "][" + to_string(i) + "]: ";
+            /*a = chek(0, cons_out, false);*/
             a = 2;
-            arr[i][j] = a;
+            sum1 += a;
         }
-    for (int i = 0; i < SIZEy; i++)
+        /*sum[i] = sum1;*/
+        cout << "Сумма " << i + 1 << " столбца равна: " << sum1 << endl;
+        sum1 = 0;
+    }
+
+    /*for (int i = 0; i < SIZEy; i++)
     {
         for (int j = 0; j < SIZEx; j++)
             cout << arr[i][j] << " ";
         cout << endl;
-    }
+    }*/
     
-    for (int j = 0; j < SIZEx; j++)
-        for (int i = 0; i < SIZEy; i++)
-        {
-            sum[j] += arr[i][j];
-        }
 
-    for (int i = 0; i < SIZEx; i++)
-        cout << "Сумма " << i + 1 << " столбца равна: " << sum[i] << endl;
+    /*for (int i = 0; i < SIZEx; i++)
+        cout << "Сумма " << i + 1 << " столбца равна: " << sum[i] << endl;*/
 
 
     ExitToMenu();
