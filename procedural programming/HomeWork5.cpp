@@ -101,30 +101,30 @@ void file_read_1()
 {
     system("cls");
     file();
-    ofstream fout;
-    char str[256];
-    char f_read[256];
-    string output;
-    map <char, int> arr { {'q', 0}, {'w', 0}, {'r', 0}, {'t', 0}, {'p', 0}, {'s', 0}, {'d', 0}, {'f', 0}, {'g', 0}, {'h', 0}, {'j', 0}, {'k', 0}, {'l', 0}, {'z', 0}, {'x', 0}, {'c', 0}, {'v', 0}, {'b', 0}, {'n', 0}, {'m', 0}};
+    string str, f_read, output;
+    map <char, int> arr {{'q', 0}, {'w', 0}, {'r', 0}, {'t', 0}, {'p', 0}, {'s', 0}, {'d', 0}, {'f', 0}, {'g', 0}, {'h', 0}, {'j', 0}, {'k', 0}, {'l', 0}, {'z', 0}, {'x', 0}, {'c', 0}, {'v', 0}, {'b', 0}, {'n', 0}, {'m', 0}, {'Q', 0}, {'W', 0}, {'R', 0}, {'T', 0}, {'P', 0}, {'S', 0}, {'D', 0}, {'F', 0}, {'G', 0}, {'H', 0}, {'J', 0}, {'K', 0}, {'L', 0}, {'Z', 0}, {'X', 0}, {'C', 0}, {'V', 0}, {'B', 0}, {'N', 0}, {'M', 0} };
     int len = 0, max = 0;
 
     cout << "Задание 3.1 'Обработка текстовых файлов'\n" << "Введите строку для записи в файл (для завершения строки введите '.'): ";
 
-    cin.getline(str, 256, '.');
+    getline(cin, str, '.');
+    str.erase(0, 1);
+    len = str.length();
 
-    /*len = str.length();*/
+    string::iterator end_pos = std::remove(str.begin(), str.end(), ' ');
+    str.erase(end_pos, str.end());
 
     //Запись строки в файл
-    fout.open("test_HW.txt");
-    fout << str << endl;
+    ofstream fout("test_HW.txt");
+    fout << str;
     fout.close();
 
     //Чтение строки из файла
     ifstream fin("test_HW.txt");
     fin >> f_read;
     fin.close();
-
-    for (int i = 0; i < 256; i++)
+    
+    for (int i = 0; i < len; i++)
     {
         try
         {
@@ -135,7 +135,7 @@ void file_read_1()
             continue;
         }
     }
-
+    
     for (auto i = arr.begin(); i != arr.end(); i++)
     {
         if (i->second > max)
@@ -180,15 +180,18 @@ void file_read_2()
     string str;
     string str_find;
 
-    cout << "Задание 'Обработка текстовых файлов'\n" << "Введите строку (для завершения строки введите '.'): ";
-    getline(cin, str, '.');
-    /*cin >> str;*/
+    cout << "Задание 'Обработка текстовых файлов'\n" << "Введите строку (для завершения строки введите '#'): ";
+    getline(cin, str, '#');
 
-    cout << "Введите строку, которую нужно найти: ";
-    /*getline(cin, str_find, '.');*/
-    cin >> str_find;
+    cout << "\nВведите строку, которую нужно найти (для завершения строки введите '#'): ";
+    getline(cin, str_find, '#');
+    cout << "\n";
     
-    if (str.find(str_find) == -1) cout << "Такой строки нет.";
+    str.erase(0, 1);
+    str_find.erase(0, 1);
+
+
+    if (str.find(str_find) == -1 || str.length() == 0 || str_find.length() == 0) cout << "Такой строки нет.";
     else find_str(str, str_find);
     cout << endl;
 
