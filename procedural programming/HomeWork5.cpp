@@ -5,8 +5,9 @@
 #include <fstream>     //Для работы с файлом
 #include <map>         //Для map
 #include <algorithm>   //Для сортировки
+#include <ctime>       //Для генерации рандомных чисел
 #include <string>      //Для перевода string -> int/float, int -> string
-#include "Chek.h"      //Модуль провкрки
+#include "Chek.h"      //Модуль проверки
 #include "HomeWork3.h" //Модуль Д/з 3
 #include "HomeWork4.h" //Модуль Д/з 4
 #include "ExitToMenu.h"//Модуль выхода
@@ -319,6 +320,7 @@ void rows_2()
     string cons_out;
     float sum1 = 0;
     cout << "Задание 'Ряды'" << endl;
+    srand(time(NULL));
 
     SIZEy = (int)chek(5, "Введите количество столбцов в массиве: ", false);
     SIZEx = (int)chek(5, "Введите количество строк в массиве: ", false);
@@ -333,7 +335,7 @@ void rows_2()
         {
             cons_out = "Введите элемент [" + to_string(j) + "][" + to_string(i) + "]: ";
             /*a = chek(0, cons_out, false);*/
-            a = 2;
+            a = rand() % 1000;
             sum1 += a;
         }
         /*sum[i] = sum1;*/

@@ -864,6 +864,7 @@ int case4()
         case 5:
             sin();
             system("cls");
+            cout << "Вы вернулись к выбору заданий.\n";
             break;
         case 6:
             recognizer();
