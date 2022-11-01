@@ -1,10 +1,10 @@
-#include <iostream> //Для chek
-#include <locale>   //Для вывода русским
-#include <string>   //Для перевода string -> int/float
+п»ї#include <iostream> //Р”Р»СЏ chek
+#include <locale>   //Р”Р»СЏ РІС‹РІРѕРґР° СЂСѓСЃСЃРєРёРј
+#include <string>   //Р”Р»СЏ РїРµСЂРµРІРѕРґР° string -> int/float
 
 using namespace std;
 
-//Проверка на ввод
+//РџСЂРѕРІРµСЂРєР° РЅР° РІРІРѕРґ
 float chek(int type, string cons_out, bool main)
 {
     setlocale(LC_NUMERIC, "eng");
@@ -26,7 +26,7 @@ float chek(int type, string cons_out, bool main)
                 {
                     flag = false;
                     if (main) system("cls");
-                    cout << num << " - это не число.\n";
+                    cout << num << " - СЌС‚Рѕ РЅРµ С‡РёСЃР»Рѕ.\n";
                     break;
                 }
             }
@@ -37,53 +37,53 @@ float chek(int type, string cons_out, bool main)
                 n = modf(Fnum, &s);
                 switch (type)
                 {
-                case 1: // Для числа большего 0.
+                case 1: // Р”Р»СЏ С‡РёСЃР»Р° Р±РѕР»СЊС€РµРіРѕ 0.
                     if (Fnum > 0) return Fnum;
                     else
                     {
-                        cout << num << " - число должно быть больше 0.\n";
+                        cout << num << " - С‡РёСЃР»Рѕ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ Р±РѕР»СЊС€Рµ 0.\n";
                         break;
                     }
-                case 2: // Для угла.
+                case 2: // Р”Р»СЏ СѓРіР»Р°.
                     if (Fnum > 0 && Fnum < 180) return Fnum;
                     else
                     {
-                        cout << "Угол должен быть в пределах (0, 180).\n";
+                        cout << "РЈРіРѕР» РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РІ РїСЂРµРґРµР»Р°С… (0, 180).\n";
                         break;
                     }
-                case 3: // Для меню.
+                case 3: // Р”Р»СЏ РјРµРЅСЋ.
                     if (n == 0) return Fnum;
                     else
                     {
                         system("cls");
-                        cout << num << " - число должно быть целым.\n";
+                        cout << num << " - С‡РёСЃР»Рѕ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ С†РµР»С‹Рј.\n";
                         break;
                     }
-                case 4: // Для системы счисления.
+                case 4: // Р”Р»СЏ СЃРёСЃС‚РµРјС‹ СЃС‡РёСЃР»РµРЅРёСЏ.
                     if (n == 0 && Fnum > 0) return Fnum;
                     else if (n != 0)
                     {
-                        cout << num << " - СС не может быть дробной.\n";
+                        cout << num << " - РЎРЎ РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РґСЂРѕР±РЅРѕР№.\n";
                         break;
                     }
                     else
                     {
-                        cout << num << " - СС не может быть отрицательной.\n";
+                        cout << num << " - РЎРЎ РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РѕС‚СЂРёС†Р°С‚РµР»СЊРЅРѕР№.\n";
                         break;
                     }
-                case 5: // Проверка на целое положительное число.
+                case 5: // РџСЂРѕРІРµСЂРєР° РЅР° С†РµР»РѕРµ РїРѕР»РѕР¶РёС‚РµР»СЊРЅРѕРµ С‡РёСЃР»Рѕ.
                     if (n == 0 && Fnum > 0) return Fnum;
                     else if (n != 0)
                     {
-                        cout << num << " - Число не может быть дробным.\n";
+                        cout << num << " - Р§РёСЃР»Рѕ РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РґСЂРѕР±РЅС‹Рј.\n";
                         break;
                     }
                     else
                     {
-                        cout << num << " - Число не может быть отрицательным.\n";
+                        cout << num << " - Р§РёСЃР»Рѕ РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹Рј.\n";
                         break;
                     }
-                default:// Для остальных случаев.
+                default:// Р”Р»СЏ РѕСЃС‚Р°Р»СЊРЅС‹С… СЃР»СѓС‡Р°РµРІ.
                     return Fnum;
                 }
             }
@@ -92,12 +92,12 @@ float chek(int type, string cons_out, bool main)
         catch (out_of_range)
         {
             if (main) system("cls");
-            cout << "Слишком большое число.\n";
+            cout << "РЎР»РёС€РєРѕРј Р±РѕР»СЊС€РѕРµ С‡РёСЃР»Рѕ.\n";
         }
         catch (...)
         {
             if (main) system("cls");
-            cout << num << "Произошла ошибка.\n";
+            cout << num << "РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР°.\n";
         }
     } while (true);
 }

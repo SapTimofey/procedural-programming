@@ -1,10 +1,10 @@
-#include <iostream> //Для ExitToMenu
-#include <locale>   //Для вывода русским
+п»ї#include <iostream> //Р”Р»СЏ ExitToMenu
+#include <locale>   //Р”Р»СЏ РІС‹РІРѕРґР° СЂСѓСЃСЃРєРёРј
 
 using namespace std;
 void ExitToMenu()
 {
 	string i;
-	cout << "Чтобы вернутся, введите любой символ.";
+	cout << "Р§С‚РѕР±С‹ РІРµСЂРЅСѓС‚СЃСЏ, РІРІРµРґРёС‚Рµ Р»СЋР±РѕР№ СЃРёРјРІРѕР».";
 	cin >> i;
 }
