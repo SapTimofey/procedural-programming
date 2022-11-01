@@ -333,156 +333,160 @@ void recognizer()
             str_input.erase(0, 1);
         }
     }
+    if (output_num >= 4000)
+        cout << "Максимально возможное число 3999." << endl;
+    else
+    {
+        num_chek = output_num;
 
-    num_chek = output_num;
+        if (num_chek >= 1000)
+        {
+            switch (num_chek / 1000)
+            {
+            case 1:
+                str += 'M';
+                num_chek -= 1000;
+                break;
+            case 2:
+                str += "MM";
+                num_chek -= 2000;
+                break;
+            case 3:
+                str += "MMM";
+                num_chek -= 3000;
+                break;
+            }
+        }
+        if (num_chek >= 100)
+        {
+            switch (num_chek / 100)
+            {
+            case 1:
+                str += 'C';
+                num_chek -= 100;
+                break;
+            case 2:
+                str += "CC";
+                num_chek -= 200;
+                break;
+            case 3:
+                str += "CCC";
+                num_chek -= 300;
+                break;
+            case 4:
+                str += "CD";
+                num_chek -= 400;
+                break;
+            case 5:
+                str += 'D';
+                num_chek -= 500;
+                break;
+            case 6:
+                str += "DC";
+                num_chek -= 600;
+                break;
+            case 7:
+                str += "DCC";
+                num_chek -= 700;
+                break;
+            case 8:
+                str += "DCCC";
+                num_chek -= 800;
+                break;
+            case 9:
+                str += "CM";
+                num_chek -= 900;
+                break;
+            }
+        }
+        if (num_chek >= 10)
+        {
+            switch (num_chek / 10)
+            {
+            case 1:
+                str += 'X';
+                num_chek -= 10;
+                break;
+            case 2:
+                str += "XX";
+                num_chek -= 20;
+                break;
+            case 3:
+                str += "XXX";
+                num_chek -= 30;
+                break;
+            case 4:
+                str += "XL";
+                num_chek -= 40;
+                break;
+            case 5:
+                str += 'L';
+                num_chek -= 50;
+                break;
+            case 6:
+                str += "LX";
+                num_chek -= 60;
+                break;
+            case 7:
+                str += "LXX";
+                num_chek -= 70;
+                break;
+            case 8:
+                str += "LXXX";
+                num_chek -= 80;
+                break;
+            case 9:
+                str += "XC";
+                num_chek -= 90;
+                break;
+            }
+        }
+        if (num_chek < 10)
+        {
+            switch (num_chek)
+            {
+            case 1:
+                str += 'I';
+                num_chek -= 1;
+                break;
+            case 2:
+                str += "II";
+                num_chek -= 2;
+                break;
+            case 3:
+                str += "III";
+                num_chek -= 3;
+                break;
+            case 4:
+                str += "IV";
+                num_chek -= 4;
+                break;
+            case 5:
+                str += 'V';
+                num_chek -= 5;
+                break;
+            case 6:
+                str += "VI";
+                num_chek -= 6;
+                break;
+            case 7:
+                str += "VII";
+                num_chek -= 7;
+                break;
+            case 8:
+                str += "VIII";
+                num_chek -= 8;
+                break;
+            case 9:
+                str += "IX";
+                num_chek -= 9;
+                break;
+            }
+        }
 
-    if (num_chek >= 1000)
-    {
-        switch (num_chek / 1000)
-        {
-        case 1:
-            str += 'M';
-            num_chek -= 1000;
-            break;
-        case 2:
-            str += "MM";
-            num_chek -= 2000;
-            break;
-        case 3:
-            str += "MMM";
-            num_chek -= 3000;
-            break;
-        }
-    } 
-    if (num_chek >= 100)
-    {
-        switch (num_chek / 100)
-        {
-        case 1:
-            str += 'C';
-            num_chek -= 100;
-            break;
-        case 2:
-            str += "CC";
-            num_chek -= 200;
-            break;
-        case 3:
-            str += "CCC";
-            num_chek -= 300;
-            break;
-        case 4:
-            str += "CD";
-            num_chek -= 400;
-            break;
-        case 5:
-            str += 'D';
-            num_chek -= 500;
-            break;
-        case 6:
-            str += "DC";
-            num_chek -= 600;
-            break;
-        case 7:
-            str += "DCC";
-            num_chek -= 700;
-            break;
-        case 8:
-            str += "DCCC";
-            num_chek -= 800;
-            break;
-        case 9:
-            str += "CM";
-            num_chek -= 900;
-            break;
-        }
+        if (str_chek == str) cout << output_num << endl;
+        else cout << "Возможно, вы имели в виду " << str << " равное " << output_num << "." << endl;
     }
-    if (num_chek >= 10)
-    {
-        switch (num_chek / 10)
-        {
-        case 1:
-            str += 'X';
-            num_chek -= 10;
-            break;
-        case 2:
-            str += "XX";
-            num_chek -= 20;
-            break;
-        case 3:
-            str += "XXX";
-            num_chek -= 30;
-            break;
-        case 4:
-            str += "XL";
-            num_chek -= 40;
-            break;
-        case 5:
-            str += 'L';
-            num_chek -= 50;
-            break;
-        case 6:
-            str += "LX";
-            num_chek -= 60;
-            break;
-        case 7:
-            str += "LXX";
-            num_chek -= 70;
-            break;
-        case 8:
-            str += "LXXX";
-            num_chek -= 80;
-            break;
-        case 9:
-            str += "XC";
-            num_chek -= 90;
-            break;
-        }
-    }
-    if (num_chek < 10)
-    {
-        switch (num_chek)
-        {
-        case 1:
-            str += 'I';
-            num_chek -= 1;
-            break;
-        case 2:
-            str += "II";
-            num_chek -= 2;
-            break;
-        case 3:
-            str += "III";
-            num_chek -= 3;
-            break;
-        case 4:
-            str += "IV";
-            num_chek -= 4;
-            break;
-        case 5:
-            str += 'V';
-            num_chek -= 5;
-            break;
-        case 6:
-            str += "VI";
-            num_chek -= 6;
-            break;
-        case 7:
-            str += "VII";
-            num_chek -= 7;
-            break;
-        case 8:
-            str += "VIII";
-            num_chek -= 8;
-            break;
-        case 9:
-            str += "IX";
-            num_chek -= 9;
-            break;
-        }
-    }
-
-    if (str_chek == str) cout << output_num << endl;
-    else cout << "Возможно, вы имели в виду " << str << " равное " << output_num << "." << endl;
 
     ExitToMenu();
 }
