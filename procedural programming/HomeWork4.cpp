@@ -85,87 +85,116 @@ void geometry()
 {
     system("cls");
     bool chek_geo = true;
-    string i = "no", cons_out = "Задание 'Геометрические фигуры'\nПрямоугольник\t1\nТреугольник\t2\nКруг    \t3\nВведите номер фигуры: ";
+    int key = 0;
+    string i, cons_out[3] = { "1 - Прямоугольник", "2 - Треугольник", "3 - Круг" };
     float R = 0, A = 0, B = 0, corner = 0;
     const double PI = 3.141592653589793;               
 
     //Модуль выбора фигур
     while (chek_geo)
     {
-        switch ((int)chek(3, cons_out, true))
+        int num = 0;
+        do
         {
-        default:
-            system("cls");
-            cout << "Нет такой фигуры.\n";
-            break;
-        case 1:
-            system("cls");
-            cout << "Площадь прямоугольника\n";
-            A = chek(1, "Введите длину стороны A: ", false);
-
-            B = chek(1, "Введите длину стороны B: ", false);
-
-            cout << "Площадь прямоугольника равна: " << A * B << endl;
-
-            //Модуль выхода в меню
-            cout << "Чтобы вернуться к выбору фигур, введите 0.\n" << "Чтобы вернуться к выбору заданий, введите любой другой символ.";
-            cin >> i;
-            if (i == "0")
+            cout << "Используйте:\n- стрелки вверх, вниз - для передвижения\n- enter - для выбора\n- escape - для выхода\n--------Выбор фигур---------" << endl;
+            for (int i = 0; i < 3; i++)
             {
-                system("cls");
-                cout << "Вы вернулись к выбору фигур.\n";
-                break;
+                if (i == num)
+                {
+                    setColor(Black, LightGray);
+                    cout << cons_out[i];
+                    setColor(LightGray, Black);
+                    cout << endl;
+                }
+                else cout << cons_out[i] << endl;
             }
-            else
+
+            key = static_cast<int>(_getch());
+            if (key == 80 && num < 2) num++;
+            if (key == 72 && num > 0) num--;
+            if (key == 27)
             {
                 chek_geo = false;
-                break;
-            }
-        case 2:
-            system("cls");
-            cout << "Площадь треугольника\n";
-            A = chek(1, "Введите длину стороны A: ", false);
-
-            B = chek(1, "Введите длину стороны B: ", false);
-
-            corner = chek(2, "Введите угол (в градусах) между двумя сторонами: ", false);
-
-            cout << "Площадь треугольника равна: " << 0.5 * A * B * sin(corner * PI / 180) << endl;
-
-            //Модуль выхода в меню
-            cout << "Чтобы вернуться к выбору фигур, введите 0.\n" << "Чтобы вернуться к выбору заданий, введите любой другой символ.";
-            cin >> i;
-            if (i == "0")
-            {
                 system("cls");
-                cout << "Вы вернулись к выбору фигур.\n";
+                cout << "Вы вернулись назад.\n";
                 break;
             }
-            else
-            {
-                chek_geo = false;
-                break;
-            }
-        case 3:
             system("cls");
-            cout << "Площадь круга\n";
-            R = chek(1, "Введите значение радиуса R: ", false);
 
-            cout << "Площадь круга равна: " << PI * pow(R, 2) << endl;
-
-            //Модуль выхода в меню
-            cout << "Чтобы вернуться к выбору фигур, введите 0.\n" << "Чтобы вернуться к выбору заданий, введите любой другой символ.";
-            cin >> i;
-            if (i == "0")
+        } while (key != 13);
+        if (chek_geo)
+        {
+            switch (num + 1)
             {
+            case 1:
                 system("cls");
-                cout << "Вы вернулись к выбору фигур.\n";
-                break;
-            }
-            else
-            {
-                chek_geo = false;
-                break;
+                cout << "Площадь прямоугольника\n";
+                A = chek(1, "Введите длину стороны A: ", false);
+
+                B = chek(1, "Введите длину стороны B: ", false);
+
+                cout << "Площадь прямоугольника равна: " << A * B << endl;
+
+                //Модуль выхода в меню
+                cout << "Чтобы вернуться к выбору фигур, введите 0.\n" << "Чтобы вернуться к выбору заданий, введите любой другой символ.";
+                cin >> i;
+                if (i == "0")
+                {
+                    system("cls");
+                    cout << "Вы вернулись к выбору фигур.\n";
+                    break;
+                }
+                else
+                {
+                    chek_geo = false;
+                    break;
+                }
+            case 2:
+                system("cls");
+                cout << "Площадь треугольника\n";
+                A = chek(1, "Введите длину стороны A: ", false);
+
+                B = chek(1, "Введите длину стороны B: ", false);
+
+                corner = chek(2, "Введите угол (в градусах) между двумя сторонами: ", false);
+
+                cout << "Площадь треугольника равна: " << 0.5 * A * B * sin(corner * PI / 180) << endl;
+
+                //Модуль выхода в меню
+                cout << "Чтобы вернуться к выбору фигур, введите 0.\n" << "Чтобы вернуться к выбору заданий, введите любой другой символ.";
+                cin >> i;
+                if (i == "0")
+                {
+                    system("cls");
+                    cout << "Вы вернулись к выбору фигур.\n";
+                    break;
+                }
+                else
+                {
+                    chek_geo = false;
+                    break;
+                }
+            case 3:
+                system("cls");
+                cout << "Площадь круга\n";
+                R = chek(1, "Введите значение радиуса R: ", false);
+
+                cout << "Площадь круга равна: " << PI * pow(R, 2) << endl;
+
+                //Модуль выхода в меню
+                cout << "Чтобы вернуться к выбору фигур, введите 0.\n" << "Чтобы вернуться к выбору заданий, введите любой другой символ.";
+                cin >> i;
+                if (i == "0")
+                {
+                    system("cls");
+                    cout << "Вы вернулись к выбору фигур.\n";
+                    break;
+                }
+                else
+                {
+                    chek_geo = false;
+                    break;
+                }
             }
         }
     }
@@ -831,67 +860,95 @@ void menu_HW4()
     SetConsoleOutputCP(1251);
     setlocale(LC_ALL, "Russian");
     
-    string cons_out = "Задание 1 'Файл'\nЗадание 2 'Знак числа'\nЗадание 3 'Геометрические фигуры'\nЗадание 4 'Былая слава'\nЗадание 5 'Синусоида'\nЗадание 6 'Автоматный распознаватель'\nЗадание 7 'Генератор псевдослучайных чисел'\nЗадание 8 'Умножение матриц'\nЗадание 9 'Системы счисления'\n0 вернуться к выбору д/з.\nВведите номер задания: ";
-    bool chek_hw3 = true;
+    int key = 0;
+    
+    string cons_out[9] = { "Задание 1 'Файл'", "Задание 2 'Знак числа'", "Задание 3 'Геометрические фигуры'", "Задание 4 'Былая слава'", "Задание 5 'Синусоида'", "Задание 6 'Автоматный распознаватель'", "Задание 7 'Генератор псевдослучайных чисел'", "Задание 8 'Умножение матриц'", "Задание 9 'Системы счисления'" };
+    bool chek_hw4 = true;
+
     system("cls");
-    while (chek_hw3)
+
+    while (chek_hw4)
     {
-        switch ((int)chek(3, cons_out, true))
+        int num = 0;
+        do
         {
-        default:
+            cout << "Используйте:\n- стрелки вверх, вниз - для передвижения\n- enter - для выбора\n- escape - для выхода\n----------Д/з 4------------" << endl;
+            for (int i = 0; i < 9; i++)
+            {
+                if (i == num)
+                {
+                    setColor(Black, LightGray);
+                    cout << cons_out[i];
+                    setColor(LightGray, Black);
+                    cout << endl;
+                }
+                else cout << cons_out[i] << endl;
+            }
+
+            key = static_cast<int>(_getch());
+            if (key == 80 && num < 8) num++;
+            if (key == 72 && num > 0) num--;
+            if (key == 27)
+            {
+                chek_hw4 = false;
+                system("cls");
+                cout << "Вы вернулись назад.\n";
+                break;
+            }
             system("cls");
-            cout << "Нет такого задания.\n";
-            break;
-        case 1:
-            file_4();
-            system("cls");
-            cout << "Вы вернулись к выбору заданий.\n";
-            break;
-        case 2:
-            number_sign();
-            system("cls");
-            cout << "Вы вернулись к выбору заданий.\n";
-            break;
-        case 3:
-            geometry();
-            system("cls");
-            cout << "Вы вернулись к выбору заданий.\n";
-            break;
-        case 4:
-            glory();
-            system("cls");
-            cout << "Вы вернулись к выбору заданий.\n";
-            break;
-        case 5:
-            sin();
-            system("cls");
-            cout << "Вы вернулись к выбору заданий.\n";
-            break;
-        case 6:
-            recognizer();
-            system("cls");
-            cout << "Вы вернулись к выбору заданий.\n";
-            break;
-        case 7:
-            random_num();
-            system("cls");
-            cout << "Вы вернулись к выбору заданий.\n";
-            break;
-        case 8:
-            matrix();
-            system("cls");
-            cout << "Вы вернулись к выбору заданий.\n";
-            break;
-        case 9:
-            number_system();
-            system("cls");
-            cout << "Вы вернулись к выбору заданий.\n";
-            break;
-        case 0:
-            system("cls");
-            cout << "Вы вернулись назад.\n";
-            chek_hw3 = false;
+
+        } while (key != 13);
+        if (chek_hw4)
+        {
+            switch (num + 1)
+            {
+            case 1:
+                file_4();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+            case 2:
+                number_sign();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+            case 3:
+                geometry();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+            case 4:
+                glory();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+            case 5:
+                sin();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+            case 6:
+                recognizer();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+            case 7:
+                random_num();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+            case 8:
+                matrix();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+            case 9:
+                number_system();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+            }
         }
     }
-    chek_hw3 = true;
+    chek_hw4 = true;
 }

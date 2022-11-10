@@ -87,12 +87,9 @@ void eratosthenes()
         }
 
         for (int i = 2; i * i <= n; i++) if (natural_num[i]) for (int j = i * i; j <= n; j += i) natural_num[j] = 0;
-        int sz = 0;
-        if (n < 100000) for (int i = 2; i < n; i++) if (natural_num[i]) cout << natural_num[i] << " ";
-        else for (int i = 2; i < n; i++) if (natural_num[i]) sz++;
+        for (int i = 2; i < n; i++) if (natural_num[i]) cout << natural_num[i] << endl;
 
-        if (n >= 100000) cout << "Количество простых чисел: " << sz << endl;
-        else cout << endl;
+        cout << endl;
     }
 
     ExitToMenu();
@@ -366,12 +363,45 @@ void menu_HW5()
     SetConsoleOutputCP(1251);
     setlocale(LC_ALL, "Russian");
 
-    string cons_out = "Задание 1 'Алгоритм Евклида'\nЗадание 2 'Решето Эратосфена'\nЗадание 3 'Обработка текстовых файлов'\nЗадание 4 'Обработка текстовых файлов'\nЗадание 5 'Ряды'\nЗадание 6 'Ряды'\n0 вернуться к выбору д/з.\nВведите номер задания: ";
-    bool chek_hw3 = true;
+    int key = 0;
+
+    string cons_out[6] = { "Задание 1 'Алгоритм Евклида'", "Задание 2 'Решето Эратосфена'", "Задание 3 'Обработка текстовых файлов'", "Задание 4 'Обработка текстовых файлов'", "Задание 5 'Ряды'", "Задание 6 'Ряды'" };
+    bool chek_hw5 = true;
+
     system("cls");
-    while (chek_hw3)
+
+    while (chek_hw5)
     {
-        switch ((int)chek(3, cons_out, true))
+        int num = 0;
+        do
+        {
+            cout << "Используйте:\n- стрелки вверх, вниз - для передвижения\n- enter - для выбора\n- escape - для выхода\n----------Д/з 5------------" << endl;
+            for (int i = 0; i < 6; i++)
+            {
+                if (i == num)
+                {
+                    setColor(Black, LightGray);
+                    cout << cons_out[i];
+                    setColor(LightGray, Black);
+                    cout << endl;
+                }
+                else cout << cons_out[i] << endl;
+            }
+
+            key = static_cast<int>(_getch());
+            if (key == 80 && num < 5) num++;
+            if (key == 72 && num > 0) num--;
+            if (key == 27)
+            {
+                chek_hw5 = false;
+                system("cls");
+                cout << "Вы вернулись назад.\n";
+                break;
+            }
+            system("cls");
+
+        } while (key != 13);
+        switch (num + 1)
         {
         default:
             system("cls");
@@ -407,11 +437,7 @@ void menu_HW5()
             system("cls");
             cout << "Вы вернулись назад.\n";
             break;
-        case 0:
-            system("cls");
-            cout << "Вы вернулись назад.\n";
-            chek_hw3 = false;
         }
     }
-    chek_hw3 = true;
+    chek_hw5 = true;
 }

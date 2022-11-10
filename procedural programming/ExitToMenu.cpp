@@ -7,6 +7,6 @@ using namespace std;
 void ExitToMenu()
 {
 	char ch;
-	cout << "Чтобы вернутся, нажмите любой символ.";
+	cout << "Чтобы вернутся, нажмите любую клавишу.";
 	ch = _getch();
 }

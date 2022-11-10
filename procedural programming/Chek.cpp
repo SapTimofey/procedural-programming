@@ -65,14 +65,6 @@ float chek(int type, string cons_out, bool main)
                         cout << "Угол должен быть в пределах (0, 180).\n";
                         break;
                     }
-                case 3: // Для меню.
-                    if (n == 0) return Fnum;
-                    else
-                    {
-                        system("cls");
-                        cout << num << " - число должно быть целым.\n";
-                        break;
-                    }
                 case 4: // Для системы счисления.
                     if (n == 0 && Fnum > 0) return Fnum;
                     else if (n != 0)
@@ -80,9 +72,14 @@ float chek(int type, string cons_out, bool main)
                         cout << num << " - СС не может быть дробной.\n";
                         break;
                     }
-                    else
+                    else if (Fnum < 0)
                     {
                         cout << num << " - СС не может быть отрицательной.\n";
+                        break;
+                    }
+                    else
+                    {
+                        cout << num << " - СС не может равняться 0.\n";
                         break;
                     }
                 case 5: // Проверка на целое положительное число.
@@ -92,9 +89,14 @@ float chek(int type, string cons_out, bool main)
                         cout << num << " - Число не может быть дробным.\n";
                         break;
                     }
-                    else
+                    else if (Fnum < 0)
                     {
                         cout << num << " - Число не может быть отрицательным.\n";
+                        break;
+                    }
+                    else
+                    {
+                        cout << num << " - Число не может равняться 0.\n";
                         break;
                     }
                 default:// Для остальных случаев.
