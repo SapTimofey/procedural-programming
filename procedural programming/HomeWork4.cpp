@@ -218,21 +218,21 @@ void glory()
     cout << endl << endl;
 
     setColor(White, White);
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 4; i++)
     {
-        for (int j = 0; j < 25; j++) cout << "_";
+        for (int j = 0; j < 40; j++) cout << "_";
         cout << endl;
     }
     setColor(Blue, Blue);
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 4; i++)
     {
-        for (int j = 0; j < 25; j++) cout << "_";
+        for (int j = 0; j < 40; j++) cout << "_";
         cout << endl;
     }
     setColor(Red, Red);
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 4; i++)
     {
-        for (int j = 0; j < 25; j++) cout << "_";
+        for (int j = 0; j < 40; j++) cout << "_";
         cout << endl;
     }
     setColor(LightGray, Black);
