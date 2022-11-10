@@ -21,7 +21,21 @@ float chek(int type, string cons_out, bool main)
             cin >> num;
             for (int i = 0; i < num.length(); i++)
             {
-                if (num[i] == '.' || isdigit(num[i]) || num[i] == '-') continue;
+                if (num[0] == '.')
+                {
+                    flag = false;
+                    if (main) system("cls");
+                    cout << num << " - число не может начинаться с точки.\n";
+                    break;
+                }
+                else if (num[1] == '.' && num[0] == '-')
+                {
+                    flag = false;
+                    if (main) system("cls");
+                    cout << num << " - число не содержит целой части.\n";
+                    break;
+                }
+                else if (num[i] == '.' || isdigit(num[i]) || num[i] == '-') continue;
                 else
                 {
                     flag = false;

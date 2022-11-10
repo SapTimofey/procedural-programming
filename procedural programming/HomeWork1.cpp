@@ -5,10 +5,15 @@
 #include <string>      //Для перевода string -> int/float
 #include "Chek.h"      //Модуль проверки
 #include "ExitToMenu.h"//Модуль выхода
+#include <conio.h>     //Для считывания клавишь
+#include "HomeWork4.h" //Модуль Д/з 4
 
 using namespace std;
 
-// Д/з 1
+enum ConsoleColor {
+    Black, Blue, Green, Cyan, Red, Magenta, Brown, LightGray,
+    DarkGray, LightBlue, LightGreen, LightCyan, LightRed, LightMagenta, Yellow, White
+};
 
 //Задание 1 "Имя"
 void Name()
@@ -146,52 +151,93 @@ void lamp()
 }
 
 //Главная часть дз 1
-int case1()
+void case1()
 {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
     setlocale(LC_ALL, "Russian");
+    
+    
+    int key = 0;
+    bool flag = false;
 
-    string cons_out = "Задание 1 'Имя'\nЗадание 2 'Арифметика'\nЗадание 3 'Уравнение'\nЗадание 4 'Ещё уравнение'\nЗадание 5 'Лампа со шторой'\n0 вернуться к выбору д/з.\nВведите номер задания: ";
+    string cons_out[5] = {"Задание 1 'Имя'", "Задание 2 'Арифметика'", "Задание 3 'Уравнение'", "Задание 4 'Ещё уравнение'","Задание 5 'Лампа со шторой'" };
     bool chek_hw1 = true;
+
+
     system("cls");
+    
+    /*for (int i = 0; i < 6; i++) cout << cons_out[i] << endl;*/
+
     while (chek_hw1)
     {
-        switch ((int)chek(3, cons_out, true))
+        int num = 0;
+        do
         {
-        default:
+            cout << "Используйте:\nстрелки вверх, вниз - для передвижения\nenter - для выбора\nescape - для выхода\n------------------------" << endl;
+            for (int i = 0; i < 5; i++)
+            {
+                if (i == num)
+                {
+                    setColor(Black, LightGray);
+                    cout << cons_out[i];
+                    setColor(LightGray, Black);
+                    cout << endl;
+                }
+                else cout << cons_out[i] << endl;
+            }
+
+            key = static_cast<int>(_getch());
+            if (key == 80 && num < 4) num++;
+            if (key == 72 && num > 0) num--;
+            if (key == 27)
+            {
+                chek_hw1 = false;
+                system("cls");
+                cout << "Вы вернулись назад.\n";
+                break;
+            }
             system("cls");
-            cout << "Нет такого задания.\n";
-            break;
-        case 1:
-            Name();
-            system("cls");
-            cout << "Вы вернулись к выбору заданий.\n";
-            break;
-        case 2:
-            arithmetic();
-            system("cls");
-            cout << "Вы вернулись к выбору заданий.\n";
-            break;
-        case 3:
-            equation();
-            system("cls");
-            cout << "Вы вернулись к выбору заданий.\n";
-            break;
-        case 4:
-            another_equation();
-            system("cls");
-            cout << "Вы вернулись к выбору заданий.\n";
-            break;
-        case 5:
-            lamp();
-            system("cls");
-            cout << "Вы вернулись к выбору заданий.\n";
-            break;
-        case 0:
-            system("cls");
-            cout << "Вы вернулись назад.\n";
-            chek_hw1 = false;
+
+        } while (key != 13);
+        if (chek_hw1)
+        {
+            switch (num + 1)
+            {
+                /*default:
+                    system("cls");
+                    cout << "Нет такого задания.\n";
+                    break;*/
+            case 1:
+                Name();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+            case 2:
+                arithmetic();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+            case 3:
+                equation();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+            case 4:
+                another_equation();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+            case 5:
+                lamp();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+                /*case 0:
+                    system("cls");
+                    cout << "Вы вернулись назад.\n";
+                    chek_hw1 = false;*/
+            }
         }
     }
     chek_hw1 = true;
