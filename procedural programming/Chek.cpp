@@ -1,4 +1,4 @@
-﻿#include <iostream> //Для chek
+﻿#include <iostream> //Для cin/cout
 #include <locale>   //Для вывода русским
 #include <string>   //Для перевода string -> int/float
 

@@ -5,7 +5,7 @@
 #include <string>      //Для перевода string -> int/float
 #include "Chek.h"      //Модуль проверки
 #include "ExitToMenu.h"//Модуль выхода
-#include <conio.h>     //Для считывания клавишь
+#include <conio.h>     //Для считывания клавиш
 #include "HomeWork4.h" //Модуль Д/з 4
 
 using namespace std;
@@ -150,16 +150,14 @@ void lamp()
     ExitToMenu();
 }
 
-//Главная часть дз 1
-void case1()
+//Меню дз 1
+void menu_HW1()
 {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
     setlocale(LC_ALL, "Russian");
     
-    
     int key = 0;
-    bool flag = false;
 
     string cons_out[5] = {"Задание 1 'Имя'", "Задание 2 'Арифметика'", "Задание 3 'Уравнение'", "Задание 4 'Ещё уравнение'","Задание 5 'Лампа со шторой'" };
     bool chek_hw1 = true;
@@ -174,7 +172,7 @@ void case1()
         int num = 0;
         do
         {
-            cout << "Используйте:\nстрелки вверх, вниз - для передвижения\nenter - для выбора\nescape - для выхода\n------------------------" << endl;
+            cout << "Используйте:\nстрелки вверх, вниз - для передвижения\nenter - для выбора\nescape - для выхода\n----------Д/з 1------------" << endl;
             for (int i = 0; i < 5; i++)
             {
                 if (i == num)
@@ -204,10 +202,6 @@ void case1()
         {
             switch (num + 1)
             {
-                /*default:
-                    system("cls");
-                    cout << "Нет такого задания.\n";
-                    break;*/
             case 1:
                 Name();
                 system("cls");
@@ -233,10 +227,6 @@ void case1()
                 system("cls");
                 cout << "Вы вернулись к выбору заданий.\n";
                 break;
-                /*case 0:
-                    system("cls");
-                    cout << "Вы вернулись назад.\n";
-                    chek_hw1 = false;*/
             }
         }
     }

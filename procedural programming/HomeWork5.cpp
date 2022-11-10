@@ -1,4 +1,4 @@
-﻿#include <iostream>    //Для case5
+﻿#include <iostream>    //Для cin/cout
 #include <locale>      //Для вывода русским
 #include <windows.h>   //Для ввода русским
 #include <cmath>       //Для вычисления уравнений
@@ -11,6 +11,7 @@
 #include "HomeWork3.h" //Модуль Д/з 3
 #include "HomeWork4.h" //Модуль Д/з 4
 #include "ExitToMenu.h"//Модуль выхода
+#include <conio.h>     //Для считывания клавиш
 
 using namespace std;
 
@@ -358,8 +359,8 @@ void rows_2()
     ExitToMenu();
 }
 
-//Главная часть дз 5
-int case5()
+//Меню дз 5
+void menu_HW5()
 {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);

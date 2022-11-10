@@ -1,6 +1,6 @@
-﻿#include <iostream> //Для ExitToMenu
+﻿#include <iostream> //Для cin/cout
 #include <locale>   //Для вывода русским
-#include <conio.h>  //Для считывания клавишь
+#include <conio.h>  //Для считывания клавиш
 
 using namespace std;
 

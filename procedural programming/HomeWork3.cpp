@@ -1,4 +1,4 @@
-﻿#include <iostream>    //Для case3
+﻿#include <iostream>    //Для cin/cout
 #include <locale>      //Для вывода русским
 #include <windows.h>   //Для ввода русским
 #include <cmath>       //Для вычисления уравнений
@@ -8,8 +8,15 @@
 #include <ctime>       //Для генерации рандомных чисел
 #include <algorithm>   //Для сортировки
 #include "ExitToMenu.h"//Для выхода
+#include <conio.h>     //Для считывания клавиш
+#include "HomeWork4.h" //Модуль Д/з 4
 
 using namespace std;
+
+enum ConsoleColor {
+    Black, Blue, Green, Cyan, Red, Magenta, Brown, LightGray,
+    DarkGray, LightBlue, LightGreen, LightCyan, LightRed, LightMagenta, Yellow, White
+};
 
 //Создание файла
 void file()
@@ -17,8 +24,6 @@ void file()
     ofstream fout("test_HW.txt");
     fout.close();
 }
-
-// Д/з 3
 
 //Задание 1 "Заём"
 void loan()
@@ -260,53 +265,81 @@ void sorting_letters()
     ExitToMenu();
 }
 
-//Главная часть дз 3
-int case3()
+//Меню дз 3
+void menu_HW3()
 {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
     setlocale(LC_ALL, "Russian");
 
-    string cons_out = "Задание 1 'Заём'\nЗадание 2 'Ссуда'\nЗадание 3 'Копирование файла'\nЗадание 4 'Фильтр'\nЗадание 5 'Сортировка букв'\n0 вернуться к выбору д/з.\nВведите номер задания: ";
+    int key = 0;
+
+    string cons_out[5] = { "Задание 1 'Заём'", "Задание 2 'Ссуда'", "Задание 3 'Копирование файла'", "Задание 4 'Фильтр'", "Задание 5 'Сортировка букв'" };
     bool chek_hw3 = true;
+    
     system("cls");
+
     while (chek_hw3)
     {
-        switch ((int)chek(3, cons_out, true))
+        int num = 0;
+        do
         {
-        default:
+            cout << "Используйте:\nстрелки вверх, вниз - для передвижения\nenter - для выбора\nescape - для выхода\n----------Д/з 3------------" << endl;
+            for (int i = 0; i < 5; i++)
+            {
+                if (i == num)
+                {
+                    setColor(Black, LightGray);
+                    cout << cons_out[i];
+                    setColor(LightGray, Black);
+                    cout << endl;
+                }
+                else cout << cons_out[i] << endl;
+            }
+
+            key = static_cast<int>(_getch());
+            if (key == 80 && num < 4) num++;
+            if (key == 72 && num > 0) num--;
+            if (key == 27)
+            {
+                chek_hw3 = false;
+                system("cls");
+                cout << "Вы вернулись назад.\n";
+                break;
+            }
             system("cls");
-            cout << "Нет такого задания.\n";
-            break;
-        case 1:
-            loan();
-            system("cls");
-            cout << "Вы вернулись к выбору заданий.\n";
-            break;
-        case 2:
-            loan2();
-            system("cls");
-            cout << "Вы вернулись к выбору заданий.\n";
-            break;
-        case 3:
-            copying_file();
-            system("cls");
-            cout << "Вы вернулись к выбору заданий.\n";
-            break;
-        case 4:
-            filter();
-            system("cls");
-            cout << "Вы вернулись к выбору заданий.\n";
-            break;
-        case 5:
-            sorting_letters();
-            system("cls");
-            cout << "Вы вернулись к выбору заданий.\n";
-            break;
-        case 0:
-            system("cls");
-            cout << "Вы вернулись назад.\n";
-            chek_hw3 = false;
+
+        } while (key != 13);
+        if (chek_hw3)
+        {
+            switch (num + 1)
+            {
+            case 1:
+                loan();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+            case 2:
+                loan2();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+            case 3:
+                copying_file();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+            case 4:
+                filter();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+            case 5:
+                sorting_letters();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+            }
         }
     }
     chek_hw3 = true;

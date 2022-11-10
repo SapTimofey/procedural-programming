@@ -8,4 +8,4 @@ void recognizer();
 void sin();
 void matrix();
 void number_system();
-int case4();
+void menu_HW4();

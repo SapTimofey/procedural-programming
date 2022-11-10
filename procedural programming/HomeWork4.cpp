@@ -1,4 +1,4 @@
-﻿#include <iostream>    //Для case4
+﻿#include <iostream>    //Для cin/cout
 #include <locale>      //Для вывода русским
 #include <windows.h>   //Для ввода русским
 #include <cmath>       //Для вычисления уравнений
@@ -9,6 +9,7 @@
 #include <algorithm>   //Для сортировки
 #include "HomeWork3.h" //Модуль Д/з 3
 #include "ExitToMenu.h"//Модуль выхода
+#include <conio.h>     //Для считывания клавиш
 
 using namespace std;
 
@@ -823,8 +824,8 @@ void number_system()
     ExitToMenu();
 }
 
-//Главная часть дз 4
-int case4()
+//Меню дз 4
+void menu_HW4()
 {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);

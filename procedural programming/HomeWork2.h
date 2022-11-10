@@ -4,4 +4,4 @@ void branching();
 void function();
 void sequence();
 void tabulation();
-int case2();
+void menu_HW2();

@@ -4,4 +4,4 @@ void arithmetic();
 void equation();
 void another_equation();
 void lamp();
-void case1();
+void menu_HW1();

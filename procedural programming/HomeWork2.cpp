@@ -1,14 +1,19 @@
-﻿#include <iostream>    //Для case2
+﻿#include <iostream>    //Для cin/cout
 #include <locale>      //Для вывода русским
 #include <windows.h>   //Для ввода русским
 #include <cmath>       //Для вычисления уравнений
 #include <string>      //Для перевода string -> int/float
 #include "Chek.h"      //Модуль провкрки
 #include "ExitToMenu.h"//Модуль выхода
+#include <conio.h>     //Для считывания клавиш
+#include "HomeWork4.h" //Модуль Д/з 4
 
 using namespace std;
 
-// Д/з 2
+enum ConsoleColor {
+    Black, Blue, Green, Cyan, Red, Magenta, Brown, LightGray,
+    DarkGray, LightBlue, LightGreen, LightCyan, LightRed, LightMagenta, Yellow, White
+};
 
 //Задание 1 "Конус"
 void cone()
@@ -103,53 +108,81 @@ void tabulation()
     ExitToMenu();
 }
 
-//Главная часть дз 2
-int case2()
+//Меню дз 2
+void menu_HW2()
 {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
     setlocale(LC_ALL, "Russian");
 
-    string cons_out = "Задание 1 'Конус'\nЗадание 2 'Разветвление'\nЗадание 3 'Функция'\nЗадание 4 'Порядок'\nЗадание 5 'Табуляция'\n0 вернуться к выбору д/з.\nВведите номер задания: ";
+    int key = 0;
+
+    string cons_out[5] = { "Задание 1 'Конус'", "Задание 2 'Разветвление'", "Задание 3 'Функция'", "Задание 4 'Порядок'", "Задание 5 'Табуляция'" };
     bool chek_hw2 = true;
+
     system("cls");
+
     while (chek_hw2)
     {
-        switch ((int)chek(3, cons_out, true))
+        int num = 0;
+        do
         {
-        default:
+            cout << "Используйте:\nстрелки вверх, вниз - для передвижения\nenter - для выбора\nescape - для выхода\n----------Д/з 2------------" << endl;
+            for (int i = 0; i < 5; i++)
+            {
+                if (i == num)
+                {
+                    setColor(Black, LightGray);
+                    cout << cons_out[i];
+                    setColor(LightGray, Black);
+                    cout << endl;
+                }
+                else cout << cons_out[i] << endl;
+            }
+
+            key = static_cast<int>(_getch());
+            if (key == 80 && num < 4) num++;
+            if (key == 72 && num > 0) num--;
+            if (key == 27)
+            {
+                chek_hw2 = false;
+                system("cls");
+                cout << "Вы вернулись назад.\n";
+                break;
+            }
             system("cls");
-            cout << "Нет такого задания.\n";
-            break;
-        case 1:
-            cone();
-            system("cls");
-            cout << "Вы вернулись к выбору заданий.\n";
-            break;
-        case 2:
-            branching();
-            system("cls");
-            cout << "Вы вернулись к выбору заданий.\n";
-            break;
-        case 3:
-            function();
-            system("cls");
-            cout << "Вы вернулись к выбору заданий.\n";
-            break;
-        case 4:
-            sequence();
-            system("cls");
-            cout << "Вы вернулись к выбору заданий.\n";
-            break;
-        case 5:
-            tabulation();
-            system("cls");
-            cout << "Вы вернулись к выбору заданий.\n";
-            break;
-        case 0:
-            system("cls");
-            cout << "Вы вернулись назад.\n";
-            chek_hw2 = false;
+
+        } while (key != 13);
+        if (chek_hw2)
+        {
+            switch (num + 1)
+            {
+            case 1:
+                cone();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+            case 2:
+                branching();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+            case 3:
+                function();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+            case 4:
+                sequence();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+            case 5:
+                tabulation();
+                system("cls");
+                cout << "Вы вернулись к выбору заданий.\n";
+                break;
+            }
         }
     }
     chek_hw2 = true;
