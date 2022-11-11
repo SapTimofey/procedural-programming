@@ -10,13 +10,12 @@
 #include "ExitToMenu.h"//Для выхода
 #include <conio.h>     //Для считывания клавиш
 #include "HomeWork4.h" //Модуль Д/з 4
+#include "Settings.h"  //Модуль настроек
 
 using namespace std;
 
-enum ConsoleColor {
-    Black, Blue, Green, Cyan, Red, Magenta, Brown, LightGray,
-    DarkGray, LightBlue, LightGreen, LightCyan, LightRed, LightMagenta, Yellow, White
-};
+extern int TextColor;
+extern int TextBackgroundColor;
 
 //Создание файла
 void file()
@@ -28,7 +27,7 @@ void file()
 //Задание 1 "Заём"
 void loan()
 {
-    system("cls");
+    system_cls();
     float S = 0, n = 0, p = 0, r = 0, m = 0, n_chek = 0, n_chek2 = 0;
     cout << "Задание 'Заём'\n";
 
@@ -64,7 +63,7 @@ void loan()
 //Задание 2 "Ссуда"
 void loan2()
 {
-    system("cls");
+    system_cls();
     float S = 0, n = 0, m = 0, p = 0;
     double r = 0.1, m_chek = 0;
 
@@ -121,7 +120,7 @@ void loan2()
 void copying_file()
 {
     file();
-    system("cls");
+    system_cls();
     char f_read[100];
     string str;
     ofstream fout;
@@ -163,7 +162,7 @@ void copying_file()
 void filter()
 {
     file();
-    system("cls");
+    system_cls();
     ofstream fout;
     string str_output, str_file, str;
     bool flag = false;
@@ -211,7 +210,7 @@ void filter()
 void sorting_letters()
 {
     file();
-    system("cls");
+    system_cls();
 
     ofstream fout;
     int const SIZE = 30;
@@ -270,28 +269,25 @@ void menu_HW3()
 {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
-    setlocale(LC_ALL, "Russian");
 
     int key = 0;
 
     string cons_out[5] = { "Задание 1 'Заём'", "Задание 2 'Ссуда'", "Задание 3 'Копирование файла'", "Задание 4 'Фильтр'", "Задание 5 'Сортировка букв'" };
-    bool chek_hw3 = true;
     
-    system("cls");
-
-    while (chek_hw3)
+    while (true)
     {
         int num = 0;
         do
         {
+            system_cls();
             cout << "Используйте:\n- стрелки вверх, вниз - для передвижения\n- enter - для выбора\n- escape - для выхода\n----------Д/з 3------------" << endl;
             for (int i = 0; i < 5; i++)
             {
                 if (i == num)
                 {
-                    setColor(Black, LightGray);
+                    setColor(TextBackgroundColor, TextColor);
                     cout << cons_out[i];
-                    setColor(LightGray, Black);
+                    setColor(TextColor, TextBackgroundColor);
                     cout << endl;
                 }
                 else cout << cons_out[i] << endl;
@@ -302,45 +298,38 @@ void menu_HW3()
             if (key == 72 && num > 0) num--;
             if (key == 27)
             {
-                chek_hw3 = false;
-                system("cls");
+                system_cls();
                 cout << "Вы вернулись назад.\n";
-                break;
+                return;
             }
-            system("cls");
-
         } while (key != 13);
-        if (chek_hw3)
+        switch (num + 1)
         {
-            switch (num + 1)
-            {
-            case 1:
-                loan();
-                system("cls");
-                cout << "Вы вернулись к выбору заданий.\n";
-                break;
-            case 2:
-                loan2();
-                system("cls");
-                cout << "Вы вернулись к выбору заданий.\n";
-                break;
-            case 3:
-                copying_file();
-                system("cls");
-                cout << "Вы вернулись к выбору заданий.\n";
-                break;
-            case 4:
-                filter();
-                system("cls");
-                cout << "Вы вернулись к выбору заданий.\n";
-                break;
-            case 5:
-                sorting_letters();
-                system("cls");
-                cout << "Вы вернулись к выбору заданий.\n";
-                break;
-            }
+        case 1:
+            loan();
+            system_cls();
+            cout << "Вы вернулись к выбору заданий.\n";
+            break;
+        case 2:
+            loan2();
+            system_cls();
+            cout << "Вы вернулись к выбору заданий.\n";
+            break;
+        case 3:
+            copying_file();
+            system_cls();
+            cout << "Вы вернулись к выбору заданий.\n";
+            break;
+        case 4:
+            filter();
+            system_cls();
+            cout << "Вы вернулись к выбору заданий.\n";
+            break;
+        case 5:
+            sorting_letters();
+            system_cls();
+            cout << "Вы вернулись к выбору заданий.\n";
+            break;
         }
     }
-    chek_hw3 = true;
 }

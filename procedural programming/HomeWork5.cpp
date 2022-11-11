@@ -12,8 +12,12 @@
 #include "HomeWork4.h" //Модуль Д/з 4
 #include "ExitToMenu.h"//Модуль выхода
 #include <conio.h>     //Для считывания клавиш
+#include "Settings.h"  //Модуль настроек
 
 using namespace std;
+
+extern int TextColor;
+extern int TextBackgroundColor;
 
 enum ConsoleColor {
     Black, Blue, Green, Cyan, Red, Magenta, Brown, LightGray,
@@ -23,7 +27,7 @@ enum ConsoleColor {
 //Задание 1 "Алгоритм Евклида"
 void euclid()
 {
-    system("cls");
+    system_cls();
     int num1 = 0, num2 = 0, num3 = 0, num4 = 0, num5 = 0, num6 = 0;
 
     cout << "Задание 'Алгоритм Евклида'\n";
@@ -65,7 +69,7 @@ void euclid()
 //Задание 2 "Решето Эратосфена"
 void eratosthenes()
 {
-    system("cls");
+    system_cls();
     int n = 0;
     bool flag = false;
 
@@ -98,7 +102,7 @@ void eratosthenes()
 //Задание 3 "Обработка текстовых файлов"
 void file_read_1()
 {
-    system("cls");
+    system_cls();
     file();
     string str, f_read, output;
     map <char, int> arr {{'q', 0}, {'w', 0}, {'r', 0}, {'t', 0}, {'p', 0}, {'s', 0}, {'d', 0}, {'f', 0}, {'g', 0}, {'h', 0}, {'j', 0}, {'k', 0}, {'l', 0}, {'z', 0}, {'x', 0}, {'c', 0}, {'v', 0}, {'b', 0}, {'n', 0}, {'m', 0}, {'Q', 0}, {'W', 0}, {'R', 0}, {'T', 0}, {'P', 0}, {'S', 0}, {'D', 0}, {'F', 0}, {'G', 0}, {'H', 0}, {'J', 0}, {'K', 0}, {'L', 0}, {'Z', 0}, {'X', 0}, {'C', 0}, {'V', 0}, {'B', 0}, {'N', 0}, {'M', 0} };
@@ -175,7 +179,7 @@ void find_str(string str, string str_find)
 }
 void file_read_2()
 {
-    system("cls");
+    system_cls();
     string str;
     string str_find;
 
@@ -235,7 +239,7 @@ string interpreter(int num)
 }
 void rows_1()
 {
-    system("cls");
+    system_cls();
     int a = 0, n = 0;
     
     string input_num;
@@ -312,7 +316,7 @@ void rows_1()
 //Задание 6 "Ряды"
 void rows_2()
 {
-    system("cls");
+    system_cls();
     int SIZEx = 0, SIZEy = 0;
     float a = 0;
     string cons_out;
@@ -361,83 +365,73 @@ void menu_HW5()
 {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
-    setlocale(LC_ALL, "Russian");
 
     int key = 0;
 
     string cons_out[6] = { "Задание 1 'Алгоритм Евклида'", "Задание 2 'Решето Эратосфена'", "Задание 3 'Обработка текстовых файлов'", "Задание 4 'Обработка текстовых файлов'", "Задание 5 'Ряды'", "Задание 6 'Ряды'" };
-    bool chek_hw5 = true;
 
-    system("cls");
-
-    while (chek_hw5)
+    while (true)
     {
         int num = 0;
         do
         {
+            system_cls();
             cout << "Используйте:\n- стрелки вверх, вниз - для передвижения\n- enter - для выбора\n- escape - для выхода\n----------Д/з 5------------" << endl;
             for (int i = 0; i < 6; i++)
             {
                 if (i == num)
                 {
-                    setColor(Black, LightGray);
+                    setColor(TextBackgroundColor, TextColor);
                     cout << cons_out[i];
-                    setColor(LightGray, Black);
+                    setColor(TextColor, TextBackgroundColor);
                     cout << endl;
                 }
                 else cout << cons_out[i] << endl;
             }
 
             key = static_cast<int>(_getch());
+
             if (key == 80 && num < 5) num++;
             if (key == 72 && num > 0) num--;
             if (key == 27)
             {
-                chek_hw5 = false;
-                system("cls");
+                system_cls();
                 cout << "Вы вернулись назад.\n";
-                break;
+                return;
             }
-            system("cls");
-
         } while (key != 13);
         switch (num + 1)
         {
-        default:
-            system("cls");
-            cout << "Нет такого задания.\n";
-            break;
         case 1:
             euclid();
-            system("cls");
+            system_cls();
             cout << "Вы вернулись назад.\n";
             break;
         case 2:
             eratosthenes();
-            system("cls");
+            system_cls();
             cout << "Вы вернулись назад.\n";
             break;
         case 3:
             file_read_1();
-            system("cls");
+            system_cls();
             cout << "Вы вернулись назад.\n";
             break;
         case 4:
             file_read_2();
-            system("cls");
+            system_cls();
             cout << "Вы вернулись назад.\n";
             break;
         case 5:
             rows_1();
-            system("cls");
+            system_cls();
             cout << "Вы вернулись назад.\n";
             break;
         case 6:
             rows_2();
-            system("cls");
+            system_cls();
             cout << "Вы вернулись назад.\n";
             break;
         }
     }
-    chek_hw5 = true;
 }

@@ -1,8 +1,13 @@
-﻿#include <iostream> //Для cin/cout
-#include <locale>   //Для вывода русским
-#include <string>   //Для перевода string -> int/float
+﻿#include <iostream>    //Для cin/cout
+#include <locale>      //Для вывода русским
+#include <string>      //Для перевода string -> int/float
+#include "HomeWork4.h" //Модуль Д/з 4
+#include "Settings.h"  //Модуль настроек
 
 using namespace std;
+
+extern int TextColor;
+extern int TextBackgroundColor;
 
 //Проверка на ввод
 float chek(int type, string cons_out, bool main)
@@ -17,6 +22,7 @@ float chek(int type, string cons_out, bool main)
     {
         try
         {
+            setColor(TextColor, TextBackgroundColor);
             cout << cons_out;
             cin >> num;
             for (int i = 0; i < num.length(); i++)
@@ -24,14 +30,14 @@ float chek(int type, string cons_out, bool main)
                 if (num[0] == '.')
                 {
                     flag = false;
-                    if (main) system("cls");
+                    if (main) system_cls();
                     cout << num << " - число не может начинаться с точки.\n";
                     break;
                 }
                 else if (num[1] == '.' && num[0] == '-')
                 {
                     flag = false;
-                    if (main) system("cls");
+                    if (main) system_cls();
                     cout << num << " - число не содержит целой части.\n";
                     break;
                 }
@@ -39,7 +45,7 @@ float chek(int type, string cons_out, bool main)
                 else
                 {
                     flag = false;
-                    if (main) system("cls");
+                    if (main) system_cls();
                     cout << num << " - это не число.\n";
                     break;
                 }
@@ -107,12 +113,12 @@ float chek(int type, string cons_out, bool main)
         }
         catch (out_of_range)
         {
-            if (main) system("cls");
+            if (main) system_cls();
             cout << "Слишком большое число.\n";
         }
         catch (...)
         {
-            if (main) system("cls");
+            if (main) system_cls();
             cout << num << "Произошла ошибка.\n";
         }
     } while (true);

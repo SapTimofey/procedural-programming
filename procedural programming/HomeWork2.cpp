@@ -7,18 +7,17 @@
 #include "ExitToMenu.h"//Модуль выхода
 #include <conio.h>     //Для считывания клавиш
 #include "HomeWork4.h" //Модуль Д/з 4
+#include "Settings.h"  //Модуль настроек
 
 using namespace std;
 
-enum ConsoleColor {
-    Black, Blue, Green, Cyan, Red, Magenta, Brown, LightGray,
-    DarkGray, LightBlue, LightGreen, LightCyan, LightRed, LightMagenta, Yellow, White
-};
+extern int TextColor;
+extern int TextBackgroundColor;
 
 //Задание 1 "Конус"
 void cone()
 {
-    system("cls");
+    system_cls();
     float R = 0, h = 0, r = 0;
     double l;
     const double PI = 3.141592653589793;
@@ -40,7 +39,7 @@ void cone()
 //Задание 2 "Разветвление"
 void branching()
 {
-    system("cls");
+    system_cls();
     float x = 0, a = 0;
 
     cout << "Задание 'Разветвление' (Дробные числа писать через запятую.)\n";
@@ -62,7 +61,7 @@ void branching()
 //Задание 3 "Функция"
 void function()
 {
-    system("cls");
+    system_cls();
     float x = 0, y = 0, b = 0;
 
     cout << "Задание 'Функция'\n" << "Введите значения для переменных x, y, b: ";
@@ -79,7 +78,7 @@ void function()
 //Задание 4 "Порядок"
 void sequence()
 {
-    system("cls");
+    system_cls();
     int g;
     float N = 0;
 
@@ -95,7 +94,7 @@ void sequence()
 //Задание 5 "Табуляция"
 void tabulation()
 {
-    system("cls");
+    system_cls();
     float x;
 
     cout << "Задание 'Табуляция'\n";
@@ -113,77 +112,68 @@ void menu_HW2()
 {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
-    setlocale(LC_ALL, "Russian");
 
     int key = 0;
 
     string cons_out[5] = { "Задание 1 'Конус'", "Задание 2 'Разветвление'", "Задание 3 'Функция'", "Задание 4 'Порядок'", "Задание 5 'Табуляция'" };
-    bool chek_hw2 = true;
 
-    system("cls");
-
-    while (chek_hw2)
+    while (true)
     {
         int num = 0;
         do
         {
+            system_cls();
             cout << "Используйте:\n- стрелки вверх, вниз - для передвижения\n- enter - для выбора\n- escape - для выхода\n----------Д/з 2------------" << endl;
             for (int i = 0; i < 5; i++)
             {
                 if (i == num)
                 {
-                    setColor(Black, LightGray);
+                    setColor(TextBackgroundColor, TextColor);
                     cout << cons_out[i];
-                    setColor(LightGray, Black);
+                    setColor(TextColor, TextBackgroundColor);
                     cout << endl;
                 }
                 else cout << cons_out[i] << endl;
             }
 
             key = static_cast<int>(_getch());
+
             if (key == 80 && num < 4) num++;
             if (key == 72 && num > 0) num--;
             if (key == 27)
             {
-                chek_hw2 = false;
-                system("cls");
+                system_cls();
                 cout << "Вы вернулись назад.\n";
-                break;
+                return;
             }
-            system("cls");
-
         } while (key != 13);
-        if (chek_hw2)
+        switch (num + 1)
         {
-            switch (num + 1)
-            {
-            case 1:
-                cone();
-                system("cls");
-                cout << "Вы вернулись к выбору заданий.\n";
-                break;
-            case 2:
-                branching();
-                system("cls");
-                cout << "Вы вернулись к выбору заданий.\n";
-                break;
-            case 3:
-                function();
-                system("cls");
-                cout << "Вы вернулись к выбору заданий.\n";
-                break;
-            case 4:
-                sequence();
-                system("cls");
-                cout << "Вы вернулись к выбору заданий.\n";
-                break;
-            case 5:
-                tabulation();
-                system("cls");
-                cout << "Вы вернулись к выбору заданий.\n";
-                break;
-            }
+        case 1:
+            cone();
+            system_cls();
+            cout << "Вы вернулись к выбору заданий.\n";
+            break;
+        case 2:
+            branching();
+            system_cls();
+            cout << "Вы вернулись к выбору заданий.\n";
+            break;
+        case 3:
+            function();
+            system_cls();
+            cout << "Вы вернулись к выбору заданий.\n";
+            break;
+        case 4:
+            sequence();
+            system_cls();
+            cout << "Вы вернулись к выбору заданий.\n";
+            break;
+        case 5:
+            tabulation();
+            system_cls();
+            cout << "Вы вернулись к выбору заданий.\n";
+            break;
         }
     }
-    chek_hw2 = true;
 }
