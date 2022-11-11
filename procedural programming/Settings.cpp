@@ -165,6 +165,10 @@ void Settings()
             int* ColorBackground = &TextBackgroundColor;
             *ColorText = 15;
             *ColorBackground = 0;
+            ofstream fout("Color_setting.txt");
+            fout << 15 << " - TextColor" <<
+            endl << 0 << " - TextBackgroundColor";
+            fout.close();
         }
     }
 }

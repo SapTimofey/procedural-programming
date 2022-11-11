@@ -17,10 +17,6 @@ using namespace std;
 extern int TextColor;
 extern int TextBackgroundColor;
 
-enum ConsoleColor {
-    Black, Blue, Green, Cyan, Red, Magenta, Brown, LightGray,
-    DarkGray, LightBlue, LightGreen, LightCyan, LightRed, LightMagenta, Yellow, White
-};
 
 //Главная часть
 int main()
@@ -35,11 +31,11 @@ int main()
 
     ifstream fin("Color_setting.txt");
     fin >> set;
-    if (stoi(set) != *ColorText) *ColorText = stoi(set);
+    *ColorText = stoi(set);
     if (set.length() == 2) fin.seekg(14);
     else fin.seekg(13);
     fin >> set;
-    if (stoi(set) != *ColorBackground) *ColorBackground = stoi(set);
+    *ColorBackground = stoi(set);
     fin.close();
 
     const int volume = 6;
