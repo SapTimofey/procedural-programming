@@ -24,34 +24,41 @@ int load_save()
     int i = 0;
     int cnt = 0;
     int chek = 0;
+    bool flag = true;
     ifstream fin("Color_setting.txt");
-    while (true)
+
+    for (i; cnt < 2; i ++)
     {
-        try
+        fin >> set;
+        if (i == 0)
         {
-            for (i; cnt < 2; i ++)
-            {
-                fin >> set;
-                if (i == 0)
+            cnt++;
+            for (int j = 0; j < set.length(); j++)
+                if (isdigit(set[j]) == 0)
                 {
-                    cnt++;
-                    *ColorText = stoi(set);
+                    chek += 1;
+                    flag = false;
+                    break;
                 }
-                if (i == 2)
-                {
-                    cnt++;
-                    *ColorBackground = stoi(set);
-                }
-            }
-            fin.close();
-            
+            if (flag) *ColorText = stoi(set);
+            else flag = true;
         }
-        catch (...)
+        if (i == 2)
         {
-            chek += 1;
+            cnt++;
+            for (int j = 0; j < set.length(); j++)
+                if (isdigit(set[j]) == 0)
+                {
+                    chek += 1;
+                    flag = false;
+                    break;
+                }
+            if (flag) *ColorBackground = stoi(set);
+            else flag = true;
         }
-        if (cnt == 2) break;
     }
+
+    fin.close();
     if (chek == 2) return 2;
     else if (chek == 1) return 1;
     else return 3;

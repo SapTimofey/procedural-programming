@@ -32,6 +32,10 @@ using namespace std;
 
 int TextColor = 15;
 int TextBackgroundColor = 0;
+int KeyExit = 27;
+int KeyEnter = 13;
+int KeyUp = 72;
+int KeyDown = 80;
 
 void system_cls()
 {
@@ -42,9 +46,6 @@ void system_cls()
 
 void Color_set(int type)
 {
-    SetConsoleCP(1251);
-    SetConsoleOutputCP(1251);
-
     int* ColorText = &TextColor;
     int* ColorBackground = &TextBackgroundColor;
 
@@ -81,9 +82,10 @@ void Color_set(int type)
             if (i == num)
             {
                 setColor(TextBackgroundColor, TextColor);
-                if (key == 13)
+                if (i == *ColorText && type == 1 || i == *ColorBackground && type == 2) cout << cons_out[i] << " - выбран.";
+                else if (key == 13)
                 {
-                    if (type == 1 && *ColorBackground == num || type == 2 && *ColorText == num) cout << cons_out[i] << " - Нельзя использовать одинаковые цвета для текста и фона.";
+                    if (*ColorBackground == num || *ColorText == num) cout << cons_out[i] << " - Нельзя использовать одинаковые цвета для текста и фона.";
                     else
                     {
                         flag = false;
@@ -93,6 +95,7 @@ void Color_set(int type)
                 setColor(TextColor, TextBackgroundColor);
                 cout << endl;
             }
+            else if (i == *ColorText && type == 1 || i == *ColorBackground && type == 2) cout << cons_out[i] << " - выбран." << endl;
             else cout << cons_out[i] << endl;
         }
         if (flag == false) break;
@@ -100,6 +103,11 @@ void Color_set(int type)
         
         if (key == 80 && num < 15) num++;
         if (key == 72 && num > 0) num--;
+        if (key == 27)
+        {
+            system_cls();
+            return;
+        }
     } while (flag);
 
     if (type == 1) *ColorText = num;
@@ -115,9 +123,6 @@ void Color_set(int type)
 
 void Settings()
 {
-    SetConsoleCP(1251);
-    SetConsoleOutputCP(1251);
-
     int key = 0;
     const int volume = 3;
     string cons_out[volume] = {"Цвет текста", "Цвет фона текста", "Сброс настроек"};
@@ -146,7 +151,6 @@ void Settings()
             if (key == 27)
             {
                 system_cls();
-                cout << "Вы вернулись назад.\n";
                 return;
             }
             
@@ -163,8 +167,10 @@ void Settings()
         case 3:
             int* ColorText = &TextColor;
             int* ColorBackground = &TextBackgroundColor;
+
             *ColorText = 15;
             *ColorBackground = 0;
+
             ofstream fout("Color_setting.txt");
             fout << 15 << " TextColor" <<
             endl << 0 << " TextBackgroundColor";
