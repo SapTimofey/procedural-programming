@@ -19,11 +19,6 @@ using namespace std;
 extern int TextColor;
 extern int TextBackgroundColor;
 
-enum ConsoleColor {
-    Black, Blue, Green, Cyan, Red, Magenta, Brown, LightGray,
-    DarkGray, LightBlue, LightGreen, LightCyan, LightRed, LightMagenta, Yellow, White
-};
-
 //Задание 1 "Алгоритм Евклида"
 void euclid()
 {
@@ -171,9 +166,9 @@ void find_str(string str, string str_find)
     str_begin.erase(str.find(str_find), len - str.find(str_find));
 
     cout << str_begin;
-    setColor(LightGreen, Black);
+    setColor(TextBackgroundColor, TextColor);
     cout << str_find;
-    setColor(LightGray, Black);
+    setColor(TextColor, TextBackgroundColor);
     if (str_end.find(str_find) == -1) cout << str_end << " ";
     else find_str(str_end, str_find);
 }

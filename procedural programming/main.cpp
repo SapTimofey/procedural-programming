@@ -10,13 +10,14 @@
 #include "HomeWork5.h" //Модуль Д/з 4
 #include "Settings.h"  //Модуль настроек
 #include "Chek.h"      //Модуль проверки
+#include "load_save.h" //Модуль загрузки сохранения
 #include <conio.h>     //Для считывания клавиш
 
 using namespace std;
 
 extern int TextColor;
 extern int TextBackgroundColor;
-
+int load = 0;
 
 //Главная часть
 int main()
@@ -24,19 +25,11 @@ int main()
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
-    int key = 0;
-    int* ColorText = &TextColor;
-    int* ColorBackground = &TextBackgroundColor;
-    string set;
+    int* l = &load;
+    int k = 0;
+    if (*l == 0) k = load_save();
 
-    ifstream fin("Color_setting.txt");
-    fin >> set;
-    *ColorText = stoi(set);
-    if (set.length() == 2) fin.seekg(14);
-    else fin.seekg(13);
-    fin >> set;
-    *ColorBackground = stoi(set);
-    fin.close();
+    int key = 0;
 
     const int volume = 6;
     string cons_out[volume] = {"Д/з 1", "Д/з 2", "Д/з 3", "Д/з 4", "Д/з 5", "Настройки"};
@@ -47,7 +40,26 @@ int main()
         do
         {
             system_cls();
+            if (k == 1)
+            {
+                *l = 5;
+                k = 8;
+                cout << "Частичная загрузка сохранения.\n";
+            }
+            else if (k == 2)
+            {
+                *l = 5;
+                k = 8;
+                cout << "Ошибка загрузки сохранения.\n";
+            }
+            else if (k == 3)
+            {
+                *l = 5;
+                k = 8;
+                cout << "Успешная загрузка сохранения.\n";
+            }
             cout << "Используйте:\n- стрелки вверх, вниз - для передвижения\n- enter - для выбора\n- escape - для выхода\n----------Выбор Д/з------------" << endl;
+            
             for (int i = 0; i < volume; i++)
             {
                 if (i == num)

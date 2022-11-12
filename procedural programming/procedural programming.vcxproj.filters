@@ -42,6 +42,9 @@
     <ClCompile Include="Settings.cpp">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
+    <ClCompile Include="load_save.cpp">
+      <Filter>Файлы ресурсов</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HomeWork2.h">
@@ -66,6 +69,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Settings.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="load_save.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
