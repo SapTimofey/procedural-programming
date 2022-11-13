@@ -15,6 +15,7 @@ extern int TextBackgroundColor;
 // 1 - частичная загрузка сохранения
 // 2 - ошибка загрузки сохранения
 // 3 - успешная загрузка
+// 4 - не удалось открыть файл сохранения
 
 int load_save()
 {
@@ -26,7 +27,7 @@ int load_save()
     int chek = 0;
     bool flag = true;
     ifstream fin("Color_setting.txt");
-
+    if (!fin.is_open()) return 4;
     for (i; cnt < 2; i ++)
     {
         fin >> set;

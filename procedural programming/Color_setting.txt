@@ -1,2 +1,2 @@
-15 TextColor
+1 TextColor
 0 TextBackgroundColor
