@@ -16,6 +16,15 @@ using namespace std;
 
 extern int TextColor;
 extern int TextBackgroundColor;
+extern int KeyExit;
+extern int KeyEnter;
+extern int KeyUp;
+extern int KeyDown;
+
+extern string KeyExitChar;
+extern string KeyEnterChar;
+extern string KeyUpChar;
+extern string KeyDownChar;
 
 //Создание файла
 void file()
@@ -267,20 +276,28 @@ void sorting_letters()
 //Меню дз 3
 void menu_HW3()
 {
-    SetConsoleCP(1251);
-    SetConsoleOutputCP(1251);
+    int* KeyU = &KeyUp;
+    int* KeyD = &KeyDown;
+    int* KeyEx = &KeyExit;
+    int* KeyEn = &KeyEnter;
+
+    string* KeyUC = &KeyUpChar;
+    string* KeyDC = &KeyDownChar;
+    string* KeyExC = &KeyExitChar;
+    string* KeyEnC = &KeyEnterChar;
 
     int key = 0;
 
     string cons_out[5] = { "Задание 1 'Заём'", "Задание 2 'Ссуда'", "Задание 3 'Копирование файла'", "Задание 4 'Фильтр'", "Задание 5 'Сортировка букв'" };
     
+    int num = 0;
+
     while (true)
     {
-        int num = 0;
         do
         {
             system_cls();
-            cout << "Используйте:\n- стрелки вверх, вниз - для передвижения\n- enter - для выбора\n- escape - для выхода\n----------Д/з 3------------" << endl;
+            cout << "Используйте:\n- " << *KeyUC << ", " << *KeyDC << " - для передвижения\n- " << *KeyEnC << " - для выбора\n- " << *KeyExC << " - для выхода\n----------Д/з 3------------" << endl;
             for (int i = 0; i < 5; i++)
             {
                 if (i == num)
@@ -293,42 +310,31 @@ void menu_HW3()
                 else cout << cons_out[i] << endl;
             }
 
-            key = static_cast<int>(_getch());
-            if (key == 80 && num < 4) num++;
-            if (key == 72 && num > 0) num--;
-            if (key == 27)
+            key = get_key();
+            if (key == *KeyD && num < 5 - 1) num++;
+            if (key == *KeyU && num > 0) num--;
+            if (key == *KeyEx)
             {
                 system_cls();
-                cout << "Вы вернулись назад.\n";
                 return;
             }
-        } while (key != 13);
+        } while (key != *KeyEn);
         switch (num + 1)
         {
         case 1:
             loan();
-            system_cls();
-            cout << "Вы вернулись к выбору заданий.\n";
             break;
         case 2:
             loan2();
-            system_cls();
-            cout << "Вы вернулись к выбору заданий.\n";
             break;
         case 3:
             copying_file();
-            system_cls();
-            cout << "Вы вернулись к выбору заданий.\n";
             break;
         case 4:
             filter();
-            system_cls();
-            cout << "Вы вернулись к выбору заданий.\n";
             break;
         case 5:
             sorting_letters();
-            system_cls();
-            cout << "Вы вернулись к выбору заданий.\n";
             break;
         }
     }

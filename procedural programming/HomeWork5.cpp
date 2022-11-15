@@ -18,6 +18,15 @@ using namespace std;
 
 extern int TextColor;
 extern int TextBackgroundColor;
+extern int KeyExit;
+extern int KeyEnter;
+extern int KeyUp;
+extern int KeyDown;
+
+extern string KeyExitChar;
+extern string KeyEnterChar;
+extern string KeyUpChar;
+extern string KeyDownChar;
 
 //Задание 1 "Алгоритм Евклида"
 void euclid()
@@ -358,20 +367,28 @@ void rows_2()
 //Меню дз 5
 void menu_HW5()
 {
-    SetConsoleCP(1251);
-    SetConsoleOutputCP(1251);
+    int* KeyU = &KeyUp;
+    int* KeyD = &KeyDown;
+    int* KeyEx = &KeyExit;
+    int* KeyEn = &KeyEnter;
+
+    string* KeyUC = &KeyUpChar;
+    string* KeyDC = &KeyDownChar;
+    string* KeyExC = &KeyExitChar;
+    string* KeyEnC = &KeyEnterChar;
 
     int key = 0;
 
     string cons_out[6] = { "Задание 1 'Алгоритм Евклида'", "Задание 2 'Решето Эратосфена'", "Задание 3 'Обработка текстовых файлов'", "Задание 4 'Обработка текстовых файлов'", "Задание 5 'Ряды'", "Задание 6 'Ряды'" };
 
+    int num = 0;
+
     while (true)
     {
-        int num = 0;
         do
         {
             system_cls();
-            cout << "Используйте:\n- стрелки вверх, вниз - для передвижения\n- enter - для выбора\n- escape - для выхода\n----------Д/з 5------------" << endl;
+            cout << "Используйте:\n- " << *KeyUC << ", " << *KeyDC << " - для передвижения\n- " << *KeyEnC << " - для выбора\n- " << *KeyExC << " - для выхода\n----------Д/з 5------------" << endl;
             for (int i = 0; i < 6; i++)
             {
                 if (i == num)
@@ -384,48 +401,34 @@ void menu_HW5()
                 else cout << cons_out[i] << endl;
             }
 
-            key = static_cast<int>(_getch());
-
-            if (key == 80 && num < 5) num++;
-            if (key == 72 && num > 0) num--;
-            if (key == 27)
+            key = get_key();
+            if (key == *KeyD && num < 5 - 1) num++;
+            if (key == *KeyU && num > 0) num--;
+            if (key == *KeyEx)
             {
                 system_cls();
-                cout << "Вы вернулись назад.\n";
                 return;
             }
-        } while (key != 13);
+        } while (key != *KeyEn);
         switch (num + 1)
         {
         case 1:
             euclid();
-            system_cls();
-            cout << "Вы вернулись назад.\n";
             break;
         case 2:
             eratosthenes();
-            system_cls();
-            cout << "Вы вернулись назад.\n";
             break;
         case 3:
             file_read_1();
-            system_cls();
-            cout << "Вы вернулись назад.\n";
             break;
         case 4:
             file_read_2();
-            system_cls();
-            cout << "Вы вернулись назад.\n";
             break;
         case 5:
             rows_1();
-            system_cls();
-            cout << "Вы вернулись назад.\n";
             break;
         case 6:
             rows_2();
-            system_cls();
-            cout << "Вы вернулись назад.\n";
             break;
         }
     }

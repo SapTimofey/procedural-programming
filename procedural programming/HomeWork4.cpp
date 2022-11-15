@@ -16,6 +16,15 @@ using namespace std;
 
 extern int TextColor;
 extern int TextBackgroundColor;
+extern int KeyExit;
+extern int KeyEnter;
+extern int KeyUp;
+extern int KeyDown;
+
+extern string KeyExitChar;
+extern string KeyEnterChar;
+extern string KeyUpChar;
+extern string KeyDownChar;
 
 enum ConsoleColor {
     Black, Blue, Green, Cyan, Red, Magenta, Brown, LightGray,
@@ -841,20 +850,28 @@ void number_system()
 //Меню дз 4
 void menu_HW4()
 {
-    SetConsoleCP(1251);
-    SetConsoleOutputCP(1251);
+    int* KeyU = &KeyUp;
+    int* KeyD = &KeyDown;
+    int* KeyEx = &KeyExit;
+    int* KeyEn = &KeyEnter;
+
+    string* KeyUC = &KeyUpChar;
+    string* KeyDC = &KeyDownChar;
+    string* KeyExC = &KeyExitChar;
+    string* KeyEnC = &KeyEnterChar;
     
     int key = 0;
     
     string cons_out[9] = { "Задание 1 'Файл'", "Задание 2 'Знак числа'", "Задание 3 'Геометрические фигуры'", "Задание 4 'Былая слава'", "Задание 5 'Синусоида'", "Задание 6 'Автоматный распознаватель'", "Задание 7 'Генератор псевдослучайных чисел'", "Задание 8 'Умножение матриц'", "Задание 9 'Системы счисления'" };
 
+    int num = 0;
+
     while (true)
     {
-        int num = 0;
         do
         {
             system_cls();
-            cout << "Используйте:\n- стрелки вверх, вниз - для передвижения\n- enter - для выбора\n- escape - для выхода\n----------Д/з 4------------" << endl;
+            cout << "Используйте:\n- " << *KeyUC << ", " << *KeyDC << " - для передвижения\n- " << *KeyEnC << " - для выбора\n- " << *KeyExC << " - для выхода\n----------Д/з 4------------" << endl;
             for (int i = 0; i < 9; i++)
             {
                 if (i == num)
@@ -867,62 +884,43 @@ void menu_HW4()
                 else cout << cons_out[i] << endl;
             }
 
-            key = static_cast<int>(_getch());
-            if (key == 80 && num < 8) num++;
-            if (key == 72 && num > 0) num--;
-            if (key == 27)
+            key = get_key();
+            if (key == *KeyD && num < 5 - 1) num++;
+            if (key == *KeyU && num > 0) num--;
+            if (key == *KeyEx)
             {
                 system_cls();
-                cout << "Вы вернулись назад.\n";
                 return;
             }
-        } while (key != 13);
+        } while (key != *KeyEn);
         switch (num + 1)
         {
         case 1:
             file_4();
-            system_cls();
-            cout << "Вы вернулись к выбору заданий.\n";
             break;
         case 2:
             number_sign();
-            system_cls();
-            cout << "Вы вернулись к выбору заданий.\n";
             break;
         case 3:
             geometry();
-            system_cls();
-            cout << "Вы вернулись к выбору заданий.\n";
             break;
         case 4:
             glory();
-            system_cls();
-            cout << "Вы вернулись к выбору заданий.\n";
             break;
         case 5:
             sin();
-            system_cls();
-            cout << "Вы вернулись к выбору заданий.\n";
             break;
         case 6:
             recognizer();
-            system_cls();
-            cout << "Вы вернулись к выбору заданий.\n";
             break;
         case 7:
             random_num();
-            system_cls();
-            cout << "Вы вернулись к выбору заданий.\n";
             break;
         case 8:
             matrix();
-            system_cls();
-            cout << "Вы вернулись к выбору заданий.\n";
             break;
         case 9:
             number_system();
-            system_cls();
-            cout << "Вы вернулись к выбору заданий.\n";
             break;
         }
     }

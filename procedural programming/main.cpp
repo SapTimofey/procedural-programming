@@ -17,6 +17,15 @@ using namespace std;
 
 extern int TextColor;
 extern int TextBackgroundColor;
+extern int KeyExit;
+extern int KeyEnter;
+extern int KeyUp;
+extern int KeyDown;
+
+extern string KeyExitChar;
+extern string KeyEnterChar;
+extern string KeyUpChar;
+extern string KeyDownChar;
 int load = 0;
 
 //Главная часть
@@ -24,6 +33,16 @@ int main()
 {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
+
+    int* KeyU = &KeyUp;
+    int* KeyD = &KeyDown;
+    int* KeyEx = &KeyExit;
+    int* KeyEn = &KeyEnter;
+
+    string* KeyUC = &KeyUpChar;
+    string* KeyDC = &KeyDownChar;
+    string* KeyExC = &KeyExitChar;
+    string* KeyEnC = &KeyEnterChar;
 
     int* l = &load;
     int k = 0;
@@ -34,9 +53,10 @@ int main()
     const int volume = 6;
     string cons_out[volume] = {"Д/з 1", "Д/з 2", "Д/з 3", "Д/з 4", "Д/з 5", "Настройки"};
 
+    int num = 0;
+
     while (true)
     {
-        int num = 0;
         do
         {
             system_cls();
@@ -65,7 +85,7 @@ int main()
                 cout << "Не удалось открыть файл сохранения.\n";
             }
             
-            cout << "Используйте:\n- стрелки вверх, вниз - для передвижения\n- enter - для выбора\n- escape - для выхода\n----------Выбор Д/з------------" << endl;
+            cout << "Используйте:\n- " << *KeyUC << ", " << *KeyDC << " - для передвижения\n- " << *KeyEnC << " - для выбора\n- " << *KeyExC << " - для выхода\n----------Выбор Д/з------------" << endl;
             
             for (int i = 0; i < volume; i++)
             {
@@ -79,16 +99,15 @@ int main()
                 else cout << cons_out[i] << endl;
             }
 
-            key = static_cast<int>(_getch());
-
-            if (key == 80 && num < volume - 1) num++;
-            if (key == 72 && num > 0) num--;
-            if (key == 27)
+            key = get_key();
+            if (key == *KeyD && num < volume - 1) num++;
+            if (key == *KeyU && num > 0) num--;
+            if (key == *KeyEx)
             {
                 cout << "Вы завершили работу.\n";
                 exit(EXIT_SUCCESS);
             }
-        } while (key != 13);
+        } while (key != *KeyEn);
         switch (num + 1)
         {
         case 1:
