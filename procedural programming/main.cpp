@@ -12,6 +12,8 @@
 #include "Chek.h"      //Модуль проверки
 #include "load_save.h" //Модуль загрузки сохранения
 #include <conio.h>     //Для считывания клавиш
+#include <list>
+#include <iterator>
 
 using namespace std;
 
@@ -26,6 +28,9 @@ extern string KeyExitChar;
 extern string KeyEnterChar;
 extern string KeyUpChar;
 extern string KeyDownChar;
+
+extern list <string> error_load;
+
 int load = 0;
 
 //Главная часть
@@ -80,7 +85,9 @@ int main()
                 *l = 5;
                 k = 8;
                 cout << "------------------------------" << endl;
-                cout << "Частичная загрузка сохранения.\n";
+                cout << "Ошибка при загрузке:\n";
+                copy(error_load.begin(), error_load.end(), ostream_iterator<string>(cout, "\n"));
+                cout << "Будут использоваться значения по умолчанию." << endl;
                 cout << "------------------------------" << endl;
             }
             else if (k == 2)
@@ -89,6 +96,7 @@ int main()
                 k = 8;
                 cout << "---------------------------" << endl;
                 cout << "Ошибка загрузки сохранения.\n";
+                cout << "Будут использоваться значения по умолчанию." << endl;
                 cout << "---------------------------" << endl;
             }
             else if (k == 3)

@@ -185,7 +185,7 @@ void Color_set(int type)
     if (type == 1) *ColorText = num;
     if (type == 2) *ColorBackground = num;
 
-    ofstream fout("Color_setting.txt");
+    ofstream fout("Save.txt");
 
     fout << *ColorText << "\t\tTextColor" <<
         endl << *ColorBackground << "\t\tTextBackgroundColor" <<
@@ -409,7 +409,7 @@ void Key_set()
             else flag = false;
         }
 
-        ofstream fout("Color_setting.txt");
+        ofstream fout("Save.txt");
 
         fout << *ColorText << "\t\tTextColor" <<
             endl << *ColorBackground << "\t\tTextBackgroundColor" <<
@@ -531,7 +531,7 @@ void Settings()
             *KeyExC = "ESC";
             *KeyEnC = "Enter";
 
-            ofstream fout("Color_setting.txt");
+            ofstream fout("Save.txt");
 
             fout << 15 << "\t\tTextColor" <<
                 endl << 0 << "\t\tTextBackgroundColor" <<
