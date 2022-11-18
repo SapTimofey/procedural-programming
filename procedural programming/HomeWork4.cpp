@@ -787,8 +787,8 @@ void number_system()
     bool flag = true;
     double num = 0;
     
-    cout << "Задание 'Системы счисления'\n" << "Введите число: ";
-    cin >> input_num;
+    cout << "Задание 'Системы счисления'\n";
+    input_num = chek(6, "Введите число: ", false);
 
     input_base_from = (int)chek(4, "Введите систему счисления введённого числа: ", false);
 
@@ -885,7 +885,7 @@ void menu_HW4()
             }
 
             key = get_key();
-            if (key == *KeyD && num < 5 - 1) num++;
+            if (key == *KeyD && num < 9 - 1) num++;
             if (key == *KeyU && num > 0) num--;
             if (key == *KeyEx)
             {
