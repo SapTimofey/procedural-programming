@@ -521,19 +521,19 @@ int gen(int m, int b, int c, int a, int s)
 {
     if (a > 0)
     {
-        return gen(m, b, c, a - 1, (m * s + b) % c);
         if (s > 0) cout << s << " ";
+        return gen(m, b, c, a - 1, (m * s + b) % c);
     }
 }
 void random_num()
 {
     system_cls();
-    int s = 0, s1 = 0, m = 37, b = 3, c = 64;
+    /*int s = 0, s1 = 0, m = 37, b = 3, c = 64;*/
     cout << "Задание 'Генератор псевдослучайных чисел'\n" << "I вариант\n" << "10 сгенерированных чисел: " << endl;
     gen(37, 3, 64, 11, 0);
-    cout << endl << "II вариант\n" << "10 сгенерированных чисел: ";
+    cout << endl << "II вариант\n" << "10 сгенерированных чисел: " << endl;
     gen(25173, 13849, 65537, 11, 0);
-    
+    cout << endl;
     ExitToMenu();
 }
 
