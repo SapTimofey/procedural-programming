@@ -137,6 +137,7 @@
     <ClCompile Include="HomeWork3.cpp" />
     <ClCompile Include="HomeWork4.cpp" />
     <ClCompile Include="HomeWork5.cpp" />
+    <ClCompile Include="keyboard.cpp" />
     <ClCompile Include="load_save.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Settings.cpp" />
@@ -149,7 +150,9 @@
     <ClInclude Include="HomeWork3.h" />
     <ClInclude Include="HomeWork4.h" />
     <ClInclude Include="HomeWork5.h" />
+    <ClInclude Include="keyboard.h" />
     <ClInclude Include="load_save.h" />
+    <ClInclude Include="main.h" />
     <ClInclude Include="Settings.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,15 +1,4 @@
-﻿#include <iostream>    //Для cin/cout
-#include <fstream>     //Для файла
-#include <windows.h>   //Для ввода/вывода русским
-#include <string>      //Для перевода string -> int/float
-#include <stdlib.h>    //Для exit
-#include "HomeWork1.h" //Модуль Д/з 1
-#include "HomeWork2.h" //Модуль Д/з 2
-#include "HomeWork3.h" //Модуль Д/з 3
-#include "HomeWork4.h" //Модуль Д/з 4
-#include "HomeWork5.h" //Модуль Д/з 4
-#include "Chek.h"      //Модуль проверки
-#include <conio.h>     //Для считывания клавиш
+﻿#include "Settings.h"
 
 // Чёрный - 0
 // Синий - 1
@@ -30,57 +19,6 @@
 
 using namespace std;
 
-int get_key();
-
-enum ascii_codes
-{
-    /*ascii_Home = 71,
-    ascii_End = 79,*/
-    ascii_Right = 77,
-    ascii_Left = 75,
-    ascii_Up = 72,
-    ascii_Down = 80,
-    /*ascii_F1 = 59,*/
-    //ascii_F2, // дальше +1
-    //ascii_F3,
-    //ascii_F4,
-    //ascii_F5,
-    //ascii_F6,
-    //ascii_F7,
-    //ascii_F8,
-    //ascii_F9,
-    //ascii_F10,
-    //ascii_F11
-};
-
-class keyboard
-{
-public:
-    /*enter = 13,
-    escape = 27,
-    space = 32,
-    bspace = 8,
-    tab = 9,
-    del = 83,*/
-    int left = 300, // для спец символов сами придумываем значения > 255 (для char)
-        up = 301,
-        right = 302,
-        down = 303;
-    /*cup,
-    home,
-    end,
-    f1,
-    f2,
-    f3,
-    f4,
-    f5,
-    f6,
-    f7,
-    f8,
-    f9,
-    f10,
-    f11*/
-};
 
 int TextColor = 15;
 int TextBackgroundColor = 0;
@@ -88,11 +26,6 @@ int KeyExit = 27;
 int KeyEnter = 13;
 int KeyUp = 301;
 int KeyDown = 303;
-
-string KeyExitChar = "ESC";
-string KeyEnterChar = "Enter";
-string KeyUpChar = "Up";
-string KeyDownChar = "Down";
 
 int save = 1;
 
@@ -103,7 +36,7 @@ void system_cls()
     setColor(TextColor, TextBackgroundColor);
 }
 
-void Color_set(int type)
+void Color_setting(int type)
 {
     int* ColorText = &TextColor;
     int* ColorBackground = &TextBackgroundColor;
@@ -113,15 +46,12 @@ void Color_set(int type)
 
     int* s = &save;
 
+    keyboard KEY;
+
     int* KeyU = &KeyUp;
     int* KeyD = &KeyDown;
     int* KeyEx = &KeyExit;
     int* KeyEn = &KeyEnter;
-
-    string* KeyUC = &KeyUpChar;
-    string* KeyDC = &KeyDownChar;
-    string* KeyExC = &KeyExitChar;
-    string* KeyEnC = &KeyEnterChar;
 
     string cons_out[16] = { 
          "Чёрный",
@@ -145,7 +75,7 @@ void Color_set(int type)
     do
     {
         system_cls();
-        cout << "Используйте:\n- " << *KeyUC << ", " << *KeyDC << " - для передвижения\n- " << *KeyEnC << " - для выбора\n- " << *KeyExC << " - для выхода\n";
+        cout << "Используйте:\n- " << KEY.Key_translation(*KeyU) << ", " << KEY.Key_translation(*KeyD) << " - для передвижения\n- " << KEY.Key_translation(*KeyEn) << " - для выбора\n- " << KEY.Key_translation(*KeyEx) << " - для выхода\n";
         if (type == 1) cout << "--------Выбор цвета текста-------- - " << endl;
         else cout << "------Выбор цвета фона текста------ - " << endl;
         
@@ -172,7 +102,7 @@ void Color_set(int type)
         }
         if (flag == false) break;
 
-        key = get_key();
+        key = KEY.get_key();
         if (key == *KeyD && num < 16 - 1) num++;
         if (key == *KeyU && num > 0) num--;
         if (key == *KeyEx)
@@ -192,98 +122,13 @@ void Color_set(int type)
         endl << *KeyEx << "\t\tKeyExit" <<
         endl << *KeyEn << "\t\tKeyEnter" <<
         endl << *KeyU << "\t\tKeyUp" <<
-        endl << *KeyD << "\t\tKeyDown" <<
-        endl << *KeyExC << "\t\tKeyExitChar" <<
-        endl << *KeyEnC << "\t\tKeyEnterChar" <<
-        endl << *KeyUC << "\t\tKeyUpChar" <<
-        endl << *KeyDC << "\t\tKeyDownChar";
-
+        endl << *KeyD << "\t\tKeyDown";
     fout.close();
 
     *s = 0;
 }
 
-int get_key()
-{
-    keyboard KEY;
-    auto key = _getch(); // считываем
-    if (_kbhit())        // проверяем есть ли в очереди еще символы
-    {                    // если есть - значит нажата спец.клавиша
-        key = _getch();  // считываем следующий символ
-        switch (key)
-        {
-        case ascii_Left: return KEY.left;
-        case ascii_Up: return KEY.up;
-        case ascii_Right: return KEY.right;
-        case ascii_Down: return KEY.down;
-        }
-    }
-    return key;
-}
-
-void Key(int type)
-{
-    int* KeyU = &KeyUp;
-    int* KeyD = &KeyDown;
-    int* KeyEx = &KeyExit;
-    int* KeyEn = &KeyEnter;
-
-    string* KeyUC = &KeyUpChar;
-    string* KeyDC = &KeyDownChar;
-    string* KeyExC = &KeyExitChar;
-    string* KeyEnC = &KeyEnterChar;
-
-    string key;
-
-    if (type == 0)
-    {
-        if (*KeyEn == 13) *KeyEnC = "Enter";
-        else if (*KeyEn == 8) *KeyEnC = "Backspace";
-        else if (*KeyEn == 32) *KeyEnC = "Space";
-        else if (*KeyEn == 27) *KeyEnC = "ESC";
-        else if (*KeyEn == 301) *KeyEnC = "Up";
-        else if (*KeyEn == 303) *KeyEnC = "Down";
-        else if (*KeyEn == 300) *KeyEnC = "Left";
-        else if (*KeyEn == 302) *KeyEnC = "Right";
-        else *KeyEnC = (char)*KeyEn;
-    }
-    if (type == 1)
-    {
-        if (*KeyEn == 13) *KeyExC = "Enter";
-        else if (*KeyEx == 8) *KeyExC = "Backspace";
-        else if (*KeyEx == 32) *KeyExC = "Space";
-        else if (*KeyEx == 27) *KeyExC = "ESC";
-        else if (*KeyEx == 301) *KeyExC = "Up";
-        else if (*KeyEx == 303) *KeyExC = "Down";
-        else if (*KeyEx == 300) *KeyExC = "Left";
-        else if (*KeyEx == 302) *KeyExC = "Right";
-        else *KeyExC = (char)*KeyEx;
-    }if (type == 2)
-    {
-        if (*KeyEn == 13) *KeyEnC = "Enter";
-        else if (*KeyU == 8) *KeyUC = "Backspace";
-        else if (*KeyU == 32) *KeyUC = "Space";
-        else if (*KeyU == 27) *KeyUC = "ESC";
-        else if (*KeyU == 301) *KeyUC = "Up";
-        else if (*KeyU == 303) *KeyUC = "Down";
-        else if (*KeyU == 300) *KeyUC = "Left";
-        else if (*KeyU == 302) *KeyUC = "Right";
-        else *KeyUC = (char)*KeyU;
-    }if (type == 3)
-    {
-        if (*KeyD == 13) *KeyDC = "Enter";
-        else if (*KeyD == 8) *KeyDC = "Backspace";
-        else if (*KeyD == 32) *KeyDC = "Space";
-        else if (*KeyD == 27) *KeyDC = "ESC";
-        else if (*KeyD == 301) *KeyDC = "Up";
-        else if (*KeyD == 303) *KeyDC = "Down";
-        else if (*KeyD == 300) *KeyDC = "Left";
-        else if (*KeyD == 302) *KeyDC = "Right";
-        else *KeyDC = (char)*KeyD;
-    }
-}
-
-void Key_set()
+void Key_setting()
 {
     int* ColorText = &TextColor;
     int* ColorBackground = &TextBackgroundColor;
@@ -294,10 +139,7 @@ void Key_set()
 
     int* s = &save;
 
-    string* KeyUC = &KeyUpChar;
-    string* KeyDC = &KeyDownChar;
-    string* KeyExC = &KeyExitChar;
-    string* KeyEnC = &KeyEnterChar;
+    keyboard KEY;
 
     bool flag = true;
     int key = 0;
@@ -311,30 +153,30 @@ void Key_set()
         do
         {
             system_cls();
-            cout << "Используйте:\n- " << *KeyUC << ", " << *KeyDC << " - для передвижения\n- " << *KeyEnC << " - для выбора\n- " << *KeyExC << " - для выхода\n-------Меню назначения клавиш--------" << endl;
+            cout << "Используйте:\n- " << KEY.Key_translation(*KeyU) << ", " << KEY.Key_translation(*KeyD) << " - для передвижения\n- " << KEY.Key_translation(*KeyEn) << " - для выбора\n- " << KEY.Key_translation(*KeyEx) << " - для выхода\n-------Меню назначения клавиш--------" << endl;
             for (int i = 0; i < volume; i++)
             {
                 if (i == num)
                 {
                     setColor(TextBackgroundColor, TextColor);
                     cout << cons_out[i];
-                    if (i == 0) cout << *KeyEnC;
-                    else if (i == 1) cout << *KeyExC;
-                    else if (i == 2) cout << *KeyUC;
-                    else if (i == 3) cout << *KeyDC;
+                    if (i == 0) cout << KEY.Key_translation(*KeyEn);
+                    else if (i == 1) cout << KEY.Key_translation(*KeyEx);
+                    else if (i == 2) cout << KEY.Key_translation(*KeyU);
+                    else if (i == 3) cout << KEY.Key_translation(*KeyD);
                     setColor(TextColor, TextBackgroundColor);
                     cout << endl;
                 }
                 else
                 {
                     cout << cons_out[i];
-                    if (i == 0) cout << *KeyEnC << endl;
-                    else if (i == 1) cout << *KeyExC << endl;
-                    else if (i == 2) cout << *KeyUC << endl;
-                    else if (i == 3) cout << *KeyDC << endl;
+                    if (i == 0) cout << KEY.Key_translation(*KeyEn) << endl;
+                    else if (i == 1) cout << KEY.Key_translation(*KeyEx) << endl;
+                    else if (i == 2) cout << KEY.Key_translation(*KeyU) << endl;
+                    else if (i == 3) cout << KEY.Key_translation(*KeyD) << endl;
                 }
             }
-            key = get_key();
+            key = KEY.get_key();
             if (key == *KeyD && num < volume - 1) num++;
             if (key == *KeyU && num > 0) num--;
             if (key == *KeyEx)
@@ -349,7 +191,7 @@ void Key_set()
         while (true)
         {
             system_cls();
-            cout << "Используйте:\n- " << *KeyUC << ", " << *KeyDC << " - для передвижения\n- " << *KeyEnC << " - для выбора\n- " << *KeyExC << " - для выхода\n-------Меню назначения клавишь--------" << endl;
+            cout << "Используйте:\n- " << KEY.Key_translation(*KeyU) << ", " << KEY.Key_translation(*KeyD) << " - для передвижения\n- " << KEY.Key_translation(*KeyEn) << " - для выбора\n- " << KEY.Key_translation(*KeyEx) << " - для выхода\n-------Меню назначения клавиш--------" << endl;
             for (int i = 0; i < volume; i++)
             {
                 if (i == num)
@@ -361,10 +203,10 @@ void Key_set()
                         setColor(TextColor, TextBackgroundColor);
                         cout << "      ";
                         setColor(TextBackgroundColor, TextColor);
-                        if (key == *KeyEn) cout << *KeyEnC;
-                        else if (key == *KeyEx) cout << *KeyExC;
-                        else if (key == *KeyU) cout << *KeyUC;
-                        else if (key == *KeyD) cout << *KeyDC;
+                        if (key == *KeyEn) cout << KEY.Key_translation(*KeyEn);
+                        else if (key == *KeyEx) cout << KEY.Key_translation(*KeyEx);
+                        else if (key == *KeyU) cout << KEY.Key_translation(*KeyU);
+                        else if (key == *KeyD) cout << KEY.Key_translation(*KeyD);
                         cout << " - эта клавиша уже занята.";
                         flag = true;
                     }
@@ -374,36 +216,32 @@ void Key_set()
                 else
                 {
                     cout << cons_out[i];
-                    if (i == 0) cout << *KeyEnC << endl;
-                    else if (i == 1) cout << *KeyExC << endl;
-                    else if (i == 2) cout << *KeyUC << endl;
-                    else if (i == 3) cout << *KeyDC << endl;
+                    if (i == 0) cout << KEY.Key_translation(*KeyEn) << endl;
+                    else if (i == 1) cout << KEY.Key_translation(*KeyEx) << endl;
+                    else if (i == 2) cout << KEY.Key_translation(*KeyU) << endl;
+                    else if (i == 3) cout << KEY.Key_translation(*KeyD) << endl;
                 }
             }
-            key = get_key();
+            key = KEY.get_key();
 
             if (num == 0 && key != *KeyD && key != *KeyU && key != *KeyEx)
             {
                 *KeyEn = key;
-                Key(num);
                 break;
             }
             else if (num == 1 && key != *KeyEn && key != *KeyD && key != *KeyU)
             {
                 *KeyEx = key;
-                Key(num);
                 break;
             }
             else if (num == 2 && key != *KeyEx && key != *KeyD && key != *KeyEn)
             {
                 *KeyU = key;
-                Key(num);
                 break;
             }
             else if (num == 3 && key != *KeyEx && key != *KeyEn && key != *KeyU)
             {
                 *KeyD = key;
-                Key(num);
                 break;
             }
             else flag = false;
@@ -416,12 +254,7 @@ void Key_set()
             endl << *KeyEx << "\t\tKeyExit" <<
             endl << *KeyEn << "\t\tKeyEnter" <<
             endl << *KeyU << "\t\tKeyUp" <<
-            endl << *KeyD << "\t\tKeyDown" <<
-            endl << *KeyExC << "\t\tKeyExitChar" <<
-            endl << *KeyEnC << "\t\tKeyEnterChar" <<
-            endl << *KeyUC << "\t\tKeyUpChar" <<
-            endl << *KeyDC << "\t\tKeyDownChar";
-
+            endl << *KeyD << "\t\tKeyDown";
         fout.close();
 
         *s = 0;
@@ -436,15 +269,7 @@ void Settings()
 
     int* s = &save;
 
-    int* KeyU = &KeyUp;
-    int* KeyD = &KeyDown;
-    int* KeyEx = &KeyExit;
-    int* KeyEn = &KeyEnter;
-
-    string* KeyUC = &KeyUpChar;
-    string* KeyDC = &KeyDownChar;
-    string* KeyExC = &KeyExitChar;
-    string* KeyEnC = &KeyEnterChar;
+    keyboard KEY;
 
     int num = 0;
 
@@ -453,7 +278,7 @@ void Settings()
         do
         {
             system_cls();
-            cout << "Используйте:\n- " << *KeyUC << ", " << *KeyDC << " - для передвижения\n- " << *KeyEnC << " - для выбора\n- " << *KeyExC << " - для выхода\n--------Меню настроек---------" << endl;
+            cout << "Используйте:\n- " << KEY.Key_translation(KeyUp) << ", " << KEY.Key_translation(KeyDown) << " - для передвижения\n- " << KEY.Key_translation(KeyEnter) << " - для выбора\n- " << KEY.Key_translation(KeyExit) << " - для выхода\n--------Меню настроек---------" << endl;
 
             for (int i = 0; i < volume; i++)
             {
@@ -473,35 +298,36 @@ void Settings()
                 cout << "Изменения сохранены." << endl;
                 cout << "--------------------" << endl;
             }
-            key = get_key();
-            if (key == *KeyD && num < volume - 1)
+
+            key = KEY.get_key();
+
+            if (key == KeyDown && num < volume - 1)
             {
                 if (num == volume - 3) num += 2;
                 else num++;
             }
-            if (key == *KeyU && num > 0)
+            if (key == KeyUp && num > 0)
             {
                 if (num == volume - 1) num -= 2;
                 else num--;
             }
-            if (key == *KeyEx)
+            if (key == KeyExit)
             {
                 system_cls();
                 return;
             }
-            
 
-        } while (key != *KeyEn);
+        } while (key != KeyEnter);
         switch (num + 1)
         {
         case 1:
-            Color_set(1);
+            Color_setting(1);
             break;
         case 2:
-            Color_set(2);
+            Color_setting(2);
             break;
         case 3:
-            Key_set();
+            Key_setting();
             break;
         case 5: // Сброс настроек
             *s = 0;
@@ -513,11 +339,6 @@ void Settings()
             int* KeyEx = &KeyExit;
             int* KeyEn = &KeyEnter;
 
-            string* KeyUC = &KeyUpChar;
-            string* KeyDC = &KeyDownChar;
-            string* KeyExC = &KeyExitChar;
-            string* KeyEnC = &KeyEnterChar;
-
             *ColorText = 15;
             *ColorBackground = 0;
 
@@ -526,11 +347,6 @@ void Settings()
             *KeyEx = 27;
             *KeyEn = 13;
 
-            *KeyUC = "Up";
-            *KeyDC = "Down";
-            *KeyExC = "ESC";
-            *KeyEnC = "Enter";
-
             ofstream fout("Save.txt");
 
             fout << 15 << "\t\tTextColor" <<
@@ -538,11 +354,7 @@ void Settings()
                 endl << 27 << "\t\tKeyExit" <<
                 endl << 13 << "\t\tKeyEnter" <<
                 endl << 301 << "\t\tKeyUp" <<
-                endl << 303 << "\t\tKeyDown" <<
-                endl << "ESC" << "\t\tKeyExitChar" <<
-                endl << "Enter" << "\t\tKeyEnterChar" <<
-                endl << "Up" << "\t\tKeyUpChar" <<
-                endl << "Down" << "\t\tKeyDownChar";
+                endl << 303 << "\t\tKeyDown";
             
             fout.close();
         }

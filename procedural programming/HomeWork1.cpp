@@ -1,13 +1,4 @@
-﻿#include <iostream>    //Для case1
-#include <locale>      //Для вывода русским
-#include <cmath>       //Для вычисления уравнений
-#include <windows.h>   //Для ввода русским
-#include <string>      //Для перевода string -> int/float
-#include "Chek.h"      //Модуль проверки
-#include "ExitToMenu.h"//Модуль выхода
-#include <conio.h>     //Для считывания клавиш
-#include "HomeWork4.h" //Модуль Д/з 4
-#include "Settings.h"  //Модуль настроек
+﻿#include "HomeWork1.h"
 
 using namespace std;
 
@@ -17,11 +8,6 @@ extern int KeyExit;
 extern int KeyEnter;
 extern int KeyUp;
 extern int KeyDown;
-
-extern string KeyExitChar;
-extern string KeyEnterChar;
-extern string KeyUpChar;
-extern string KeyDownChar;
 
 //Задание 1 "Имя"
 void Name()
@@ -158,16 +144,7 @@ void lamp()
 //Меню дз 1
 void menu_HW1()
 {
-    
-    int* KeyU = &KeyUp;
-    int* KeyD = &KeyDown;
-    int* KeyEx = &KeyExit;
-    int* KeyEn = &KeyEnter;
-
-    string* KeyUC = &KeyUpChar;
-    string* KeyDC = &KeyDownChar;
-    string* KeyExC = &KeyExitChar;
-    string* KeyEnC = &KeyEnterChar;
+    keyboard KEY;
 
     int key = 0;
 
@@ -180,7 +157,7 @@ void menu_HW1()
         do
         {
             system_cls();
-            cout << "Используйте:\n- " << *KeyUC << ", " << *KeyDC << " - для передвижения\n- " << *KeyEnC << " - для выбора\n- " << *KeyExC << " - для выхода\n----------Д/з 1------------" << endl;
+            cout << "Используйте:\n- " << KEY.Key_translation(KeyUp) << ", " << KEY.Key_translation(KeyDown) << " - для передвижения\n- " << KEY.Key_translation(KeyEnter) << " - для выбора\n- " << KEY.Key_translation(KeyExit) << " - для выхода\n----------Д/з 1------------" << endl;
             for (int i = 0; i < 5; i++)
             {
                 if (i == num)
@@ -193,15 +170,15 @@ void menu_HW1()
                 else cout << cons_out[i] << endl;
             }
 
-            key = get_key();
-            if (key == *KeyD && num < 5 - 1) num++;
-            if (key == *KeyU && num > 0) num--;
-            if (key == *KeyEx)
+            key = KEY.get_key();
+            if (key == KeyDown && num < 5 - 1) num++;
+            if (key == KeyUp && num > 0) num--;
+            if (key == KeyExit)
             {
                 system_cls();
                 return;
             }
-        } while (key != *KeyEn);
+        } while (key != KeyEnter);
         switch (num + 1)
         {
         case 1:

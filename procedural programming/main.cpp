@@ -1,21 +1,4 @@
-﻿#include <iostream>    //Для cin/cout
-#include <fstream>     //Для файла
-#include <windows.h>   //Для ввода/вывода русским
-#include <string>      //Для перевода string -> int/float
-#include <stdlib.h>    //Для exit
-#include "HomeWork1.h" //Модуль Д/з 1
-#include "HomeWork2.h" //Модуль Д/з 2
-#include "HomeWork3.h" //Модуль Д/з 3
-#include "HomeWork4.h" //Модуль Д/з 4
-#include "HomeWork5.h" //Модуль Д/з 4
-#include "Settings.h"  //Модуль настроек
-#include "Chek.h"      //Модуль проверки
-#include "load_save.h" //Модуль загрузки сохранения
-#include <conio.h>     //Для считывания клавиш
-#include <list>
-#include <iterator>
-
-using namespace std;
+﻿#include "main.h"
 
 extern int TextColor;
 extern int TextBackgroundColor;
@@ -24,12 +7,7 @@ extern int KeyEnter;
 extern int KeyUp;
 extern int KeyDown;
 
-extern string KeyExitChar;
-extern string KeyEnterChar;
-extern string KeyUpChar;
-extern string KeyDownChar;
-
-extern list <string> error_load;
+extern std::list <std::string> error_load;
 
 int load = 0;
 
@@ -39,24 +17,16 @@ int main()
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
-    int* KeyU = &KeyUp;
-    int* KeyD = &KeyDown;
-    int* KeyEx = &KeyExit;
-    int* KeyEn = &KeyEnter;
-
-    string* KeyUC = &KeyUpChar;
-    string* KeyDC = &KeyDownChar;
-    string* KeyExC = &KeyExitChar;
-    string* KeyEnC = &KeyEnterChar;
+    keyboard KEY;
 
     int* l = &load;
     int k = 0;
-    if (*l == 0) k = load_save();
+    if (load == 0) k = load_save();
 
     int key = 0;
 
     const int volume = 6;
-    string cons_out[volume] = {"Д/з 1", "Д/з 2", "Д/з 3", "Д/з 4", "Д/з 5", "Настройки"};
+    std::string cons_out[volume] = {"Д/з 1", "Д/з 2", "Д/з 3", "Д/з 4", "Д/з 5", "Настройки"};
 
     int num = 0;
 
@@ -66,65 +36,56 @@ int main()
         {
             system_cls();
 
-            cout << "Используйте:\n- " << *KeyUC << ", " << *KeyDC << " - для передвижения\n- " << *KeyEnC << " - для выбора\n- " << *KeyExC << " - для выхода\n----------Выбор Д/з------------" << endl;
-            
+            std::cout << "Используйте:\n- " << KEY.Key_translation(KeyUp) << ", " << KEY.Key_translation(KeyDown) << " - для передвижения\n- " << KEY.Key_translation(KeyEnter) << " - для выбора\n- " << KEY.Key_translation(KeyExit) << " - для выхода\n----------Выбор Д/з------------\n";
+
             for (int i = 0; i < volume; i++)
             {
                 if (i == num)
                 {
                     setColor(TextBackgroundColor, TextColor);
-                    cout << cons_out[i];
+                    std::cout << cons_out[i];
                     setColor(TextColor, TextBackgroundColor);
-                    cout << endl;
+                    std::cout << "\n";
                 }
-                else cout << cons_out[i] << endl;
+                else std::cout << cons_out[i] << "\n";
             }
 
-            if (k == 1)
+            if (k == 2)
             {
                 *l = 5;
                 k = 8;
-                cout << "------------------------------" << endl;
-                cout << "Ошибка при загрузке:\n";
-                copy(error_load.begin(), error_load.end(), ostream_iterator<string>(cout, "\n"));
-                cout << "Будут использоваться значения по умолчанию." << endl;
-                cout << "------------------------------" << endl;
+                std::cout << "------------------------------\n";
+                std::cout << "Ошибка при загрузке:\n";
+                copy(error_load.begin(), error_load.end(), std::ostream_iterator<std::string>(std::cout, "\n"));
+                std::cout << "Будут использоваться значения по умолчанию.\n";
+                std::cout << "------------------------------\n";
             }
-            else if (k == 2)
+            else if (k == 1)
             {
                 *l = 5;
                 k = 8;
-                cout << "---------------------------" << endl;
-                cout << "Ошибка загрузки сохранения.\n";
-                cout << "Будут использоваться значения по умолчанию." << endl;
-                cout << "---------------------------" << endl;
+                std::cout << "-----------------------------\n";
+                std::cout << "Успешная загрузка сохранения.\n";
+                std::cout << "-----------------------------\n";
             }
             else if (k == 3)
             {
                 *l = 5;
                 k = 8;
-                cout << "-----------------------------" << endl;
-                cout << "Успешная загрузка сохранения.\n";
-                cout << "-----------------------------" << endl;
-            }
-            else if (k == 4)
-            {
-                *l = 5;
-                k = 8;
-                cout << "-----------------------------------" << endl;
-                cout << "Не удалось открыть файл сохранения.\n";
-                cout << "-----------------------------------" << endl;
+                std::cout << "-----------------------------------\n";
+                std::cout << "Не удалось открыть файл сохранения.\n";
+                std::cout << "-----------------------------------\n";
             }
 
-            key = get_key();
-            if (key == *KeyD && num < volume - 1) num++;
-            if (key == *KeyU && num > 0) num--;
-            if (key == *KeyEx)
+            key = KEY.get_key();
+            if (key == KeyDown && num < volume - 1) num++;
+            if (key == KeyUp && num > 0) num--;
+            if (key == KeyExit)
             {
-                cout << "Вы завершили работу.\n";
+                std::cout << "Вы завершили работу.\n";
                 exit(EXIT_SUCCESS);
             }
-        } while (key != *KeyEn);
+        } while (key != KeyEnter);
         switch (num + 1)
         {
         case 1:
@@ -143,7 +104,7 @@ int main()
             menu_HW5(); // Д/з 5
             break;
         case 6:
-            Settings();
+            Settings(); // Настройки
             break;
         }
         

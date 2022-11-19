@@ -1,4 +1,3 @@
 #pragma once
-using namespace std;
 
-float chek(int type, string cons_out, bool i);
+float chek(int type, std::string cons_out, bool i);

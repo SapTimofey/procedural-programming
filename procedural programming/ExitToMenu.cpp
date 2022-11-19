@@ -11,8 +11,7 @@ extern int TextBackgroundColor;
 
 void ExitToMenu()
 {
-	char ch;
 	setColor(TextColor, TextBackgroundColor);
 	cout << "Чтобы вернутся, нажмите любую клавишу.";
-	ch = _getch();
+	_getch();
 }

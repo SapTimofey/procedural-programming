@@ -4,7 +4,3 @@
 302		KeyEnter
 301		KeyUp
 303		KeyDown
-Left		KeyExitChar
-Right		KeyEnterChar
-Up		KeyUpChar
-Down		KeyDownChar
