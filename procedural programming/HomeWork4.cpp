@@ -504,8 +504,8 @@ int gen(int m, int b, int c, int a, int s)
 {
     if (a > 0)
     {
-        return gen(m, b, c, a - 1, (m * s + b) % c);
         if (s > 0) cout << s << " ";
+        return gen(m, b, c, a - 1, (m * s + b) % c);
     }
 }
 void random_num()
