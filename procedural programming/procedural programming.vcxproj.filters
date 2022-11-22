@@ -46,7 +46,7 @@
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
     <ClCompile Include="keyboard.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Файлы ресурсов</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
