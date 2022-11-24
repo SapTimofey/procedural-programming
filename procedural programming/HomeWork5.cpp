@@ -348,20 +348,6 @@ void rows_2()
 //Задание 7 "Файлы"
 string** Dsort(string **data, int f, int g, int SIZEx)
 {
-    /*string** data_sort = new string*[SIZEx];
-    for (int i = 0; i < SIZEx; i++)
-        data_sort[i] = new string[2];
-    for (int i = 1; i < SIZEx + 1; i++)
-    {
-        data_sort[i-1][0] = to_string(i);
-        data_sort[i-1][1] = data[i][f];
-    }
-    for (int i = 0; i < SIZEx; i++)
-    {
-        for (int j = 0; j < 2; j++)
-            cout << data_sort[i][j] << " ";
-        cout << "\n";
-    }*/
     try
     {
         for (int i = 1; i < SIZEx; i++)
@@ -376,22 +362,6 @@ string** Dsort(string **data, int f, int g, int SIZEx)
                     if (stoi(data[k][f]) < stoi(data[k + 1][f]))
                         swap(data[k], data[k + 1]);
                 }
-                
-        /*for (int i = 0; i < SIZEx + 1; i++)
-        {
-            for (int j = 0; j < 7; j++)
-            {
-                if (j == 0)
-                    cout << left << setw(3) << data[i][j];
-                else if (j == 1)
-                    cout << left << setw(9) << data[i][j];
-                else if (j == 5 || j == 6)
-                    cout << right << setw(15) << data[i][j];
-                else
-                    cout << right << setw(10) << data[i][j];
-            }
-            cout << "\n";
-        }*/
         return data;
     }
     catch (...)
@@ -410,10 +380,6 @@ string** Dsort(string **data, int f, int g, int SIZEx)
                 }
         return data;
     }
-    
-
-    
-    
 }
 void files()
 {
@@ -597,7 +563,6 @@ void files()
                         else
                             cout << right << setw(10) << data[i][j];
                         setColor(TextColor, TextBackgroundColor);
-
                     }
                     else
                     {
@@ -623,6 +588,7 @@ void files()
                 return;
             }
         } while (key != KeyEnter);
+
         string type[2] = { "Сортировать по возрастанию", "Сортировать по убыванию" };
         int g = 0;
         do
@@ -637,7 +603,6 @@ void files()
                     setColor(TextBackgroundColor, TextColor);
                     cout << type[i];
                     setColor(TextColor, TextBackgroundColor);
-                    
                 }
                 else cout << type[i];
                 cout << " ";
@@ -659,7 +624,6 @@ void files()
                         else
                             cout << right << setw(10) << data[i][j];
                         setColor(TextColor, TextBackgroundColor);
-
                     }
                     else
                     {
@@ -686,12 +650,7 @@ void files()
             }
         } while (key != KeyEnter);
         data = Dsort(data, f, g, SIZEx);
-        /*ExitToMenu();*/
     }
-
-
-
-
 
     for (int i = 0; i < SIZEx + 1; i++)
         delete [] data[i];
