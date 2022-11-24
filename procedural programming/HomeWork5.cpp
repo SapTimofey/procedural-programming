@@ -546,7 +546,7 @@ void files()
         do
         {
             system_cls();
-            cout << "Используйте:\n- " << KEY.Key_translation(KeyUp) << ", " << KEY.Key_translation(KeyDown) << " - для передвижения\n- " << KEY.Key_translation(KeyEnter) << " - для выбора\n- " << KEY.Key_translation(KeyExit) << " - для выхода\n----------Задание 'Файлы'------------" << endl;
+            cout << "Используйте:\n- " << "Left, Right - для передвижения\n- " << "Up - для выбора\n- " << "ESC - для выхода\n----------Задание 'Файлы'------------" << endl;
             cout << endl;
             for (int i = 0; i < SIZEx; i++)
             {
@@ -581,21 +581,21 @@ void files()
             }
 
             key = KEY.get_key();
-            if (key == KeyDown && f < 7 - 1) f++;
-            if (key == KeyUp && f > 0) f--;
-            if (key == KeyExit)
+            if (key == 302 && f < 7 - 1) f++;
+            if (key == 300 && f > 0) f--;
+            if (key == 27)
             {
                 system_cls();
                 return;
             }
-        } while (key != KeyEnter);
+        } while (key != 301);
 
         string type[2] = { "Сортировать по возрастанию", "Сортировать по убыванию" };
         int g = 0;
         do
         {
             system_cls();
-            cout << "Используйте:\n- " << KEY.Key_translation(KeyUp) << ", " << KEY.Key_translation(KeyDown) << " - для передвижения\n- " << KEY.Key_translation(KeyEnter) << " - для выбора\n- " << KEY.Key_translation(KeyExit) << " - для выхода\n----------Задание 'Файлы'------------" << endl;
+            cout << "Используйте:\n- " << "Left, Right - для передвижения\n- " << "Up - для выбора\n- " << "ESC - для выхода\n----------Задание 'Файлы'------------" << endl;
             
             for (int i = 0; i < 2; i++)
             {
@@ -642,14 +642,14 @@ void files()
             }
 
             key = KEY.get_key();
-            if (key == KeyDown && g < 2 - 1) g++;
-            if (key == KeyUp && g > 0) g--;
-            if (key == KeyExit)
+            if (key == 302 && g < 2 - 1) g++;
+            if (key == 300 && g > 0) g--;
+            if (key == 27)
             {
                 system_cls();
                 return;
             }
-        } while (key != KeyEnter);
+        } while (key != 301);
         data = Dsort(data, f, g, SIZEx);
     }
 
