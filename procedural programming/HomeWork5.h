@@ -15,6 +15,8 @@
 #include <conio.h>     //Для считывания клавиш
 #include "Settings.h"  //Модуль настроек
 #include "keyboard.h"  //Класс keyboard
+#include <list>
+#include <iomanip>
 
 void euclid();
 void eratosthenes();

@@ -41,7 +41,7 @@ float chek(int type, string cons_out, bool main)
                     cout << num << " - число не содержит целой части.\n";
                     break;
                 }
-                else if (num[i] == '.' || isdigit(num[i]) || num[i] == '-') continue;
+                else if (num[i] == '.' || isdigit(num[i]) || num[0] == '-') continue;
                 else
                 {
                     flag = false;
