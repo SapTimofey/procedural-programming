@@ -346,12 +346,12 @@ void rows_2()
 }
 
 //Задание 7 "Файлы"
-string** Dsort(string **data, int f, int g, int SIZEx)
+string** Dsort(string** data, int f, int g, int SIZEx)
 {
     try
     {
-        for (int i = 1; i < SIZEx; i++)
-            for (int k = 1; k < SIZEx - i + 1; k++)
+        for (int i = 1; i < SIZEx - 1; i++)
+            for (int k = 1; k < SIZEx - i; k++)
                 if (g == 0)
                 {
                     if (stoi(data[k][f]) > stoi(data[k + 1][f]))
@@ -366,8 +366,8 @@ string** Dsort(string **data, int f, int g, int SIZEx)
     }
     catch (...)
     {
-        for (int i = 1; i < SIZEx; i++)
-            for (int k = 1; k < SIZEx - i + 1; k++)
+        for (int i = 1; i < SIZEx - 1; i++)
+            for (int k = 1; k < SIZEx - i; k++)
                 if (g == 0)
                 {
                     if (data[k][f] > data[k + 1][f])
@@ -422,10 +422,11 @@ void files()
         }
     } while (key != KeyEnter);
 
-    SIZEx = (int)chek(5, "Введите количество стран: ", false);
+    SIZEx = (int)chek(5, "Введите количество стран: ", false) + 1;
+    if (num == 1 && SIZEx > 11) SIZEx = 11;
 
-    string** data = new string * [SIZEx + 1];
-    for (int i = 0; i < SIZEx+1; i++)
+    string** data = new string * [SIZEx];
+    for (int i = 0; i < SIZEx; i++)
         data[i] = new string[7];
 
     const int cnt_country = 10;
@@ -442,7 +443,7 @@ void files()
     ofstream fout("country.txt");
     if (num == 0)
     {
-        for (int i = 1; i < SIZEx+1; i++)
+        for (int i = 1; i < SIZEx; i++)
         {
             if (i != 1) fout << "\n";
             for (int j = 0; j < 7; j++)
@@ -472,7 +473,7 @@ void files()
         bool flag = false;
         int cnt = 0;
         int num1 = 0;
-        for (int i = 1; i < SIZEx+1; i++)
+        for (int i = 1; i < SIZEx; i++)
         {
             if (i != 1) fout << "\n";
             for (int j = 0; j < 7; j++)
@@ -501,7 +502,7 @@ void files()
 
     //Чтение данных из файла и запись в таблицу
     ifstream fin("country.txt");
-    for (int i = 1; i < SIZEx + 1; i++)
+    for (int i = 1; i < SIZEx; i++)
     {
         int sum_medal = 0, sum_point = 0;
         for (int j = 0; j < 7; j++)
@@ -547,7 +548,7 @@ void files()
             system_cls();
             cout << "Используйте:\n- " << KEY.Key_translation(KeyUp) << ", " << KEY.Key_translation(KeyDown) << " - для передвижения\n- " << KEY.Key_translation(KeyEnter) << " - для выбора\n- " << KEY.Key_translation(KeyExit) << " - для выхода\n----------Задание 'Файлы'------------" << endl;
             cout << endl;
-            for (int i = 0; i < SIZEx + 1; i++)
+            for (int i = 0; i < SIZEx; i++)
             {
                 for (int j = 0; j < 7; j++)
                 {
@@ -608,7 +609,7 @@ void files()
                 cout << " ";
             }
             cout << endl;
-            for (int i = 0; i < SIZEx + 1; i++)
+            for (int i = 0; i < SIZEx; i++)
             {
                 for (int j = 0; j < 7; j++)
                 {
@@ -652,7 +653,7 @@ void files()
         data = Dsort(data, f, g, SIZEx);
     }
 
-    for (int i = 0; i < SIZEx + 1; i++)
+    for (int i = 0; i < SIZEx; i++)
         delete [] data[i];
     delete [] data;
 }

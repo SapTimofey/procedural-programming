@@ -119,7 +119,7 @@ float chek(int type, string cons_out, bool main)
         catch (...)
         {
             if (main) system_cls();
-            cout << num << "Произошла ошибка.\n";
+            cout << num << " Произошла ошибка.\n";
         }
     } while (true);
 }
