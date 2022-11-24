@@ -155,6 +155,11 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="Settings.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="country.txt" />
+    <Text Include="Save.txt" />
+    <Text Include="test_HW.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
