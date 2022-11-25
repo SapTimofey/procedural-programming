@@ -428,7 +428,12 @@ void files()
     {
         try
         {
-            SIZEx = (int)chek(5, "Введите количество стран: ", false) + 1;
+            while (SIZEx > 101 || SIZEx < 2)
+            {
+                SIZEx = (int)chek(5, "Введите количество стран: ", false) + 1;
+                if (SIZEx > 101) cout << "Количество стран должно не больше 100.\n";
+                else if (SIZEx < 2) cout << "Количество стран должно быть не меньше 1.\n";
+            }
             if (num == 1 && SIZEx > 11) SIZEx = 11;
 
             string** data = new string * [SIZEx];
