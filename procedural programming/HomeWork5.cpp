@@ -421,241 +421,250 @@ void files()
             return;
         }
     } while (key != KeyEnter);
-
-    SIZEx = (int)chek(5, "Введите количество стран: ", false) + 1;
-    if (num == 1 && SIZEx > 11) SIZEx = 11;
-
-    string** data = new string * [SIZEx];
-    for (int i = 0; i < SIZEx; i++)
-        data[i] = new string[7];
-
-    const int cnt_country = 10;
-
-    data[0][0] = "N";
-    data[0][1] = "Страна";
-    data[0][2] = "Золото";
-    data[0][3] = "Серебро";
-    data[0][4] = "Бронза";
-    data[0][5] = "Сумма медалей";
-    data[0][6] = "Сумма очков";
-
-    //Запись данных в файл
-    ofstream fout("country.txt");
-    if (num == 0)
-    {
-        for (int i = 1; i < SIZEx; i++)
-        {
-            if (i != 1) fout << "\n";
-            for (int j = 0; j < 7; j++)
-            {
-                if (j == 0) data[i][0] = to_string(i);
-                else if (j == 1)
-                {
-                    cout << "Введите " << i << "-ую страну: ";
-                    cin >> s;
-                    fout << s << ": ";
-                }
-                else if (j == 2) fout << to_string((int)chek(5, "Введите количество золотых медалей: ", false)) << " ";
-
-                else if (j == 3) fout << to_string((int)chek(5, "Введите количество серебрянных медалей: ", false)) << " ";
-
-                else if (j == 4) fout << to_string((int)chek(5, "Введите количество бронзовых медалей: ", false));
-
-            }
-        }
-    }
-    else
-    {
-        srand(time(0));
-        
-        string country[cnt_country]{ "Канада", "Китай", "Корея", "Норвегия", "Финляндия", "Россия", "Германия", "США", "Франция", "Япония" };
-        string check;
-        bool flag = false;
-        int cnt = 0;
-        int num1 = 0;
-        for (int i = 1; i < SIZEx; i++)
-        {
-            if (i != 1) fout << "\n";
-            for (int j = 0; j < 7; j++)
-            {
-                if (j == 0) data[i][0] = to_string(i);
-                else if (j == 1)
-                {
-                    while (check.find(country[num1]) != -1) num1 = rand() % cnt_country;
-
-                    check += country[num1];
-
-                    cnt++;
-
-                    fout << country[num1] << ": ";
-                }
-                else if (j == 2) fout << to_string(rand() % 20) << " ";
-
-                else if (j == 3) fout << to_string(rand() % 20) << " ";
-
-                else if (j == 4) fout << to_string(rand() % 20);
-            }
-            if (cnt_country == cnt) break;
-        }
-    }
-    fout.close();
-
-    //Чтение данных из файла и запись в таблицу
-    ifstream fin("country.txt");
-    for (int i = 1; i < SIZEx; i++)
-    {
-        int sum_medal = 0, sum_point = 0;
-        for (int j = 0; j < 7; j++)
-        {
-            if (j == 0) data[i][0] = to_string(i);
-            else if (j == 1)
-            {
-                fin >> s;
-                data[i][1] = s.erase(s.size() - 1, 1);
-            }
-            else if (j == 2)
-            {
-                fin >> s;
-                sum_medal += stoi(s);
-                sum_point += 7 * stoi(s);
-                data[i][2] = s;
-            }
-            else if (j == 3)
-            {
-                fin >> s;
-                sum_medal += stoi(s);
-                sum_point += 6 * stoi(s);
-                data[i][3] = s;
-            }
-            else if (j == 4)
-            {
-                fin >> s;
-                sum_medal += stoi(s);
-                sum_point += 5 * stoi(s);
-                data[i][4] = s;
-            }
-            else if (j == 5) data[i][5] = to_string(sum_medal);
-            else if (j == 6) data[i][6] = to_string(sum_point);
-        }
-    }
-    fin.close();
-
-    int f = 0;
     while (true)
     {
-        do
+        try
         {
-            system_cls();
-            cout << "Используйте:\n- " << "Left, Right - для передвижения\n- " << "Up - для выбора\n- " << "ESC - для выхода\n----------Задание 'Файлы'------------" << endl;
-            cout << endl;
+            SIZEx = (int)chek(5, "Введите количество стран: ", false) + 1;
+            if (num == 1 && SIZEx > 11) SIZEx = 11;
+
+            string** data = new string * [SIZEx];
             for (int i = 0; i < SIZEx; i++)
+                data[i] = new string[7];
+
+            const int cnt_country = 10;
+
+            data[0][0] = "N";
+            data[0][1] = "Страна";
+            data[0][2] = "Золото";
+            data[0][3] = "Серебро";
+            data[0][4] = "Бронза";
+            data[0][5] = "Сумма медалей";
+            data[0][6] = "Сумма очков";
+
+            //Запись данных в файл
+            ofstream fout("country.txt");
+            if (num == 0)
             {
+                for (int i = 1; i < SIZEx; i++)
+                {
+                    if (i != 1) fout << "\n";
+                    for (int j = 0; j < 7; j++)
+                    {
+                        if (j == 0) data[i][0] = to_string(i);
+                        else if (j == 1)
+                        {
+                            cout << "Введите " << i << "-ую страну: ";
+                            cin >> s;
+                            fout << s << ": ";
+                        }
+                        else if (j == 2) fout << to_string((int)chek(5, "Введите количество золотых медалей: ", false)) << " ";
+
+                        else if (j == 3) fout << to_string((int)chek(5, "Введите количество серебрянных медалей: ", false)) << " ";
+
+                        else if (j == 4) fout << to_string((int)chek(5, "Введите количество бронзовых медалей: ", false));
+
+                    }
+                }
+            }
+            else
+            {
+                srand(time(0));
+
+                string country[cnt_country]{ "Канада", "Китай", "Корея", "Норвегия", "Финляндия", "Россия", "Германия", "США", "Франция", "Япония" };
+                string check;
+                bool flag = false;
+                int cnt = 0;
+                int num1 = 0;
+                for (int i = 1; i < SIZEx; i++)
+                {
+                    if (i != 1) fout << "\n";
+                    for (int j = 0; j < 7; j++)
+                    {
+                        if (j == 0) data[i][0] = to_string(i);
+                        else if (j == 1)
+                        {
+                            while (check.find(country[num1]) != -1) num1 = rand() % cnt_country;
+
+                            check += country[num1];
+
+                            cnt++;
+
+                            fout << country[num1] << ": ";
+                        }
+                        else if (j == 2) fout << to_string(rand() % 20) << " ";
+
+                        else if (j == 3) fout << to_string(rand() % 20) << " ";
+
+                        else if (j == 4) fout << to_string(rand() % 20);
+                    }
+                    if (cnt_country == cnt) break;
+                }
+            }
+            fout.close();
+
+            //Чтение данных из файла и запись в таблицу
+            ifstream fin("country.txt");
+            for (int i = 1; i < SIZEx; i++)
+            {
+                int sum_medal = 0, sum_point = 0;
                 for (int j = 0; j < 7; j++)
                 {
-                    if (j == f && i == 0)
+                    if (j == 0) data[i][0] = to_string(i);
+                    else if (j == 1)
                     {
-                        setColor(TextBackgroundColor, TextColor);
-                        if (j == 0)
-                            cout << left << setw(3) << data[i][j];
-                        else if (j == 1)
-                            cout << left << setw(9) << data[i][j];
-                        else if (j == 5 || j == 6)
-                            cout << right << setw(15) << data[i][j];
-                        else
-                            cout << right << setw(10) << data[i][j];
-                        setColor(TextColor, TextBackgroundColor);
+                        fin >> s;
+                        data[i][1] = s.erase(s.size() - 1, 1);
                     }
-                    else
+                    else if (j == 2)
                     {
-                        if (j == 0)
-                            cout << left << setw(3) << data[i][j];
-                        else if (j == 1)
-                            cout << left << setw(9) << data[i][j];
-                        else if (j == 5 || j == 6)
-                            cout << right << setw(15) << data[i][j];
-                        else
-                            cout << right << setw(10) << data[i][j];
+                        fin >> s;
+                        sum_medal += stoi(s);
+                        sum_point += 7 * stoi(s);
+                        data[i][2] = s;
                     }
+                    else if (j == 3)
+                    {
+                        fin >> s;
+                        sum_medal += stoi(s);
+                        sum_point += 6 * stoi(s);
+                        data[i][3] = s;
+                    }
+                    else if (j == 4)
+                    {
+                        fin >> s;
+                        sum_medal += stoi(s);
+                        sum_point += 5 * stoi(s);
+                        data[i][4] = s;
+                    }
+                    else if (j == 5) data[i][5] = to_string(sum_medal);
+                    else if (j == 6) data[i][6] = to_string(sum_point);
                 }
-                cout << endl;
             }
+            fin.close();
 
-            key = KEY.get_key();
-            if (key == 302 && f < 7 - 1) f++;
-            if (key == 300 && f > 0) f--;
-            if (key == 27)
+            int f = 0;
+            while (true)
             {
-                system_cls();
-                return;
-            }
-        } while (key != 301);
-
-        string type[2] = { "Сортировать по возрастанию", "Сортировать по убыванию" };
-        int g = 0;
-        do
-        {
-            system_cls();
-            cout << "Используйте:\n- " << "Left, Right - для передвижения\n- " << "Up - для выбора\n- " << "ESC - для выхода\n----------Задание 'Файлы'------------" << endl;
-            
-            for (int i = 0; i < 2; i++)
-            {
-                if (i == g)
+                do
                 {
-                    setColor(TextBackgroundColor, TextColor);
-                    cout << type[i];
-                    setColor(TextColor, TextBackgroundColor);
-                }
-                else cout << type[i];
-                cout << " ";
+                    system_cls();
+                    cout << "Используйте:\n- " << "Left, Right - для передвижения\n- " << "Up - для выбора\n- " << "ESC - для выхода\n----------Задание 'Файлы'------------" << endl;
+                    cout << endl;
+                    for (int i = 0; i < SIZEx; i++)
+                    {
+                        for (int j = 0; j < 7; j++)
+                        {
+                            if (j == f && i == 0)
+                            {
+                                setColor(TextBackgroundColor, TextColor);
+                                if (j == 0)
+                                    cout << left << setw(3) << data[i][j];
+                                else if (j == 1)
+                                    cout << left << setw(9) << data[i][j];
+                                else if (j == 5 || j == 6)
+                                    cout << right << setw(15) << data[i][j];
+                                else
+                                    cout << right << setw(10) << data[i][j];
+                                setColor(TextColor, TextBackgroundColor);
+                            }
+                            else
+                            {
+                                if (j == 0)
+                                    cout << left << setw(3) << data[i][j];
+                                else if (j == 1)
+                                    cout << left << setw(9) << data[i][j];
+                                else if (j == 5 || j == 6)
+                                    cout << right << setw(15) << data[i][j];
+                                else
+                                    cout << right << setw(10) << data[i][j];
+                            }
+                        }
+                        cout << endl;
+                    }
+
+                    key = KEY.get_key();
+                    if (key == 302 && f < 7 - 1) f++;
+                    if (key == 300 && f > 0) f--;
+                    if (key == 27)
+                    {
+                        system_cls();
+                        return;
+                    }
+                } while (key != 301);
+
+                string type[2] = { "Сортировать по возрастанию", "Сортировать по убыванию" };
+                int g = 0;
+                do
+                {
+                    system_cls();
+                    cout << "Используйте:\n- " << "Left, Right - для передвижения\n- " << "Up - для выбора\n- " << "ESC - для выхода\n----------Задание 'Файлы'------------" << endl;
+
+                    for (int i = 0; i < 2; i++)
+                    {
+                        if (i == g)
+                        {
+                            setColor(TextBackgroundColor, TextColor);
+                            cout << type[i];
+                            setColor(TextColor, TextBackgroundColor);
+                        }
+                        else cout << type[i];
+                        cout << " ";
+                    }
+                    cout << endl;
+                    for (int i = 0; i < SIZEx; i++)
+                    {
+                        for (int j = 0; j < 7; j++)
+                        {
+                            if (j == f && i == 0)
+                            {
+                                setColor(TextBackgroundColor, TextColor);
+                                if (j == 0)
+                                    cout << left << setw(3) << data[i][j];
+                                else if (j == 1)
+                                    cout << left << setw(9) << data[i][j];
+                                else if (j == 5 || j == 6)
+                                    cout << right << setw(15) << data[i][j];
+                                else
+                                    cout << right << setw(10) << data[i][j];
+                                setColor(TextColor, TextBackgroundColor);
+                            }
+                            else
+                            {
+                                if (j == 0)
+                                    cout << left << setw(3) << data[i][j];
+                                else if (j == 1)
+                                    cout << left << setw(9) << data[i][j];
+                                else if (j == 5 || j == 6)
+                                    cout << right << setw(15) << data[i][j];
+                                else
+                                    cout << right << setw(10) << data[i][j];
+                            }
+                        }
+                        cout << endl;
+                    }
+
+                    key = KEY.get_key();
+                    if (key == 302 && g < 2 - 1) g++;
+                    if (key == 300 && g > 0) g--;
+                    if (key == 27)
+                    {
+                        system_cls();
+                        return;
+                    }
+                } while (key != 301);
+                data = Dsort(data, f, g, SIZEx);
             }
-            cout << endl;
+
             for (int i = 0; i < SIZEx; i++)
-            {
-                for (int j = 0; j < 7; j++)
-                {
-                    if (j == f && i == 0)
-                    {
-                        setColor(TextBackgroundColor, TextColor);
-                        if (j == 0)
-                            cout << left << setw(3) << data[i][j];
-                        else if (j == 1)
-                            cout << left << setw(9) << data[i][j];
-                        else if (j == 5 || j == 6)
-                            cout << right << setw(15) << data[i][j];
-                        else
-                            cout << right << setw(10) << data[i][j];
-                        setColor(TextColor, TextBackgroundColor);
-                    }
-                    else
-                    {
-                        if (j == 0)
-                            cout << left << setw(3) << data[i][j];
-                        else if (j == 1)
-                            cout << left << setw(9) << data[i][j];
-                        else if (j == 5 || j == 6)
-                            cout << right << setw(15) << data[i][j];
-                        else
-                            cout << right << setw(10) << data[i][j];
-                    }
-                }
-                cout << endl;
-            }
-
-            key = KEY.get_key();
-            if (key == 302 && g < 2 - 1) g++;
-            if (key == 300 && g > 0) g--;
-            if (key == 27)
-            {
-                system_cls();
-                return;
-            }
-        } while (key != 301);
-        data = Dsort(data, f, g, SIZEx);
+                delete[] data[i];
+            delete[] data;
+        }
+        catch (...)
+        {
+            cout << "Произошла ошибка." << endl;
+        }
     }
-
-    for (int i = 0; i < SIZEx; i++)
-        delete [] data[i];
-    delete [] data;
 }
 
 //Меню дз 5
