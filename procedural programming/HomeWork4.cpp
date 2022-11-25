@@ -860,7 +860,7 @@ void menu_HW4()
             }
 
             key = KEY.get_key();
-            if (key == KeyDown && num < 5 - 1) num++;
+            if (key == KeyDown && num < 9 - 1) num++;
             if (key == KeyUp && num > 0) num--;
             if (key == KeyExit)
             {
