@@ -270,7 +270,6 @@ void sin()
         LineTo(hDC, 10 * x + 100, -10 * sin(x) + 85);
     }
     ReleaseDC(hWnd, hDC);
-    cin.get();
    
     ExitToMenu();
 }
