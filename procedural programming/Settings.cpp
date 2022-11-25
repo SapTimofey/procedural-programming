@@ -76,8 +76,8 @@ void Color_setting(int type)
     {
         system_cls();
         cout << "Используйте:\n- " << KEY.Key_translation(*KeyU) << ", " << KEY.Key_translation(*KeyD) << " - для передвижения\n- " << KEY.Key_translation(*KeyEn) << " - для выбора\n- " << KEY.Key_translation(*KeyEx) << " - для выхода\n";
-        if (type == 1) cout << "--------Выбор цвета текста-------- - " << endl;
-        else cout << "------Выбор цвета фона текста------ - " << endl;
+        if (type == 1) cout << "--------Выбор цвета текста---------" << endl;
+        else cout << "------Выбор цвета фона текста-------" << endl;
         
         for (int i = 0; i < 16; i++)
         {

@@ -1,4 +1,6 @@
 ﻿#include "HomeWork5.h"
+#define NALLOCS 1000
+#define ALLOC_SIZE 1024*100
 
 using namespace std;
 
@@ -57,16 +59,16 @@ void eratosthenes()
     system_cls();
     int n = 0;
     bool flag = false;
-
     cout << "Задание 'Решето Эратосфена'\n";
     
-    while (n < 2)
+    while (n < 2 || n > 10000000)
     {
         n = (int)chek(5, "Введите число, до которого нужно найти простые числа: ", false);
         if (n < 2) cout << "Число должно быть не меньше 2.\n";
+        else if (n > 10000000) cout << "Число должно быть не больше 10 000 000.\n";
     }
 
-    int* natural_num = new int[n + 1];
+    int* natural_num = new int[n];
     if (n == 2) cout << 2 << "\n";
     else
     {
@@ -79,6 +81,7 @@ void eratosthenes()
         for (int i = 2; i < n; i++) if (natural_num[i]) cout << natural_num[i] << endl;
 
         cout << endl;
+        delete[] natural_num;
     }
 
     ExitToMenu();
