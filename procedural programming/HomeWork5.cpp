@@ -1,6 +1,4 @@
 ﻿#include "HomeWork5.h"
-#define NALLOCS 1000
-#define ALLOC_SIZE 1024*100
 
 using namespace std;
 
