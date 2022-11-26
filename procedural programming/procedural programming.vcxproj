@@ -141,6 +141,7 @@
     <ClCompile Include="load_save.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Settings.cpp" />
+    <ClCompile Include="TaskDatabase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Chek.h" />
@@ -154,6 +155,7 @@
     <ClInclude Include="load_save.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Settings.h" />
+    <ClInclude Include="TaskDatabase.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="country.txt" />

@@ -8,12 +8,9 @@
 #include "HomeWork2.h" //Модуль Д/з 2
 #include "HomeWork3.h" //Модуль Д/з 3
 #include "HomeWork4.h" //Модуль Д/з 4
-#include "HomeWork5.h" //Модуль Д/з 4
-#include "TaskDatabase.h" //Модуль Д/з 4
-#include "Settings.h"  //Модуль настроек
+#include "HomeWork5.h" //Модуль Д/з 5
 #include "Chek.h"      //Модуль проверки
-#include "load_save.h" //Модуль загрузки сохранения
 #include <conio.h>     //Для считывания клавиш
-#include <list>
-#include <iterator>
 #include "keyboard.h"
+
+void menu_TD();
