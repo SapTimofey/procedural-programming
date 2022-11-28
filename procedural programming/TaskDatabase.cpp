@@ -172,7 +172,7 @@ void array_2D()
             else arr[i][j] = rand() % 100 * (-1);
         }
     }
-    cout << endl << "Матрица [" << SIZEx << " x " << SIZEy << "]" << endl;
+    cout << endl << "Матрица [" << SIZEy << " x " << SIZEx << "]" << endl;
     for (int i = 0; i < SIZEy; i++)
     {
         for (int j = 0; j < SIZEx; j++)
@@ -212,7 +212,7 @@ void array_2D()
         }
         arr_2[i] = a / SIZEy;
         cons_out += ") / " + to_string(SIZEy);
-        cout << left << setw(43) << cons_out << " = " << arr_2[i] << endl;
+        cout << left << setw(SIZEy * 5 + (SIZEy-1) * 3 + 2) << cons_out << " = " << arr_2[i] << endl;
     }
 
     
