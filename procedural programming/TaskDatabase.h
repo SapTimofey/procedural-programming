@@ -4,6 +4,7 @@
 #include <windows.h>   //Для ввода/вывода русским
 #include <string>      //Для перевода string -> int/float
 #include <stdlib.h>    //Для exit
+#include <ctime>       
 #include "HomeWork1.h" //Модуль Д/з 1
 #include "HomeWork2.h" //Модуль Д/з 2
 #include "HomeWork3.h" //Модуль Д/з 3

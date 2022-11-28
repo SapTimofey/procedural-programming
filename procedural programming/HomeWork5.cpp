@@ -460,7 +460,8 @@ void files()
                         if (j == 0) data[i][0] = to_string(i);
                         else if (j == 1)
                         {
-                            cout << "Введите " << i << "-ую страну: ";
+                            if (i == 3 || (i != 13 && to_string(i)[to_string(i).size()-1] == '3')) cout << "Введите " << i << "-ью страну: ";
+                            else cout << "Введите " << i << "-ую страну: ";
                             cin >> s;
                             fout << s << ": ";
                         }
