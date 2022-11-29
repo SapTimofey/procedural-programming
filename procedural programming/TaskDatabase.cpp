@@ -1,4 +1,4 @@
-#include "TaskDatabase.h"
+п»ї#include "TaskDatabase.h"
 
 using namespace std;
 
@@ -20,17 +20,17 @@ void miniCalc()
     int key = 0;
     const int volume = 4;
 
-    string cons_out[volume] = { "Сложение", "Вычитание", "Умножение", "Деление" };
+    string cons_out[volume] = { "РЎР»РѕР¶РµРЅРёРµ", "Р’С‹С‡РёС‚Р°РЅРёРµ", "РЈРјРЅРѕР¶РµРЅРёРµ", "Р”РµР»РµРЅРёРµ" };
 
     int num = 0;
 
-    cout << "Используйте:\n- " << KEY.Key_translation(KeyUp) << ", " << KEY.Key_translation(KeyDown) << " - для передвижения\n- " << KEY.Key_translation(KeyEnter) << " - для выбора\n- " << KEY.Key_translation(KeyExit) << " - для выхода\n----------А.М.В. 5------------" << endl;
+    cout << "РСЃРїРѕР»СЊР·СѓР№С‚Рµ:\n- " << KEY.Key_translation(KeyUp) << ", " << KEY.Key_translation(KeyDown) << " - РґР»СЏ РїРµСЂРµРґРІРёР¶РµРЅРёСЏ\n- " << KEY.Key_translation(KeyEnter) << " - РґР»СЏ РІС‹Р±РѕСЂР°\n- " << KEY.Key_translation(KeyExit) << " - РґР»СЏ РІС‹С…РѕРґР°\n----------Рђ.Рњ.Р’. 5------------" << endl;
 
-    num1 = chek(0, "Введите первое число: ", false);
+    num1 = chek(0, "Р’РІРµРґРёС‚Рµ РїРµСЂРІРѕРµ С‡РёСЃР»Рѕ: ", false);
     while (num2 == 0)
     {
-        num2 = chek(0, "Введите второе число: ", false);
-        if (num2 == 0) cout << "Число не может равняться 0.\n";
+        num2 = chek(0, "Р’РІРµРґРёС‚Рµ РІС‚РѕСЂРѕРµ С‡РёСЃР»Рѕ: ", false);
+        if (num2 == 0) cout << "Р§РёСЃР»Рѕ РЅРµ РјРѕР¶РµС‚ СЂР°РІРЅСЏС‚СЊСЃСЏ 0.\n";
     }
 
 
@@ -39,7 +39,7 @@ void miniCalc()
         do
         {
             system_cls();
-            cout << "Используйте:\n- " << KEY.Key_translation(KeyUp) << ", " << KEY.Key_translation(KeyDown) << " - для передвижения\n- " << KEY.Key_translation(KeyEnter) << " - для выбора\n- " << KEY.Key_translation(KeyExit) << " - для выхода\n----------А.М.В. 5------------" << endl << "Выбирите действие над числами: " << num1 << " и " << num2 << "\n----------------------------\n";
+            cout << "РСЃРїРѕР»СЊР·СѓР№С‚Рµ:\n- " << KEY.Key_translation(KeyUp) << ", " << KEY.Key_translation(KeyDown) << " - РґР»СЏ РїРµСЂРµРґРІРёР¶РµРЅРёСЏ\n- " << KEY.Key_translation(KeyEnter) << " - РґР»СЏ РІС‹Р±РѕСЂР°\n- " << KEY.Key_translation(KeyExit) << " - РґР»СЏ РІС‹С…РѕРґР°\n----------Рђ.Рњ.Р’. 5------------" << endl << "Р’С‹Р±РёСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ РЅР°Рґ С‡РёСЃР»Р°РјРё: " << num1 << " Рё " << num2 << "\n----------------------------\n";
             for (int i = 0; i < volume; i++)
             {
                 if (i == num)
@@ -65,30 +65,30 @@ void miniCalc()
         {
         case 1:
             system_cls();
-            cout << "Используйте:\n- " << KEY.Key_translation(KeyUp) << ", " << KEY.Key_translation(KeyDown) << " - для передвижения\n- " << KEY.Key_translation(KeyEnter) << " - для выбора\n- " << KEY.Key_translation(KeyExit) << " - для выхода\n----------А.М.В. 5------------" << endl;
+            cout << "РСЃРїРѕР»СЊР·СѓР№С‚Рµ:\n- " << KEY.Key_translation(KeyUp) << ", " << KEY.Key_translation(KeyDown) << " - РґР»СЏ РїРµСЂРµРґРІРёР¶РµРЅРёСЏ\n- " << KEY.Key_translation(KeyEnter) << " - РґР»СЏ РІС‹Р±РѕСЂР°\n- " << KEY.Key_translation(KeyExit) << " - РґР»СЏ РІС‹С…РѕРґР°\n----------Рђ.Рњ.Р’. 5------------" << endl;
 
-            cout << "Сумма чисел " << num1 << " и " << num2 << " равна: " << num1 + num2 << endl;
+            cout << "РЎСѓРјРјР° С‡РёСЃРµР» " << num1 << " Рё " << num2 << " СЂР°РІРЅР°: " << num1 + num2 << endl;
             ExitToMenu();
             return;
         case 2:
             system_cls();
-            cout << "Используйте:\n- " << KEY.Key_translation(KeyUp) << ", " << KEY.Key_translation(KeyDown) << " - для передвижения\n- " << KEY.Key_translation(KeyEnter) << " - для выбора\n- " << KEY.Key_translation(KeyExit) << " - для выхода\n----------А.М.В. 5------------" << endl;
+            cout << "РСЃРїРѕР»СЊР·СѓР№С‚Рµ:\n- " << KEY.Key_translation(KeyUp) << ", " << KEY.Key_translation(KeyDown) << " - РґР»СЏ РїРµСЂРµРґРІРёР¶РµРЅРёСЏ\n- " << KEY.Key_translation(KeyEnter) << " - РґР»СЏ РІС‹Р±РѕСЂР°\n- " << KEY.Key_translation(KeyExit) << " - РґР»СЏ РІС‹С…РѕРґР°\n----------Рђ.Рњ.Р’. 5------------" << endl;
 
-            cout << "Разность чисел " << num1 << " и " << num2 << " равна: " << num1 - num2 << endl;
+            cout << "Р Р°Р·РЅРѕСЃС‚СЊ С‡РёСЃРµР» " << num1 << " Рё " << num2 << " СЂР°РІРЅР°: " << num1 - num2 << endl;
             ExitToMenu();
             return;
         case 3:
             system_cls();
-            cout << "Используйте:\n- " << KEY.Key_translation(KeyUp) << ", " << KEY.Key_translation(KeyDown) << " - для передвижения\n- " << KEY.Key_translation(KeyEnter) << " - для выбора\n- " << KEY.Key_translation(KeyExit) << " - для выхода\n----------А.М.В. 5------------" << endl;
+            cout << "РСЃРїРѕР»СЊР·СѓР№С‚Рµ:\n- " << KEY.Key_translation(KeyUp) << ", " << KEY.Key_translation(KeyDown) << " - РґР»СЏ РїРµСЂРµРґРІРёР¶РµРЅРёСЏ\n- " << KEY.Key_translation(KeyEnter) << " - РґР»СЏ РІС‹Р±РѕСЂР°\n- " << KEY.Key_translation(KeyExit) << " - РґР»СЏ РІС‹С…РѕРґР°\n----------Рђ.Рњ.Р’. 5------------" << endl;
 
-            cout << "Произведение чисел " << num1 << " и " << num2 << " равно: " << num1 * num2 << endl;
+            cout << "РџСЂРѕРёР·РІРµРґРµРЅРёРµ С‡РёСЃРµР» " << num1 << " Рё " << num2 << " СЂР°РІРЅРѕ: " << num1 * num2 << endl;
             ExitToMenu();
             return;
         case 4:
             system_cls();
-            cout << "Используйте:\n- " << KEY.Key_translation(KeyUp) << ", " << KEY.Key_translation(KeyDown) << " - для передвижения\n- " << KEY.Key_translation(KeyEnter) << " - для выбора\n- " << KEY.Key_translation(KeyExit) << " - для выхода\n----------А.М.В. 5------------" << endl;
+            cout << "РСЃРїРѕР»СЊР·СѓР№С‚Рµ:\n- " << KEY.Key_translation(KeyUp) << ", " << KEY.Key_translation(KeyDown) << " - РґР»СЏ РїРµСЂРµРґРІРёР¶РµРЅРёСЏ\n- " << KEY.Key_translation(KeyEnter) << " - РґР»СЏ РІС‹Р±РѕСЂР°\n- " << KEY.Key_translation(KeyExit) << " - РґР»СЏ РІС‹С…РѕРґР°\n----------Рђ.Рњ.Р’. 5------------" << endl;
 
-            cout << "Частное чисел " << num1 << " и " << num2 << " равно: " << num1 / num2 << endl;
+            cout << "Р§Р°СЃС‚РЅРѕРµ С‡РёСЃРµР» " << num1 << " Рё " << num2 << " СЂР°РІРЅРѕ: " << num1 / num2 << endl;
             ExitToMenu();
             return;
         }
@@ -104,13 +104,15 @@ void array_1D()
     float arr_1[SIZE]{ 0 };
     float arr_2[SIZE]{ 0 };
 
+    cout << "Р—Р°РґР°РЅРёРµ 2 \"РћРґРЅРѕРјРµСЂРЅС‹Рµ РњР°СЃСЃРёРІС‹ 36\"" << endl;
+
     for (int i = 0; i < SIZE; i++)
     {
         if (rand() % 2)
             arr_1[i] = rand() % 100;
         else arr_1[i] = rand() % 100 * (-1);
     }
-    cout << "Исходный массив: [";
+    cout << "РСЃС…РѕРґРЅС‹Р№ РјР°СЃСЃРёРІ: [";
     for (int i = 0; i < SIZE; i++)
     {
         if (i != SIZE - 1) cout << arr_1[i] << ", ";
@@ -126,7 +128,7 @@ void array_1D()
         else if (i == SIZE - 1) arr_2[i] = arr_1[i];
 
     }
-    cout << endl << "Сглаженный массив: [";
+    cout << endl << "РЎРіР»Р°Р¶РµРЅРЅС‹Р№ РјР°СЃСЃРёРІ: [";
     for (int i = 0; i < SIZE; i++)
     {
         if (i != SIZE - 1) cout << arr_2[i] << ", ";
@@ -142,18 +144,18 @@ void array_2D()
     srand(time(NULL));
     int SIZEx = 0;
     int SIZEy = 0;
-    cout << "Задание 3 \"Двумерный массив 57\"" << endl;
+    cout << "Р—Р°РґР°РЅРёРµ 3 \"Р”РІСѓРјРµСЂРЅС‹Р№ РјР°СЃСЃРёРІ 57\"" << endl;
     while (SIZEx > 100 || SIZEx < 1)
     {
-        SIZEx = (int)chek(5, "Введите количество столбцов: ", false);
-        if (SIZEx > 100) cout << "Количество столбцов должно не больше 100.\n";
-        /*else if (SIZEx < 2) cout << "Количество столбцов должно быть не меньше 1.\n";*/
+        SIZEx = (int)chek(5, "Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚РѕР»Р±С†РѕРІ: ", false);
+        if (SIZEx > 100) cout << "РљРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚РѕР»Р±С†РѕРІ РґРѕР»Р¶РЅРѕ РЅРµ Р±РѕР»СЊС€Рµ 100.\n";
+        /*else if (SIZEx < 2) cout << "РљРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚РѕР»Р±С†РѕРІ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РЅРµ РјРµРЅСЊС€Рµ 1.\n";*/
     }
     while (SIZEy > 100 || SIZEy < 1)
     {
-        SIZEy = (int)chek(5, "Введите количество строк: ", false);
-        if (SIZEy > 100) cout << "Количество строк должно не больше 100.\n";
-        /*else if (SIZEy < 2) cout << "Количество строк должно быть не меньше 1.\n";*/
+        SIZEy = (int)chek(5, "Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚СЂРѕРє: ", false);
+        if (SIZEy > 100) cout << "РљРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚СЂРѕРє РґРѕР»Р¶РЅРѕ РЅРµ Р±РѕР»СЊС€Рµ 100.\n";
+        /*else if (SIZEy < 2) cout << "РљРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚СЂРѕРє РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РЅРµ РјРµРЅСЊС€Рµ 1.\n";*/
     }
     float a = 0;
     float* arr_2 = new float[SIZEx];
@@ -172,7 +174,7 @@ void array_2D()
             else arr[i][j] = rand() % 100 * (-1);
         }
     }
-    cout << endl << "Матрица [" << SIZEy << " x " << SIZEx << "]" << endl;
+    cout << endl << "РњР°С‚СЂРёС†Р° [" << SIZEy << " x " << SIZEx << "]" << endl;
     for (int i = 0; i < SIZEy; i++)
     {
         for (int j = 0; j < SIZEx; j++)
@@ -186,7 +188,7 @@ void array_2D()
     {
         a = 0;
         cons_out = "";
-        cout << right << "Среднее арифметическое " << setw(3) << i + 1 <<" столбца: ";
+        cout << right << "РЎСЂРµРґРЅРµРµ Р°СЂРёС„РјРµС‚РёС‡РµСЃРєРѕРµ " << setw(3) << i + 1 <<" СЃС‚РѕР»Р±С†Р°: ";
         for (int j = 0; j < SIZEy; j++)
         {
             a += arr[j][i];
@@ -222,7 +224,7 @@ void array_2D()
     delete[] arr;
     
 
-    cout << endl << "Массив средних арифметических: [";
+    cout << endl << "РњР°СЃСЃРёРІ СЃСЂРµРґРЅРёС… Р°СЂРёС„РјРµС‚РёС‡РµСЃРєРёС…: [";
     for (int i = 0; i < SIZEx; i++)
     {
         if (i != SIZEx - 1) cout << arr_2[i] << ", ";
@@ -250,7 +252,7 @@ int** func(int** arr,  char type, int** arr_A, int** arr_B, int** arr_C, int** a
             switch (type)
             {
             case 'A':
-                cons_out = "Введите [" + to_string(i) + "][" + to_string(j) + "] элемент матрицы A: ";
+                cons_out = "Р’РІРµРґРёС‚Рµ [" + to_string(i) + "][" + to_string(j) + "] СЌР»РµРјРµРЅС‚ РјР°С‚СЂРёС†С‹ A: ";
                 arr[i][j] = (int)chek(5, cons_out, false);
                 break;
             case 'B':
@@ -282,20 +284,20 @@ void func_cout(int** arr, char type)
     {
     case 'A':
         system_cls();
-        cout << "Задание 4 \"Функции 66\"" << endl;
-        cout << "Матрица A: " << endl;
+        cout << "Р—Р°РґР°РЅРёРµ 4 \"Р¤СѓРЅРєС†РёРё 66\"" << endl;
+        cout << "РњР°С‚СЂРёС†Р° A: " << endl;
         break;
     case 'B':
-        cout << "Матрица B: " << endl;
+        cout << "РњР°С‚СЂРёС†Р° B: " << endl;
         break;
     case 'C':
-        cout << "Матрица C: " << endl;
+        cout << "РњР°С‚СЂРёС†Р° C: " << endl;
         break;
     case 'D':
-        cout << "Матрица D: " << endl;
+        cout << "РњР°С‚СЂРёС†Р° D: " << endl;
         break;
     case 'E':
-        cout << "Матрица E: " << endl;
+        cout << "РњР°С‚СЂРёС†Р° E: " << endl;
         break;
     }
 
@@ -318,7 +320,7 @@ void func_delete(int** arr)
 void functions()
 {
     system_cls();
-    cout << "Задание 4 \"Функции 66\"" << endl;
+    cout << "Р—Р°РґР°РЅРёРµ 4 \"Р¤СѓРЅРєС†РёРё 66\"" << endl;
 
     const int SIZEx = 5;
     const int SIZEy = 2;
@@ -360,7 +362,7 @@ void functions()
     ExitToMenu();
 }
 
-//Меню базы заданий
+//РњРµРЅСЋ Р±Р°Р·С‹ Р·Р°РґР°РЅРёР№
 void menu_TD()
 {
     keyboard KEY;
@@ -368,7 +370,7 @@ void menu_TD()
     int key = 0;
     const int volume = 5;
 
-    string cons_out[volume] = { "Задание 1 \"Алгоритмы Множественного Выбора 5\"", "Задание 2 \"Одномерные Массивы 36\"", "Задание 3 \"Двумерный Массив 57\"", "Задание 4 \"Функции 66\"", "Задание 5 'Ряды'" };
+    string cons_out[volume] = { "Р—Р°РґР°РЅРёРµ 1 \"РђР»РіРѕСЂРёС‚РјС‹ РњРЅРѕР¶РµСЃС‚РІРµРЅРЅРѕРіРѕ Р’С‹Р±РѕСЂР° 5\"", "Р—Р°РґР°РЅРёРµ 2 \"РћРґРЅРѕРјРµСЂРЅС‹Рµ РњР°СЃСЃРёРІС‹ 36\"", "Р—Р°РґР°РЅРёРµ 3 \"Р”РІСѓРјРµСЂРЅС‹Р№ РњР°СЃСЃРёРІ 57\"", "Р—Р°РґР°РЅРёРµ 4 \"Р¤СѓРЅРєС†РёРё 66\"", "Р—Р°РґР°РЅРёРµ 5 'Р СЏРґС‹'" };
 
     int num = 0;
 
@@ -377,7 +379,7 @@ void menu_TD()
         do
         {
             system_cls();
-            cout << "Используйте:\n- " << KEY.Key_translation(KeyUp) << ", " << KEY.Key_translation(KeyDown) << " - для передвижения\n- " << KEY.Key_translation(KeyEnter) << " - для выбора\n- " << KEY.Key_translation(KeyExit) << " - для выхода\n----------Д/з 5------------" << endl;
+            cout << "РСЃРїРѕР»СЊР·СѓР№С‚Рµ:\n- " << KEY.Key_translation(KeyUp) << ", " << KEY.Key_translation(KeyDown) << " - РґР»СЏ РїРµСЂРµРґРІРёР¶РµРЅРёСЏ\n- " << KEY.Key_translation(KeyEnter) << " - РґР»СЏ РІС‹Р±РѕСЂР°\n- " << KEY.Key_translation(KeyExit) << " - РґР»СЏ РІС‹С…РѕРґР°\n----------Р‘Р°Р·Р° Р·Р°РґР°РЅРёР№------------" << endl;
             for (int i = 0; i < volume; i++)
             {
                 if (i == num)
