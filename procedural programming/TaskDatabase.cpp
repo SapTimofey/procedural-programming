@@ -362,6 +362,39 @@ void functions()
     ExitToMenu();
 }
 
+void different_task()
+{
+    system_cls();
+
+    cout << "Задание 5 \"Разные задания 139\"" << endl;
+    int a = 0;
+    string str;
+    
+    cout << "Введите строку (для завершения строки введите '#'): ";
+    getline(cin, str, '#');
+
+    for (int i = 0; i < str.length(); i++)
+    {
+        char x = str[i];
+        a = x;
+        if (a >= 65)
+        {
+            setColor(TextBackgroundColor, TextColor);
+            cout << str[i];
+            setColor(TextColor, TextBackgroundColor);
+        }
+        else cout << str[i];
+    }
+    cout << endl << endl;
+    
+    setColor(TextBackgroundColor, TextColor);
+    cout << " ";
+    setColor(TextColor, TextBackgroundColor);
+    cout << " - запрещённые символы." << endl << endl;
+
+    ExitToMenu();
+}
+
 //Меню базы заданий
 void menu_TD()
 {
@@ -370,7 +403,7 @@ void menu_TD()
     int key = 0;
     const int volume = 5;
 
-    string cons_out[volume] = { "Задание 1 \"Алгоритмы Множественного Выбора 5\"", "Задание 2 \"Одномерные Массивы 36\"", "Задание 3 \"Двумерный Массив 57\"", "Задание 4 \"Функции 66\"", "Задание 5 'Ряды'" };
+    string cons_out[volume] = { "Задание 1 \"Алгоритмы Множественного Выбора 5\"", "Задание 2 \"Одномерные Массивы 36\"", "Задание 3 \"Двумерный Массив 57\"", "Задание 4 \"Функции 66\"", "Задание 5 \"Разные задания 139\"" };
 
     int num = 0;
 
@@ -416,7 +449,7 @@ void menu_TD()
             functions();
             break;
         case 5:
-            rows_1();
+            different_task();
             break;
         }
     }
