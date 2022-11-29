@@ -233,6 +233,133 @@ void array_2D()
     ExitToMenu();
 }
 
+int** func(int** arr,  char type, int** arr_A, int** arr_B, int** arr_C, int** arr_E)
+{
+    const int SIZEx = 5;
+    const int SIZEy = 2;
+    int a[10]{ -3, -2, -1, 0, 1, 2, 3, 4, 5, 6 };
+    string cons_out;
+    srand(time(NULL));
+
+    
+
+    for (int i = 0; i < SIZEy; i++)
+    {
+        for (int j = 0; j < SIZEx; j++)
+        {
+            switch (type)
+            {
+            case 'A':
+                cons_out = "Введите [" + to_string(i) + "][" + to_string(j) + "] элемент матрицы A: ";
+                arr[i][j] = (int)chek(5, cons_out, false);
+                break;
+            case 'B':
+                arr[i][j] = i * j - (5 - i - j);
+                break;
+            case 'C':
+                arr[i][j] = a[rand() % 10];
+                break;
+            case 'E':
+                arr[i][j] = 1;
+                break;
+            case 'D':
+                arr[i][j] = 6 * arr_E[i][j] - arr_C[i][j] - 2 * arr_B[i][j] - 3 * arr_A[i][j];
+                break;
+            }
+        }
+    }
+    return arr;
+}
+void func_cout(int** arr, char type)
+{
+    const int SIZEx = 5;
+    const int SIZEy = 2;
+    int a[10]{ -3, -2, -1, 0, 1, 2, 3, 4, 5, 6 };
+    string cons_out;
+    srand(time(NULL));
+
+    switch (type)
+    {
+    case 'A':
+        system_cls();
+        cout << "Задание 4 \"Функции 66\"" << endl;
+        cout << "Матрица A: " << endl;
+        break;
+    case 'B':
+        cout << "Матрица B: " << endl;
+        break;
+    case 'C':
+        cout << "Матрица C: " << endl;
+        break;
+    case 'D':
+        cout << "Матрица D: " << endl;
+        break;
+    case 'E':
+        cout << "Матрица E: " << endl;
+        break;
+    }
+
+    for (int i = 0; i < SIZEy; i++)
+    {
+        for (int j = 0; j < SIZEx; j++)
+        {
+            cout << setw(5) << arr[i][j];
+        }
+        cout << endl;
+    }
+    cout << endl;
+}
+void func_delete(int** arr)
+{
+    for (int i = 0; i < 2; i++)
+        delete[] arr[i];
+    delete[] arr;
+}
+void functions()
+{
+    system_cls();
+    cout << "Задание 4 \"Функции 66\"" << endl;
+
+    const int SIZEx = 5;
+    const int SIZEy = 2;
+
+    int** arr_A = new int* [SIZEy];
+    for (int i = 0; i < SIZEy; i++)
+        arr_A[i] = new int[SIZEx];
+    int** arr_B = new int* [SIZEy];
+    for (int i = 0; i < SIZEy; i++)
+        arr_B[i] = new int[SIZEx];
+    int** arr_C = new int* [SIZEy];
+    for (int i = 0; i < SIZEy; i++)
+        arr_C[i] = new int[SIZEx];
+    int** arr_D = new int* [SIZEy];
+    for (int i = 0; i < SIZEy; i++)
+        arr_D[i] = new int[SIZEx];
+    int** arr_E = new int* [SIZEy];
+    for (int i = 0; i < SIZEy; i++)
+        arr_E[i] = new int[SIZEx];
+
+    arr_A = func(arr_A, 'A', NULL, NULL, NULL, NULL);
+    arr_B = func(arr_B, 'B', NULL, NULL, NULL, NULL);
+    arr_C = func(arr_C, 'C', NULL, NULL, NULL, NULL);
+    arr_E = func(arr_E, 'E', NULL, NULL, NULL, NULL);
+    arr_D = func(arr_D, 'D', arr_A, arr_B, arr_C, arr_E);
+
+    func_cout(arr_A, 'A');
+    func_cout(arr_B, 'B');
+    func_cout(arr_C, 'C');
+    func_cout(arr_D, 'D');
+    func_cout(arr_E, 'E');
+
+    func_delete(arr_A);
+    func_delete(arr_B);
+    func_delete(arr_C);
+    func_delete(arr_D);
+    func_delete(arr_E);
+
+    ExitToMenu();
+}
+
 //Меню базы заданий
 void menu_TD()
 {
@@ -241,7 +368,7 @@ void menu_TD()
     int key = 0;
     const int volume = 5;
 
-    string cons_out[volume] = { "Задание 1 \"Алгоритмы Множественного Выбора 5\"", "Задание 2 \"Одномерные Массивы 36\"", "Задание 3 \"Двумерный массив 57\"", "Задание 4 'Обработка текстовых файлов'", "Задание 5 'Ряды'" };
+    string cons_out[volume] = { "Задание 1 \"Алгоритмы Множественного Выбора 5\"", "Задание 2 \"Одномерные Массивы 36\"", "Задание 3 \"Двумерный Массив 57\"", "Задание 4 \"Функции 66\"", "Задание 5 'Ряды'" };
 
     int num = 0;
 
@@ -284,7 +411,7 @@ void menu_TD()
             array_2D();
             break;
         case 4:
-            file_read_2();
+            functions();
             break;
         case 5:
             rows_1();
