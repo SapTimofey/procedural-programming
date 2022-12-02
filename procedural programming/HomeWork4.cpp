@@ -270,7 +270,7 @@ void sin()
         LineTo(hDC, 10 * x + 100, -10 * sin(x) + 85);
     }
     ReleaseDC(hWnd, hDC);
-   
+    cout << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl;
     ExitToMenu();
 }
 
@@ -603,10 +603,20 @@ string interpreter(double num, int base_out)
             if (num_befor_dot / base_out >= 10000000) cout << "\t остаток: " << f << endl;
             else cout << "\t\t остаток: " << f << endl;
 
-            switch (f)
+            if (f >= 10)
+            {
+                res = (char)(f + 87) + res;
+                num_befor_dot = num_befor_dot / base_out;
+            }
+            else
+            {
+                res = to_string(f) + res;
+                num_befor_dot = num_befor_dot / base_out;
+            }
+            /*switch (f)
             {
             case 10:
-                res = 'a' + res;
+                res = (char)(f + 87) + res;
                 num_befor_dot = num_befor_dot / base_out;
                 break;
             case 11:
@@ -633,7 +643,7 @@ string interpreter(double num, int base_out)
                 res = to_string(f) + res;
                 num_befor_dot = num_befor_dot / base_out;
                 break;
-            }
+            }*/
         }
         cout << endl;
     }
@@ -654,7 +664,15 @@ string interpreter(double num, int base_out)
             cout << " * " << base_out << " = " << num_after_dot << " целая часть: " << num_after_dot_chek << endl;
 
             if (num_after_dot_chek > 0) num_after_dot -= num_after_dot_chek;
-            res_chek += to_string(num_after_dot_chek);
+            if (num_after_dot_chek >= 10)
+            {
+                res_chek += (char)(num_after_dot_chek + 87);
+            }
+            else
+            {
+                res_chek += to_string(num_after_dot_chek);
+            }
+            
             if (L == 1) last_num = num_after_dot_chek;
             if (num_after_dot == 0)
             {
@@ -669,7 +687,9 @@ string interpreter(double num, int base_out)
             {
                 for (int i = 0; res_chek[i] == '0'; i++) res += '0';
                 res_chek.pop_back();
-                res += to_string(stoi(res_chek) + 1);
+                int d = res_chek[res_chek.size() - 1] - 86;
+                res_chek.pop_back();
+                res += res_chek + (char)(d + 87);
             }
             else
             {
@@ -768,9 +788,26 @@ void number_system()
     int input_base_from = 0, input_base_to = 0, a = 0;
     bool flag = true;
     double num = 0;
-    
-    cout << "Задание 'Системы счисления'\n" << "Введите число: ";
-    cin >> input_num;
+
+    cout << "Задание 'Системы счисления'\n";
+    while (true)
+    {
+        bool flag2 = true;
+        cout << "Введите число: ";
+        cin >> input_num;
+        for (int i = 0; i < input_num.length(); i++)
+        {
+            char x = input_num[i];
+            a = x;
+            if (a < 0)
+            {
+                cout << input_num << " - В числе не могут использоваться русские буквы." << endl;
+                flag2 = false;
+                break;
+            }
+        }
+        if (flag2) break;
+    }
 
     input_base_from = (int)chek(4, "Введите систему счисления введённого числа: ", false);
 

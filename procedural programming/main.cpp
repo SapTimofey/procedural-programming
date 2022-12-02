@@ -25,8 +25,8 @@ int main()
 
     int key = 0;
 
-    const int volume = 7;
-    std::string cons_out[volume] = {"Д/з 1", "Д/з 2", "Д/з 3", "Д/з 4", "Д/з 5", "База заданий", "Настройки"};
+    const int volume = 8;
+    std::string cons_out[volume] = {"Д/з 1", "Д/з 2", "Д/з 3", "Д/з 4", "Д/з 5", "Шарики", "База заданий", "Настройки"};
 
     int num = 0;
 
@@ -105,9 +105,12 @@ int main()
             menu_HW5(); // Д/з 5
             break;
         case 6:
-            menu_TD(); // База заданий
+            balls(); // База заданий
             break;
         case 7:
+            menu_TD(); // База заданий
+            break;
+        case 8:
             Settings(); // Настройки
             break;
         }

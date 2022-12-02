@@ -17,4 +17,6 @@
 #include <list>
 #include <iterator>
 #include "keyboard.h"
-#include "Balls.h"
+#include <vector>
+
+int balls();

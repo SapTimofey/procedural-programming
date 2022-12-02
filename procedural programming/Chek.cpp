@@ -72,7 +72,7 @@ float chek(int type, string cons_out, bool main)
                         break;
                     }
                 case 4: // Для системы счисления.
-                    if (n == 0 && Fnum > 0) return Fnum;
+                    if (n == 0 && Fnum > 0 && Fnum <= 37) return Fnum;
                     else if (n != 0)
                     {
                         cout << num << " - СС не может быть дробной.\n";
@@ -81,6 +81,11 @@ float chek(int type, string cons_out, bool main)
                     else if (Fnum < 0)
                     {
                         cout << num << " - СС не может быть отрицательной.\n";
+                        break;
+                    }
+                    else if (Fnum > 37)
+                    {
+                        cout << num << " - СС не может быть больше 37.\n";
                         break;
                     }
                     else
