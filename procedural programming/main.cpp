@@ -25,8 +25,8 @@ int main()
 
     int key = 0;
 
-    const int volume = 8;
-    std::string cons_out[volume] = {"Д/з 1", "Д/з 2", "Д/з 3", "Д/з 4", "Д/з 5", "Шарики", "База заданий", "Настройки"};
+    const int volume = 9;
+    std::string cons_out[volume] = {"Д/з 1", "Д/з 2", "Д/з 3", "Д/з 4", "Д/з 5", "Шарики", "База заданий", "Пятнашки", "Настройки"};
 
     int num = 0;
 
@@ -111,6 +111,9 @@ int main()
             menu_TD(); // База заданий
             break;
         case 8:
+            Pyatnashki(); // Настройки
+            break;
+        case 9:
             Settings(); // Настройки
             break;
         }

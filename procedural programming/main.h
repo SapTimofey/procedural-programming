@@ -18,3 +18,4 @@
 #include <iterator>
 #include "keyboard.h"
 #include "Balls.h"
+#include "Pyatnashki.h"

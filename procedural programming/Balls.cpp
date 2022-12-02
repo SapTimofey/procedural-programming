@@ -36,7 +36,7 @@ int balls()
 	cout << CalculateALLPossibleVariants(GenerateBalls(count)) << endl;*/
 	int cnt = 0;
 	cnt = (int)chek(5, "Введите количество шариков: ", false);
-	string *arr = new string[cnt];
+	string* arr = new string[cnt];
 
 	for (int i = 0; i < cnt; i++)
 	{
@@ -44,25 +44,27 @@ int balls()
 	}
 	/*for (int i = 0; i < cnt; i++)
 	{
-		cout << arr[i] << " ";
+		cout <<arr[i] << " ";
 	}*/
 	int i;
 	int res;
+
 
 
 	res = 1;
 	for (i = 1; i <= cnt; i++) {
 		res = res * i;
 	}
+	cout << res << endl;
 	int num = 0;
 	do
 	{
 		for (int i = 0; i < cnt; i++)
 			cout << arr[i] << " ";
 		cout << endl;
-		if (num == res / 2) break;
+		if (num == res) break;
 		num++;
 	} while (next_permutation(arr, arr + cnt));
-
+	cout << num << endl;
 	ExitToMenu();
 }

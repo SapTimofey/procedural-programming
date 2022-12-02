@@ -141,6 +141,7 @@
     <ClCompile Include="keyboard.cpp" />
     <ClCompile Include="load_save.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Pyatnashki.cpp" />
     <ClCompile Include="Settings.cpp" />
     <ClCompile Include="TaskDatabase.cpp" />
   </ItemGroup>
@@ -156,6 +157,7 @@
     <ClInclude Include="keyboard.h" />
     <ClInclude Include="load_save.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="Pyatnashki.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="TaskDatabase.h" />
   </ItemGroup>
