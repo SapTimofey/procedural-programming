@@ -9,6 +9,34 @@ extern int KeyEnter;
 extern int KeyUp;
 extern int KeyDown;
 
+int alg(int numi, int numj, int SIZEx)
+{
+	//300: "Left"
+	//301: "Up"
+	//302: "Right"
+	//303: "Down"
+	if (SIZEx == 0) return 13;
+	if (numi == 0)
+	{
+		if (numj == 0) return 303;
+		return 300;
+	}
+	if (numi == SIZEx - 1)
+	{
+		if (numj == SIZEx - 1) return 301;
+		return 302;
+	}
+	if (numj == 0)
+	{
+		if (numi == SIZEx - 1) return 302;
+		return 303;
+	}
+	if (numj == SIZEx - 1)
+	{
+		if (numi == 0) return 300;
+		return 301;
+	}
+}
 void Pyatnashki()
 {
 	keyboard KEY;
@@ -143,13 +171,18 @@ void Pyatnashki()
 		}
 		else
 		{
+			unsigned int start_time = clock();
+			int cnt_Enter = 0;
 			while (true)
 			{
+				if (cnt_Enter == 0)
+				{
+					start_time = clock();
+				}
 
 				do
 				{
 					system_cls();
-
 
 					cout << "Используйте:\n- стрелки вверх, вниз - для передвижения по вертикали\n- стрелки вправо, влево - для передвижения по горизонтали\n- Enter - для выбора\n- ESC - для выхода\n- R - для рестарта\n---------Пятнашки------------\n";
 					int cnt = 1;
@@ -186,16 +219,20 @@ void Pyatnashki()
 					}
 
 					key = KEY.get_key();
+					/*key = alg(numi, numj, SIZEx);
+					Sleep(1000);*/
 					if (key == 302 && numj < SIZEx - 1) numj++;
 					else if (key == 303 && numi < SIZEx - 1) numi++;
 					else if (key == 300 && numj > 0) numj--;
 					else if (key == 301 && numi > 0) numi--;
-					else if (key == 82 || key == 114)
+					/*key = alg(numi, numj, 0);*/
+					if (key == 82 || key == 114 || key == 138 || key == 170)
 					{
 						flag_R = true;
 						for (int i = 0; i < SIZEx; i++)
 							delete[] data[i];
 						delete[] data;
+						cnt_Enter = 0;
 						break;
 					}
 					else if (key == 27)
@@ -207,6 +244,7 @@ void Pyatnashki()
 					}
 				} while (key != 13);
 				if (flag_R) break;
+				cnt_Enter++;
 				if (numi != 0 && numj != 0 && numi != SIZEx - 1 && numj != SIZEx - 1)
 				{
 					if (data[numi + 1][numj] == " ") swap(data[numi + 1][numj], data[numi][numj]);
@@ -277,6 +315,7 @@ void Pyatnashki()
 				}
 				if (flag_win)
 				{
+					unsigned int end_time = clock();
 					system_cls();
 					cout << "Используйте:\n- стрелки вверх, вниз - для передвижения по вертикали\n- стрелки вправо, влево - для передвижения по горизонтали\n- Enter - для выбора\n- ESC - для выхода\n- R - для рестарта\n---------Пятнашки------------\n";
 					for (int i = 0; i < SIZEx; i++)
@@ -292,12 +331,18 @@ void Pyatnashki()
 					for (int i = 0; i < SIZEx; i++)
 						delete[] data[i];
 					delete[] data;
-					cout << "Игра пройдена!" << endl;
+					
+					cout << "Игра пройдена!\n" << "Количество перестановок: " << cnt_Enter << "\nВремя игры: " << (end_time - start_time) / 1000.0 << " секунд\n";
+					/*if ((end_time - start_time) / 1000.0 >= 60)
+					{
+						cout << ((end_time - start_time) / 1000) / 60 << " минут " << ((end_time - start_time) % 60) / 1000.0 << " секунд" << endl;
+					}*/
+					cnt_Enter = 0;
 					while (true)
 					{
 						key = KEY.get_key();
 
-						if (key == 82 || key == 114)
+						if (key == 82 || key == 114 || key == 138 || key == 170)
 						{
 							flag_R = true;
 							break;
