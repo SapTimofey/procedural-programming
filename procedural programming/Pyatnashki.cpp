@@ -11,86 +11,306 @@ extern int KeyDown;
 
 void Pyatnashki()
 {
-	system_cls();
 	keyboard KEY;
-
-
-	int key = 0;
-
-
-
-	int SIZEx = (int)chek(5, "Введите размер матрицы: ", false);
-
-	int** data = new int* [SIZEx] {0};
-	for (int i = 0; i < SIZEx; i++)
-		data[i] = new int[SIZEx] {0};
-
-
-	int* num = new int[SIZEx * SIZEx];
-	string check;
-	bool flag = false;
-	int cnt = 0;
-	int num1 = 0;
-	for (int i = 0; i < SIZEx * SIZEx; i++)
+	while (true)
 	{
-		num[i] = i + 1;
-	}
+		system_cls();
+		bool flag_R = false;
+		int key = 0;
+		srand(time(NULL));
 
-	for (int i = 0; i < SIZEx; i++)
-	{
-		for (int j = 0; j < SIZEx; j++)
+		string cons_out[5] = { "2 x 2", "3 x 3", "4 x 4", "5 x 5", "Свой вариант" };
+
+		int SIZEx = 0;
+
+
+		do
 		{
-			while (check.find(to_string(num[num1]) + "!") != -1) num1 = rand() % (SIZEx * SIZEx);
+			system_cls();
+			cout << "Используйте:\n- " << KEY.Key_translation(KeyUp) << ", " << KEY.Key_translation(KeyDown) << " - для передвижения\n- " << KEY.Key_translation(KeyEnter) << " - для выбора\n- " << KEY.Key_translation(KeyExit) << " - для выхода\n----------Выбор поля------------" << endl;
+			for (int i = 0; i < 5; i++)
+			{
+				if (i == SIZEx)
+				{
+					setColor(TextBackgroundColor, TextColor);
+					cout << cons_out[i];
+					setColor(TextColor, TextBackgroundColor);
+					cout << endl;
+				}
+				else cout << cons_out[i] << endl;
+			}
 
-			check += to_string(num[num1]) + "!";
-			cout << check << endl;
-			data[i][j] = num[num1];
+			key = KEY.get_key();
+			if (key == KeyDown && SIZEx < 5 - 1) SIZEx++;
+			if (key == KeyUp && SIZEx > 0) SIZEx--;
+			if (key == KeyExit)
+			{
+				system_cls();
+				return;
+			}
+		} while (key != KeyEnter);
+
+		if (SIZEx == 4)
+		{
+			while (true)
+			{
+				SIZEx = (int)chek(5, "Введите размер поля: ", false);
+				if (SIZEx > 10) cout << "Размер не должен превышать 10 х 10." << endl;
+				else if (SIZEx < 2) cout << "Размер должен быть не меньше 2 х 2." << endl;
+				else break;
+			}
+		}
+		else SIZEx += 2;
+
+
+		string** data = new string * [SIZEx];
+		for (int i = 0; i < SIZEx; i++)
+			data[i] = new string[SIZEx];
+
+
+		string* num = new string[SIZEx * SIZEx];
+		string check;
+		int num1 = 0;
+		int numi = 0, numj = 0;
+
+		for (int i = 0; i < SIZEx * SIZEx; i++)
+		{
+			if (i == 0) num[i] = " ";
+			else num[i] = to_string(i);
 		}
 
+		for (int i = 0; i < SIZEx; i++)
+		{
+			for (int j = 0; j < SIZEx; j++)
+			{
+				do num1 = rand() % (SIZEx * SIZEx); while (check.find("(" + num[num1] + ")") != -1);
+				check += "(" + num[num1] + ")";
+				data[i][j] = num[num1];
+			}
+		}
 
+		delete[] num;
+		
+		bool flag_win = true;
+		int cnt = 1;
+
+		for (int i = 0; i < SIZEx; i++)
+		{
+			for (int j = 0; j < SIZEx; j++)
+			{
+				if (i == SIZEx - 1 && j == SIZEx - 1) continue;
+				else if (data[i][j] != to_string(cnt))
+				{
+					flag_win = false;
+					break;
+				}
+				cnt++;
+			}
+			if (!flag_win) break;
+		}
+		if (flag_win)
+		{
+			system_cls();
+			cout << "Используйте:\n- стрелки вверх, вниз - для передвижения по вертикали\n- стрелки вправо, влево - для передвижения по горизонтали\n- Enter - для выбора\n- ESC - для выхода\n- R - для рестарта\n---------Пятнашки------------\n";
+			for (int i = 0; i < SIZEx; i++)
+			{
+				for (int j = 0; j < SIZEx; j++)
+				{
+					setColor(2, TextBackgroundColor);
+					cout << setw(4) << data[i][j];
+					setColor(TextColor, TextBackgroundColor);
+				}
+				cout << endl;
+			}
+			for (int i = 0; i < SIZEx; i++)
+				delete[] data[i];
+			delete[] data;
+			cout << "Вам сказачно повезло!" << endl;
+			while (true)
+			{
+				key = KEY.get_key();
+
+				if (key == 82 || key == 114)
+				{
+					flag_R = true;
+					break;
+				}
+				else if (key == 27)
+				{
+					return;
+				}
+			}
+		}
+		else
+		{
+			while (true)
+			{
+
+				do
+				{
+					system_cls();
+
+
+					cout << "Используйте:\n- стрелки вверх, вниз - для передвижения по вертикали\n- стрелки вправо, влево - для передвижения по горизонтали\n- Enter - для выбора\n- ESC - для выхода\n- R - для рестарта\n---------Пятнашки------------\n";
+					int cnt = 1;
+					for (int i = 0; i < SIZEx; i++)
+					{
+						for (int j = 0; j < SIZEx; j++)
+						{
+							if (i == numi && j == numj)
+							{
+								if (data[i][j] == to_string(cnt))
+								{
+									setColor(2, TextColor);
+									cout << setw(4) << data[i][j];
+									setColor(TextColor, TextBackgroundColor);
+								}
+								else
+								{
+									setColor(TextBackgroundColor, TextColor);
+									cout << setw(4) << data[i][j];
+									setColor(TextColor, TextBackgroundColor);
+								}
+							}
+							else if (data[i][j] == to_string(cnt))
+							{
+								setColor(2, TextBackgroundColor);
+								cout << setw(4) << data[i][j];
+								setColor(TextColor, TextBackgroundColor);
+							}
+							else cout << setw(4) << data[i][j];
+							cnt++;
+						}
+						cout << endl;
+
+					}
+
+					key = KEY.get_key();
+					if (key == 302 && numj < SIZEx - 1) numj++;
+					else if (key == 303 && numi < SIZEx - 1) numi++;
+					else if (key == 300 && numj > 0) numj--;
+					else if (key == 301 && numi > 0) numi--;
+					else if (key == 82 || key == 114)
+					{
+						flag_R = true;
+						for (int i = 0; i < SIZEx; i++)
+							delete[] data[i];
+						delete[] data;
+						break;
+					}
+					else if (key == 27)
+					{
+						for (int i = 0; i < SIZEx; i++)
+							delete[] data[i];
+						delete[] data;
+						return;
+					}
+				} while (key != 13);
+				if (flag_R) break;
+				if (numi != 0 && numj != 0 && numi != SIZEx - 1 && numj != SIZEx - 1)
+				{
+					if (data[numi + 1][numj] == " ") swap(data[numi + 1][numj], data[numi][numj]);
+					else if (data[numi - 1][numj] == " ") swap(data[numi - 1][numj], data[numi][numj]);
+					else if (data[numi][numj + 1] == " ") swap(data[numi][numj + 1], data[numi][numj]);
+					else if (data[numi][numj - 1] == " ") swap(data[numi][numj - 1], data[numi][numj]);
+				}
+				else if (numi == 0 && numj == 0)
+				{
+					if (data[numi + 1][numj] == " ") swap(data[numi + 1][numj], data[numi][numj]);
+					else if (data[numi][numj + 1] == " ") swap(data[numi][numj + 1], data[numi][numj]);
+				}
+				else if (numi == SIZEx - 1 && numj == 0)
+				{
+					if (data[numi - 1][numj] == " ") swap(data[numi - 1][numj], data[numi][numj]);
+					else if (data[numi][numj + 1] == " ") swap(data[numi][numj + 1], data[numi][numj]);
+				}
+				else if (numi == 0 && numj == SIZEx - 1)
+				{
+					if (data[numi + 1][numj] == " ") swap(data[numi + 1][numj], data[numi][numj]);
+					else if (data[numi][numj - 1] == " ") swap(data[numi][numj - 1], data[numi][numj]);
+				}
+				else if (numi == SIZEx - 1 && numj == SIZEx - 1)
+				{
+					if (data[numi - 1][numj] == " ") swap(data[numi - 1][numj], data[numi][numj]);
+					else if (data[numi][numj - 1] == " ") swap(data[numi][numj - 1], data[numi][numj]);
+				}
+				else if (numi == 0)
+				{
+					if (data[numi + 1][numj] == " ") swap(data[numi + 1][numj], data[numi][numj]);
+					else if (data[numi][numj + 1] == " ") swap(data[numi][numj + 1], data[numi][numj]);
+					else if (data[numi][numj - 1] == " ") swap(data[numi][numj - 1], data[numi][numj]);
+				}
+				else if (numi == SIZEx - 1)
+				{
+					if (data[numi - 1][numj] == " ") swap(data[numi - 1][numj], data[numi][numj]);
+					else if (data[numi][numj + 1] == " ") swap(data[numi][numj + 1], data[numi][numj]);
+					else if (data[numi][numj - 1] == " ") swap(data[numi][numj - 1], data[numi][numj]);
+				}
+				else if (numj == 0)
+				{
+					if (data[numi + 1][numj] == " ") swap(data[numi + 1][numj], data[numi][numj]);
+					else if (data[numi - 1][numj] == " ") swap(data[numi - 1][numj], data[numi][numj]);
+					else if (data[numi][numj + 1] == " ") swap(data[numi][numj + 1], data[numi][numj]);
+				}
+				else if (numj == SIZEx - 1)
+				{
+					if (data[numi + 1][numj] == " ") swap(data[numi + 1][numj], data[numi][numj]);
+					else if (data[numi - 1][numj] == " ") swap(data[numi - 1][numj], data[numi][numj]);
+					else if (data[numi][numj - 1] == " ") swap(data[numi][numj - 1], data[numi][numj]);
+				}
+				bool flag_win = true;
+				int cnt = 1;
+
+				for (int i = 0; i < SIZEx; i++)
+				{
+					for (int j = 0; j < SIZEx; j++)
+					{
+						if (i == SIZEx - 1 && j == SIZEx - 1) continue;
+						else if (data[i][j] != to_string(cnt))
+						{
+							flag_win = false;
+							break;
+						}
+						cnt++;
+					}
+					if (!flag_win) break;
+				}
+				if (flag_win)
+				{
+					system_cls();
+					cout << "Используйте:\n- стрелки вверх, вниз - для передвижения по вертикали\n- стрелки вправо, влево - для передвижения по горизонтали\n- Enter - для выбора\n- ESC - для выхода\n- R - для рестарта\n---------Пятнашки------------\n";
+					for (int i = 0; i < SIZEx; i++)
+					{
+						for (int j = 0; j < SIZEx; j++)
+						{
+							setColor(2, TextBackgroundColor);
+							cout << setw(4) << data[i][j];
+							setColor(TextColor, TextBackgroundColor);
+						}
+						cout << endl;
+					}
+					for (int i = 0; i < SIZEx; i++)
+						delete[] data[i];
+					delete[] data;
+					cout << "Игра пройдена!" << endl;
+					while (true)
+					{
+						key = KEY.get_key();
+
+						if (key == 82 || key == 114)
+						{
+							flag_R = true;
+							break;
+						}
+						else if (key == 27)
+						{
+							return;
+						}
+					}
+					break;
+				}
+			}
+		}
 	}
-	int numi = 0, numj = 0;
 
-	//while (true)
-	//{
-	//	do
-	//	{
-	//		system_cls();
-
-	//		std::cout << "Используйте:\n- " << KEY.Key_translation(KeyUp) << ", " << KEY.Key_translation(KeyDown) << " - для передвижения\n- " << KEY.Key_translation(KeyEnter) << " - для выбора\n- " << KEY.Key_translation(KeyExit) << " - для выхода\n----------Выбор Д/з------------\n";
-
-	//		for (int i = 0; i < SIZEx; i++)
-	//		{
-	//			for (int j = 0; j < SIZEx; j++)
-	//			{
-	//				if (i == numi && j == numj)
-	//				{
-	//					setColor(TextBackgroundColor, TextColor);
-	//					cout << data[i][j];
-	//					setColor(TextColor, TextBackgroundColor);
-	//					cout << " ";
-	//				}
-	//				else cout << data[i][j] << " ";
-	//			}
-	//			cout << endl;
-
-	//		}
-
-
-
-	//		key = KEY.get_key();
-	//		if (key == 302 && numj < SIZEx - 1) numj++;
-	//		if (key == 303 && numi < SIZEx - 1) numi++;
-	//		if (key == 300 && numj > 0) numj--;
-	//		if (key == 301 && numi > 0) numi--;
-	//		/*if (key == KeyExit)
-	//		{
-	//			std::cout << "Вы завершили работу.\n";
-	//			exit(EXIT_SUCCESS);
-	//		}*/
-	//	} while (true);
-
-
-	//}
-	ExitToMenu();
 }
