@@ -2,69 +2,40 @@
 
 using namespace std;
 
-//vector <int> GenerateBalls(const size_t count)
-//{
-//	vector <int> out;
-//	for (int i = 0; i < count; ++i)
-//		out.emplace_back(i);
-//	return out;
-//}
-//
-//bool CheckVariant(const vector <int>& balls)
-//{
-//	for (size_t i = 0; i < balls.size(); ++i)
-//		if (balls[i] == i)
-//			return true;
-//	return false;
-//}
-//
-//size_t CalculateALLPossibleVariants(vector <int> balls)
-//{
-//	size_t ct = 0;
-//	do
-//	{
-//		if (CheckVariant(balls))
-//			ct++;
-//	} while (next_permutation(balls.begin(), balls.end()));
-//	return ct;
-//}
-
-int balls()
+void balls()
 {
 	system_cls();
-	/*size_t count = 10;
-	cout << CalculateALLPossibleVariants(GenerateBalls(count)) << endl;*/
 	int cnt = 0;
-	cnt = (int)chek(5, "Введите количество шариков: ", false);
-	string* arr = new string[cnt];
+	while (true)
+	{
+		cnt = (int)chek(5, "Введите количество шариков: ", false);
+		if (cnt > 12) cout << "Количество шариков не должно превышать 12." << endl;
+		else break;
+	}
+	int* arr = new int[cnt];
 
 	for (int i = 0; i < cnt; i++)
-	{
-		arr[i] = to_string(i + 1);
-	}
-	/*for (int i = 0; i < cnt; i++)
-	{
-		cout <<arr[i] << " ";
-	}*/
-	int i;
-	int res;
+		arr[i] = i;
 
-
-
-	res = 1;
-	for (i = 1; i <= cnt; i++) {
+	int res = 1;
+	for (int i = 1; i <= cnt; i++)
 		res = res * i;
-	}
-	cout << res << endl;
+
+	cout << "Общее количество перестановок: " << res << endl;
 	int num = 0;
 	do
 	{
 		for (int i = 0; i < cnt; i++)
-			cout << arr[i] << " ";
-		cout << endl;
-		if (num == res) break;
-		num++;
+		{
+			if (arr[i] == i)
+			{
+				num++;
+				break;
+			}
+		}
 	} while (next_permutation(arr, arr + cnt));
-	cout << num << endl;
+	delete[] arr;
+	cout << "Количество перестановок, удовлетворяющих условию: " << num << endl;
 	ExitToMenu();
+	//2293839
 }

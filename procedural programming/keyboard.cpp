@@ -21,14 +21,14 @@ std::string keyboard::Key_translation(int key)
 {
     switch (key)
     {
-    case 13: return "Enter";
-    case 8: return "Backspace";
-    case 32: return "Space";
-    case 27: return "ESC";
+    case 13:  return "Enter";
+    case 8:   return "Backspace";
+    case 32:  return "Space";
+    case 27:  return "ESC";
     case 300: return "Left";
     case 301: return "Up";
     case 302: return "Right";
     case 303: return "Down";
-    default: return std::to_string((char)key);
+    default:  return std::to_string((char)key);
     }
 }

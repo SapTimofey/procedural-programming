@@ -9,12 +9,14 @@ extern int KeyEnter;
 extern int KeyUp;
 extern int KeyDown;
 
-int alg(int numi, int numj, string** data, int SIZEx)
+int algorithm(int numi, int numj, string** data, int SIZEx)
 {
 	//300: "Left"
 	//301: "Up"
 	//302: "Right"
 	//303: "Down"
+	//13:  "Enter"
+
 	if (SIZEx == 0) return 13;
 	int numi_1 = 0, numj_1 = 0;
 	int numi_s = 0, numj_s = 0;
@@ -79,7 +81,6 @@ void Pyatnashki()
 
 		int SIZEx = 0;
 
-
 		do
 		{
 			system_cls();
@@ -118,16 +119,14 @@ void Pyatnashki()
 		}
 		else SIZEx += 2;
 
-
 		string** data = new string * [SIZEx];
 		for (int i = 0; i < SIZEx; i++)
 			data[i] = new string[SIZEx];
 
-
 		string* num = new string[SIZEx * SIZEx];
 		string* check_ = new string[SIZEx * SIZEx];
-		string check;
-		int num1 = 0;
+		
+		
 		int numi = 0, numj = 0;
 
 		for (int i = 0; i < SIZEx * SIZEx; i++)
@@ -135,25 +134,59 @@ void Pyatnashki()
 			if (i == 0) num[i] = " ";
 			else num[i] = to_string(i);
 		}
+
+		int sum = 0;
 		int y = 0;
 		int i_s = 0;
-		for (int i = 0; i < SIZEx; i++)
-		{
-			for (int j = 0; j < SIZEx; j++)
-			{
-				do num1 = rand() % (SIZEx * SIZEx); while (check.find("(" + num[num1] + ")") != -1);
-				check += "(" + num[num1] + ")";
-				data[i][j] = num[num1];
-				check_[y] = num[num1];
-				if (check_[y] == " ") i_s = i + 1;
-				y++;
-			}
-		}
+		int x_index = 0, x_index_reserv = 0;
+		int x = 0;
+		int num1 = 0;
+		string check;
 
+		// Создание и проверка комбинации на существование решения
+		do
+		{
+			sum = 0, y = 0, i_s = 0, x_index = 0, x_index_reserv = 0, x = 0, num1 = 0, check = ""; // Сброс значений
+
+			for (int i = 0; i < SIZEx; i++)
+			{
+				for (int j = 0; j < SIZEx; j++)
+				{
+					do num1 = rand() % (SIZEx * SIZEx); while (check.find("(" + num[num1] + ")") != -1);
+					check += "(" + num[num1] + ")";
+					data[i][j] = num[num1];
+					check_[y] = num[num1];
+					if (check_[y] == " ") i_s = i + 1;
+					y++;
+				}
+			}
+			for (int i = 0; i < SIZEx * SIZEx; i++)
+			{
+				if (check_[i] != " ")
+				{
+					x = stoi(check_[i]);
+					x_index = i;
+				}
+				else x = 0;
+				x_index_reserv = x_index;
+				for (x_index; x_index < SIZEx * SIZEx; x_index++)
+				{
+					if (check_[x_index] != " " && x > stoi(check_[x_index]) && x_index_reserv < x_index) sum++;
+					/*cout << "x_index = " << x_index << ", x_index_reserv = " << x_index_reserv << ", x = " << x << ", i_s = " << i_s << ", sum = " << sum << endl;*/
+				}
+				x_index = x_index_reserv + 1;
+				/*cout << endl;*/
+			}
+			sum += i_s;
+			/*cout << "sum = " << sum << endl << endl;*/
+		} while (sum % 2 == 1);
+
+		delete[] check_;
 		delete[] num;
 
 		string cons_out2[2] = { "Играть самому", "Доверить игру алгоритму" };
 		int type = 0;
+
 		do
 		{
 			system_cls();
@@ -180,32 +213,24 @@ void Pyatnashki()
 			}
 		} while (key != KeyEnter);
 
-		int sum = 0;
-		int x_index = 0, x_index_reserv = 0;
-		int x = 0;
-
-		for (int i = 0; i < SIZEx * SIZEx; i++)
+		
+		bool flag_win = true;
+		int cnt = 1;
+		for (int i = 0; i < SIZEx; i++)
 		{
-			if (check_[i] != " ")
+			for (int j = 0; j < SIZEx; j++)
 			{
-				x = stoi(check_[i]);
-				x_index = i;
+				if (i == SIZEx - 1 && j == SIZEx - 1) continue;
+				else if (data[i][j] != to_string(cnt))
+				{
+					flag_win = false;
+					break;
+				}
+				cnt++;
 			}
-			else x = 0;
-			x_index_reserv = x_index;
-			for (x_index; x_index < SIZEx * SIZEx; x_index++)
-			{
-				if (check_[x_index] != " " && x > stoi(check_[x_index]) && x_index_reserv < x_index) sum++;
-				/*cout << "x_index = " << x_index << ", x_index_reserv = " << x_index_reserv << ", x = " << x << ", i_s = " << i_s << ", sum = " << sum << endl;*/
-			}
-			x_index = x_index_reserv + 1;
-			/*cout << endl;*/
+			if (!flag_win) break;
 		}
-		delete[] check_;
-		sum += i_s;
-		/*cout << "sum = " << sum << endl << endl;*/
-
-		if (sum % 2 == 1)
+		if (flag_win)
 		{
 			system_cls();
 			cout << "Используйте:\n- стрелки вверх, вниз - для передвижения по вертикали\n- стрелки вправо, влево - для передвижения по горизонтали\n- Enter - для выбора\n- ESC - для выхода\n- R - для рестарта\n---------Пятнашки------------\n";
@@ -213,14 +238,16 @@ void Pyatnashki()
 			{
 				for (int j = 0; j < SIZEx; j++)
 				{
+					setColor(2, TextBackgroundColor);
 					cout << setw(4) << data[i][j];
+					setColor(TextColor, TextBackgroundColor);
 				}
 				cout << endl;
 			}
 			for (int i = 0; i < SIZEx; i++)
 				delete[] data[i];
 			delete[] data;
-			cout << "Нерешаемая комбинация." << endl;
+			cout << "Вам сказачно повезло!" << endl;
 			while (true)
 			{
 				key = KEY.get_key();
@@ -238,432 +265,380 @@ void Pyatnashki()
 		}
 		else
 		{
-			bool flag_win = true;
-			int cnt = 1;
-			for (int i = 0; i < SIZEx; i++)
+			int k = 0;
+			unsigned int start_time = clock();
+			int cnt_Enter = 0, cnt_move = 0;
+			while (true)
 			{
-				for (int j = 0; j < SIZEx; j++)
+				if (cnt_Enter == 0)
 				{
-					if (i == SIZEx - 1 && j == SIZEx - 1) continue;
-					else if (data[i][j] != to_string(cnt))
-					{
-						flag_win = false;
-						break;
-					}
-					cnt++;
+					start_time = clock();
 				}
-				if (!flag_win) break;
-			}
-			if (flag_win)
-			{
-				system_cls();
-				cout << "Используйте:\n- стрелки вверх, вниз - для передвижения по вертикали\n- стрелки вправо, влево - для передвижения по горизонтали\n- Enter - для выбора\n- ESC - для выхода\n- R - для рестарта\n---------Пятнашки------------\n";
-				for (int i = 0; i < SIZEx; i++)
+
+				do
 				{
-					for (int j = 0; j < SIZEx; j++)
-					{
-						setColor(2, TextBackgroundColor);
-						cout << setw(4) << data[i][j];
-						setColor(TextColor, TextBackgroundColor);
-					}
-					cout << endl;
-				}
-				for (int i = 0; i < SIZEx; i++)
-					delete[] data[i];
-				delete[] data;
-				cout << "Вам сказачно повезло!" << endl;
-				while (true)
-				{
-					key = KEY.get_key();
+					system_cls();
 
-					if (key == 82 || key == 114)
-					{
-						flag_R = true;
-						break;
-					}
-					else if (key == 27)
-					{
-						return;
-					}
-				}
-			}
-			else
-			{
-				int k = 0;
-				unsigned int start_time = clock();
-				int cnt_Enter = 0, cnt_move = 0;
-				while (true)
-				{
-					if (cnt_Enter == 0)
-					{
-						start_time = clock();
-					}
-
-					do
-					{
-						system_cls();
-
-						cout << "Используйте:\n- стрелки вверх, вниз - для передвижения по вертикали\n- стрелки вправо, влево - для передвижения по горизонтали\n- Enter - для выбора\n- ESC - для выхода\n- R - для рестарта\n---------Пятнашки------------\n";
-						int cnt = 1;
-						for (int i = 0; i < SIZEx; i++)
-						{
-							for (int j = 0; j < SIZEx; j++)
-							{
-								if (i == numi && j == numj)
-								{
-									if (data[i][j] == to_string(cnt))
-									{
-										setColor(2, TextColor);
-										cout << setw(4) << data[i][j];
-										setColor(TextColor, TextBackgroundColor);
-									}
-									else
-									{
-										setColor(TextBackgroundColor, TextColor);
-										cout << setw(4) << data[i][j];
-										setColor(TextColor, TextBackgroundColor);
-									}
-								}
-								else if (data[i][j] == to_string(cnt))
-								{
-									setColor(2, TextBackgroundColor);
-									cout << setw(4) << data[i][j];
-									setColor(TextColor, TextBackgroundColor);
-								}
-								else cout << setw(4) << data[i][j];
-								cnt++;
-							}
-							cout << endl;
-
-						}
-						if (type == 0) key = KEY.get_key();
-						else if (k == 0 || data[numi][numj] == " ")
-						{
-							key = alg(numi, numj, data, SIZEx);
-							Sleep(500);
-							cnt_move++;
-							k = 1;
-						}
-						else if (data[numi][numj] != " ")
-						{
-							/*if (numi != 0 && numj != 0 && numi != SIZEx - 1 && numj != SIZEx - 1)
-							{
-								if (data[numi + 1][numj] == " ")
-								{
-									key = alg(numi, numj, 0);
-									Sleep(500);
-									k = 0;
-								}
-								else if (data[numi - 1][numj] == " ")
-								{
-									key = alg(numi, numj, 0);
-									Sleep(500);
-									k = 0;
-								}
-								else if (data[numi][numj + 1] == " ")
-								{
-									key = alg(numi, numj, 0);
-									Sleep(500);
-									k = 0;
-								}
-								else if (data[numi][numj - 1] == " ")
-								{
-									key = alg(numi, numj, 0);
-									Sleep(500);
-									k = 0;
-								}
-							}
-							else if (numi == 0 && numj == 0)
-							{
-								if (data[numi + 1][numj] == " ")
-								{
-									key = alg(numi, numj, 0);
-									Sleep(500);
-									k = 0;
-								}
-								else if (data[numi][numj + 1] == " ")
-								{
-									key = alg(numi, numj, 0);
-									Sleep(500);
-									k = 0;
-								}
-							}
-							else if (numi == SIZEx - 1 && numj == 0)
-							{
-								if (data[numi - 1][numj] == " ")
-								{
-									key = alg(numi, numj, 0);
-									Sleep(500);
-									k = 0;
-								}
-								else if (data[numi][numj + 1] == " ")
-								{
-									key = alg(numi, numj, 0);
-									Sleep(500);
-									k = 0;
-								}
-							}
-							else if (numi == 0 && numj == SIZEx - 1)
-							{
-								if (data[numi + 1][numj] == " ")
-								{
-									key = alg(numi, numj, 0);
-									Sleep(500);
-									k = 0;
-								}
-								else if (data[numi][numj - 1] == " ")
-								{
-									key = alg(numi, numj, 0);
-									Sleep(500);
-									k = 0;
-								}
-							}
-							else if (numi == SIZEx - 1 && numj == SIZEx - 1)
-							{
-								if (data[numi - 1][numj] == " ")
-								{
-									key = alg(numi, numj, 0);
-									Sleep(500);
-									k = 0;
-								}
-								else if (data[numi][numj - 1] == " ")
-								{
-									key = alg(numi, numj, 0);
-									Sleep(500);
-									k = 0;
-								}
-							}
-							else if (numi == 0)
-							{
-								if (data[numi + 1][numj] == " ")
-								{
-									key = alg(numi, numj, 0);
-									Sleep(500);
-									k = 0;
-								}
-								else if (data[numi][numj + 1] == " ")
-								{
-									key = alg(numi, numj, 0);
-									Sleep(500);
-									k = 0;
-								}
-								else if (data[numi][numj - 1] == " ")
-								{
-									key = alg(numi, numj, 0);
-									Sleep(500);
-									k = 0;
-								}
-							}
-							else if (numi == SIZEx - 1)
-							{
-								if (data[numi - 1][numj] == " ")
-								{
-									key = alg(numi, numj, 0);
-									Sleep(500);
-									k = 0;
-								}
-								else if (data[numi][numj + 1] == " ")
-								{
-									key = alg(numi, numj, 0);
-									Sleep(500);
-									k = 0;
-								}
-								else if (data[numi][numj - 1] == " ")
-								{
-									key = alg(numi, numj, 0);
-									Sleep(500);
-									k = 0;
-								}
-							}
-							else if (numj == 0)
-							{
-								if (data[numi + 1][numj] == " ")
-								{
-									key = alg(numi, numj, 0);
-									Sleep(500);
-									k = 0;
-								}
-								else if (data[numi - 1][numj] == " ")
-								{
-									key = alg(numi, numj, 0);
-									Sleep(500);
-									k = 0;
-								}
-								else if (data[numi][numj + 1] == " ")
-								{
-									key = alg(numi, numj, 0);
-									Sleep(500);
-									k = 0;
-								}
-							}
-							else if (numj == SIZEx - 1)
-							{
-								if (data[numi + 1][numj] == " ")
-								{
-									key = alg(numi, numj, 0);
-									Sleep(500);
-									k = 0;
-								}
-								else if (data[numi - 1][numj] == " ")
-								{
-									key = alg(numi, numj, 0);
-									Sleep(500);
-									k = 0;
-								}
-								else if (data[numi][numj - 1] == " ")
-								{
-									key = alg(numi, numj, 0);
-									Sleep(500);
-									k = 0;
-								}
-							}
-							else k = 0;*/
-							{
-								key = alg(numi, numj, data, 0);
-								Sleep(500);
-								k = 0;
-							}
-						}
-
-						if (key == 302 && numj < SIZEx - 1) numj++;
-						else if (key == 303 && numi < SIZEx - 1) numi++;
-						else if (key == 300 && numj > 0) numj--;
-						else if (key == 301 && numi > 0) numi--;
-						else if (key == 82 || key == 114 || key == 138 || key == 170)
-						{
-							flag_R = true;
-							for (int i = 0; i < SIZEx; i++)
-								delete[] data[i];
-							delete[] data;
-							cnt_Enter = 0;
-							break;
-						}
-						else if (key == 27)
-						{
-							for (int i = 0; i < SIZEx; i++)
-								delete[] data[i];
-							delete[] data;
-							return;
-						}
-					} while (key != 13);
-					if (flag_R) break;
-					cnt_Enter++;
-
-					if (numi != 0 && numj != 0 && numi != SIZEx - 1 && numj != SIZEx - 1)
-					{
-						if (data[numi + 1][numj] == " ") swap(data[numi + 1][numj], data[numi][numj]);
-						else if (data[numi - 1][numj] == " ") swap(data[numi - 1][numj], data[numi][numj]);
-						else if (data[numi][numj + 1] == " ") swap(data[numi][numj + 1], data[numi][numj]);
-						else if (data[numi][numj - 1] == " ") swap(data[numi][numj - 1], data[numi][numj]);
-					}
-					else if (numi == 0 && numj == 0)
-					{
-						if (data[numi + 1][numj] == " ") swap(data[numi + 1][numj], data[numi][numj]);
-						else if (data[numi][numj + 1] == " ") swap(data[numi][numj + 1], data[numi][numj]);
-					}
-					else if (numi == SIZEx - 1 && numj == 0)
-					{
-						if (data[numi - 1][numj] == " ") swap(data[numi - 1][numj], data[numi][numj]);
-						else if (data[numi][numj + 1] == " ") swap(data[numi][numj + 1], data[numi][numj]);
-					}
-					else if (numi == 0 && numj == SIZEx - 1)
-					{
-						if (data[numi + 1][numj] == " ") swap(data[numi + 1][numj], data[numi][numj]);
-						else if (data[numi][numj - 1] == " ") swap(data[numi][numj - 1], data[numi][numj]);
-					}
-					else if (numi == SIZEx - 1 && numj == SIZEx - 1)
-					{
-						if (data[numi - 1][numj] == " ") swap(data[numi - 1][numj], data[numi][numj]);
-						else if (data[numi][numj - 1] == " ") swap(data[numi][numj - 1], data[numi][numj]);
-					}
-					else if (numi == 0)
-					{
-						if (data[numi + 1][numj] == " ") swap(data[numi + 1][numj], data[numi][numj]);
-						else if (data[numi][numj + 1] == " ") swap(data[numi][numj + 1], data[numi][numj]);
-						else if (data[numi][numj - 1] == " ") swap(data[numi][numj - 1], data[numi][numj]);
-					}
-					else if (numi == SIZEx - 1)
-					{
-						if (data[numi - 1][numj] == " ") swap(data[numi - 1][numj], data[numi][numj]);
-						else if (data[numi][numj + 1] == " ") swap(data[numi][numj + 1], data[numi][numj]);
-						else if (data[numi][numj - 1] == " ") swap(data[numi][numj - 1], data[numi][numj]);
-					}
-					else if (numj == 0)
-					{
-						if (data[numi + 1][numj] == " ") swap(data[numi + 1][numj], data[numi][numj]);
-						else if (data[numi - 1][numj] == " ") swap(data[numi - 1][numj], data[numi][numj]);
-						else if (data[numi][numj + 1] == " ") swap(data[numi][numj + 1], data[numi][numj]);
-					}
-					else if (numj == SIZEx - 1)
-					{
-						if (data[numi + 1][numj] == " ") swap(data[numi + 1][numj], data[numi][numj]);
-						else if (data[numi - 1][numj] == " ") swap(data[numi - 1][numj], data[numi][numj]);
-						else if (data[numi][numj - 1] == " ") swap(data[numi][numj - 1], data[numi][numj]);
-					}
-
-					bool flag_win = true;
+					cout << "Используйте:\n- стрелки вверх, вниз - для передвижения по вертикали\n- стрелки вправо, влево - для передвижения по горизонтали\n- Enter - для выбора\n- ESC - для выхода\n- R - для рестарта\n---------Пятнашки------------\n";
 					int cnt = 1;
-
 					for (int i = 0; i < SIZEx; i++)
 					{
 						for (int j = 0; j < SIZEx; j++)
 						{
-							if (i == SIZEx - 1 && j == SIZEx - 1) continue;
-							else if (data[i][j] != to_string(cnt))
+							if (i == numi && j == numj)
 							{
-								flag_win = false;
-								break;
+								if (data[i][j] == to_string(cnt))
+								{
+									setColor(2, TextColor);
+									cout << setw(4) << data[i][j];
+									setColor(TextColor, TextBackgroundColor);
+								}
+								else
+								{
+									setColor(TextBackgroundColor, TextColor);
+									cout << setw(4) << data[i][j];
+									setColor(TextColor, TextBackgroundColor);
+								}
 							}
-							cnt++;
-						}
-						if (!flag_win) break;
-					}
-					if (flag_win)
-					{
-						unsigned int end_time = clock();
-						system_cls();
-						cout << "Используйте:\n- стрелки вверх, вниз - для передвижения по вертикали\n- стрелки вправо, влево - для передвижения по горизонтали\n- Enter - для выбора\n- ESC - для выхода\n- R - для рестарта\n---------Пятнашки------------\n";
-						for (int i = 0; i < SIZEx; i++)
-						{
-							for (int j = 0; j < SIZEx; j++)
+							else if (data[i][j] == to_string(cnt))
 							{
 								setColor(2, TextBackgroundColor);
 								cout << setw(4) << data[i][j];
 								setColor(TextColor, TextBackgroundColor);
 							}
-							cout << endl;
+							else cout << setw(4) << data[i][j];
+							cnt++;
 						}
+						cout << endl;
+
+					}
+					if (type == 0) key = KEY.get_key();
+					else if (k == 0 || data[numi][numj] == " ")
+					{
+						key = algorithm(numi, numj, data, SIZEx);
+						Sleep(500);
+						cnt_move++;
+						k = 1;
+					}
+					else if (data[numi][numj] != " ")
+					{
+						/*if (numi != 0 && numj != 0 && numi != SIZEx - 1 && numj != SIZEx - 1)
+						{
+							if (data[numi + 1][numj] == " ")
+							{
+								key = alg(numi, numj, 0);
+								Sleep(500);
+								k = 0;
+							}
+							else if (data[numi - 1][numj] == " ")
+							{
+								key = alg(numi, numj, 0);
+								Sleep(500);
+								k = 0;
+							}
+							else if (data[numi][numj + 1] == " ")
+							{
+								key = alg(numi, numj, 0);
+								Sleep(500);
+								k = 0;
+							}
+							else if (data[numi][numj - 1] == " ")
+							{
+								key = alg(numi, numj, 0);
+								Sleep(500);
+								k = 0;
+							}
+						}
+						else if (numi == 0 && numj == 0)
+						{
+							if (data[numi + 1][numj] == " ")
+							{
+								key = alg(numi, numj, 0);
+								Sleep(500);
+								k = 0;
+							}
+							else if (data[numi][numj + 1] == " ")
+							{
+								key = alg(numi, numj, 0);
+								Sleep(500);
+								k = 0;
+							}
+						}
+						else if (numi == SIZEx - 1 && numj == 0)
+						{
+							if (data[numi - 1][numj] == " ")
+							{
+								key = alg(numi, numj, 0);
+								Sleep(500);
+								k = 0;
+							}
+							else if (data[numi][numj + 1] == " ")
+							{
+								key = alg(numi, numj, 0);
+								Sleep(500);
+								k = 0;
+							}
+						}
+						else if (numi == 0 && numj == SIZEx - 1)
+						{
+							if (data[numi + 1][numj] == " ")
+							{
+								key = alg(numi, numj, 0);
+								Sleep(500);
+								k = 0;
+							}
+							else if (data[numi][numj - 1] == " ")
+							{
+								key = alg(numi, numj, 0);
+								Sleep(500);
+								k = 0;
+							}
+						}
+						else if (numi == SIZEx - 1 && numj == SIZEx - 1)
+						{
+							if (data[numi - 1][numj] == " ")
+							{
+								key = alg(numi, numj, 0);
+								Sleep(500);
+								k = 0;
+							}
+							else if (data[numi][numj - 1] == " ")
+							{
+								key = alg(numi, numj, 0);
+								Sleep(500);
+								k = 0;
+							}
+						}
+						else if (numi == 0)
+						{
+							if (data[numi + 1][numj] == " ")
+							{
+								key = alg(numi, numj, 0);
+								Sleep(500);
+								k = 0;
+							}
+							else if (data[numi][numj + 1] == " ")
+							{
+								key = alg(numi, numj, 0);
+								Sleep(500);
+								k = 0;
+							}
+							else if (data[numi][numj - 1] == " ")
+							{
+								key = alg(numi, numj, 0);
+								Sleep(500);
+								k = 0;
+							}
+						}
+						else if (numi == SIZEx - 1)
+						{
+							if (data[numi - 1][numj] == " ")
+							{
+								key = alg(numi, numj, 0);
+								Sleep(500);
+								k = 0;
+							}
+							else if (data[numi][numj + 1] == " ")
+							{
+								key = alg(numi, numj, 0);
+								Sleep(500);
+								k = 0;
+							}
+							else if (data[numi][numj - 1] == " ")
+							{
+								key = alg(numi, numj, 0);
+								Sleep(500);
+								k = 0;
+							}
+						}
+						else if (numj == 0)
+						{
+							if (data[numi + 1][numj] == " ")
+							{
+								key = alg(numi, numj, 0);
+								Sleep(500);
+								k = 0;
+							}
+							else if (data[numi - 1][numj] == " ")
+							{
+								key = alg(numi, numj, 0);
+								Sleep(500);
+								k = 0;
+							}
+							else if (data[numi][numj + 1] == " ")
+							{
+								key = alg(numi, numj, 0);
+								Sleep(500);
+								k = 0;
+							}
+						}
+						else if (numj == SIZEx - 1)
+						{
+							if (data[numi + 1][numj] == " ")
+							{
+								key = alg(numi, numj, 0);
+								Sleep(500);
+								k = 0;
+							}
+							else if (data[numi - 1][numj] == " ")
+							{
+								key = alg(numi, numj, 0);
+								Sleep(500);
+								k = 0;
+							}
+							else if (data[numi][numj - 1] == " ")
+							{
+								key = alg(numi, numj, 0);
+								Sleep(500);
+								k = 0;
+							}
+						}
+						else k = 0;*/
+						{
+							key = algorithm(numi, numj, data, 0);
+							Sleep(500);
+							k = 0;
+						}
+					}
+
+					if (key == 302 && numj < SIZEx - 1) numj++;
+					else if (key == 303 && numi < SIZEx - 1) numi++;
+					else if (key == 300 && numj > 0) numj--;
+					else if (key == 301 && numi > 0) numi--;
+					else if (key == 82 || key == 114 || key == 138 || key == 170)
+					{
+						flag_R = true;
 						for (int i = 0; i < SIZEx; i++)
 							delete[] data[i];
 						delete[] data;
-
-						cout << "Игра пройдена!\n" << "Количество перестановок: " << cnt_Enter << "\nВремя игры: " << (end_time - start_time) / 1000.0 << " секунд";
-						/*if ((end_time - start_time) / 1000.0 >= 60)
-						{
-							cout << ((end_time - start_time) / 1000) / 60 << " минут " << ((end_time - start_time) % 60) / 1000.0 << " секунд" << endl;
-						}*/
-						if (type == 1)
-						{
-							cout << " (" << (end_time - start_time) / 1000.0 - cnt_Enter * 0.5 - cnt_move * 0.5 << " без учёта пауз)";
-						}
-						cout << endl;
 						cnt_Enter = 0;
-						while (true)
-						{
-							key = KEY.get_key();
-
-							if (key == 82 || key == 114 || key == 138 || key == 170)
-							{
-								flag_R = true;
-								break;
-							}
-							else if (key == 27)
-							{
-								return;
-							}
-						}
 						break;
 					}
+					else if (key == 27)
+					{
+						for (int i = 0; i < SIZEx; i++)
+							delete[] data[i];
+						delete[] data;
+						return;
+					}
+				} while (key != 13);
+				if (flag_R) break;
+				cnt_Enter++;
+
+				if (numi != 0 && numj != 0 && numi != SIZEx - 1 && numj != SIZEx - 1)
+				{
+					if (data[numi + 1][numj] == " ") swap(data[numi + 1][numj], data[numi][numj]);
+					else if (data[numi - 1][numj] == " ") swap(data[numi - 1][numj], data[numi][numj]);
+					else if (data[numi][numj + 1] == " ") swap(data[numi][numj + 1], data[numi][numj]);
+					else if (data[numi][numj - 1] == " ") swap(data[numi][numj - 1], data[numi][numj]);
+				}
+				else if (numi == 0 && numj == 0)
+				{
+					if (data[numi + 1][numj] == " ") swap(data[numi + 1][numj], data[numi][numj]);
+					else if (data[numi][numj + 1] == " ") swap(data[numi][numj + 1], data[numi][numj]);
+				}
+				else if (numi == SIZEx - 1 && numj == 0)
+				{
+					if (data[numi - 1][numj] == " ") swap(data[numi - 1][numj], data[numi][numj]);
+					else if (data[numi][numj + 1] == " ") swap(data[numi][numj + 1], data[numi][numj]);
+				}
+				else if (numi == 0 && numj == SIZEx - 1)
+				{
+					if (data[numi + 1][numj] == " ") swap(data[numi + 1][numj], data[numi][numj]);
+					else if (data[numi][numj - 1] == " ") swap(data[numi][numj - 1], data[numi][numj]);
+				}
+				else if (numi == SIZEx - 1 && numj == SIZEx - 1)
+				{
+					if (data[numi - 1][numj] == " ") swap(data[numi - 1][numj], data[numi][numj]);
+					else if (data[numi][numj - 1] == " ") swap(data[numi][numj - 1], data[numi][numj]);
+				}
+				else if (numi == 0)
+				{
+					if (data[numi + 1][numj] == " ") swap(data[numi + 1][numj], data[numi][numj]);
+					else if (data[numi][numj + 1] == " ") swap(data[numi][numj + 1], data[numi][numj]);
+					else if (data[numi][numj - 1] == " ") swap(data[numi][numj - 1], data[numi][numj]);
+				}
+				else if (numi == SIZEx - 1)
+				{
+					if (data[numi - 1][numj] == " ") swap(data[numi - 1][numj], data[numi][numj]);
+					else if (data[numi][numj + 1] == " ") swap(data[numi][numj + 1], data[numi][numj]);
+					else if (data[numi][numj - 1] == " ") swap(data[numi][numj - 1], data[numi][numj]);
+				}
+				else if (numj == 0)
+				{
+					if (data[numi + 1][numj] == " ") swap(data[numi + 1][numj], data[numi][numj]);
+					else if (data[numi - 1][numj] == " ") swap(data[numi - 1][numj], data[numi][numj]);
+					else if (data[numi][numj + 1] == " ") swap(data[numi][numj + 1], data[numi][numj]);
+				}
+				else if (numj == SIZEx - 1)
+				{
+					if (data[numi + 1][numj] == " ") swap(data[numi + 1][numj], data[numi][numj]);
+					else if (data[numi - 1][numj] == " ") swap(data[numi - 1][numj], data[numi][numj]);
+					else if (data[numi][numj - 1] == " ") swap(data[numi][numj - 1], data[numi][numj]);
+				}
+
+				bool flag_win = true;
+				int cnt = 1;
+
+				for (int i = 0; i < SIZEx; i++)
+				{
+					for (int j = 0; j < SIZEx; j++)
+					{
+						if (i == SIZEx - 1 && j == SIZEx - 1) continue;
+						else if (data[i][j] != to_string(cnt))
+						{
+							flag_win = false;
+							break;
+						}
+						cnt++;
+					}
+					if (!flag_win) break;
+				}
+				if (flag_win)
+				{
+					unsigned int end_time = clock();
+					system_cls();
+					cout << "Используйте:\n- стрелки вверх, вниз - для передвижения по вертикали\n- стрелки вправо, влево - для передвижения по горизонтали\n- Enter - для выбора\n- ESC - для выхода\n- R - для рестарта\n---------Пятнашки------------\n";
+					for (int i = 0; i < SIZEx; i++)
+					{
+						for (int j = 0; j < SIZEx; j++)
+						{
+							setColor(2, TextBackgroundColor);
+							cout << setw(4) << data[i][j];
+							setColor(TextColor, TextBackgroundColor);
+						}
+						cout << endl;
+					}
+					for (int i = 0; i < SIZEx; i++)
+						delete[] data[i];
+					delete[] data;
+
+					cout << "Игра пройдена!\n" << "Количество перестановок: " << cnt_Enter << "\nВремя игры: " << (end_time - start_time) / 1000.0 << " секунд";
+					/*if ((end_time - start_time) / 1000.0 >= 60)
+					{
+						cout << ((end_time - start_time) / 1000) / 60 << " минут " << ((end_time - start_time) % 60) / 1000.0 << " секунд" << endl;
+					}*/
+					if (type == 1)
+					{
+						cout << " (" << (end_time - start_time) / 1000.0 - cnt_Enter * 0.5 - cnt_move * 0.5 << " без учёта пауз)";
+					}
+					cout << endl;
+					cnt_Enter = 0;
+					while (true)
+					{
+						key = KEY.get_key();
+
+						if (key == 82 || key == 114 || key == 138 || key == 170)
+						{
+							flag_R = true;
+							break;
+						}
+						else if (key == 27)
+						{
+							return;
+						}
+					}
+					break;
 				}
 			}
 		}
