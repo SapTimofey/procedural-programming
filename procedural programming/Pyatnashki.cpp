@@ -9,7 +9,7 @@ extern int KeyEnter;
 extern int KeyUp;
 extern int KeyDown;
 
-int algorithm(int numi, int numj, string** data, int SIZEx)
+bool algorithm(string** data, int SIZEx)
 {
 	//300: "Left"
 	//301: "Up"
@@ -17,55 +17,125 @@ int algorithm(int numi, int numj, string** data, int SIZEx)
 	//303: "Down"
 	//13:  "Enter"
 
-	if (SIZEx == 0) return 13;
-	int numi_1 = 0, numj_1 = 0;
+	unsigned int start_time = clock();
+	int cnt_Enter = 0;
+
+	int SIZEy = SIZEx;
+	int step = 0;
+	int numi = 0, numj = 0;
 	int numi_s = 0, numj_s = 0;
+	bool flag = false;
+	int num_find = 1;
 
-	bool flag_find = false;
+	int action = 0;
 
-	for (int i = 0; i < SIZEx; i++)
+	while (true)
 	{
-		for (int j = 0; j < SIZEx; j++)
+		system_cls();
+		int cnt = 1;
+		for (int i = 0; i < SIZEx; i++)
 		{
-			if (data[i][j] == "1")
+			for (int j = 0; j < SIZEx; j++)
 			{
-				numi_1 = i;
-				numj_1 = j;
+				if (data[i][j] == to_string(cnt))
+				{
+					setColor(2, TextBackgroundColor);
+					cout << setw(4) << data[i][j];
+					setColor(TextColor, TextBackgroundColor);
+				}
+				else cout << setw(4) << data[i][j];
+				cnt++;
 			}
-			if (data[i][j] == " ")
+			
+			cout << endl;
+		}
+		cout << "step = " << step << " action = " << action << " flag = " << flag;
+		Sleep(250);
+
+		for (int i = 0; i < SIZEx; i++)
+		{
+			for (int j = 0; j < SIZEx; j++)
 			{
-				numi_s = i;
-				numj_s = j;
+				if (data[i][j] == to_string(num_find))
+				{
+					numi = i;
+					numj = j;
+					if (numi == SIZEx - 1)
+					{
+						action = 1;
+						flag = true;
+					}
+				}
+				if (data[i][j] == " ")
+				{
+					numi_s = i;
+					numj_s = j;
+				}
 			}
 		}
-	}
 
-	if (numi > numi_s) return 301;
-	if (numi < numi_s) return 303;
-	if (numj < numj_s) return 302;
-	if (numj > numj_s) return 300;
+		// action = 0 передвижение пропуска к нужному числу 
+		// action = 1 передвижение пропуска к нужному числу (сверху)
+		// action = 2 передвижение числа на нужную строчку
+		// action = 3 передвижение числа на нужную позицию
+		//
+		//
+		//
 
-	/*if (SIZEx == 0) return 13;
-	if (numi == 0)
-	{
-		if (numj == 0) return 303;
-		return 300;
+
+		switch (action)
+		{
+		case 0:
+			if (numi_s != numi + 1 || numj_s != numj)
+			{
+				if (numi_s > numi + 1) swap(data[numi_s][numj_s], data[numi_s - 1][numj_s]);
+				else if (numi_s < numi + 1) swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
+				else if (numj_s < numj) swap(data[numi_s][numj_s], data[numi_s][numj_s + 1]);
+				else swap(data[numi_s][numj_s], data[numi_s][numj_s - 1]);
+			}
+			else action = 2;
+			break;
+		case 1:
+			if (numi_s != numi - 1 || numj_s != numj)
+			{
+				if (numi_s < numi - 1) swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
+				else if (numj_s < numj) swap(data[numi_s][numj_s], data[numi_s][numj_s + 1]);
+				else swap(data[numi_s][numj_s], data[numi_s][numj_s - 1]);
+			}
+			else action = 2;
+			break;
+		case 2:
+			if (flag)
+			{
+				swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
+				flag = false;
+			}
+			if (step == 0) swap(data[numi_s][numj_s], data[numi_s][numj_s - 1]);
+			else if (step == 1 || step == 2) swap(data[numi_s][numj_s], data[numi_s - 1][numj_s]);
+			else if (step == 3) swap(data[numi_s][numj_s], data[numi_s][numj_s + 1]);
+			if (step < 3) step++;
+			else
+			{
+				action = 0;
+				step = 0;
+			}
+
+			/*if (numi == num_find / SIZEx && numj != num_find % SIZEx - 1) action = 2;*/
+			break;
+		}
+
+	
+
+		
+		cnt_Enter++;
+
+		
+
+
+
 	}
-	if (numi == SIZEx - 1)
-	{
-		if (numj == SIZEx - 1) return 301;
-		return 302;
-	}
-	if (numj == 0)
-	{
-		if (numi == SIZEx - 1) return 302;
-		return 303;
-	}
-	if (numj == SIZEx - 1)
-	{
-		if (numi == 0) return 300;
-		return 301;
-	}*/
+	
+
 }
 void Pyatnashki()
 {
@@ -187,6 +257,7 @@ void Pyatnashki()
 		string cons_out2[2] = { "Играть самому", "Доверить игру алгоритму" };
 		int type = 0;
 
+		// Выбор режима игры
 		do
 		{
 			system_cls();
@@ -213,7 +284,6 @@ void Pyatnashki()
 			}
 		} while (key != KeyEnter);
 
-		
 		bool flag_win = true;
 		int cnt = 1;
 		for (int i = 0; i < SIZEx; i++)
@@ -263,11 +333,15 @@ void Pyatnashki()
 				}
 			}
 		}
+		else if (type == 1)
+		{
+			if (algorithm(data, SIZEx)) return;
+		}
 		else
 		{
 			int k = 0;
 			unsigned int start_time = clock();
-			int cnt_Enter = 0, cnt_move = 0;
+			int cnt_Enter = 0;
 			while (true)
 			{
 				if (cnt_Enter == 0)
@@ -312,194 +386,7 @@ void Pyatnashki()
 						cout << endl;
 
 					}
-					if (type == 0) key = KEY.get_key();
-					else if (k == 0 || data[numi][numj] == " ")
-					{
-						key = algorithm(numi, numj, data, SIZEx);
-						Sleep(500);
-						cnt_move++;
-						k = 1;
-					}
-					else if (data[numi][numj] != " ")
-					{
-						/*if (numi != 0 && numj != 0 && numi != SIZEx - 1 && numj != SIZEx - 1)
-						{
-							if (data[numi + 1][numj] == " ")
-							{
-								key = alg(numi, numj, 0);
-								Sleep(500);
-								k = 0;
-							}
-							else if (data[numi - 1][numj] == " ")
-							{
-								key = alg(numi, numj, 0);
-								Sleep(500);
-								k = 0;
-							}
-							else if (data[numi][numj + 1] == " ")
-							{
-								key = alg(numi, numj, 0);
-								Sleep(500);
-								k = 0;
-							}
-							else if (data[numi][numj - 1] == " ")
-							{
-								key = alg(numi, numj, 0);
-								Sleep(500);
-								k = 0;
-							}
-						}
-						else if (numi == 0 && numj == 0)
-						{
-							if (data[numi + 1][numj] == " ")
-							{
-								key = alg(numi, numj, 0);
-								Sleep(500);
-								k = 0;
-							}
-							else if (data[numi][numj + 1] == " ")
-							{
-								key = alg(numi, numj, 0);
-								Sleep(500);
-								k = 0;
-							}
-						}
-						else if (numi == SIZEx - 1 && numj == 0)
-						{
-							if (data[numi - 1][numj] == " ")
-							{
-								key = alg(numi, numj, 0);
-								Sleep(500);
-								k = 0;
-							}
-							else if (data[numi][numj + 1] == " ")
-							{
-								key = alg(numi, numj, 0);
-								Sleep(500);
-								k = 0;
-							}
-						}
-						else if (numi == 0 && numj == SIZEx - 1)
-						{
-							if (data[numi + 1][numj] == " ")
-							{
-								key = alg(numi, numj, 0);
-								Sleep(500);
-								k = 0;
-							}
-							else if (data[numi][numj - 1] == " ")
-							{
-								key = alg(numi, numj, 0);
-								Sleep(500);
-								k = 0;
-							}
-						}
-						else if (numi == SIZEx - 1 && numj == SIZEx - 1)
-						{
-							if (data[numi - 1][numj] == " ")
-							{
-								key = alg(numi, numj, 0);
-								Sleep(500);
-								k = 0;
-							}
-							else if (data[numi][numj - 1] == " ")
-							{
-								key = alg(numi, numj, 0);
-								Sleep(500);
-								k = 0;
-							}
-						}
-						else if (numi == 0)
-						{
-							if (data[numi + 1][numj] == " ")
-							{
-								key = alg(numi, numj, 0);
-								Sleep(500);
-								k = 0;
-							}
-							else if (data[numi][numj + 1] == " ")
-							{
-								key = alg(numi, numj, 0);
-								Sleep(500);
-								k = 0;
-							}
-							else if (data[numi][numj - 1] == " ")
-							{
-								key = alg(numi, numj, 0);
-								Sleep(500);
-								k = 0;
-							}
-						}
-						else if (numi == SIZEx - 1)
-						{
-							if (data[numi - 1][numj] == " ")
-							{
-								key = alg(numi, numj, 0);
-								Sleep(500);
-								k = 0;
-							}
-							else if (data[numi][numj + 1] == " ")
-							{
-								key = alg(numi, numj, 0);
-								Sleep(500);
-								k = 0;
-							}
-							else if (data[numi][numj - 1] == " ")
-							{
-								key = alg(numi, numj, 0);
-								Sleep(500);
-								k = 0;
-							}
-						}
-						else if (numj == 0)
-						{
-							if (data[numi + 1][numj] == " ")
-							{
-								key = alg(numi, numj, 0);
-								Sleep(500);
-								k = 0;
-							}
-							else if (data[numi - 1][numj] == " ")
-							{
-								key = alg(numi, numj, 0);
-								Sleep(500);
-								k = 0;
-							}
-							else if (data[numi][numj + 1] == " ")
-							{
-								key = alg(numi, numj, 0);
-								Sleep(500);
-								k = 0;
-							}
-						}
-						else if (numj == SIZEx - 1)
-						{
-							if (data[numi + 1][numj] == " ")
-							{
-								key = alg(numi, numj, 0);
-								Sleep(500);
-								k = 0;
-							}
-							else if (data[numi - 1][numj] == " ")
-							{
-								key = alg(numi, numj, 0);
-								Sleep(500);
-								k = 0;
-							}
-							else if (data[numi][numj - 1] == " ")
-							{
-								key = alg(numi, numj, 0);
-								Sleep(500);
-								k = 0;
-							}
-						}
-						else k = 0;*/
-						{
-							key = algorithm(numi, numj, data, 0);
-							Sleep(500);
-							k = 0;
-						}
-					}
+					key = KEY.get_key();
 
 					if (key == 302 && numj < SIZEx - 1) numj++;
 					else if (key == 303 && numi < SIZEx - 1) numi++;
@@ -618,10 +505,6 @@ void Pyatnashki()
 					{
 						cout << ((end_time - start_time) / 1000) / 60 << " минут " << ((end_time - start_time) % 60) / 1000.0 << " секунд" << endl;
 					}*/
-					if (type == 1)
-					{
-						cout << " (" << (end_time - start_time) / 1000.0 - cnt_Enter * 0.5 - cnt_move * 0.5 << " без учёта пауз)";
-					}
 					cout << endl;
 					cnt_Enter = 0;
 					while (true)
