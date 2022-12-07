@@ -24,8 +24,15 @@ bool algorithm(string** data, int SIZEx)
 	int step = 0;
 	int numi = 0, numj = 0;
 	int numi_s = 0, numj_s = 0;
-	bool flagi = false, flagj = false;
 	int num_find = 1;
+
+	bool flag = true;
+
+	int SIZEx_for_move_j = SIZEx;
+	int SIZEx_for_move_i = SIZEx;
+	int num_find_reserv = 0;
+
+	int switcher = 0;
 
 	int action = 0;
 
@@ -43,14 +50,29 @@ bool algorithm(string** data, int SIZEx)
 					cout << setw(4) << data[i][j];
 					setColor(TextColor, TextBackgroundColor);
 				}
+				else if (data[i][j] == to_string(num_find))
+				{
+					setColor(14, TextBackgroundColor);
+					cout << setw(4) << data[i][j];
+					setColor(TextColor, TextBackgroundColor);
+				}
 				else cout << setw(4) << data[i][j];
 				cnt++;
 			}
 			
 			cout << endl;
 		}
-		cout << "step = " << step << " action = " << action << " flagi = " << flagi << " flagj = " << flagj << " num_find = " << num_find;
-		Sleep(125);
+		cnt = 1;
+		cout << "step = " << step << " \naction = " << action << " \nnum_find = ";
+		setColor(14, TextBackgroundColor);
+		cout << num_find;
+		setColor(TextColor, TextBackgroundColor);
+		cout << endl;
+
+		/*if (num_find != 21) Sleep(100);
+		else ExitToMenu();*/
+		Sleep(100);
+		/*ExitToMenu();*/
 
 		for (int i = 0; i < SIZEx; i++)
 		{
@@ -63,11 +85,10 @@ bool algorithm(string** data, int SIZEx)
 					if (numi == SIZEx - 1)
 					{
 						action = 1;
-						flagi = true;
 					}
 					if (numj == 0) flagj = true;
 				}
-				if (data[i][j] == " ")
+				else if (data[i][j] == " ")
 				{
 					numi_s = i;
 					numj_s = j;
@@ -75,18 +96,44 @@ bool algorithm(string** data, int SIZEx)
 			}
 		}
 
+
+		
+
+		// switcher = 0 сбор строки
+		// switcher = 1 сбор столбца
+
 		// action = 0 передвижение пропуска к нужному числу (снизу)
 		// action = 1 передвижение пропуска к нужному числу (сверху)
-		// action = 2 передвижение числа на нужную строчку (слева)
-		// action = 3 передвижение числа на нужную строчку (справа)
-		// action = 4 передвижение числа на нужную позицию
-		//
-		//
-		//
+		// action = 2 передвижение числа вправо до конца
+		// action = 3 передвижение числа на нужную строчку вверх (слева)
+		// action = 4 передвижение числа на нужную строчку вниз (слева)
+		// action = 5 передвижение числа на нужную позицию (снизу)
+		// action = 6 передвижение числа на нужную позицию (последнего в столбце)
+		// action = 7 передвижение последнего числа в строке
+		// action = 8 передвижение последнего числа в столбце
+
+		if (num_find % SIZEx == 1 && num_find != 1)
+		{
+			num_find_reserv = num_find + 1;
+			switcher = 1;
+			SIZEx_for_move_j--;
+		}
+		else if (num_find == SIZEx * (SIZEx - 1) + 1)
+		{
+			num_find = num_find_reserv;
+			SIZEx_for_move_i--;
+			switcher = 0;
+		}
 
 		switch (action)
 		{
-		case 0:
+		case 0: // action = 0 передвижение пропуска к нужному числу (снизу)
+			if ((numi == num_find / SIZEx) && (numj == num_find % SIZEx - 1 || (numj == SIZEx - 1 && num_find % SIZEx == 0)))
+			{
+				if (switcher == 0) num_find++;
+				else num_find += SIZEx;
+				break;
+			}
 			if (numi_s != numi + 1 || numj_s != numj)
 			{
 				if (numi_s > numi + 1) swap(data[numi_s][numj_s], data[numi_s - 1][numj_s]);
@@ -96,11 +143,18 @@ bool algorithm(string** data, int SIZEx)
 			}
 			else
 			{
-				if (flagj) action = 3;
+				if (numj == SIZEx - 1) action = 3;
 				else action = 2;
 			}
 			break;
-		case 1:
+		case 1: // action = 1 передвижение пропуска к нужному числу (сверху)
+			if ((numi == num_find / SIZEx) && (numj == num_find % SIZEx - 1 || (numj == SIZEx - 1 && num_find % SIZEx == 0)))
+			{
+				action = 0;
+				if (switcher == 0) num_find++;
+				else num_find += SIZEx;
+				break;
+			}
 			if (numi_s != numi - 1 || numj_s != numj)
 			{
 				if (numi_s == numi) swap(data[numi_s][numj_s], data[numi_s - 1][numj_s]);
@@ -110,18 +164,46 @@ bool algorithm(string** data, int SIZEx)
 			}
 			else
 			{
-				if (flagj) action = 3;
+				swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
+				if (numj == SIZEx - 1)
+				{
+					if (numi_s > num_find / SIZEx) action = 3;
+					else action = 4;
+				}
 				else action = 2;
 			}
 			break;
-		case 2:
-			if (flagi)
+		case 2: // action = 2 передвижение числа вправо до конца
+			if (numj_s != SIZEx - 1 || numj != SIZEx - 1)
 			{
-				swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
-				flagi = false;
-			}
+				if (step == 0) swap(data[numi_s][numj_s], data[numi_s][numj_s + 1]);
+				else if (step == 1) swap(data[numi_s][numj_s], data[numi_s - 1][numj_s]);
+				else if (step == 2) swap(data[numi_s][numj_s], data[numi_s][numj_s - 1]);
+				else if (step == 3) swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
+				else if (step == 4) swap(data[numi_s][numj_s], data[numi_s][numj_s + 1]);
 
-			else if (numi_s != num_find / SIZEx || numi != num_find / SIZEx)
+				if (step < 4) step++;
+				else step = 0;
+			}
+			else
+			{
+				step = 0;
+				if (numi_s > num_find / SIZEx) action = 3;
+				else if (numi_s == num_find / SIZEx)
+				{
+					if (num_find % SIZEx == 0) action = 7;
+					else
+					{
+						if (num_find / SIZEx == SIZEx - 1) action = 6;
+						else action = 5;
+					}
+				}
+				else action = 4;
+				
+			}
+			break;
+		case 3: // action = 3 передвижение числа на нужную строчку вверх (слева)
+			if (numi_s > num_find / SIZEx || numi > num_find / SIZEx)
 			{
 				if (step == 0) swap(data[numi_s][numj_s], data[numi_s][numj_s - 1]);
 				else if (step == 1 || step == 2) swap(data[numi_s][numj_s], data[numi_s - 1][numj_s]);
@@ -134,43 +216,37 @@ bool algorithm(string** data, int SIZEx)
 			else
 			{
 				step = 0;
-				flagj = false;
-				action = 4;
-			}
-
-			/*if (numi == num_find / SIZEx && numj != num_find % SIZEx - 1) action = 2;*/
-			break;
-		case 3:
-			if (flagi)
-			{
-				swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
-				flagi = false;
-			}
-			else if (numi_s != num_find / SIZEx || numi != num_find / SIZEx)
-			{
-				if (step == 0) swap(data[numi_s][numj_s], data[numi_s][numj_s + 1]);
-				else if (step == 1 || step == 2) swap(data[numi_s][numj_s], data[numi_s - 1][numj_s]);
-				else if (step == 3) swap(data[numi_s][numj_s], data[numi_s][numj_s - 1]);
-				else if (step == 4) swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
-
-				if (step < 4) step++;
+				if (num_find % SIZEx == 0) action = 7;
 				else
 				{
-					step = 0;
-					flagj = false;
+					if (num_find / SIZEx == SIZEx - 1) action = 6;
+					else action = 5;
 				}
+			}
+			break;
+		case 4: // action = 4 передвижение числа на нужную строчку вниз (слева)
+			if (numi_s < num_find / SIZEx || numi < num_find / SIZEx)
+			{
+				if (step == 0) swap(data[numi_s][numj_s], data[numi_s - 1][numj_s]);
+				else if (step == 1) swap(data[numi_s][numj_s], data[numi_s][numj_s - 1]);
+				else if (step == 2 || step == 3) swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
+				else if (step == 4) swap(data[numi_s][numj_s], data[numi_s][numj_s + 1]);
+
+				if (step < 4) step++;
+				else step = 0;
 			}
 			else
 			{
 				step = 0;
-				flagj = false;
-				action = 4;
+				if (num_find % SIZEx == 0) action = 7;
+				else
+				{
+					if (num_find / SIZEx == SIZEx - 1) action = 6;
+					else action = 5;
+				}
 			}
-			
-
-			/*if (numi == num_find / SIZEx && numj != num_find % SIZEx - 1) action = 2;*/
 			break;
-		case 4:
+		case 5: // action = 5 передвижение числа на нужную позицию (снизу)
 			if (numj != num_find % SIZEx - 1)
 			{
 				if (step == 0) swap(data[numi_s][numj_s], data[numi_s][numj_s + 1]);
@@ -186,7 +262,121 @@ bool algorithm(string** data, int SIZEx)
 			}
 			else
 			{
-				num_find++;
+				step = 0;
+				if (switcher == 0) num_find++;
+				else num_find += SIZEx;
+				action = 0;
+			}
+			break;
+		case 6: // action = 6 передвижение числа на нужную позицию (последнего в столбце)
+			if (numj != num_find % SIZEx - 1 || numj_s != num_find % SIZEx - 1)
+			{
+				if (step == 0) swap(data[numi_s][numj_s], data[numi_s][numj_s + 1]);
+				else if (step == 1) swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
+				else if (step == 2 || step == 3) swap(data[numi_s][numj_s], data[numi_s][numj_s - 1]);
+				else if (step == 4) swap(data[numi_s][numj_s], data[numi_s - 1][numj_s]);
+
+				if (step < 4) step++;
+				else
+				{
+					step = 0;
+				}
+			}
+			else
+			{
+				step = 0;
+				action = 8;
+			}
+			break;
+		case 7: // action = 7 передвижение последнего числа в строке
+			if (step != SIZEx_for_move_j + 5 + SIZEx_for_move_j)
+			{
+				if (step < SIZEx_for_move_j - 2)
+				{
+					swap(data[numi_s][numj_s], data[numi_s][numj_s - 1]);
+				}
+				else if (step == SIZEx_for_move_j - 2)
+				{
+					swap(data[numi_s][numj_s], data[numi_s - 1][numj_s]);
+				}
+				else if (step < SIZEx_for_move_j + 3)
+				{
+					swap(data[numi_s][numj_s], data[numi_s][numj_s + 1]);
+				}
+				else if (step == SIZEx_for_move_j + 3)
+				{
+					swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
+				}
+				else if (step == SIZEx_for_move_j + 4)
+				{
+					swap(data[numi_s][numj_s], data[numi_s][numj_s - 1]);
+				}
+				else if (step == SIZEx_for_move_j + 5)
+				{
+					swap(data[numi_s][numj_s], data[numi_s - 1][numj_s]);
+				}
+				else if (step < SIZEx_for_move_j + 5 + SIZEx_for_move_j - 1)
+				{
+					swap(data[numi_s][numj_s], data[numi_s][numj_s - 1]);
+				}
+				else if (step == SIZEx_for_move_j + 5 + SIZEx_for_move_j - 1)
+				{
+					swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
+				}
+				step++;
+
+			}
+			else
+			{
+				step = 0;
+				if (switcher == 0) num_find++;
+				else num_find += SIZEx;
+				action = 0;
+			}
+			break;
+		case 8: // action = 8 передвижение последнего числа в столбце
+			if (step != SIZEx_for_move_j + 5 + SIZEx_for_move_j)
+			{
+				if (step < SIZEx_for_move_j - 2)
+				{
+					swap(data[numi_s][numj_s], data[numi_s][numj_s - 1]);
+				}
+				else if (step == SIZEx_for_move_j - 2)
+				{
+					swap(data[numi_s][numj_s], data[numi_s - 1][numj_s]);
+				}
+				else if (step < SIZEx_for_move_j + 3)
+				{
+					swap(data[numi_s][numj_s], data[numi_s][numj_s + 1]);
+				}
+				else if (step == SIZEx_for_move_j + 3)
+				{
+					swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
+				}
+				else if (step == SIZEx_for_move_j + 4)
+				{
+					swap(data[numi_s][numj_s], data[numi_s][numj_s - 1]);
+				}
+				else if (step == SIZEx_for_move_j + 5)
+				{
+					swap(data[numi_s][numj_s], data[numi_s - 1][numj_s]);
+				}
+				else if (step < SIZEx_for_move_j + 5 + SIZEx_for_move_j - 1)
+				{
+					swap(data[numi_s][numj_s], data[numi_s][numj_s - 1]);
+				}
+				else if (step == SIZEx_for_move_j + 5 + SIZEx_for_move_j - 1)
+				{
+					swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
+				}
+				step++;
+
+			}
+			else
+			{
+				step = 0;
+				if (switcher == 0) num_find++;
+				else num_find += SIZEx;
 				action = 0;
 			}
 			break;
