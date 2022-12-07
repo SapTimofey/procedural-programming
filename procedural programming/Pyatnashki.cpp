@@ -24,7 +24,7 @@ bool algorithm(string** data, int SIZEx)
 	int step = 0;
 	int numi = 0, numj = 0;
 	int numi_s = 0, numj_s = 0;
-	bool flag = false;
+	bool flagi = false, flagj = false;
 	int num_find = 1;
 
 	int action = 0;
@@ -49,8 +49,8 @@ bool algorithm(string** data, int SIZEx)
 			
 			cout << endl;
 		}
-		cout << "step = " << step << " action = " << action << " flag = " << flag;
-		Sleep(250);
+		cout << "step = " << step << " action = " << action << " flagi = " << flagi << " flagj = " << flagj << " num_find = " << num_find;
+		Sleep(125);
 
 		for (int i = 0; i < SIZEx; i++)
 		{
@@ -63,8 +63,9 @@ bool algorithm(string** data, int SIZEx)
 					if (numi == SIZEx - 1)
 					{
 						action = 1;
-						flag = true;
+						flagi = true;
 					}
+					if (numj == 0) flagj = true;
 				}
 				if (data[i][j] == " ")
 				{
@@ -74,14 +75,14 @@ bool algorithm(string** data, int SIZEx)
 			}
 		}
 
-		// action = 0 передвижение пропуска к нужному числу 
+		// action = 0 передвижение пропуска к нужному числу (снизу)
 		// action = 1 передвижение пропуска к нужному числу (сверху)
-		// action = 2 передвижение числа на нужную строчку
-		// action = 3 передвижение числа на нужную позицию
+		// action = 2 передвижение числа на нужную строчку (слева)
+		// action = 3 передвижение числа на нужную строчку (справа)
+		// action = 4 передвижение числа на нужную позицию
 		//
 		//
 		//
-
 
 		switch (action)
 		{
@@ -93,49 +94,106 @@ bool algorithm(string** data, int SIZEx)
 				else if (numj_s < numj) swap(data[numi_s][numj_s], data[numi_s][numj_s + 1]);
 				else swap(data[numi_s][numj_s], data[numi_s][numj_s - 1]);
 			}
-			else action = 2;
+			else
+			{
+				if (flagj) action = 3;
+				else action = 2;
+			}
 			break;
 		case 1:
 			if (numi_s != numi - 1 || numj_s != numj)
 			{
-				if (numi_s < numi - 1) swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
+				if (numi_s == numi) swap(data[numi_s][numj_s], data[numi_s - 1][numj_s]);
+				else if (numi_s < numi - 1) swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
 				else if (numj_s < numj) swap(data[numi_s][numj_s], data[numi_s][numj_s + 1]);
 				else swap(data[numi_s][numj_s], data[numi_s][numj_s - 1]);
 			}
-			else action = 2;
-			break;
-		case 2:
-			if (flag)
-			{
-				swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
-				flag = false;
-			}
-			if (step == 0) swap(data[numi_s][numj_s], data[numi_s][numj_s - 1]);
-			else if (step == 1 || step == 2) swap(data[numi_s][numj_s], data[numi_s - 1][numj_s]);
-			else if (step == 3) swap(data[numi_s][numj_s], data[numi_s][numj_s + 1]);
-			if (step < 3) step++;
 			else
 			{
-				action = 0;
+				if (flagj) action = 3;
+				else action = 2;
+			}
+			break;
+		case 2:
+			if (flagi)
+			{
+				swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
+				flagi = false;
+			}
+
+			else if (numi_s != num_find / SIZEx || numi != num_find / SIZEx)
+			{
+				if (step == 0) swap(data[numi_s][numj_s], data[numi_s][numj_s - 1]);
+				else if (step == 1 || step == 2) swap(data[numi_s][numj_s], data[numi_s - 1][numj_s]);
+				else if (step == 3) swap(data[numi_s][numj_s], data[numi_s][numj_s + 1]);
+				else if (step == 4) swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
+
+				if (step < 4) step++;
+				else step = 0;
+			}
+			else
+			{
 				step = 0;
+				flagj = false;
+				action = 4;
 			}
 
 			/*if (numi == num_find / SIZEx && numj != num_find % SIZEx - 1) action = 2;*/
 			break;
+		case 3:
+			if (flagi)
+			{
+				swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
+				flagi = false;
+			}
+			else if (numi_s != num_find / SIZEx || numi != num_find / SIZEx)
+			{
+				if (step == 0) swap(data[numi_s][numj_s], data[numi_s][numj_s + 1]);
+				else if (step == 1 || step == 2) swap(data[numi_s][numj_s], data[numi_s - 1][numj_s]);
+				else if (step == 3) swap(data[numi_s][numj_s], data[numi_s][numj_s - 1]);
+				else if (step == 4) swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
+
+				if (step < 4) step++;
+				else
+				{
+					step = 0;
+					flagj = false;
+				}
+			}
+			else
+			{
+				step = 0;
+				flagj = false;
+				action = 4;
+			}
+			
+
+			/*if (numi == num_find / SIZEx && numj != num_find % SIZEx - 1) action = 2;*/
+			break;
+		case 4:
+			if (numj != num_find % SIZEx - 1)
+			{
+				if (step == 0) swap(data[numi_s][numj_s], data[numi_s][numj_s + 1]);
+				else if (step == 1) swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
+				else if (step == 2 || step == 3) swap(data[numi_s][numj_s], data[numi_s][numj_s - 1]);
+				else if (step == 4) swap(data[numi_s][numj_s], data[numi_s - 1][numj_s]);
+
+				if (step < 4) step++;
+				else
+				{
+					step = 0;
+				}
+			}
+			else
+			{
+				num_find++;
+				action = 0;
+			}
+			break;
 		}
 
-	
-
-		
 		cnt_Enter++;
-
-		
-
-
-
 	}
-	
-
 }
 void Pyatnashki()
 {
