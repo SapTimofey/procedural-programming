@@ -86,7 +86,6 @@ bool algorithm(string** data, int SIZEx)
 					{
 						action = 1;
 					}
-					if (numj == 0) flagj = true;
 				}
 				else if (data[i][j] == " ")
 				{
