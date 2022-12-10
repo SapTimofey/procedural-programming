@@ -37,6 +37,7 @@ bool algorithm(string** data, int SIZEx)
 	{
 		system_cls();
 		int cnt = 1;
+		
 		for (int i = 0; i < SIZEx; i++)
 		{
 			for (int j = 0; j < SIZEx; j++)
@@ -60,7 +61,8 @@ bool algorithm(string** data, int SIZEx)
 			cout << endl;
 		}
 		cnt = 1;
-		cout << "step = " << step << " \naction = " << action << " \nswitcher = " << switcher << " \nnum_find_reserv = " << num_find_reserv << " \nnum_find = ";
+		cout << "Значения до шага:\n";
+		cout << "step = " << step << " \naction = " << action << " \nswitcher = " << switcher << " \nnum_find_reserv = " << num_find_reserv << "\nnumi = " << numi << " numj = " << numj << "\nnumi_s = " << numi_s << " numj_s = " << numj_s << " \nnum_find = ";
 		setColor(14, TextBackgroundColor);
 		cout << num_find;
 		setColor(TextColor, TextBackgroundColor);
@@ -68,7 +70,7 @@ bool algorithm(string** data, int SIZEx)
 
 		/*if (num_find / SIZEx != SIZEx - 1) Sleep(100);
 		else ExitToMenu();*/
-		Sleep(100);
+		/*Sleep(100);*/
 		/*ExitToMenu();*/
 
 		for (int i = 0; i < SIZEx; i++)
@@ -136,12 +138,7 @@ bool algorithm(string** data, int SIZEx)
 			}
 			else
 			{
-				if (numj == SIZEx - 1)
-				{
-					if (numi_s >= num_find / SIZEx) action = 3;
-					else action = 4;
-				}
-				else action = 2;
+				action = 2;
 			}
 			break;
 		case 1: // action = 1 передвижение пропуска к нужному числу (сверху)
@@ -162,12 +159,7 @@ bool algorithm(string** data, int SIZEx)
 			else
 			{
 				swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
-				if (numj == SIZEx - 1)
-				{
-					if (numi_s >= num_find / SIZEx) action = 3;
-					else action = 4;
-				}
-				else action = 2;
+				action = 2;
 			}
 			break;
 		case 2: // action = 2 передвижение числа вправо до конца
@@ -389,6 +381,15 @@ bool algorithm(string** data, int SIZEx)
 		}
 
 		cnt_Enter++;
+		cout << "\nЗначения после шага:\n";
+		cout << "step = " << step << " \naction = " << action << " \nswitcher = " << switcher << " \nnum_find_reserv = " << num_find_reserv << "\nnumi = " << numi << " numj = " << numj << "\nnumi_s = " << numi_s << " numj_s = " << numj_s << " \nnum_find = ";
+		setColor(14, TextBackgroundColor);
+		cout << num_find;
+		setColor(TextColor, TextBackgroundColor);
+		cout << endl;
+
+		/*ExitToMenu();*/
+		Sleep(100);
 	}
 }
 
