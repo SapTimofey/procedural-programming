@@ -9,10 +9,11 @@ extern int KeyEnter;
 extern int KeyUp;
 extern int KeyDown;
 
-bool algorithm(string** data, int SIZEx)
+bool algorithm(string** data, int SIZEx, int animation)
 {
 	unsigned int start_time = clock(); // Время начала запуска алгоритма
-	int cnt_Enter = 0;                 // Счётчик количества перестановок
+	int cnt_Enter = 0;                 // Счётчик перестановок
+	int cnt = 1;                       // Переменная для проверки, что число стоит на нужном месте
 
 	int step = 0;                 // Переключатель шага в действии
 	int numi = 0, numj = 0;       // Координаты искомого числа: i - по вертикали, j - по горизонтали (от 0 до SIZEx - 1)
@@ -41,43 +42,48 @@ bool algorithm(string** data, int SIZEx)
 
 	while (true)
 	{
-		system_cls();
-		int cnt = 1;
-		
-		// Вывод поля на экран
-		for (int i = 0; i < SIZEx; i++)
+		cnt = 1;
+
+		// Вывод поля на экран с анимацией
+		if (animation == 1)
 		{
-			for (int j = 0; j < SIZEx; j++)
+			system_cls();
+			for (int i = 0; i < SIZEx; i++)
 			{
-				if (data[i][j] == to_string(cnt))
+				for (int j = 0; j < SIZEx; j++)
 				{
-					setColor(2, TextBackgroundColor);
-					cout << setw(4) << data[i][j];
-					setColor(TextColor, TextBackgroundColor);
+					if (data[i][j] == to_string(cnt))
+					{
+						setColor(2, TextBackgroundColor);
+						cout << setw(4) << data[i][j];
+						setColor(TextColor, TextBackgroundColor);
+					}
+					else if (data[i][j] == to_string(num_find))
+					{
+						setColor(14, TextBackgroundColor);
+						cout << setw(4) << data[i][j];
+						setColor(TextColor, TextBackgroundColor);
+					}
+					else cout << setw(4) << data[i][j];
+					cnt++;
 				}
-				else if (data[i][j] == to_string(num_find))
-				{
-					setColor(14, TextBackgroundColor);
-					cout << setw(4) << data[i][j];
-					setColor(TextColor, TextBackgroundColor);
-				}
-				else cout << setw(4) << data[i][j];
-				cnt++;
+				cout << endl;
 			}
-			
-			cout << endl;
 		}
 
 		// Сбор поля до 3 х 3
 		if (SIZEx_for_move_i > 3 || SIZEx_for_move_j > 3)
 		{
-			cout << "Значения до шага:\n";
-			cout << "step = " << step << " \naction = " << action << " \nswitcher = " << switcher << " \nnum_find_reserv = " << num_find_reserv << "\nnumi = " << numi << " numj = " << numj << "\nnumi_s = " << numi_s << " numj_s = " << numj_s << " \nnum_find = ";
-			setColor(14, TextBackgroundColor);
-			cout << num_find;
-			setColor(TextColor, TextBackgroundColor);
-			cout << endl;
-
+			if (animation == 1)
+			{
+				cout << "Значения до шага:\n";
+				cout << "step = " << step << " \naction = " << action << " \nswitcher = " << switcher << " \nnum_find_reserv = " << num_find_reserv << "\nnumi = " << numi << " numj = " << numj << "\nnumi_s = " << numi_s << " numj_s = " << numj_s << " \nnum_find = ";
+				setColor(14, TextBackgroundColor);
+				cout << num_find;
+				setColor(TextColor, TextBackgroundColor);
+				cout << endl;
+			}
+			
 			// Опредиления координат искомого числа и пробела
 			for (int i = 0; i < SIZEx; i++)
 			{
@@ -393,19 +399,41 @@ bool algorithm(string** data, int SIZEx)
 			}
 
 			cnt_Enter++;
-			cout << "\nЗначения после шага:\n";
-			cout << "step = " << step << " \naction = " << action << " \nswitcher = " << switcher << " \nnum_find_reserv = " << num_find_reserv << "\nnumi = " << numi << " numj = " << numj << "\nnumi_s = " << numi_s << " numj_s = " << numj_s << " \nnum_find = ";
-			setColor(14, TextBackgroundColor);
-			cout << num_find;
-			setColor(TextColor, TextBackgroundColor);
-			cout << endl;
 
-			/*ExitToMenu();*/
-			Sleep(100);
+			if (animation == 1)
+			{
+				cout << "\nЗначения после шага:\n";
+				cout << "step = " << step << " \naction = " << action << " \nswitcher = " << switcher << " \nnum_find_reserv = " << num_find_reserv << "\nnumi = " << numi << " numj = " << numj << "\nnumi_s = " << numi_s << " numj_s = " << numj_s << " \nnum_find = ";
+				setColor(14, TextBackgroundColor);
+				cout << num_find;
+				setColor(TextColor, TextBackgroundColor);
+				cout << endl;
+
+				/*ExitToMenu();*/
+				Sleep(100);
+			}
 		}
 		else
 		{
+			cnt = 1;
+			system_cls();
+			for (int i = 0; i < SIZEx; i++)
+			{
+				for (int j = 0; j < SIZEx; j++)
+				{
+					if (data[i][j] == to_string(cnt))
+					{
+						setColor(2, TextBackgroundColor);
+						cout << setw(4) << data[i][j];
+						setColor(TextColor, TextBackgroundColor);
+					}
+					else cout << setw(4) << data[i][j];
+					cnt++;
+				}
+				cout << endl;
+			}
 			ExitToMenu();
+			return false;
 		}
 	}
 }
@@ -608,7 +636,46 @@ void Pyatnashki()
 		}
 		else if (type == 1)
 		{
-			if (algorithm(data, SIZEx)) return;
+			int animation = 0;
+			string cons_out3[2] = { "Без анимации", "С анимацией" };
+			do
+			{
+				system_cls();
+				cout << "Используйте:\n- " << KEY.Key_translation(KeyUp) << ", " << KEY.Key_translation(KeyDown) << " - для передвижения\n- " << KEY.Key_translation(KeyEnter) << " - для выбора\n- " << KEY.Key_translation(KeyExit) << " - для выхода\n----------Выбор поля------------" << endl;
+				for (int i = 0; i < 2; i++)
+				{
+					if (i == type)
+					{
+						setColor(TextBackgroundColor, TextColor);
+						cout << cons_out2[i];
+						setColor(TextColor, TextBackgroundColor);
+						cout << endl;
+					}
+					else cout << cons_out2[i] << endl;
+				}
+				for (int i = 0; i < 2; i++)
+				{
+					if (i == animation)
+					{
+						setColor(TextBackgroundColor, TextColor);
+						cout << cons_out3[i];
+						setColor(TextColor, TextBackgroundColor);
+						cout << endl;
+					}
+					else cout << cons_out3[i] << endl;
+				}
+
+				key = KEY.get_key();
+				if (key == KeyDown && animation < 2 - 1) animation++;
+				if (key == KeyUp && animation > 0) animation--;
+				if (key == KeyExit)
+				{
+					system_cls();
+					return;
+				}
+			} while (key != KeyEnter);
+			if (algorithm(data, SIZEx, animation)) return;
+			else flag_R = true;
 		}
 		else
 		{
