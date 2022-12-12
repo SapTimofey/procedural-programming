@@ -67,16 +67,17 @@ bool algorithm(string** data, int SIZEx)
 			
 			cout << endl;
 		}
-		
-		cout << "Значения до шага:\n";
-		cout << "step = " << step << " \naction = " << action << " \nswitcher = " << switcher << " \nnum_find_reserv = " << num_find_reserv << "\nnumi = " << numi << " numj = " << numj << "\nnumi_s = " << numi_s << " numj_s = " << numj_s << " \nnum_find = ";
-		setColor(14, TextBackgroundColor);
-		cout << num_find;
-		setColor(TextColor, TextBackgroundColor);
-		cout << endl;
 
+		// Сбор поля до 3 х 3
 		if (SIZEx_for_move_i > 3 || SIZEx_for_move_j > 3)
 		{
+			cout << "Значения до шага:\n";
+			cout << "step = " << step << " \naction = " << action << " \nswitcher = " << switcher << " \nnum_find_reserv = " << num_find_reserv << "\nnumi = " << numi << " numj = " << numj << "\nnumi_s = " << numi_s << " numj_s = " << numj_s << " \nnum_find = ";
+			setColor(14, TextBackgroundColor);
+			cout << num_find;
+			setColor(TextColor, TextBackgroundColor);
+			cout << endl;
+
 			// Опредиления координат искомого числа и пробела
 			for (int i = 0; i < SIZEx; i++)
 			{
