@@ -11,34 +11,37 @@ extern int KeyDown;
 
 bool algorithm(string** data, int SIZEx, int animation)
 {
-	//unsigned int start_time = clock(); // Время начала запуска алгоритма
+	unsigned int start_time = clock(); // Время начала запуска алгоритма
 	int cnt_Enter = 0;                 // Счётчик перестановок
 	int cnt = 1;                       // Переменная для проверки, что число стоит на нужном месте
 
-	int step = 0;                 // Переключатель шага в действии
-	int numi = 0, numj = 0;       // Координаты искомого числа: i - по вертикали, j - по горизонтали (от 0 до SIZEx - 1)
-	int numi_s = 0, numj_s = 0;   // Координаты пробела: i - по вертикали, j - по горизонтали (от 0 до SIZEx - 1)
-	int num_find = 1;             // Искомое число
+	int step = 0;                   // Переключатель шага в действии
+	int numi = 0, numj = 0;         // Координаты искомого числа: i - по вертикали, j - по горизонтали (от 0 до SIZEx - 1)
+	int numi_s = 0, numj_s = 0;     // Координаты пробела: i - по вертикали, j - по горизонтали (от 0 до SIZEx - 1)
+	int num_find = 1;               // Искомое число
 
-	int SIZEx_for_move_j = SIZEx; // Переменная для переопредиления размера поля при переключении на сбор строки
-	int SIZEx_for_move_i = SIZEx; // Переменная для переопредиления размера поля при переключении на сбор столбца
-	int num_find_reserv = 
-		SIZEx + 1;                // Переменная для переопредиления искомого числа при переключении между сбором строки или столбца
+	int SIZEx_for_move_j = SIZEx;   // Переменная для переопредиления размера поля при переключении на сбор строки
+	int SIZEx_for_move_i = SIZEx;   // Переменная для переопредиления размера поля при переключении на сбор столбца
+	int num_find_reserv =
+		SIZEx + 1;                  // Переменная для переопредиления искомого числа при переключении между сбором строки или столбца
 
-	int switcher = 0;             // Переключение между сбором столбца или строки:
-								  // switcher = 0 сбор строки
-								  // switcher = 1 сбор столбца
+	int numi_s_reserv = 0;
+	int numj_s_reserv = 0;
 
-	int action = 0;               // Переключение между действиями:
-								  // action = 0 передвижение пропуска к нужному числу (снизу)
-								  // action = 1 передвижение пропуска к нужному числу (сверху)
-							      // action = 2 передвижение числа вправо до конца
-								  // action = 3 передвижение числа на нужную строчку вверх (слева)
-								  // action = 4 передвижение числа на нужную строчку вниз (слева)
-								  // action = 5 передвижение числа на нужную позицию (снизу)
-								  // action = 6 передвижение числа на нужную позицию (последнего в столбце)
-								  // action = 7 передвижение последнего числа в строке
-								  // action = 8 передвижение последнего числа в столбце
+	int switcher = 0;               // Переключение между сбором столбца или строки:
+									// switcher = 0 сбор строки
+									// switcher = 1 сбор столбца
+
+	int action = 0;                 // Переключение между действиями:
+									// action = 0 передвижение пропуска к нужному числу (снизу)
+									// action = 1 передвижение пропуска к нужному числу (сверху)
+									// action = 2 передвижение числа вправо до конца
+									// action = 3 передвижение числа на нужную строчку вверх (слева)
+									// action = 4 передвижение числа на нужную строчку вниз (слева)
+									// action = 5 передвижение числа на нужную позицию (снизу)
+									// action = 6 передвижение числа на нужную позицию (последнего в столбце)
+									// action = 7 передвижение последнего числа в строке
+									// action = 8 передвижение последнего числа в столбце
 
 	try
 	{
@@ -74,7 +77,7 @@ bool algorithm(string** data, int SIZEx, int animation)
 			}
 
 			// Сбор поля до 3 х 3
-			if (SIZEx_for_move_i > 3 || SIZEx_for_move_j > 3)
+			if (SIZEx_for_move_i > 3 || SIZEx_for_move_j > 2)
 			{
 				if (animation == 1)
 				{
@@ -114,7 +117,7 @@ bool algorithm(string** data, int SIZEx, int animation)
 				case 0: // action = 0 передвижение пропуска к нужному числу (снизу)
 					if ((numi == num_find / SIZEx && numj == num_find % SIZEx - 1) || (numj == SIZEx - 1 && num_find % SIZEx == 0 && numi == num_find / SIZEx - 1))
 					{
-						if (num_find == SIZEx * (SIZEx - 1) + 1)
+						if (num_find == SIZEx * (SIZEx - 1) + 1 + SIZEx - SIZEx_for_move_i)
 						{
 							num_find = num_find_reserv + 1;
 							num_find_reserv += SIZEx + 1;
@@ -147,7 +150,7 @@ bool algorithm(string** data, int SIZEx, int animation)
 					if ((numi == num_find / SIZEx && numj == num_find % SIZEx - 1) || (numj == SIZEx - 1 && num_find % SIZEx == 0 && numi == num_find / SIZEx - 1))
 					{
 						action = 0;
-						if (num_find == SIZEx * (SIZEx - 1) + 1)
+						if (num_find == SIZEx * (SIZEx - 1) + 1 + SIZEx - SIZEx_for_move_i)
 						{
 							num_find = num_find_reserv + 1;
 							num_find_reserv += SIZEx + 1;
@@ -410,17 +413,153 @@ bool algorithm(string** data, int SIZEx, int animation)
 					cout << num_find;
 					setColor(TextColor, TextBackgroundColor);
 					cout << endl;
+					cout << "SIZEx_for_move_i = " << SIZEx_for_move_i << endl;
 
-					if (num_find == 10) ExitToMenu();
+					if (num_find == 22) ExitToMenu();
 					/*ExitToMenu();*/
-					else Sleep(100);
+					else Sleep(75);
 				}
 			}
 			else
 			{
 				cnt = 1;
-				/*system_cls();*/
+
+				// Вывод поля на экран с анимацией
+				system_cls();
 				for (int i = 0; i < SIZEx; i++)
+				{
+					for (int j = 0; j < SIZEx; j++)
+					{
+						if (data[i][j] == to_string(cnt))
+						{
+							setColor(2, TextBackgroundColor);
+							cout << setw(4) << data[i][j];
+							setColor(TextColor, TextBackgroundColor);
+						}
+						else if (data[i][j] == to_string(num_find))
+						{
+							setColor(14, TextBackgroundColor);
+							cout << setw(4) << data[i][j];
+							setColor(TextColor, TextBackgroundColor);
+						}
+						else cout << setw(4) << data[i][j];
+						cnt++;
+					}
+					cout << endl;
+				}
+
+				num_find = num_find_reserv + SIZEx;
+
+				// Опредиления координат искомого числа и пробела
+				for (int i = 0; i < SIZEx; i++)
+				{
+					for (int j = 0; j < SIZEx; j++)
+					{
+						if (data[i][j] == " " && numi_s_reserv == 0 && numj_s_reserv == 0)
+						{
+							numi_s_reserv = i;
+							numj_s_reserv = j;
+						}
+						else if (data[i][j] == " ")
+						{
+							numi_s = i;
+							numj_s = j;
+						}
+						else if (data[i][j] == to_string(num_find))
+						{
+							numi = i;
+							numj = j;
+							if (numi == SIZEx - 1)
+							{
+								action = 1;
+							}
+						}
+					}
+				}
+				
+				// Выбор действий
+				switch (action)
+				{
+				case 0: // action = 0 передвижение пропуска к нужному числу (снизу)
+					if (numi_s != numi + 1 || numj_s != numj)
+					{
+						if (numi_s > numi + 1) swap(data[numi_s][numj_s], data[numi_s - 1][numj_s]);
+						else if (numi_s < numi + 1) swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
+						else if (numj_s < numj) swap(data[numi_s][numj_s], data[numi_s][numj_s + 1]);
+						else swap(data[numi_s][numj_s], data[numi_s][numj_s - 1]);
+					}
+					else action = 5;
+					break;
+				case 1: // action = 1 передвижение пропуска к нужному числу (сверху)
+					if (numi_s != numi - 1 || numj_s != numj)
+					{
+						if (numi_s == numi) swap(data[numi_s][numj_s], data[numi_s - 1][numj_s]);
+						else if (numi_s < numi - 1) swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
+						else if (numj_s < numj) swap(data[numi_s][numj_s], data[numi_s][numj_s + 1]);
+						else swap(data[numi_s][numj_s], data[numi_s][numj_s - 1]);
+					}
+					else
+					{
+						swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
+						action = 5;
+					}
+					break;
+				case 5: // action = 5 передвижение числа на нужную позицию (снизу)
+					if (numj != numj_s_reserv)
+					{
+						if (step == 0) swap(data[numi_s][numj_s], data[numi_s][numj_s + 1]);
+						else if (step == 1) swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
+						else if (step == 2 || step == 3) swap(data[numi_s][numj_s], data[numi_s][numj_s - 1]);
+						else if (step == 4) swap(data[numi_s][numj_s], data[numi_s - 1][numj_s]);
+
+						if (step < 4) step++;
+						else
+						{
+							step = 0;
+						}
+					}
+					else
+					{
+						step = 0;
+						action = 0;
+					}
+					break;
+				}
+				//if (numi != numi_s_reserv || numj != numj_s_reserv)
+				//{
+				//	if (step == 0) swap(data[numi_s][numj_s], data[numi_s][numj_s + 1]);
+				//	else if (step == 1) swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
+				//	else if (step == 2) swap(data[numi_s][numj_s], data[numi_s][numj_s - 1]);
+				//	else if (step == 3) swap(data[numi_s][numj_s], data[numi_s - 1][numj_s]);
+
+				//	if (step < 3) step++;
+				//	else
+				//	{
+				//		step = 0;
+				//	}
+				//}
+				//else
+				//{
+				//	/*system_cls();*/
+				//	for (int i = 0; i < SIZEx; i++)
+				//	{
+				//		for (int j = 0; j < SIZEx; j++)
+				//		{
+				//			if (data[i][j] == to_string(cnt))
+				//			{
+				//				setColor(2, TextBackgroundColor);
+				//				cout << setw(4) << data[i][j];
+				//				setColor(TextColor, TextBackgroundColor);
+				//			}
+				//			else cout << setw(4) << data[i][j];
+				//			cnt++;
+				//		}
+				//		cout << endl;
+				//	}
+				//	ExitToMenu();
+				//	return false;
+				//}
+				/*for (int i = 0; i < SIZEx; i++)
 				{
 					for (int j = 0; j < SIZEx; j++)
 					{
@@ -434,9 +573,8 @@ bool algorithm(string** data, int SIZEx, int animation)
 						cnt++;
 					}
 					cout << endl;
-				}
+				}*/
 				ExitToMenu();
-				return false;
 			}
 		}
 	}
@@ -520,68 +658,68 @@ void Pyatnashki()
 		}
 		else SIZEx += 2;
 
-		/*string** data = new string * [SIZEx];
+		string** data = new string * [SIZEx];
 		for (int i = 0; i < SIZEx; i++)
-			data[i] = new string[SIZEx];*/
+			data[i] = new string[SIZEx];
 
-		string** data = new string * [5];
+		/*string** data = new string * [5];
 		for (int i = 0; i < 5; i++)
-			data[i] = new string[5];
-		/*data[0][0] = "3";
-		data[0][1] = "2";
-		data[0][2] = "20";
-		data[0][3] = "1";
-		data[0][4] = "13";
-		data[1][0] = "18";
-		data[1][1] = "9";
-		data[1][2] = "17";
-		data[1][3] = "14";
-		data[1][4] = "16";
-		data[2][0] = "11";
-		data[2][1] = "5";
-		data[2][2] = "7";
-		data[2][3] = "23";
-		data[2][4] = "12";
-		data[3][0] = "24";
-		data[3][1] = "8";
-		data[3][2] = "19";
-		data[3][3] = "15";
-		data[3][4] = "6";
-		data[4][0] = " ";
-		data[4][1] = "10";
-		data[4][2] = "21";
-		data[4][3] = "4";
-		data[4][4] = "22";*/
+			data[i] = new string[5];*/
+			/*data[0][0] = "3";
+			data[0][1] = "2";
+			data[0][2] = "20";
+			data[0][3] = "1";
+			data[0][4] = "13";
+			data[1][0] = "18";
+			data[1][1] = "9";
+			data[1][2] = "17";
+			data[1][3] = "14";
+			data[1][4] = "16";
+			data[2][0] = "11";
+			data[2][1] = "5";
+			data[2][2] = "7";
+			data[2][3] = "23";
+			data[2][4] = "12";
+			data[3][0] = "24";
+			data[3][1] = "8";
+			data[3][2] = "19";
+			data[3][3] = "15";
+			data[3][4] = "6";
+			data[4][0] = " ";
+			data[4][1] = "10";
+			data[4][2] = "21";
+			data[4][3] = "4";
+			data[4][4] = "22";*/
 
-		data[0][0] = "15";
-		data[0][1] = "12";
-		data[0][2] = "24";
-		data[0][3] = "3";
-		data[0][4] = "9";
-		data[1][0] = "14";
-		data[1][1] = "4";
-		data[1][2] = "8";
-		data[1][3] = "13";
-		data[1][4] = "21";
-		data[2][0] = "18";
-		data[2][1] = "16";
-		data[2][2] = " ";
-		data[2][3] = "20";
-		data[2][4] = "10";
-		data[3][0] = "5";
-		data[3][1] = "23";
-		data[3][2] = "19";
-		data[3][3] = "2";
-		data[3][4] = "6";
-		data[4][0] = "11";
-		data[4][1] = "17";
-		data[4][2] = "7";
-		data[4][3] = "22";
-		data[4][4] = "1";
+			/*data[0][0] = "15";
+			data[0][1] = "12";
+			data[0][2] = "24";
+			data[0][3] = "3";
+			data[0][4] = "9";
+			data[1][0] = "14";
+			data[1][1] = "4";
+			data[1][2] = "8";
+			data[1][3] = "13";
+			data[1][4] = "21";
+			data[2][0] = "18";
+			data[2][1] = "16";
+			data[2][2] = " ";
+			data[2][3] = "20";
+			data[2][4] = "10";
+			data[3][0] = "5";
+			data[3][1] = "23";
+			data[3][2] = "19";
+			data[3][3] = "2";
+			data[3][4] = "6";
+			data[4][0] = "11";
+			data[4][1] = "17";
+			data[4][2] = "7";
+			data[4][3] = "22";
+			data[4][4] = "1";*/
 
 		string* num = new string[SIZEx * SIZEx];
 		string* check_ = new string[SIZEx * SIZEx];
-		
+
 		int numi = 0, numj = 0;
 
 		for (int i = 0; i < SIZEx * SIZEx; i++)
@@ -599,43 +737,43 @@ void Pyatnashki()
 		string check;
 
 		// Создание и проверка комбинации на существование решения
-		//do
-		//{
-		//	sum = 0, y = 0, i_s = 0, x_index = 0, x_index_reserv = 0, x = 0, num1 = 0, check = ""; // Сброс значений
+		do
+		{
+			sum = 0, y = 0, i_s = 0, x_index = 0, x_index_reserv = 0, x = 0, num1 = 0, check = ""; // Сброс значений
 
-		//	for (int i = 0; i < SIZEx; i++)
-		//	{
-		//		for (int j = 0; j < SIZEx; j++)
-		//		{
-		//			do num1 = rand() % (SIZEx * SIZEx); while (check.find("(" + num[num1] + ")") != -1);
-		//			check += "(" + num[num1] + ")";
-		//			data[i][j] = num[num1];
-		//			check_[y] = num[num1];
-		//			if (check_[y] == " ") i_s = i + 1;
-		//			y++;
-		//		}
-		//	}
-		//	for (int i = 0; i < SIZEx * SIZEx; i++)
-		//	{
-		//		if (check_[i] != " ")
-		//		{
-		//			x = stoi(check_[i]);
-		//			x_index = i;
-		//		}
-		//		else x = 0;
-		//		x_index_reserv = x_index;
-		//		for (x_index; x_index < SIZEx * SIZEx; x_index++)
-		//		{
-		//			if (check_[x_index] != " " && x > stoi(check_[x_index]) && x_index_reserv < x_index) sum++;
-		//			/*cout << "x_index = " << x_index << ", x_index_reserv = " << x_index_reserv << ", x = " << x << ", i_s = " << i_s << ", sum = " << sum << endl;*/
-		//		}
-		//		x_index = x_index_reserv + 1;
-		//		/*cout << endl;*/
-		//	}
-		//	sum += i_s;
-		//	/*cout << "sum = " << sum << endl << endl;*/
-		//} while (sum % 2 == 1);
-		
+			for (int i = 0; i < SIZEx; i++)
+			{
+				for (int j = 0; j < SIZEx; j++)
+				{
+					do num1 = rand() % (SIZEx * SIZEx); while (check.find("(" + num[num1] + ")") != -1);
+					check += "(" + num[num1] + ")";
+					data[i][j] = num[num1];
+					check_[y] = num[num1];
+					if (check_[y] == " ") i_s = i + 1;
+					y++;
+				}
+			}
+			for (int i = 0; i < SIZEx * SIZEx; i++)
+			{
+				if (check_[i] != " ")
+				{
+					x = stoi(check_[i]);
+					x_index = i;
+				}
+				else x = 0;
+				x_index_reserv = x_index;
+				for (x_index; x_index < SIZEx * SIZEx; x_index++)
+				{
+					if (check_[x_index] != " " && x > stoi(check_[x_index]) && x_index_reserv < x_index) sum++;
+					/*cout << "x_index = " << x_index << ", x_index_reserv = " << x_index_reserv << ", x = " << x << ", i_s = " << i_s << ", sum = " << sum << endl;*/
+				}
+				x_index = x_index_reserv + 1;
+				/*cout << endl;*/
+			}
+			sum += i_s;
+			/*cout << "sum = " << sum << endl << endl;*/
+		} while (sum % 2 == 1);
+
 		delete[] check_;
 		delete[] num;
 
@@ -721,7 +859,7 @@ void Pyatnashki()
 		else if (type == 1)
 		{
 			int animation = 0;
-			/*string cons_out3[2] = { "Без анимации", "С анимацией" };
+			string cons_out3[2] = { "Без анимации", "С анимацией" };
 			do
 			{
 				system_cls();
@@ -757,7 +895,7 @@ void Pyatnashki()
 					system_cls();
 					return;
 				}
-			} while (key != KeyEnter);*/
+			} while (key != KeyEnter);
 			system_cls();
 			cnt = 1;
 			for (int i = 0; i < SIZEx; i++)
@@ -776,8 +914,7 @@ void Pyatnashki()
 				cout << endl;
 			}
 			cout << "-------------------------------------" << endl;
-			
-			animation = 1;
+
 			if (algorithm(data, SIZEx, animation)) return;
 			else flag_R = true;
 		}
