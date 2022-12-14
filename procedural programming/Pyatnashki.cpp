@@ -73,7 +73,7 @@ bool algorithm(string** data, int SIZEx, int animation)
 					else cout << setw(4) << data[i][j];
 					cnt++;
 				}
-				cout << endl;
+				cout << "\n";
 			}
 		}
 
@@ -87,8 +87,7 @@ bool algorithm(string** data, int SIZEx, int animation)
 				setColor(14, TextBackgroundColor);
 				cout << num_find;
 				setColor(TextColor, TextBackgroundColor);
-				cout << endl;
-				cout << "SIZEx_for_move_i = " << SIZEx_for_move_i << endl;
+				cout << "\nSIZEx_for_move_i = " << SIZEx_for_move_i << "\n";
 			}
 
 			// Опредиления координат искомого числа и пробела
@@ -412,13 +411,11 @@ bool algorithm(string** data, int SIZEx, int animation)
 				setColor(14, TextBackgroundColor);
 				cout << num_find;
 				setColor(TextColor, TextBackgroundColor);
-				cout << endl;
-				cout << "SIZEx_for_move_i = " << SIZEx_for_move_i << endl;
-
-
+				cout << "\nSIZEx_for_move_i = " << SIZEx_for_move_i << "\n";
 				Sleep(75);
 			}
 		}
+		// Сбор оставшегося поля
 		else
 		{
 			if (numj_reserv == SIZEx - 3) num_find = num_find_reserv + SIZEx;
@@ -430,7 +427,7 @@ bool algorithm(string** data, int SIZEx, int animation)
 				setColor(14, TextBackgroundColor);
 				cout << num_find;
 				setColor(TextColor, TextBackgroundColor);
-				cout << endl;
+				cout << "\n";
 			}
 
 			// Опредиления координат искомого числа и пробела
@@ -645,7 +642,7 @@ bool algorithm(string** data, int SIZEx, int animation)
 							cout << endl;
 						}
 						cout << "Готово!\n" << "Количество перестановок: " << cnt_Enter << "\nВремя сборки: " << (end_time - start_time) / 1000.0 << " секунд";
-						if (animation) cout << " (~" << ((end_time - start_time) / 1000.0) - (0.132 * cnt_Enter) << " без учёта пауз и отрисовки)";
+						if (animation) cout << " (~" << ((end_time - start_time) / 1000.0) - (0.075 * cnt_Enter) << " без учёта пауз)";
 
 						cout << "\nИспользуйте:\n- ESC - для выхода\n- R - для рестарта\n";
 
@@ -700,7 +697,7 @@ bool algorithm(string** data, int SIZEx, int animation)
 							}
 
 							cout << "Не удалось решить.\n" << "Количество перестановок: " << cnt_Enter << "\nВремя сборки: " << (end_time - start_time) / 1000.0 << " секунд";
-							if (animation) cout << " (~" << ((end_time - start_time) / 1000.0) - (0.132 * cnt_Enter) << " без учёта пауз и отрисовки)";
+							if (animation) cout << " (~" << ((end_time - start_time) / 1000.0) - (0.075 * cnt_Enter) << " без учёта пауз и отрисовки)";
 
 							cout << "\nИспользуйте:\n- ESC - для выхода\n- R - для рестарта\n";
 
@@ -736,11 +733,12 @@ bool algorithm(string** data, int SIZEx, int animation)
 				setColor(14, TextBackgroundColor);
 				cout << num_find;
 				setColor(TextColor, TextBackgroundColor);
-				cout << endl;
+				cout << "\n";
 				Sleep(75);
 			}
 
 		}
+
 		cnt_Enter++;
 	}
 }
@@ -801,54 +799,6 @@ void Pyatnashki()
 		string** data = new string * [SIZEx];
 		for (int i = 0; i < SIZEx; i++)
 			data[i] = new string[SIZEx];
-
-		/*string** data = new string * [4];
-		for (int i = 0; i < 4; i++)
-			data[i] = new string[4];*/
-		/*data[0][0] = "3";
-		data[0][1] = "2";
-		data[0][2] = "20";
-		data[0][3] = "1";
-		data[0][4] = "13";
-		data[1][0] = "18";
-		data[1][1] = "9";
-		data[1][2] = "17";
-		data[1][3] = "14";
-		data[1][4] = "16";
-		data[2][0] = "11";
-		data[2][1] = "5";
-		data[2][2] = "7";
-		data[2][3] = "23";
-		data[2][4] = "12";
-		data[3][0] = "24";
-		data[3][1] = "8";
-		data[3][2] = "19";
-		data[3][3] = "15";
-		data[3][4] = "6";
-		data[4][0] = " ";
-		data[4][1] = "10";
-		data[4][2] = "21";
-		data[4][3] = "4";
-		data[4][4] = "22";*/
-
-		/*data[0][0] = "15";
-		data[0][1] = "13";
-		data[0][2] = "4";
-		data[0][3] = "7";
-		data[1][0] = "5";
-		data[1][1] = "3";
-		data[1][2] = "2";
-		data[1][3] = "12";
-		data[2][0] = "9";
-		data[2][1] = "11";
-		data[2][2] = "8";
-		data[2][3] = "6";
-		data[3][0] = " ";
-		data[3][1] = "14";
-		data[3][2] = "1";
-		data[3][3] = "10";*/
-
-
 
 		string* num = new string[SIZEx * SIZEx];
 		string* check_ = new string[SIZEx * SIZEx];
@@ -1038,12 +988,14 @@ void Pyatnashki()
 		}
 		else if (type == 1)
 		{
+			key = 0;
 			int animation = 0;
 			string cons_out3[2] = { "Без анимации", "С анимацией" };
+			bool flag = true;
 			do
 			{
 				system_cls();
-				cout << "Используйте:\n- " << KEY.Key_translation(KeyUp) << ", " << KEY.Key_translation(KeyDown) << " - для передвижения\n- " << KEY.Key_translation(KeyEnter) << " - для выбора\n- " << KEY.Key_translation(KeyExit) << " - для выхода\n----------Выбор режима игры------------" << endl;
+				cout << "Используйте:\n- " << KEY.Key_translation(KeyUp) << ", " << KEY.Key_translation(KeyDown) << " - для передвижения\n- " << KEY.Key_translation(KeyEnter) << " - для выбора\n- " << KEY.Key_translation(KeyExit) << " - для выхода\n-------Выбор режима игры--------" << endl;
 				for (int i = 0; i < 2; i++)
 				{
 					if (i == type)
@@ -1061,12 +1013,18 @@ void Pyatnashki()
 					if (i == animation)
 					{
 						setColor(TextBackgroundColor, TextColor);
-						cout << cons_out3[i];
+						if (key == KeyEnter)
+						{
+							if (SIZEx > 10 && i == 1) cout << cons_out3[i] << " - Нельзя использовать при размере поля большего 10 х 10.";
+							else flag = false;
+						}
+						else cout << cons_out3[i];
 						setColor(TextColor, TextBackgroundColor);
 						cout << endl;
 					}
 					else cout << cons_out3[i] << endl;
 				}
+				if (!flag) break;
 
 				key = KEY.get_key();
 				if (key == KeyDown && animation < 2 - 1) animation++;
@@ -1076,7 +1034,7 @@ void Pyatnashki()
 					system_cls();
 					return;
 				}
-			} while (key != KeyEnter);
+			} while (true);
 			system_cls();
 
 			cout << "Размер поля: " << SIZEx << " x " << SIZEx << endl;
@@ -1099,7 +1057,6 @@ void Pyatnashki()
 			for (int i = 0; i < SIZEx; i++)
 				cout << "----";
 			cout << endl;
-			cout << "sum = " << sum << endl;
 
 			if (algorithm(data, SIZEx, animation)) return;
 			else flag_R = true;
@@ -1267,12 +1224,8 @@ void Pyatnashki()
 						delete[] data[i];
 					delete[] data;
 
-					cout << "Игра пройдена!\n" << "Количество перестановок: " << cnt_Enter << "\nВремя игры: " << (end_time - start_time) / 1000.0 << " секунд";
-					/*if ((end_time - start_time) / 1000.0 >= 60)
-					{
-						cout << ((end_time - start_time) / 1000) / 60 << " минут " << ((end_time - start_time) % 60) / 1000.0 << " секунд" << endl;
-					}*/
-					cout << endl;
+					cout << "Игра пройдена!\n" << "Количество перестановок: " << cnt_Enter << "\nВремя игры: " << (end_time - start_time) / 1000.0 << " секунд\n";
+
 					cnt_Enter = 0;
 					while (true)
 					{
