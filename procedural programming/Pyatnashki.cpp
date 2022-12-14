@@ -82,7 +82,7 @@ bool algorithm(string** data, int SIZEx, int animation)
 		{
 			if (animation == 1)
 			{
-				cout << "Значения до шага:\n";
+				cout << "\nЗначения до шага:\n";
 				cout << "step = " << step << " \naction = " << action << " \nswitcher = " << switcher << " \nnum_find_reserv = " << num_find_reserv << "\nnumi = " << numi << " numj = " << numj << "\nnumi_s = " << numi_s << " numj_s = " << numj_s << " \nnum_find = ";
 				setColor(14, TextBackgroundColor);
 				cout << num_find;
@@ -422,36 +422,16 @@ bool algorithm(string** data, int SIZEx, int animation)
 		else
 		{
 			if (numj_reserv == SIZEx - 3) num_find = num_find_reserv + SIZEx;
-
-			/*system_cls();
-			for (int i = 0; i < SIZEx; i++)
+			
+			if (animation == 1)
 			{
-				for (int j = 0; j < SIZEx; j++)
-				{
-					if (data[i][j] == to_string(cnt))
-					{
-						setColor(2, TextBackgroundColor);
-						cout << setw(4) << data[i][j];
-						setColor(TextColor, TextBackgroundColor);
-					}
-					else if (data[i][j] == to_string(num_find))
-					{
-						setColor(14, TextBackgroundColor);
-						cout << setw(4) << data[i][j];
-						setColor(TextColor, TextBackgroundColor);
-					}
-					else cout << setw(4) << data[i][j];
-					cnt++;
-				}
+				cout << "\nЗначения до шага:\n";
+				cout << "step = " << step << " \naction = " << action << " \nnumj_reserv = " << numj_reserv << " \nnum_find_reserv = " << num_find_reserv << "\nnumi = " << numi << " numj = " << numj << "\nnumi_s = " << numi_s << " numj_s = " << numj_s << " \nnum_find = ";
+				setColor(14, TextBackgroundColor);
+				cout << num_find;
+				setColor(TextColor, TextBackgroundColor);
 				cout << endl;
-			}*/
-
-			/*cout << "\nЗначения до шага:\n";
-			cout << "step = " << step << " \naction = " << action << " \nnumj_reserv = " << numj_reserv << " \nnum_find_reserv = " << num_find_reserv << "\nnumi = " << numi << " numj = " << numj << "\nnumi_s = " << numi_s << " numj_s = " << numj_s << " \nnum_find = ";
-			setColor(14, TextBackgroundColor);
-			cout << num_find;
-			setColor(TextColor, TextBackgroundColor);
-			cout << endl;*/
+			}
 
 			// Опредиления координат искомого числа и пробела
 			for (int i = 0; i < SIZEx; i++)
@@ -492,14 +472,6 @@ bool algorithm(string** data, int SIZEx, int animation)
 				step = 2;
 			}
 
-			/*cout << "\nЗначения после обновления координат, до шага:\n";
-			cout << "step = " << step << " \naction = " << action << " \nnumj_reserv = " << numj_reserv << " \nnum_find_reserv = " << num_find_reserv << "\nnumi = " << numi << " numj = " << numj << "\nnumi_s = " << numi_s << " numj_s = " << numj_s << " \nnum_find = ";
-			setColor(14, TextBackgroundColor);
-			cout << num_find;
-			setColor(TextColor, TextBackgroundColor);
-			cout << endl;*/
-
-
 			// Выбор действий
 			switch (action)
 			{
@@ -513,6 +485,14 @@ bool algorithm(string** data, int SIZEx, int animation)
 					}
 					else
 					{
+						if (numi_s == SIZEx - 1 && numj_s == SIZEx - 2)
+						{
+							step = 2;
+						}
+						else if (numi_s == SIZEx - 1 && numj_s == SIZEx - 3)
+						{
+							step = 3;
+						}
 						action = 5;
 					}
 					break;
@@ -536,6 +516,14 @@ bool algorithm(string** data, int SIZEx, int animation)
 					}
 					else
 					{
+						if (numi_s == SIZEx - 1 && numj_s == SIZEx - 2)
+						{
+							step = 2;
+						}
+						else if (numi_s == SIZEx - 1 && numj_s == SIZEx - 3)
+						{
+							step = 3;
+						}
 						action = 5;
 					}
 					break;
@@ -656,10 +644,10 @@ bool algorithm(string** data, int SIZEx, int animation)
 							}
 							cout << endl;
 						}
-						cout << "Готово!\n" << "Количество перестановок: " << cnt_Enter << "\nВремя сборки: ";
-						if (animation) cout << (end_time - start_time) / 1000.0 << " секунд (" << ((end_time - start_time) / 1000.0) - (0.075 * cnt_Enter) << " без учёта пауз)\n";
-						else cout << (end_time - start_time) / 1000.0 << " секунд\n";
-						cout << "Используйте:\n- ESC - для выхода\n- R - для рестарта\n";
+						cout << "Готово!\n" << "Количество перестановок: " << cnt_Enter << "\nВремя сборки: " << (end_time - start_time) / 1000.0 << " секунд";
+						if (animation) cout << " (~" << ((end_time - start_time) / 1000.0) - (0.132 * cnt_Enter) << " без учёта пауз и отрисовки)";
+
+						cout << "\nИспользуйте:\n- ESC - для выхода\n- R - для рестарта\n";
 
 						for (int i = 0; i < SIZEx; i++)
 							delete[] data[i];
@@ -686,6 +674,54 @@ bool algorithm(string** data, int SIZEx, int animation)
 						else if (step % 4 == 2) swap(data[numi_s][numj_s], data[numi_s + 1][numj_s]);
 						else if (step % 4 == 3) swap(data[numi_s][numj_s], data[numi_s][numj_s - 1]);
 						else if (step % 4 == 0) swap(data[numi_s][numj_s], data[numi_s - 1][numj_s]);
+
+						if (step > 16)
+						{
+							time_t end_time = clock();
+							int key = 0;
+							keyboard KEY;
+							cnt = 1;
+							if (animation) system_cls();
+
+							for (int i = 0; i < SIZEx; i++)
+							{
+								for (int j = 0; j < SIZEx; j++)
+								{
+									if (data[i][j] == to_string(cnt))
+									{
+										setColor(2, TextBackgroundColor);
+										cout << setw(4) << data[i][j];
+										setColor(TextColor, TextBackgroundColor);
+									}
+									else cout << setw(4) << data[i][j];
+									cnt++;
+								}
+								cout << endl;
+							}
+
+							cout << "Не удалось решить.\n" << "Количество перестановок: " << cnt_Enter << "\nВремя сборки: " << (end_time - start_time) / 1000.0 << " секунд";
+							if (animation) cout << " (~" << ((end_time - start_time) / 1000.0) - (0.132 * cnt_Enter) << " без учёта пауз и отрисовки)";
+
+							cout << "\nИспользуйте:\n- ESC - для выхода\n- R - для рестарта\n";
+
+							for (int i = 0; i < SIZEx; i++)
+								delete[] data[i];
+							delete[] data;
+
+							while (true)
+							{
+								key = KEY.get_key();
+
+								if (key == 82 || key == 114)
+								{
+									return false;
+								}
+								else if (key == 27)
+								{
+									return true;
+								}
+							}
+						}
 					}
 				}
 
@@ -693,14 +729,17 @@ bool algorithm(string** data, int SIZEx, int animation)
 				break;
 			}
 			
-			/*cout << "\nЗначения после шага:\n";
-			cout << "step = " << step << " \naction = " << action << " \nnumj_reserv = " << numj_reserv << " \nnum_find_reserv = " << num_find_reserv << "\nnumi = " << numi << " numj = " << numj << "\nnumi_s = " << numi_s << " numj_s = " << numj_s << " \nnum_find = ";
-			setColor(14, TextBackgroundColor);
-			cout << num_find;
-			setColor(TextColor, TextBackgroundColor);
-			cout << endl;
+			if (animation == 1)
+			{
+				cout << "\nЗначения после шага:\n";
+				cout << "step = " << step << " \naction = " << action << " \nnumj_reserv = " << numj_reserv << " \nnum_find_reserv = " << num_find_reserv << "\nnumi = " << numi << " numj = " << numj << "\nnumi_s = " << numi_s << " numj_s = " << numj_s << " \nnum_find = ";
+				setColor(14, TextBackgroundColor);
+				cout << num_find;
+				setColor(TextColor, TextBackgroundColor);
+				cout << endl;
+				Sleep(75);
+			}
 
-			ExitToMenu();*/
 		}
 		cnt_Enter++;
 	}
@@ -716,7 +755,7 @@ void Pyatnashki()
 		int key = 0;
 		srand(time(NULL));
 
-		string cons_out[5] = { "2 x 2", "3 x 3", "4 x 4", "5 x 5", "Свой вариант" };
+		string cons_out[6] = { "2 x 2", "3 x 3", "4 x 4", "5 x 5", "10 x 10", "Свой вариант" };
 
 		int SIZEx = 0;
 
@@ -724,7 +763,7 @@ void Pyatnashki()
 		{
 			system_cls();
 			cout << "Используйте:\n- " << KEY.Key_translation(KeyUp) << ", " << KEY.Key_translation(KeyDown) << " - для передвижения\n- " << KEY.Key_translation(KeyEnter) << " - для выбора\n- " << KEY.Key_translation(KeyExit) << " - для выхода\n----------Выбор поля------------" << endl;
-			for (int i = 0; i < 5; i++)
+			for (int i = 0; i < 6; i++)
 			{
 				if (i == SIZEx)
 				{
@@ -737,7 +776,7 @@ void Pyatnashki()
 			}
 
 			key = KEY.get_key();
-			if (key == KeyDown && SIZEx < 5 - 1) SIZEx++;
+			if (key == KeyDown && SIZEx < 6 - 1) SIZEx++;
 			if (key == KeyUp && SIZEx > 0) SIZEx--;
 			if (key == KeyExit)
 			{
@@ -746,21 +785,70 @@ void Pyatnashki()
 			}
 		} while (key != KeyEnter);
 
-		if (SIZEx == 4)
+		if (SIZEx == 5)
 		{
 			while (true)
 			{
 				SIZEx = (int)chek(5, "Введите размер поля: ", false);
-				if (SIZEx > 10) cout << "Размер не должен превышать 10 х 10." << endl;
+				if (SIZEx > 50) cout << "Размер не должен превышать 50 х 50." << endl;
 				else if (SIZEx < 2) cout << "Размер должен быть не меньше 2 х 2." << endl;
 				else break;
 			}
 		}
+		else if (SIZEx == 4) SIZEx = 10;
 		else SIZEx += 2;
 
 		string** data = new string * [SIZEx];
 		for (int i = 0; i < SIZEx; i++)
 			data[i] = new string[SIZEx];
+
+		/*string** data = new string * [4];
+		for (int i = 0; i < 4; i++)
+			data[i] = new string[4];*/
+		/*data[0][0] = "3";
+		data[0][1] = "2";
+		data[0][2] = "20";
+		data[0][3] = "1";
+		data[0][4] = "13";
+		data[1][0] = "18";
+		data[1][1] = "9";
+		data[1][2] = "17";
+		data[1][3] = "14";
+		data[1][4] = "16";
+		data[2][0] = "11";
+		data[2][1] = "5";
+		data[2][2] = "7";
+		data[2][3] = "23";
+		data[2][4] = "12";
+		data[3][0] = "24";
+		data[3][1] = "8";
+		data[3][2] = "19";
+		data[3][3] = "15";
+		data[3][4] = "6";
+		data[4][0] = " ";
+		data[4][1] = "10";
+		data[4][2] = "21";
+		data[4][3] = "4";
+		data[4][4] = "22";*/
+
+		/*data[0][0] = "15";
+		data[0][1] = "13";
+		data[0][2] = "4";
+		data[0][3] = "7";
+		data[1][0] = "5";
+		data[1][1] = "3";
+		data[1][2] = "2";
+		data[1][3] = "12";
+		data[2][0] = "9";
+		data[2][1] = "11";
+		data[2][2] = "8";
+		data[2][3] = "6";
+		data[3][0] = " ";
+		data[3][1] = "14";
+		data[3][2] = "1";
+		data[3][3] = "10";*/
+
+
 
 		string* num = new string[SIZEx * SIZEx];
 		string* check_ = new string[SIZEx * SIZEx];
@@ -780,9 +868,10 @@ void Pyatnashki()
 		int x = 0;
 		int num1 = 0;
 		string check;
+		int cnt = 1;
 
-		// Создание и проверка комбинации на существование решения
-		do
+		// Создание и проверка комбинации на существование решения (для чётных полей)
+		if (SIZEx % 2 == 0) do
 		{
 			sum = 0, y = 0, i_s = 0, x_index = 0, x_index_reserv = 0, x = 0, num1 = 0, check = ""; // Сброс значений
 
@@ -809,15 +898,61 @@ void Pyatnashki()
 				x_index_reserv = x_index;
 				for (x_index; x_index < SIZEx * SIZEx; x_index++)
 				{
-					if (check_[x_index] != " " && x > stoi(check_[x_index]) && x_index_reserv < x_index) sum++;
-					/*cout << "x_index = " << x_index << ", x_index_reserv = " << x_index_reserv << ", x = " << x << ", i_s = " << i_s << ", sum = " << sum << endl;*/
+					if (check_[x_index] != " " && x > stoi(check_[x_index]) && x_index_reserv < x_index)
+					{
+						sum++;
+						/*cout << "x_index = " << x_index << ", x_index_reserv = " << x_index_reserv << ", x = " << x << ", i_s = " << i_s << ", sum = " << sum << endl;*/
+					}
 				}
-				x_index = x_index_reserv + 1;
-				/*cout << endl;*/
+				/*x_index = x_index_reserv + 1;
+				cout << endl;*/
 			}
 			sum += i_s;
-			/*cout << "sum = " << sum << endl << endl;*/
+			/*cout << "sum = " << sum << endl << endl;
+			ExitToMenu();*/
 		} while (sum % 2 == 1);
+
+		// Создание и проверка комбинации на существование решения (для нечётных полей)
+		else do
+		{
+			sum = 0, y = 0, i_s = 0, x_index = 0, x_index_reserv = 0, x = 0, num1 = 0, check = ""; // Сброс значений
+
+			for (int i = 0; i < SIZEx; i++)
+			{
+				for (int j = 0; j < SIZEx; j++)
+				{
+					do num1 = rand() % (SIZEx * SIZEx); while (check.find("(" + num[num1] + ")") != -1);
+					check += "(" + num[num1] + ")";
+					data[i][j] = num[num1];
+					check_[y] = num[num1];
+					if (check_[y] == " ") i_s = i + 1;
+					y++;
+				}
+			}
+			for (int i = 0; i < SIZEx * SIZEx; i++)
+			{
+				if (check_[i] != " ")
+				{
+					x = stoi(check_[i]);
+					x_index = i;
+				}
+				else x = 0;
+				x_index_reserv = x_index;
+				for (x_index; x_index < SIZEx * SIZEx; x_index++)
+				{
+					if (check_[x_index] != " " && x > stoi(check_[x_index]) && x_index_reserv < x_index)
+					{
+						sum++;
+						/*cout << "x_index = " << x_index << ", x_index_reserv = " << x_index_reserv << ", x = " << x << ", i_s = " << i_s << ", sum = " << sum << endl;*/
+					}
+				}
+				/*x_index = x_index_reserv + 1;
+				cout << endl;*/
+			}
+			sum += i_s;
+			/*cout << "sum = " << sum << endl << endl;
+			ExitToMenu();*/
+		} while (sum % 2 == 0);
 
 		delete[] check_;
 		delete[] num;
@@ -853,7 +988,7 @@ void Pyatnashki()
 		} while (key != KeyEnter);
 
 		bool flag_win = true;
-		int cnt = 1;
+		
 		for (int i = 0; i < SIZEx; i++)
 		{
 			for (int j = 0; j < SIZEx; j++)
@@ -943,6 +1078,8 @@ void Pyatnashki()
 				}
 			} while (key != KeyEnter);
 			system_cls();
+
+			cout << "Размер поля: " << SIZEx << " x " << SIZEx << endl;
 			cnt = 1;
 			for (int i = 0; i < SIZEx; i++)
 			{
@@ -959,7 +1096,9 @@ void Pyatnashki()
 				}
 				cout << endl;
 			}
-			cout << "-------------------------------------" << endl;
+			for (int i = 0; i < SIZEx; i++)
+				cout << "----";
+			cout << endl;
 			cout << "sum = " << sum << endl;
 
 			if (algorithm(data, SIZEx, animation)) return;
