@@ -641,9 +641,13 @@ bool algorithm(string** data, int SIZEx, int animation)
 							}
 							cout << endl;
 						}
-						cout << "Готово!\n" << "Количество перестановок: " << cnt_Enter << "\nВремя сборки: " << (end_time - start_time) / 1000.0 << " секунд";
+						for (int i = 0; i < SIZEx; i++)
+							cout << "----";
+						cout << "\nГотово!\n" << "Количество перестановок: " << cnt_Enter << "\nВремя сборки: " << (end_time - start_time) / 1000.0 << " секунд";
 						if (animation) cout << " (~" << ((end_time - start_time) / 1000.0) - (0.075 * cnt_Enter) << " без учёта пауз)";
-
+						cout << "\n";
+						for (int i = 0; i < SIZEx; i++)
+							cout << "----";
 						cout << "\nИспользуйте:\n- ESC - для выхода\n- R - для рестарта\n";
 
 						for (int i = 0; i < SIZEx; i++)
@@ -696,9 +700,13 @@ bool algorithm(string** data, int SIZEx, int animation)
 								cout << endl;
 							}
 
-							cout << "Не удалось решить.\n" << "Количество перестановок: " << cnt_Enter << "\nВремя сборки: " << (end_time - start_time) / 1000.0 << " секунд";
+							for (int i = 0; i < SIZEx; i++)
+								cout << "----";
+							cout << "\nНе удалось решить.\n" << "Количество перестановок: " << cnt_Enter << "\nВремя сборки: " << (end_time - start_time) / 1000.0 << " секунд";
 							if (animation) cout << " (~" << ((end_time - start_time) / 1000.0) - (0.075 * cnt_Enter) << " без учёта пауз и отрисовки)";
-
+							cout << "\n";
+							for (int i = 0; i < SIZEx; i++)
+								cout << "----";
 							cout << "\nИспользуйте:\n- ESC - для выхода\n- R - для рестарта\n";
 
 							for (int i = 0; i < SIZEx; i++)
@@ -757,6 +765,7 @@ void Pyatnashki()
 
 		int SIZEx = 0;
 
+		// Выбор размера поля
 		do
 		{
 			system_cls();
@@ -782,7 +791,6 @@ void Pyatnashki()
 				return;
 			}
 		} while (key != KeyEnter);
-
 		if (SIZEx == 5)
 		{
 			while (true)
