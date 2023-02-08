@@ -1,0 +1,6 @@
+12		TextColor
+0		TextBackgroundColor
+300		KeyExit
+302		KeyEnter
+301		KeyUp
+303		KeyDown
