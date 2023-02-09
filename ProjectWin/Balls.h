@@ -1,10 +1,7 @@
 #pragma once
-#include <iostream>    //Для cin/cout
-#include <fstream>     //Для файла
-#include <windows.h>   //Для ввода/вывода русским
-#include <string>      //Для перевода string -> int/float
-#include <stdlib.h>    //Для exit
-#include "ExitToMenu.h"
-#include "Chek.h"      //Модуль проверки
+#include "Chek.h"
 
-void balls();
+using namespace System;
+
+String^ balls_allpermut(String^ str);
+String^ balls_right(String^ str);

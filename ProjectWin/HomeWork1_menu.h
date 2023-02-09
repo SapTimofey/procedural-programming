@@ -35,12 +35,50 @@ namespace ProjectWin {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::GroupBox^ groupBox_HW2;
-	public: System::Windows::Forms::Button^ loan;
-	public: System::Windows::Forms::Button^ loan2;
-	public: System::Windows::Forms::Button^ filter;
-	public: System::Windows::Forms::Button^ copying_file;
-	public: System::Windows::Forms::Button^ sorting_letters;
+	private: System::Windows::Forms::GroupBox^ groupBox_HW4;
+	protected:
+
+	public: System::Windows::Forms::Button^ button_number_system;
+	private:
+
+	public: System::Windows::Forms::Button^ button_matrix;
+	private:
+
+	public: System::Windows::Forms::Button^ button_random_num;
+
+	public: System::Windows::Forms::Button^ button_recognizer;
+
+	public: System::Windows::Forms::Button^ button_sin;
+
+	public: System::Windows::Forms::Button^ button_glory;
+
+	public: System::Windows::Forms::Button^ button_geometry;
+
+	public: System::Windows::Forms::Button^ button_number_sign;
+
+	public: System::Windows::Forms::Button^ button_file_4;
+
+
+
+
+
+
+
+
+
+	protected:
+
+
+
+
+
+
+
+	public:
+
+	public:
+
+	public:
 
 
 
@@ -90,99 +128,163 @@ namespace ProjectWin {
 		void InitializeComponent(void)
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(HomeWork1_menu::typeid));
-			this->groupBox_HW2 = (gcnew System::Windows::Forms::GroupBox());
-			this->sorting_letters = (gcnew System::Windows::Forms::Button());
-			this->filter = (gcnew System::Windows::Forms::Button());
-			this->copying_file = (gcnew System::Windows::Forms::Button());
-			this->loan2 = (gcnew System::Windows::Forms::Button());
-			this->loan = (gcnew System::Windows::Forms::Button());
-			this->groupBox_HW2->SuspendLayout();
+			this->groupBox_HW4 = (gcnew System::Windows::Forms::GroupBox());
+			this->button_file_4 = (gcnew System::Windows::Forms::Button());
+			this->button_number_sign = (gcnew System::Windows::Forms::Button());
+			this->button_geometry = (gcnew System::Windows::Forms::Button());
+			this->button_glory = (gcnew System::Windows::Forms::Button());
+			this->button_sin = (gcnew System::Windows::Forms::Button());
+			this->button_recognizer = (gcnew System::Windows::Forms::Button());
+			this->button_random_num = (gcnew System::Windows::Forms::Button());
+			this->button_matrix = (gcnew System::Windows::Forms::Button());
+			this->button_number_system = (gcnew System::Windows::Forms::Button());
+			this->groupBox_HW4->SuspendLayout();
 			this->SuspendLayout();
 			// 
-			// groupBox_HW2
+			// groupBox_HW4
 			// 
-			this->groupBox_HW2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
-			this->groupBox_HW2->AutoSize = true;
-			this->groupBox_HW2->BackColor = System::Drawing::Color::Transparent;
-			this->groupBox_HW2->Controls->Add(this->sorting_letters);
-			this->groupBox_HW2->Controls->Add(this->filter);
-			this->groupBox_HW2->Controls->Add(this->copying_file);
-			this->groupBox_HW2->Controls->Add(this->loan2);
-			this->groupBox_HW2->Controls->Add(this->loan);
-			this->groupBox_HW2->ForeColor = System::Drawing::Color::Red;
-			this->groupBox_HW2->Location = System::Drawing::Point(12, 12);
-			this->groupBox_HW2->Name = L"groupBox_HW2";
-			this->groupBox_HW2->Size = System::Drawing::Size(516, 200);
-			this->groupBox_HW2->TabIndex = 0;
-			this->groupBox_HW2->TabStop = false;
-			this->groupBox_HW2->Text = L"Задания";
+			this->groupBox_HW4->AutoSize = true;
+			this->groupBox_HW4->BackColor = System::Drawing::Color::Transparent;
+			this->groupBox_HW4->Controls->Add(this->button_number_system);
+			this->groupBox_HW4->Controls->Add(this->button_matrix);
+			this->groupBox_HW4->Controls->Add(this->button_random_num);
+			this->groupBox_HW4->Controls->Add(this->button_recognizer);
+			this->groupBox_HW4->Controls->Add(this->button_sin);
+			this->groupBox_HW4->Controls->Add(this->button_glory);
+			this->groupBox_HW4->Controls->Add(this->button_geometry);
+			this->groupBox_HW4->Controls->Add(this->button_number_sign);
+			this->groupBox_HW4->Controls->Add(this->button_file_4);
+			this->groupBox_HW4->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->groupBox_HW4->ForeColor = System::Drawing::Color::Red;
+			this->groupBox_HW4->Location = System::Drawing::Point(12, 12);
+			this->groupBox_HW4->Name = L"groupBox_HW4";
+			this->groupBox_HW4->Size = System::Drawing::Size(516, 275);
+			this->groupBox_HW4->TabIndex = 0;
+			this->groupBox_HW4->TabStop = false;
+			this->groupBox_HW4->Text = L"Д/З 4 - Задания";
 			// 
-			// sorting_letters
+			// button_file_4
 			// 
-			this->sorting_letters->BackColor = System::Drawing::Color::Transparent;
-			this->sorting_letters->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->sorting_letters->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
-			this->sorting_letters->Location = System::Drawing::Point(176, 103);
-			this->sorting_letters->Name = L"sorting_letters";
-			this->sorting_letters->Size = System::Drawing::Size(164, 69);
-			this->sorting_letters->TabIndex = 8;
-			this->sorting_letters->TabStop = false;
-			this->sorting_letters->Text = L"Сортировка букв";
-			this->sorting_letters->UseVisualStyleBackColor = false;
+			this->button_file_4->BackColor = System::Drawing::Color::Transparent;
+			this->button_file_4->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->button_file_4->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->button_file_4->Location = System::Drawing::Point(6, 28);
+			this->button_file_4->Name = L"button_file_4";
+			this->button_file_4->Size = System::Drawing::Size(164, 69);
+			this->button_file_4->TabIndex = 5;
+			this->button_file_4->TabStop = false;
+			this->button_file_4->Text = L"Файл";
+			this->button_file_4->UseVisualStyleBackColor = false;
 			// 
-			// filter
+			// button_number_sign
 			// 
-			this->filter->BackColor = System::Drawing::Color::Transparent;
-			this->filter->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->filter->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
-			this->filter->Location = System::Drawing::Point(6, 103);
-			this->filter->Name = L"filter";
-			this->filter->Size = System::Drawing::Size(164, 69);
-			this->filter->TabIndex = 7;
-			this->filter->TabStop = false;
-			this->filter->Text = L"Фильтр";
-			this->filter->UseVisualStyleBackColor = false;
+			this->button_number_sign->BackColor = System::Drawing::Color::Transparent;
+			this->button_number_sign->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->button_number_sign->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->button_number_sign->Location = System::Drawing::Point(176, 28);
+			this->button_number_sign->Name = L"button_number_sign";
+			this->button_number_sign->Size = System::Drawing::Size(164, 69);
+			this->button_number_sign->TabIndex = 6;
+			this->button_number_sign->TabStop = false;
+			this->button_number_sign->Text = L"Знак числа";
+			this->button_number_sign->UseVisualStyleBackColor = false;
 			// 
-			// copying_file
+			// button_geometry
 			// 
-			this->copying_file->BackColor = System::Drawing::Color::Transparent;
-			this->copying_file->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->copying_file->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
-			this->copying_file->Location = System::Drawing::Point(346, 28);
-			this->copying_file->Name = L"copying_file";
-			this->copying_file->Size = System::Drawing::Size(164, 69);
-			this->copying_file->TabIndex = 6;
-			this->copying_file->TabStop = false;
-			this->copying_file->Text = L"Копирование файла";
-			this->copying_file->UseVisualStyleBackColor = false;
+			this->button_geometry->BackColor = System::Drawing::Color::Transparent;
+			this->button_geometry->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->button_geometry->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->button_geometry->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->button_geometry->Location = System::Drawing::Point(346, 28);
+			this->button_geometry->Name = L"button_geometry";
+			this->button_geometry->Size = System::Drawing::Size(164, 69);
+			this->button_geometry->TabIndex = 7;
+			this->button_geometry->TabStop = false;
+			this->button_geometry->Text = L"Геометрические фигуры";
+			this->button_geometry->UseVisualStyleBackColor = false;
 			// 
-			// loan2
+			// button_glory
 			// 
-			this->loan2->BackColor = System::Drawing::Color::Transparent;
-			this->loan2->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->loan2->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
-			this->loan2->Location = System::Drawing::Point(176, 28);
-			this->loan2->Name = L"loan2";
-			this->loan2->Size = System::Drawing::Size(164, 69);
-			this->loan2->TabIndex = 5;
-			this->loan2->TabStop = false;
-			this->loan2->Text = L"Ссуда";
-			this->loan2->UseVisualStyleBackColor = false;
+			this->button_glory->BackColor = System::Drawing::Color::Transparent;
+			this->button_glory->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->button_glory->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->button_glory->Location = System::Drawing::Point(6, 103);
+			this->button_glory->Name = L"button_glory";
+			this->button_glory->Size = System::Drawing::Size(164, 69);
+			this->button_glory->TabIndex = 8;
+			this->button_glory->TabStop = false;
+			this->button_glory->Text = L"Былая слава";
+			this->button_glory->UseVisualStyleBackColor = false;
 			// 
-			// loan
+			// button_sin
 			// 
-			this->loan->BackColor = System::Drawing::Color::Transparent;
-			this->loan->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->loan->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
-			this->loan->Location = System::Drawing::Point(6, 28);
-			this->loan->Name = L"loan";
-			this->loan->Size = System::Drawing::Size(164, 69);
-			this->loan->TabIndex = 4;
-			this->loan->TabStop = false;
-			this->loan->Text = L"Заём";
-			this->loan->UseVisualStyleBackColor = false;
+			this->button_sin->BackColor = System::Drawing::Color::Transparent;
+			this->button_sin->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->button_sin->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->button_sin->Location = System::Drawing::Point(176, 103);
+			this->button_sin->Name = L"button_sin";
+			this->button_sin->Size = System::Drawing::Size(164, 69);
+			this->button_sin->TabIndex = 9;
+			this->button_sin->TabStop = false;
+			this->button_sin->Text = L"Синус";
+			this->button_sin->UseVisualStyleBackColor = false;
+			// 
+			// button_recognizer
+			// 
+			this->button_recognizer->BackColor = System::Drawing::Color::Transparent;
+			this->button_recognizer->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->button_recognizer->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->button_recognizer->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->button_recognizer->Location = System::Drawing::Point(346, 103);
+			this->button_recognizer->Name = L"button_recognizer";
+			this->button_recognizer->Size = System::Drawing::Size(164, 69);
+			this->button_recognizer->TabIndex = 10;
+			this->button_recognizer->TabStop = false;
+			this->button_recognizer->Text = L"Автоматный распознаватель";
+			this->button_recognizer->UseVisualStyleBackColor = false;
+			// 
+			// button_random_num
+			// 
+			this->button_random_num->BackColor = System::Drawing::Color::Transparent;
+			this->button_random_num->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->button_random_num->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->button_random_num->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->button_random_num->Location = System::Drawing::Point(6, 178);
+			this->button_random_num->Name = L"button_random_num";
+			this->button_random_num->Size = System::Drawing::Size(164, 69);
+			this->button_random_num->TabIndex = 11;
+			this->button_random_num->TabStop = false;
+			this->button_random_num->Text = L"Генератор псевдослучайных чисел";
+			this->button_random_num->UseVisualStyleBackColor = false;
+			// 
+			// button_matrix
+			// 
+			this->button_matrix->BackColor = System::Drawing::Color::Transparent;
+			this->button_matrix->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->button_matrix->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->button_matrix->Location = System::Drawing::Point(176, 178);
+			this->button_matrix->Name = L"button_matrix";
+			this->button_matrix->Size = System::Drawing::Size(164, 69);
+			this->button_matrix->TabIndex = 12;
+			this->button_matrix->TabStop = false;
+			this->button_matrix->Text = L"Умножение матриц";
+			this->button_matrix->UseVisualStyleBackColor = false;
+			// 
+			// button_number_system
+			// 
+			this->button_number_system->BackColor = System::Drawing::Color::Transparent;
+			this->button_number_system->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->button_number_system->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->button_number_system->Location = System::Drawing::Point(346, 178);
+			this->button_number_system->Name = L"button_number_system";
+			this->button_number_system->Size = System::Drawing::Size(164, 69);
+			this->button_number_system->TabIndex = 13;
+			this->button_number_system->TabStop = false;
+			this->button_number_system->Text = L"Системы счисления";
+			this->button_number_system->UseVisualStyleBackColor = false;
 			// 
 			// HomeWork1_menu
 			// 
@@ -192,7 +294,7 @@ namespace ProjectWin {
 			this->AutoValidate = System::Windows::Forms::AutoValidate::Disable;
 			this->BackColor = System::Drawing::Color::Black;
 			this->ClientSize = System::Drawing::Size(540, 457);
-			this->Controls->Add(this->groupBox_HW2);
+			this->Controls->Add(this->groupBox_HW4);
 			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->ForeColor = System::Drawing::Color::Red;
@@ -203,7 +305,7 @@ namespace ProjectWin {
 			this->Name = L"HomeWork1_menu";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Процедурное программирование";
-			this->groupBox_HW2->ResumeLayout(false);
+			this->groupBox_HW4->ResumeLayout(false);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -213,6 +315,7 @@ namespace ProjectWin {
 	private: System::Void task_name_Click(System::Object^ sender, System::EventArgs^ e);
 
 
-
+private: System::Void textBox_cntball_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }

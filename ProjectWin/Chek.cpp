@@ -1,8 +1,4 @@
-﻿#include <iostream>    //Для cin/cout
-#include <locale>      //Для вывода русским
-#include <string>      //Для перевода string -> int/float
-#include "HomeWork4.h" //Модуль Д/з 4
-#include "Settings.h"  //Модуль настроек
+﻿#include "Chek.h"
 
 using namespace std;
 
@@ -127,4 +123,113 @@ float chek(int type, string cons_out, bool main)
             cout << num << " Произошла ошибка.\n";
         }
     } while (true);
+}
+
+float check_num(int type, String^ str)
+{
+    String^ num = str;
+    float Fnum = 0;
+    float s = 0, n = 0;
+    bool flag = true;
+
+    try
+    {
+        for (int i = 0; i < num->Length; i++)
+        {
+            if (num[0] == '.')
+            {
+                flag = false;
+                MessageBox::Show(str + " - число не может начинаться с точки.", "Ошибка", MessageBoxButtons::OK);
+                break;
+            }
+            else if (num->Length > 1 && num[1] == '.' && num[0] == '-')
+            {
+                flag = false;
+                MessageBox::Show(str + " - число не содержит целой части.", "Ошибка", MessageBoxButtons::OK);
+                break;
+            }
+            else if (num[i] == '.' || isdigit(num[i]) || (num[0] == '-' && num->Length > 1))
+            {
+                continue;
+            }
+            else
+            {
+                flag = false;
+                MessageBox::Show(str + " - это не число.", "Ошибка", MessageBoxButtons::OK);
+                break;
+            }
+        }
+
+        if (flag)
+        {
+            Fnum = Convert::ToDouble(num);
+            n = modf(Fnum, &s);
+            switch (type)
+            {
+            case 1: // Для числа большего 0.
+                if (Fnum > 0) return Fnum;
+                else
+                {
+                    MessageBox::Show(str + " - число должно быть больше 0.", "Ошибка", MessageBoxButtons::OK);
+                    break;
+                }
+            case 2: // Для угла.
+                if (Fnum > 0 && Fnum < 180) return Fnum;
+                else
+                {
+                    MessageBox::Show("Угол должен быть в пределах (0, 180).", "Ошибка", MessageBoxButtons::OK);
+                    break;
+                }
+            case 4: // Для системы счисления.
+                if (n == 0 && Fnum > 0 && Fnum <= 37) return Fnum;
+                else if (n != 0)
+                {
+                    MessageBox::Show(str + " - СС не может быть дробной.", "Ошибка", MessageBoxButtons::OK);
+                    break;
+                }
+                else if (Fnum < 0)
+                {
+                    MessageBox::Show(str + " - СС не может быть отрицательной.", "Ошибка", MessageBoxButtons::OK);
+                    break;
+                }
+                else if (Fnum > 37)
+                {
+                    MessageBox::Show(str + " - СС не может быть больше 37.", "Ошибка", MessageBoxButtons::OK);
+                    break;
+                }
+                else
+                {
+                    MessageBox::Show(str + " - СС не может равняться 0.", "Ошибка", MessageBoxButtons::OK);
+                    break;
+                }
+            case 5: // Проверка на целое положительное число.
+                if (n == 0 && Fnum > 0) return Fnum;
+                else if (n != 0)
+                {
+                    MessageBox::Show(str + " - Число не может быть дробным.", "Ошибка", MessageBoxButtons::OK);
+                    break;
+                }
+                else if (Fnum < 0)
+                {
+                    MessageBox::Show(str + " - Число не может быть отрицательным.", "Ошибка", MessageBoxButtons::OK);
+                    break;
+                }
+                else
+                {
+                    MessageBox::Show(str + " - число должно быть больше 0.", "Ошибка", MessageBoxButtons::OK);
+                    break;
+                }
+            default:// Для остальных случаев.
+                return Fnum;
+            }
+        }
+    }
+    catch (out_of_range) 
+    { 
+        MessageBox::Show("Слишком большое число.", "Ошибка", MessageBoxButtons::OK); 
+    }
+    catch (...)
+    {
+        MessageBox::Show(Convert::ToString(Convert::ToDouble("1.12")), "Ошибка", MessageBoxButtons::OK);
+    }
 }

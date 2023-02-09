@@ -1,17 +1,25 @@
-#include "Balls.h";
+#include "Balls.h"
 
-using namespace std;
-
-void balls()
+String^ balls_allpermut(String^ str)
 {
-	system_cls();
 	int cnt = 0;
-	while (true)
+	cnt = (int)check_num(0, str);
+	if (cnt > 12)
 	{
-		cnt = (int)chek(5, "Введите количество шариков: ", false);
-		if (cnt > 12) cout << "Количество шариков не должно превышать 12." << endl;
-		else break;
+		MessageBox::Show("Число не может быть больше 12.", "Ошибка", MessageBoxButtons::OK);
+		return "";
 	}
+	else if (cnt == 0) return "";
+	int res = 1;
+	for (int i = 1; i <= cnt; i++)
+		res = res * i;
+
+	return Convert::ToString(res);
+}
+
+String^ balls_right(String^ str)
+{
+	int cnt = Convert::ToInt32(str);
 	int* arr = new int[cnt];
 
 	for (int i = 0; i < cnt; i++)
@@ -21,7 +29,6 @@ void balls()
 	for (int i = 1; i <= cnt; i++)
 		res = res * i;
 
-	cout << "Общее количество перестановок: " << res << endl;
 	int num = 0;
 	do
 	{
@@ -33,9 +40,7 @@ void balls()
 				break;
 			}
 		}
-	} while (next_permutation(arr, arr + cnt));
+	} while (std::next_permutation(arr, arr + cnt));
 	delete[] arr;
-	cout << "Количество перестановок, удовлетворяющих условию: " << num << endl;
-	ExitToMenu();
-	//2293839
+	return Convert::ToString(num);
 }
