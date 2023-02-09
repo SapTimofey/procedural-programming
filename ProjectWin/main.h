@@ -1,6 +1,6 @@
 #pragma once
 #include "HomeWork1_menu.h"
-
+#include "Balls.h"
 
 
 
@@ -47,9 +47,15 @@ namespace ProjectWin {
 	public: System::Windows::Forms::Button^ HW3;
 	public: System::Windows::Forms::Button^ HW2;
 	public: System::Windows::Forms::Button^ HW5;
-	public: System::Windows::Forms::Button^ balls;
+	public: System::Windows::Forms::Button^ balls1;
+
 	public: System::Windows::Forms::Button^ task_database;
 	public: System::Windows::Forms::Button^ settings;
+	public: System::Windows::Forms::Button^ loan;
+	public: System::Windows::Forms::Button^ loan2;
+	public: System::Windows::Forms::Button^ filter;
+	public: System::Windows::Forms::Button^ copying_file;
+	public: System::Windows::Forms::Button^ sorting_letters;
 
 	public: System::Windows::Forms::Button^ pyatnashki;
 	private: System::Windows::Forms::GroupBox^ groupBox_HW;
@@ -67,6 +73,14 @@ namespace ProjectWin {
 	private: System::Windows::Forms::ListBox^ listBox1;
 	private: System::Windows::Forms::GroupBox^ groupBox_settings;
 	private: System::ComponentModel::IContainer^ components;
+	private: System::Windows::Forms::GroupBox^ groupBox_HW2;
+	private: System::Windows::Forms::GroupBox^ groupBox_HW3;
+	public: System::Windows::Forms::Button^ cone;
+	public: System::Windows::Forms::Button^ branching;
+	public: System::Windows::Forms::Button^ sequence;
+	public: System::Windows::Forms::Button^ function;
+	public: System::Windows::Forms::Button^ tabulation;
+
 	private:
 		/// <summary>
 		/// Обязательная переменная конструктора.
@@ -88,7 +102,7 @@ namespace ProjectWin {
 			this->HW3 = (gcnew System::Windows::Forms::Button());
 			this->HW2 = (gcnew System::Windows::Forms::Button());
 			this->HW5 = (gcnew System::Windows::Forms::Button());
-			this->balls = (gcnew System::Windows::Forms::Button());
+			this->balls1 = (gcnew System::Windows::Forms::Button());
 			this->task_database = (gcnew System::Windows::Forms::Button());
 			this->settings = (gcnew System::Windows::Forms::Button());
 			this->pyatnashki = (gcnew System::Windows::Forms::Button());
@@ -105,11 +119,25 @@ namespace ProjectWin {
 			this->apply = (gcnew System::Windows::Forms::Button());
 			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
 			this->groupBox_settings = (gcnew System::Windows::Forms::GroupBox());
+			this->tabulation = (gcnew System::Windows::Forms::Button());
+			this->sequence = (gcnew System::Windows::Forms::Button());
+			this->function = (gcnew System::Windows::Forms::Button());
+			this->branching = (gcnew System::Windows::Forms::Button());
+			this->cone = (gcnew System::Windows::Forms::Button());
+			this->groupBox_HW2 = (gcnew System::Windows::Forms::GroupBox());
+			this->groupBox_HW3 = (gcnew System::Windows::Forms::GroupBox());
+			this->sorting_letters = (gcnew System::Windows::Forms::Button());
+			this->filter = (gcnew System::Windows::Forms::Button());
+			this->copying_file = (gcnew System::Windows::Forms::Button());
+			this->loan2 = (gcnew System::Windows::Forms::Button());
+			this->loan = (gcnew System::Windows::Forms::Button());
 			exit = (gcnew System::Windows::Forms::Button());
 			this->groupBox_HW->SuspendLayout();
 			this->groupBox_HW1->SuspendLayout();
 			this->groupBox_another->SuspendLayout();
 			this->groupBox_settings->SuspendLayout();
+			this->groupBox_HW2->SuspendLayout();
+			this->groupBox_HW3->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// exit
@@ -166,6 +194,7 @@ namespace ProjectWin {
 			this->HW3->TabStop = false;
 			this->HW3->Text = L"Д/З 3";
 			this->HW3->UseVisualStyleBackColor = false;
+			this->HW3->Click += gcnew System::EventHandler(this, &main::HW3_Click);
 			// 
 			// HW2
 			// 
@@ -179,6 +208,7 @@ namespace ProjectWin {
 			this->HW2->TabStop = false;
 			this->HW2->Text = L"Д/З 2";
 			this->HW2->UseVisualStyleBackColor = false;
+			this->HW2->Click += gcnew System::EventHandler(this, &main::HW2_Click);
 			// 
 			// HW5
 			// 
@@ -193,18 +223,19 @@ namespace ProjectWin {
 			this->HW5->Text = L"Д/З 5";
 			this->HW5->UseVisualStyleBackColor = false;
 			// 
-			// balls
+			// balls1
 			// 
-			this->balls->BackColor = System::Drawing::Color::Transparent;
-			this->balls->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->balls->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
-			this->balls->Location = System::Drawing::Point(6, 28);
-			this->balls->Name = L"balls";
-			this->balls->Size = System::Drawing::Size(164, 69);
-			this->balls->TabIndex = 5;
-			this->balls->TabStop = false;
-			this->balls->Text = L"Шарики";
-			this->balls->UseVisualStyleBackColor = false;
+			this->balls1->BackColor = System::Drawing::Color::Transparent;
+			this->balls1->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->balls1->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->balls1->Location = System::Drawing::Point(6, 28);
+			this->balls1->Name = L"balls1";
+			this->balls1->Size = System::Drawing::Size(164, 69);
+			this->balls1->TabIndex = 5;
+			this->balls1->TabStop = false;
+			this->balls1->Text = L"Шарики";
+			this->balls1->UseVisualStyleBackColor = false;
+			this->balls1->Click += gcnew System::EventHandler(this, &main::balls1_Click);
 			// 
 			// task_database
 			// 
@@ -272,7 +303,7 @@ namespace ProjectWin {
 			this->groupBox_HW1->Controls->Add(this->button4);
 			this->groupBox_HW1->Controls->Add(this->button5);
 			this->groupBox_HW1->ForeColor = System::Drawing::Color::Red;
-			this->groupBox_HW1->Location = System::Drawing::Point(395, 443);
+			this->groupBox_HW1->Location = System::Drawing::Point(12, 12);
 			this->groupBox_HW1->Name = L"groupBox_HW1";
 			this->groupBox_HW1->Size = System::Drawing::Size(516, 200);
 			this->groupBox_HW1->TabIndex = 14;
@@ -347,11 +378,8 @@ namespace ProjectWin {
 			// 
 			// groupBox_another
 			// 
-			this->groupBox_another->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
 			this->groupBox_another->AutoSize = true;
-			this->groupBox_another->Controls->Add(this->balls);
+			this->groupBox_another->Controls->Add(this->balls1);
 			this->groupBox_another->Controls->Add(this->task_database);
 			this->groupBox_another->Controls->Add(this->pyatnashki);
 			this->groupBox_another->ForeColor = System::Drawing::Color::Red;
@@ -419,13 +447,181 @@ namespace ProjectWin {
 			this->groupBox_settings->Controls->Add(this->apply);
 			this->groupBox_settings->Controls->Add(this->listBox1);
 			this->groupBox_settings->ForeColor = System::Drawing::Color::Red;
-			this->groupBox_settings->Location = System::Drawing::Point(306, 443);
+			this->groupBox_settings->Location = System::Drawing::Point(12, 12);
 			this->groupBox_settings->Name = L"groupBox_settings";
 			this->groupBox_settings->Size = System::Drawing::Size(516, 187);
 			this->groupBox_settings->TabIndex = 1;
 			this->groupBox_settings->TabStop = false;
 			this->groupBox_settings->Text = L"Настройки";
 			this->groupBox_settings->Visible = false;
+			// 
+			// tabulation
+			// 
+			this->tabulation->BackColor = System::Drawing::Color::Transparent;
+			this->tabulation->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->tabulation->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->tabulation->Location = System::Drawing::Point(176, 103);
+			this->tabulation->Name = L"tabulation";
+			this->tabulation->Size = System::Drawing::Size(164, 69);
+			this->tabulation->TabIndex = 8;
+			this->tabulation->TabStop = false;
+			this->tabulation->Text = L"Табуляция";
+			this->tabulation->UseVisualStyleBackColor = false;
+			// 
+			// sequence
+			// 
+			this->sequence->BackColor = System::Drawing::Color::Transparent;
+			this->sequence->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->sequence->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->sequence->Location = System::Drawing::Point(6, 103);
+			this->sequence->Name = L"sequence";
+			this->sequence->Size = System::Drawing::Size(164, 69);
+			this->sequence->TabIndex = 7;
+			this->sequence->TabStop = false;
+			this->sequence->Text = L"Порядок";
+			this->sequence->UseVisualStyleBackColor = false;
+			// 
+			// function
+			// 
+			this->function->BackColor = System::Drawing::Color::Transparent;
+			this->function->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->function->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->function->Location = System::Drawing::Point(346, 28);
+			this->function->Name = L"function";
+			this->function->Size = System::Drawing::Size(164, 69);
+			this->function->TabIndex = 6;
+			this->function->TabStop = false;
+			this->function->Text = L"Функция";
+			this->function->UseVisualStyleBackColor = false;
+			// 
+			// branching
+			// 
+			this->branching->BackColor = System::Drawing::Color::Transparent;
+			this->branching->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->branching->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->branching->Location = System::Drawing::Point(176, 28);
+			this->branching->Name = L"branching";
+			this->branching->Size = System::Drawing::Size(164, 69);
+			this->branching->TabIndex = 5;
+			this->branching->TabStop = false;
+			this->branching->Text = L"Разветвление";
+			this->branching->UseVisualStyleBackColor = false;
+			// 
+			// cone
+			// 
+			this->cone->BackColor = System::Drawing::Color::Transparent;
+			this->cone->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->cone->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->cone->Location = System::Drawing::Point(6, 28);
+			this->cone->Name = L"cone";
+			this->cone->Size = System::Drawing::Size(164, 69);
+			this->cone->TabIndex = 4;
+			this->cone->TabStop = false;
+			this->cone->Text = L"Конус";
+			this->cone->UseVisualStyleBackColor = false;
+			// 
+			// groupBox_HW2
+			// 
+			this->groupBox_HW2->AutoSize = true;
+			this->groupBox_HW2->BackColor = System::Drawing::Color::Transparent;
+			this->groupBox_HW2->Controls->Add(this->tabulation);
+			this->groupBox_HW2->Controls->Add(this->sequence);
+			this->groupBox_HW2->Controls->Add(this->function);
+			this->groupBox_HW2->Controls->Add(this->branching);
+			this->groupBox_HW2->Controls->Add(this->cone);
+			this->groupBox_HW2->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->groupBox_HW2->ForeColor = System::Drawing::Color::Red;
+			this->groupBox_HW2->Location = System::Drawing::Point(12, 12);
+			this->groupBox_HW2->Name = L"groupBox_HW2";
+			this->groupBox_HW2->Size = System::Drawing::Size(516, 200);
+			this->groupBox_HW2->TabIndex = 0;
+			this->groupBox_HW2->TabStop = false;
+			this->groupBox_HW2->Text = L"Задания";
+			this->groupBox_HW2->Visible = false;
+			// 
+			// groupBox_HW3
+			// 
+			this->groupBox_HW3->AutoSize = true;
+			this->groupBox_HW3->BackColor = System::Drawing::Color::Transparent;
+			this->groupBox_HW3->Controls->Add(this->sorting_letters);
+			this->groupBox_HW3->Controls->Add(this->filter);
+			this->groupBox_HW3->Controls->Add(this->copying_file);
+			this->groupBox_HW3->Controls->Add(this->loan2);
+			this->groupBox_HW3->Controls->Add(this->loan);
+			this->groupBox_HW3->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->groupBox_HW3->ForeColor = System::Drawing::Color::Red;
+			this->groupBox_HW3->Location = System::Drawing::Point(12, 12);
+			this->groupBox_HW3->Name = L"groupBox_HW3";
+			this->groupBox_HW3->Size = System::Drawing::Size(516, 200);
+			this->groupBox_HW3->TabIndex = 0;
+			this->groupBox_HW3->TabStop = false;
+			this->groupBox_HW3->Text = L"Задания";
+			this->groupBox_HW3->Visible = false;
+			// 
+			// sorting_letters
+			// 
+			this->sorting_letters->BackColor = System::Drawing::Color::Transparent;
+			this->sorting_letters->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->sorting_letters->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->sorting_letters->Location = System::Drawing::Point(176, 103);
+			this->sorting_letters->Name = L"sorting_letters";
+			this->sorting_letters->Size = System::Drawing::Size(164, 69);
+			this->sorting_letters->TabIndex = 8;
+			this->sorting_letters->TabStop = false;
+			this->sorting_letters->Text = L"Сортировка букв";
+			this->sorting_letters->UseVisualStyleBackColor = false;
+			// 
+			// filter
+			// 
+			this->filter->BackColor = System::Drawing::Color::Transparent;
+			this->filter->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->filter->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->filter->Location = System::Drawing::Point(6, 103);
+			this->filter->Name = L"filter";
+			this->filter->Size = System::Drawing::Size(164, 69);
+			this->filter->TabIndex = 7;
+			this->filter->TabStop = false;
+			this->filter->Text = L"Фильтр";
+			this->filter->UseVisualStyleBackColor = false;
+			// 
+			// copying_file
+			// 
+			this->copying_file->BackColor = System::Drawing::Color::Transparent;
+			this->copying_file->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->copying_file->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->copying_file->Location = System::Drawing::Point(346, 28);
+			this->copying_file->Name = L"copying_file";
+			this->copying_file->Size = System::Drawing::Size(164, 69);
+			this->copying_file->TabIndex = 6;
+			this->copying_file->TabStop = false;
+			this->copying_file->Text = L"Копирование файла";
+			this->copying_file->UseVisualStyleBackColor = false;
+			// 
+			// loan2
+			// 
+			this->loan2->BackColor = System::Drawing::Color::Transparent;
+			this->loan2->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->loan2->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->loan2->Location = System::Drawing::Point(176, 28);
+			this->loan2->Name = L"loan2";
+			this->loan2->Size = System::Drawing::Size(164, 69);
+			this->loan2->TabIndex = 5;
+			this->loan2->TabStop = false;
+			this->loan2->Text = L"Ссуда";
+			this->loan2->UseVisualStyleBackColor = false;
+			// 
+			// loan
+			// 
+			this->loan->BackColor = System::Drawing::Color::Transparent;
+			this->loan->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->loan->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->loan->Location = System::Drawing::Point(6, 28);
+			this->loan->Name = L"loan";
+			this->loan->Size = System::Drawing::Size(164, 69);
+			this->loan->TabIndex = 4;
+			this->loan->TabStop = false;
+			this->loan->Text = L"Заём";
+			this->loan->UseVisualStyleBackColor = false;
 			// 
 			// main
 			// 
@@ -435,13 +631,15 @@ namespace ProjectWin {
 			this->AutoValidate = System::Windows::Forms::AutoValidate::Disable;
 			this->BackColor = System::Drawing::Color::Black;
 			this->ClientSize = System::Drawing::Size(540, 457);
-			this->Controls->Add(this->groupBox_settings);
 			this->Controls->Add(this->groupBox_HW);
+			this->Controls->Add(this->groupBox_settings);
 			this->Controls->Add(this->back);
 			this->Controls->Add(exit);
 			this->Controls->Add(this->groupBox_another);
 			this->Controls->Add(this->settings);
 			this->Controls->Add(this->groupBox_HW1);
+			this->Controls->Add(this->groupBox_HW2);
+			this->Controls->Add(this->groupBox_HW3);
 			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->ForeColor = System::Drawing::Color::Red;
@@ -458,6 +656,8 @@ namespace ProjectWin {
 			this->groupBox_another->ResumeLayout(false);
 			this->groupBox_settings->ResumeLayout(false);
 			this->groupBox_settings->PerformLayout();
+			this->groupBox_HW2->ResumeLayout(false);
+			this->groupBox_HW3->ResumeLayout(false);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -469,5 +669,8 @@ namespace ProjectWin {
 	private: System::Void back_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void settings_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void apply_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void HW2_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void HW3_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void balls1_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

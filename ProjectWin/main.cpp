@@ -24,7 +24,6 @@ System::Void ProjectWin::main::exit_Click(System::Object^ sender, System::EventA
 {
     if (MessageBox::Show("Вы действительно хотите выйти?", "Выход", MessageBoxButtons::YesNo) == System::Windows::Forms::DialogResult::Yes)
         this->Close();
-        
 }
 
 System::Void ProjectWin::main::HW1_Click(System::Object^ sender, System::EventArgs^ e)
@@ -43,6 +42,7 @@ System::Void ProjectWin::main::back_Click(System::Object^ sender, System::EventA
     groupBox_another->Visible = true;
     //groupBox_HW1->Location = System::Drawing::Point(358, 443);
     groupBox_HW1->Visible = false;
+    groupBox_HW2->Visible = false;
     groupBox_settings->Visible = false;
     back->Visible = false;
     settings->Visible = true;
@@ -66,20 +66,47 @@ System::Void ProjectWin::main::apply_Click(System::Object^ sender, System::Event
         ForeColor = System::Drawing::Color::Red;
         groupBox_HW->ForeColor = System::Drawing::Color::Red;
         groupBox_HW1->ForeColor = System::Drawing::Color::Red;
+        groupBox_HW2->ForeColor = System::Drawing::Color::Red;
+        groupBox_HW3->ForeColor = System::Drawing::Color::Red;
         groupBox_another->ForeColor = System::Drawing::Color::Red;
         groupBox_settings->ForeColor = System::Drawing::Color::Red;
         listBox1->BackColor = System::Drawing::Color::Black;
         listBox1->ForeColor = System::Drawing::Color::Red;
     }
-    else
+    else if(listBox1->SelectedIndex == 1)
     {
         BackColor = System::Drawing::Color::White;
         ForeColor = System::Drawing::Color::Black;
         groupBox_HW->ForeColor = System::Drawing::Color::Black;
         groupBox_HW1->ForeColor = System::Drawing::Color::Black;
+        groupBox_HW2->ForeColor = System::Drawing::Color::Black;
+        groupBox_HW3->ForeColor = System::Drawing::Color::Black;
         groupBox_another->ForeColor = System::Drawing::Color::Black;
         groupBox_settings->ForeColor = System::Drawing::Color::Black;
         listBox1->BackColor = System::Drawing::Color::White;
         listBox1->ForeColor = System::Drawing::Color::Black;
     }
+}
+
+System::Void ProjectWin::main::HW2_Click(System::Object^ sender, System::EventArgs^ e)
+{
+    groupBox_HW->Visible = false;
+    groupBox_another->Visible = false;
+    groupBox_HW2->Visible = true;
+    back->Visible = true;
+    settings->Visible = false;
+}
+
+System::Void ProjectWin::main::HW3_Click(System::Object^ sender, System::EventArgs^ e)
+{
+    groupBox_HW->Visible = false;
+    groupBox_another->Visible = false;
+    groupBox_HW3->Visible = true;
+    back->Visible = true;
+    settings->Visible = false;
+}
+
+System::Void ProjectWin::main::balls1_Click(System::Object^ sender, System::EventArgs^ e)
+{
+    balls();
 }
