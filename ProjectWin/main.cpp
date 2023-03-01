@@ -62,6 +62,18 @@ System::Void ProjectWin::main::HW4_Click(System::Object^ sender, System::EventAr
     back->Visible = true;
 }
 
+System::Void ProjectWin::main::button_number_system_Click(System::Object^ sender, System::EventArgs^ e)
+{
+    reserv = 4;
+    groupBox_HW4->Visible = false;
+    groupBox_HW4_number_system->Visible = true;
+}
+
+System::Void ProjectWin::main::button_HW4_NS_result_Click(System::Object^ sender, System::EventArgs^ e)
+{
+    number_system();
+}
+
 System::Void ProjectWin::main::back_Click(System::Object^ sender, System::EventArgs^ e)
 {
     switch (reserv)
@@ -107,6 +119,7 @@ System::Void ProjectWin::main::back_Click(System::Object^ sender, System::EventA
     case 4:
     {
         groupBox_HW4->Visible = true;
+        groupBox_HW4_number_system->Visible = false;
         groupBox_settings->Visible = false;
         settings->Visible = true;
         reserv = 0;
@@ -120,6 +133,14 @@ System::Void ProjectWin::main::back_Click(System::Object^ sender, System::EventA
         reserv = 0;
         break;
     }
+    case 49:
+    {
+        groupBox_HW4_number_system->Visible = true;
+        groupBox_settings->Visible = false;
+        settings->Visible = true;
+        reserv = 4;
+        break;
+    }
     }
 }
 
@@ -130,6 +151,7 @@ System::Void ProjectWin::main::settings_Click(System::Object^ sender, System::Ev
     else if (groupBox_HW3->Visible == true) reserv = 3;
     else if (groupBox_HW4->Visible == true) reserv = 4;
     else if (groupBox_balls->Visible == true) reserv = 6;
+    else if (groupBox_HW4_number_system->Visible == true) reserv = 49;
 
     groupBox_HW->Visible = false;
     groupBox_another->Visible = false;
@@ -137,6 +159,7 @@ System::Void ProjectWin::main::settings_Click(System::Object^ sender, System::Ev
     groupBox_HW2->Visible = false;
     groupBox_HW3->Visible = false;
     groupBox_HW4->Visible = false;
+    groupBox_HW4_number_system->Visible = false;
     groupBox_balls->Visible = false;
     groupBox_settings->Visible = true;
     back->Visible = true;
@@ -145,7 +168,7 @@ System::Void ProjectWin::main::settings_Click(System::Object^ sender, System::Ev
 
 System::Void ProjectWin::main::apply_Click(System::Object^ sender, System::EventArgs^ e)
 {
-    if (checkBox_dark->Checked == true)
+    if (radioButton_S_dark->Checked == true)
     {
         BackColor = System::Drawing::Color::Black;
         ForeColor = System::Drawing::Color::Red;
@@ -153,13 +176,21 @@ System::Void ProjectWin::main::apply_Click(System::Object^ sender, System::Event
         groupBox_HW1->ForeColor = System::Drawing::Color::Red;
         groupBox_HW2->ForeColor = System::Drawing::Color::Red;
         groupBox_HW3->ForeColor = System::Drawing::Color::Red;
+        groupBox_HW4->ForeColor = System::Drawing::Color::Red;
         groupBox_another->ForeColor = System::Drawing::Color::Red;
         groupBox_settings->ForeColor = System::Drawing::Color::Red;
         groupBox_balls->ForeColor = System::Drawing::Color::Red;
+        groupBox_HW4_number_system->ForeColor = System::Drawing::Color::Red;
         textBox_cntball->ForeColor = System::Drawing::Color::Red;
         textBox_cntball->BackColor = System::Drawing::Color::Black;
+        textBox_num_for_convert->ForeColor = System::Drawing::Color::Red;
+        textBox_num_for_convert->BackColor = System::Drawing::Color::Black;
+        textBox_to_another->ForeColor = System::Drawing::Color::Red;
+        textBox_to_another->BackColor = System::Drawing::Color::Black;
+        textBox_from_another->ForeColor = System::Drawing::Color::Red;
+        textBox_from_another->BackColor = System::Drawing::Color::Black;
     }
-    else if(checkBox_light->Checked == true)
+    else if(radioButton_S_light->Checked == true)
     {
         BackColor = System::Drawing::Color::White;
         ForeColor = System::Drawing::Color::Black;
@@ -167,11 +198,19 @@ System::Void ProjectWin::main::apply_Click(System::Object^ sender, System::Event
         groupBox_HW1->ForeColor = System::Drawing::Color::Black;
         groupBox_HW2->ForeColor = System::Drawing::Color::Black;
         groupBox_HW3->ForeColor = System::Drawing::Color::Black;
+        groupBox_HW4->ForeColor = System::Drawing::Color::Black;
         groupBox_another->ForeColor = System::Drawing::Color::Black;
         groupBox_settings->ForeColor = System::Drawing::Color::Black;
         groupBox_balls->ForeColor = System::Drawing::Color::Black;
+        groupBox_HW4_number_system->ForeColor = System::Drawing::Color::Black;
         textBox_cntball->ForeColor = System::Drawing::Color::Black;
         textBox_cntball->BackColor = System::Drawing::Color::White;
+        textBox_num_for_convert->ForeColor = System::Drawing::Color::Black;
+        textBox_num_for_convert->BackColor = System::Drawing::Color::White;
+        textBox_to_another->ForeColor = System::Drawing::Color::Black;
+        textBox_to_another->BackColor = System::Drawing::Color::White;
+        textBox_from_another->ForeColor = System::Drawing::Color::Black;
+        textBox_from_another->BackColor = System::Drawing::Color::White;
     }
 }
 
@@ -193,16 +232,3 @@ System::Void ProjectWin::main::calculate_Click(System::Object^ sender, System::E
     }
 }
 
-System::Void ProjectWin::main::checkBox_light_CheckedChanged(System::Object^ sender, System::EventArgs^ e)
-{
-    if (checkBox_light->Checked == true)
-        checkBox_dark->Checked = false;
-    else checkBox_dark->Checked = true;
-}
-
-System::Void ProjectWin::main::checkBox_dark_CheckedChanged(System::Object^ sender, System::EventArgs^ e)
-{
-    if (checkBox_dark->Checked == true)
-        checkBox_light->Checked = false;
-    else checkBox_light->Checked = true;
-}

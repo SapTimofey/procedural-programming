@@ -13,6 +13,8 @@
 #include <conio.h>     //Для считывания клавиш
 #include "Settings.h"  //Модуль настроек
 #include "keyboard.h"
+#include "main.h"
+#include <msclr/marshal.h>
 
 void setColor(unsigned fg, unsigned bg);
 void file_4();

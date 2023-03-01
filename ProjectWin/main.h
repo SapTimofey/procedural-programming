@@ -1,6 +1,7 @@
 #pragma once
 #include "HomeWork1_menu.h"
 #include "Balls.h"
+#include "HomeWork4.h"
 
 using namespace System;
 using namespace System::Windows::Forms;
@@ -41,7 +42,6 @@ namespace ProjectWin {
 				delete components;
 			}
 		}
-
 	public: System::Windows::Forms::Button^ HW1;
 	public: System::Windows::Forms::Button^ HW4;
 	public: System::Windows::Forms::Button^ HW3;
@@ -82,8 +82,8 @@ namespace ProjectWin {
 	public: System::Windows::Forms::Button^ branching;
 	public: System::Windows::Forms::Button^ sequence;
 	public: System::Windows::Forms::Button^ function;
-	private: System::Windows::Forms::CheckBox^ checkBox_light;
-	private: System::Windows::Forms::CheckBox^ checkBox_dark;
+
+
 	private: System::Windows::Forms::GroupBox^ groupBox_HW4;
 	public: System::Windows::Forms::Button^ button_number_system;
 	public: System::Windows::Forms::Button^ button_matrix;
@@ -95,6 +95,77 @@ namespace ProjectWin {
 	public: System::Windows::Forms::Button^ button_number_sign;
 	public: System::Windows::Forms::Button^ button_file_4;
 	public: System::Windows::Forms::Button^ tabulation;
+	private: System::Windows::Forms::GroupBox^ groupBox_HW4_number_system;
+
+	private: System::Windows::Forms::Label^ label_HW4_NS1;
+	private: System::Windows::Forms::Label^ label_HW4_NS2;
+	public: System::Windows::Forms::TextBox^ textBox_num_for_convert;
+	private:
+
+	private:
+
+	private: System::Windows::Forms::Label^ label_HW4_NS3;
+	public: System::Windows::Forms::TextBox^ textBox_to_another;
+	private:
+
+
+	private: System::Windows::Forms::Label^ label_HW4_NS4;
+	private: System::Windows::Forms::GroupBox^ groupBox_from;
+	public: System::Windows::Forms::RadioButton^ radioButton_from_2;
+	private:
+	public: System::Windows::Forms::RadioButton^ radioButton_from_another;
+	public: System::Windows::Forms::TextBox^ textBox_from_another;
+	public: System::Windows::Forms::RadioButton^ radioButton_from_8;
+	public: System::Windows::Forms::RadioButton^ radioButton_from_16;
+	public: System::Windows::Forms::RadioButton^ radioButton_from_10;
+
+	private:
+
+
+
+
+
+
+
+
+
+
+
+	private: System::Windows::Forms::GroupBox^ groupBox_to;
+public: System::Windows::Forms::RadioButton^ radioButton_to_2;
+private:
+public: System::Windows::Forms::RadioButton^ radioButton_to_another;
+public: System::Windows::Forms::RadioButton^ radioButton_to_8;
+public: System::Windows::Forms::RadioButton^ radioButton_to_16;
+public: System::Windows::Forms::RadioButton^ radioButton_to_10;
+public: System::Windows::Forms::Label^ label_result;
+
+
+
+
+
+
+	private: System::Windows::Forms::RadioButton^ radioButton_S_light;
+	private: System::Windows::Forms::RadioButton^ radioButton_S_dark;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	private: System::Windows::Forms::Label^ label_HW4_NS5;
 	private:
 		/// <summary>
 		/// Обязательная переменная конструктора.
@@ -111,6 +182,7 @@ namespace ProjectWin {
 		{
 			System::Windows::Forms::Button^ exit;
 			System::Windows::Forms::Button^ calculate;
+			System::Windows::Forms::Button^ button_HW4_NS_result;
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(main::typeid));
 			this->groupBox_HW = (gcnew System::Windows::Forms::GroupBox());
 			this->HW1 = (gcnew System::Windows::Forms::Button());
@@ -141,8 +213,8 @@ namespace ProjectWin {
 			this->loan2 = (gcnew System::Windows::Forms::Button());
 			this->loan = (gcnew System::Windows::Forms::Button());
 			this->groupBox_settings = (gcnew System::Windows::Forms::GroupBox());
-			this->checkBox_dark = (gcnew System::Windows::Forms::CheckBox());
-			this->checkBox_light = (gcnew System::Windows::Forms::CheckBox());
+			this->radioButton_S_light = (gcnew System::Windows::Forms::RadioButton());
+			this->radioButton_S_dark = (gcnew System::Windows::Forms::RadioButton());
 			this->label = (gcnew System::Windows::Forms::Label());
 			this->apply = (gcnew System::Windows::Forms::Button());
 			this->groupBox_balls = (gcnew System::Windows::Forms::GroupBox());
@@ -164,8 +236,31 @@ namespace ProjectWin {
 			this->button_geometry = (gcnew System::Windows::Forms::Button());
 			this->button_number_sign = (gcnew System::Windows::Forms::Button());
 			this->button_file_4 = (gcnew System::Windows::Forms::Button());
+			this->groupBox_HW4_number_system = (gcnew System::Windows::Forms::GroupBox());
+			this->label_HW4_NS1 = (gcnew System::Windows::Forms::Label());
+			this->groupBox_from = (gcnew System::Windows::Forms::GroupBox());
+			this->radioButton_from_2 = (gcnew System::Windows::Forms::RadioButton());
+			this->radioButton_from_another = (gcnew System::Windows::Forms::RadioButton());
+			this->textBox_from_another = (gcnew System::Windows::Forms::TextBox());
+			this->radioButton_from_8 = (gcnew System::Windows::Forms::RadioButton());
+			this->radioButton_from_16 = (gcnew System::Windows::Forms::RadioButton());
+			this->radioButton_from_10 = (gcnew System::Windows::Forms::RadioButton());
+			this->label_result = (gcnew System::Windows::Forms::Label());
+			this->label_HW4_NS2 = (gcnew System::Windows::Forms::Label());
+			this->label_HW4_NS3 = (gcnew System::Windows::Forms::Label());
+			this->label_HW4_NS4 = (gcnew System::Windows::Forms::Label());
+			this->textBox_num_for_convert = (gcnew System::Windows::Forms::TextBox());
+			this->label_HW4_NS5 = (gcnew System::Windows::Forms::Label());
+			this->groupBox_to = (gcnew System::Windows::Forms::GroupBox());
+			this->radioButton_to_2 = (gcnew System::Windows::Forms::RadioButton());
+			this->radioButton_to_another = (gcnew System::Windows::Forms::RadioButton());
+			this->textBox_to_another = (gcnew System::Windows::Forms::TextBox());
+			this->radioButton_to_8 = (gcnew System::Windows::Forms::RadioButton());
+			this->radioButton_to_16 = (gcnew System::Windows::Forms::RadioButton());
+			this->radioButton_to_10 = (gcnew System::Windows::Forms::RadioButton());
 			exit = (gcnew System::Windows::Forms::Button());
 			calculate = (gcnew System::Windows::Forms::Button());
+			button_HW4_NS_result = (gcnew System::Windows::Forms::Button());
 			this->groupBox_HW->SuspendLayout();
 			this->groupBox_another->SuspendLayout();
 			this->groupBox_HW1->SuspendLayout();
@@ -174,6 +269,9 @@ namespace ProjectWin {
 			this->groupBox_settings->SuspendLayout();
 			this->groupBox_balls->SuspendLayout();
 			this->groupBox_HW4->SuspendLayout();
+			this->groupBox_HW4_number_system->SuspendLayout();
+			this->groupBox_from->SuspendLayout();
+			this->groupBox_to->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// exit
@@ -205,6 +303,21 @@ namespace ProjectWin {
 			calculate->Text = L"Рассчитать";
 			calculate->UseVisualStyleBackColor = false;
 			calculate->Click += gcnew System::EventHandler(this, &main::calculate_Click);
+			// 
+			// button_HW4_NS_result
+			// 
+			button_HW4_NS_result->BackColor = System::Drawing::Color::Transparent;
+			button_HW4_NS_result->Cursor = System::Windows::Forms::Cursors::Hand;
+			button_HW4_NS_result->DialogResult = System::Windows::Forms::DialogResult::Cancel;
+			button_HW4_NS_result->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			button_HW4_NS_result->Location = System::Drawing::Point(6, 234);
+			button_HW4_NS_result->Name = L"button_HW4_NS_result";
+			button_HW4_NS_result->Size = System::Drawing::Size(164, 69);
+			button_HW4_NS_result->TabIndex = 15;
+			button_HW4_NS_result->TabStop = false;
+			button_HW4_NS_result->Text = L"Рассчитать";
+			button_HW4_NS_result->UseVisualStyleBackColor = false;
+			button_HW4_NS_result->Click += gcnew System::EventHandler(this, &main::button_HW4_NS_result_Click);
 			// 
 			// groupBox_HW
 			// 
@@ -598,8 +711,8 @@ namespace ProjectWin {
 			// 
 			// groupBox_settings
 			// 
-			this->groupBox_settings->Controls->Add(this->checkBox_dark);
-			this->groupBox_settings->Controls->Add(this->checkBox_light);
+			this->groupBox_settings->Controls->Add(this->radioButton_S_light);
+			this->groupBox_settings->Controls->Add(this->radioButton_S_dark);
 			this->groupBox_settings->Controls->Add(this->label);
 			this->groupBox_settings->Controls->Add(this->apply);
 			this->groupBox_settings->ForeColor = System::Drawing::Color::Red;
@@ -611,33 +724,27 @@ namespace ProjectWin {
 			this->groupBox_settings->Text = L"Настройки";
 			this->groupBox_settings->Visible = false;
 			// 
-			// checkBox_dark
+			// radioButton_S_light
 			// 
-			this->checkBox_dark->BackColor = System::Drawing::Color::Transparent;
-			this->checkBox_dark->CheckAlign = System::Drawing::ContentAlignment::MiddleRight;
-			this->checkBox_dark->Checked = true;
-			this->checkBox_dark->CheckState = System::Windows::Forms::CheckState::Checked;
-			this->checkBox_dark->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->checkBox_dark->Location = System::Drawing::Point(176, 75);
-			this->checkBox_dark->Name = L"checkBox_dark";
-			this->checkBox_dark->Size = System::Drawing::Size(108, 28);
-			this->checkBox_dark->TabIndex = 3;
-			this->checkBox_dark->Text = L"Тёмная";
-			this->checkBox_dark->UseVisualStyleBackColor = false;
-			this->checkBox_dark->CheckedChanged += gcnew System::EventHandler(this, &main::checkBox_dark_CheckedChanged);
+			this->radioButton_S_light->AutoSize = true;
+			this->radioButton_S_light->Location = System::Drawing::Point(176, 69);
+			this->radioButton_S_light->Name = L"radioButton_S_light";
+			this->radioButton_S_light->Size = System::Drawing::Size(100, 28);
+			this->radioButton_S_light->TabIndex = 4;
+			this->radioButton_S_light->Text = L"светлая";
+			this->radioButton_S_light->UseVisualStyleBackColor = true;
 			// 
-			// checkBox_light
+			// radioButton_S_dark
 			// 
-			this->checkBox_light->BackColor = System::Drawing::Color::Transparent;
-			this->checkBox_light->CheckAlign = System::Drawing::ContentAlignment::MiddleRight;
-			this->checkBox_light->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->checkBox_light->Location = System::Drawing::Point(176, 49);
-			this->checkBox_light->Name = L"checkBox_light";
-			this->checkBox_light->Size = System::Drawing::Size(108, 28);
-			this->checkBox_light->TabIndex = 1;
-			this->checkBox_light->Text = L"Светлая";
-			this->checkBox_light->UseVisualStyleBackColor = false;
-			this->checkBox_light->CheckedChanged += gcnew System::EventHandler(this, &main::checkBox_light_CheckedChanged);
+			this->radioButton_S_dark->AutoSize = true;
+			this->radioButton_S_dark->Checked = true;
+			this->radioButton_S_dark->Location = System::Drawing::Point(176, 46);
+			this->radioButton_S_dark->Name = L"radioButton_S_dark";
+			this->radioButton_S_dark->Size = System::Drawing::Size(93, 28);
+			this->radioButton_S_dark->TabIndex = 3;
+			this->radioButton_S_dark->TabStop = true;
+			this->radioButton_S_dark->Text = L"тёмная";
+			this->radioButton_S_dark->UseVisualStyleBackColor = true;
 			// 
 			// label
 			// 
@@ -801,6 +908,7 @@ namespace ProjectWin {
 			this->button_number_system->TabStop = false;
 			this->button_number_system->Text = L"Системы счисления";
 			this->button_number_system->UseVisualStyleBackColor = false;
+			this->button_number_system->Click += gcnew System::EventHandler(this, &main::button_number_system_Click);
 			// 
 			// button_matrix
 			// 
@@ -912,6 +1020,246 @@ namespace ProjectWin {
 			this->button_file_4->Text = L"Файл";
 			this->button_file_4->UseVisualStyleBackColor = false;
 			// 
+			// groupBox_HW4_number_system
+			// 
+			this->groupBox_HW4_number_system->Controls->Add(this->label_HW4_NS1);
+			this->groupBox_HW4_number_system->Controls->Add(this->groupBox_from);
+			this->groupBox_HW4_number_system->Controls->Add(button_HW4_NS_result);
+			this->groupBox_HW4_number_system->Controls->Add(this->label_result);
+			this->groupBox_HW4_number_system->Controls->Add(this->label_HW4_NS2);
+			this->groupBox_HW4_number_system->Controls->Add(this->label_HW4_NS3);
+			this->groupBox_HW4_number_system->Controls->Add(this->label_HW4_NS4);
+			this->groupBox_HW4_number_system->Controls->Add(this->textBox_num_for_convert);
+			this->groupBox_HW4_number_system->Controls->Add(this->label_HW4_NS5);
+			this->groupBox_HW4_number_system->Controls->Add(this->groupBox_to);
+			this->groupBox_HW4_number_system->ForeColor = System::Drawing::Color::Red;
+			this->groupBox_HW4_number_system->Location = System::Drawing::Point(12, 12);
+			this->groupBox_HW4_number_system->Name = L"groupBox_HW4_number_system";
+			this->groupBox_HW4_number_system->Size = System::Drawing::Size(516, 331);
+			this->groupBox_HW4_number_system->TabIndex = 0;
+			this->groupBox_HW4_number_system->TabStop = false;
+			this->groupBox_HW4_number_system->Text = L"Д/З 4 - Задания - Системы счисления";
+			this->groupBox_HW4_number_system->Visible = false;
+			// 
+			// label_HW4_NS1
+			// 
+			this->label_HW4_NS1->AutoSize = true;
+			this->label_HW4_NS1->Location = System::Drawing::Point(6, 25);
+			this->label_HW4_NS1->Name = L"label_HW4_NS1";
+			this->label_HW4_NS1->Size = System::Drawing::Size(209, 24);
+			this->label_HW4_NS1->TabIndex = 0;
+			this->label_HW4_NS1->Text = L"Число для преревода:";
+			// 
+			// groupBox_from
+			// 
+			this->groupBox_from->Controls->Add(this->radioButton_from_2);
+			this->groupBox_from->Controls->Add(this->radioButton_from_another);
+			this->groupBox_from->Controls->Add(this->textBox_from_another);
+			this->groupBox_from->Controls->Add(this->radioButton_from_8);
+			this->groupBox_from->Controls->Add(this->radioButton_from_16);
+			this->groupBox_from->Controls->Add(this->radioButton_from_10);
+			this->groupBox_from->Location = System::Drawing::Point(45, 34);
+			this->groupBox_from->Name = L"groupBox_from";
+			this->groupBox_from->Size = System::Drawing::Size(63, 153);
+			this->groupBox_from->TabIndex = 25;
+			this->groupBox_from->TabStop = false;
+			// 
+			// radioButton_from_2
+			// 
+			this->radioButton_from_2->AutoSize = true;
+			this->radioButton_from_2->Location = System::Drawing::Point(6, 12);
+			this->radioButton_from_2->Name = L"radioButton_from_2";
+			this->radioButton_from_2->Size = System::Drawing::Size(43, 28);
+			this->radioButton_from_2->TabIndex = 19;
+			this->radioButton_from_2->TabStop = true;
+			this->radioButton_from_2->Text = L" 2";
+			this->radioButton_from_2->UseVisualStyleBackColor = true;
+			// 
+			// radioButton_from_another
+			// 
+			this->radioButton_from_another->AutoSize = true;
+			this->radioButton_from_another->Location = System::Drawing::Point(6, 131);
+			this->radioButton_from_another->Name = L"radioButton_from_another";
+			this->radioButton_from_another->Size = System::Drawing::Size(14, 13);
+			this->radioButton_from_another->TabIndex = 23;
+			this->radioButton_from_another->TabStop = true;
+			this->radioButton_from_another->UseVisualStyleBackColor = true;
+			// 
+			// textBox_from_another
+			// 
+			this->textBox_from_another->BackColor = System::Drawing::Color::Black;
+			this->textBox_from_another->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->textBox_from_another->ForeColor = System::Drawing::Color::Red;
+			this->textBox_from_another->Location = System::Drawing::Point(26, 125);
+			this->textBox_from_another->Name = L"textBox_from_another";
+			this->textBox_from_another->Size = System::Drawing::Size(23, 22);
+			this->textBox_from_another->TabIndex = 18;
+			// 
+			// radioButton_from_8
+			// 
+			this->radioButton_from_8->AutoSize = true;
+			this->radioButton_from_8->Location = System::Drawing::Point(6, 41);
+			this->radioButton_from_8->Name = L"radioButton_from_8";
+			this->radioButton_from_8->Size = System::Drawing::Size(43, 28);
+			this->radioButton_from_8->TabIndex = 20;
+			this->radioButton_from_8->TabStop = true;
+			this->radioButton_from_8->Text = L" 8";
+			this->radioButton_from_8->UseVisualStyleBackColor = true;
+			// 
+			// radioButton_from_16
+			// 
+			this->radioButton_from_16->AutoSize = true;
+			this->radioButton_from_16->Location = System::Drawing::Point(6, 97);
+			this->radioButton_from_16->Name = L"radioButton_from_16";
+			this->radioButton_from_16->Size = System::Drawing::Size(48, 28);
+			this->radioButton_from_16->TabIndex = 22;
+			this->radioButton_from_16->TabStop = true;
+			this->radioButton_from_16->Text = L"16";
+			this->radioButton_from_16->UseVisualStyleBackColor = true;
+			// 
+			// radioButton_from_10
+			// 
+			this->radioButton_from_10->AutoSize = true;
+			this->radioButton_from_10->Location = System::Drawing::Point(6, 69);
+			this->radioButton_from_10->Name = L"radioButton_from_10";
+			this->radioButton_from_10->Size = System::Drawing::Size(48, 28);
+			this->radioButton_from_10->TabIndex = 21;
+			this->radioButton_from_10->TabStop = true;
+			this->radioButton_from_10->Text = L"10";
+			this->radioButton_from_10->UseVisualStyleBackColor = true;
+			// 
+			// label_result
+			// 
+			this->label_result->AutoSize = true;
+			this->label_result->Location = System::Drawing::Point(207, 199);
+			this->label_result->Name = L"label_result";
+			this->label_result->Size = System::Drawing::Size(0, 24);
+			this->label_result->TabIndex = 16;
+			// 
+			// label_HW4_NS2
+			// 
+			this->label_HW4_NS2->AutoSize = true;
+			this->label_HW4_NS2->Location = System::Drawing::Point(6, 49);
+			this->label_HW4_NS2->Name = L"label_HW4_NS2";
+			this->label_HW4_NS2->Size = System::Drawing::Size(33, 24);
+			this->label_HW4_NS2->TabIndex = 2;
+			this->label_HW4_NS2->Text = L"Из";
+			// 
+			// label_HW4_NS3
+			// 
+			this->label_HW4_NS3->AutoSize = true;
+			this->label_HW4_NS3->Location = System::Drawing::Point(114, 48);
+			this->label_HW4_NS3->Name = L"label_HW4_NS3";
+			this->label_HW4_NS3->Size = System::Drawing::Size(21, 24);
+			this->label_HW4_NS3->TabIndex = 3;
+			this->label_HW4_NS3->Text = L"в";
+			// 
+			// label_HW4_NS4
+			// 
+			this->label_HW4_NS4->AutoSize = true;
+			this->label_HW4_NS4->Location = System::Drawing::Point(213, 48);
+			this->label_HW4_NS4->Name = L"label_HW4_NS4";
+			this->label_HW4_NS4->Size = System::Drawing::Size(188, 24);
+			this->label_HW4_NS4->TabIndex = 14;
+			this->label_HW4_NS4->Text = L"систему счисления.";
+			// 
+			// textBox_num_for_convert
+			// 
+			this->textBox_num_for_convert->BackColor = System::Drawing::Color::Black;
+			this->textBox_num_for_convert->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->textBox_num_for_convert->ForeColor = System::Drawing::Color::Red;
+			this->textBox_num_for_convert->Location = System::Drawing::Point(221, 27);
+			this->textBox_num_for_convert->Name = L"textBox_num_for_convert";
+			this->textBox_num_for_convert->Size = System::Drawing::Size(289, 22);
+			this->textBox_num_for_convert->TabIndex = 1;
+			// 
+			// label_HW4_NS5
+			// 
+			this->label_HW4_NS5->AutoSize = true;
+			this->label_HW4_NS5->Location = System::Drawing::Point(6, 199);
+			this->label_HW4_NS5->Name = L"label_HW4_NS5";
+			this->label_HW4_NS5->Size = System::Drawing::Size(201, 24);
+			this->label_HW4_NS5->TabIndex = 15;
+			this->label_HW4_NS5->Text = L"Результат перевода:";
+			// 
+			// groupBox_to
+			// 
+			this->groupBox_to->Controls->Add(this->radioButton_to_2);
+			this->groupBox_to->Controls->Add(this->radioButton_to_another);
+			this->groupBox_to->Controls->Add(this->textBox_to_another);
+			this->groupBox_to->Controls->Add(this->radioButton_to_8);
+			this->groupBox_to->Controls->Add(this->radioButton_to_16);
+			this->groupBox_to->Controls->Add(this->radioButton_to_10);
+			this->groupBox_to->Location = System::Drawing::Point(144, 34);
+			this->groupBox_to->Name = L"groupBox_to";
+			this->groupBox_to->Size = System::Drawing::Size(63, 153);
+			this->groupBox_to->TabIndex = 24;
+			this->groupBox_to->TabStop = false;
+			// 
+			// radioButton_to_2
+			// 
+			this->radioButton_to_2->AutoSize = true;
+			this->radioButton_to_2->Location = System::Drawing::Point(6, 12);
+			this->radioButton_to_2->Name = L"radioButton_to_2";
+			this->radioButton_to_2->Size = System::Drawing::Size(43, 28);
+			this->radioButton_to_2->TabIndex = 19;
+			this->radioButton_to_2->TabStop = true;
+			this->radioButton_to_2->Text = L" 2";
+			this->radioButton_to_2->UseVisualStyleBackColor = true;
+			// 
+			// radioButton_to_another
+			// 
+			this->radioButton_to_another->AutoSize = true;
+			this->radioButton_to_another->Location = System::Drawing::Point(6, 131);
+			this->radioButton_to_another->Name = L"radioButton_to_another";
+			this->radioButton_to_another->Size = System::Drawing::Size(14, 13);
+			this->radioButton_to_another->TabIndex = 23;
+			this->radioButton_to_another->TabStop = true;
+			this->radioButton_to_another->UseVisualStyleBackColor = true;
+			// 
+			// textBox_to_another
+			// 
+			this->textBox_to_another->BackColor = System::Drawing::Color::Black;
+			this->textBox_to_another->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->textBox_to_another->ForeColor = System::Drawing::Color::Red;
+			this->textBox_to_another->Location = System::Drawing::Point(26, 125);
+			this->textBox_to_another->Name = L"textBox_to_another";
+			this->textBox_to_another->Size = System::Drawing::Size(23, 22);
+			this->textBox_to_another->TabIndex = 18;
+			// 
+			// radioButton_to_8
+			// 
+			this->radioButton_to_8->AutoSize = true;
+			this->radioButton_to_8->Location = System::Drawing::Point(6, 41);
+			this->radioButton_to_8->Name = L"radioButton_to_8";
+			this->radioButton_to_8->Size = System::Drawing::Size(43, 28);
+			this->radioButton_to_8->TabIndex = 20;
+			this->radioButton_to_8->TabStop = true;
+			this->radioButton_to_8->Text = L" 8";
+			this->radioButton_to_8->UseVisualStyleBackColor = true;
+			// 
+			// radioButton_to_16
+			// 
+			this->radioButton_to_16->AutoSize = true;
+			this->radioButton_to_16->Location = System::Drawing::Point(6, 97);
+			this->radioButton_to_16->Name = L"radioButton_to_16";
+			this->radioButton_to_16->Size = System::Drawing::Size(48, 28);
+			this->radioButton_to_16->TabIndex = 22;
+			this->radioButton_to_16->TabStop = true;
+			this->radioButton_to_16->Text = L"16";
+			this->radioButton_to_16->UseVisualStyleBackColor = true;
+			// 
+			// radioButton_to_10
+			// 
+			this->radioButton_to_10->AutoSize = true;
+			this->radioButton_to_10->Location = System::Drawing::Point(6, 69);
+			this->radioButton_to_10->Name = L"radioButton_to_10";
+			this->radioButton_to_10->Size = System::Drawing::Size(48, 28);
+			this->radioButton_to_10->TabIndex = 21;
+			this->radioButton_to_10->TabStop = true;
+			this->radioButton_to_10->Text = L"10";
+			this->radioButton_to_10->UseVisualStyleBackColor = true;
+			// 
 			// main
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(11, 24);
@@ -920,8 +1268,8 @@ namespace ProjectWin {
 			this->AutoValidate = System::Windows::Forms::AutoValidate::Disable;
 			this->BackColor = System::Drawing::Color::Black;
 			this->ClientSize = System::Drawing::Size(540, 457);
-			this->Controls->Add(this->groupBox_HW);
 			this->Controls->Add(this->groupBox_settings);
+			this->Controls->Add(this->groupBox_HW);
 			this->Controls->Add(this->back);
 			this->Controls->Add(exit);
 			this->Controls->Add(this->groupBox_another);
@@ -931,6 +1279,7 @@ namespace ProjectWin {
 			this->Controls->Add(this->groupBox_HW3);
 			this->Controls->Add(this->groupBox_HW4);
 			this->Controls->Add(this->groupBox_balls);
+			this->Controls->Add(this->groupBox_HW4_number_system);
 			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->ForeColor = System::Drawing::Color::Red;
@@ -952,6 +1301,12 @@ namespace ProjectWin {
 			this->groupBox_balls->ResumeLayout(false);
 			this->groupBox_balls->PerformLayout();
 			this->groupBox_HW4->ResumeLayout(false);
+			this->groupBox_HW4_number_system->ResumeLayout(false);
+			this->groupBox_HW4_number_system->PerformLayout();
+			this->groupBox_from->ResumeLayout(false);
+			this->groupBox_from->PerformLayout();
+			this->groupBox_to->ResumeLayout(false);
+			this->groupBox_to->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -966,10 +1321,9 @@ namespace ProjectWin {
 	private: System::Void HW2_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void HW3_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void balls1_Click(System::Object^ sender, System::EventArgs^ e);
-	private: System::Void checkBox_light_CheckedChanged(System::Object^ sender, System::EventArgs^ e);
-	private: System::Void checkBox_dark_CheckedChanged(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void calculate_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void HW4_Click(System::Object^ sender, System::EventArgs^ e);
-
+	private: System::Void button_number_system_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void button_HW4_NS_result_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

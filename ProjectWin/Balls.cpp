@@ -3,7 +3,7 @@
 String^ balls_allpermut(String^ str)
 {
 	int cnt = 0;
-	cnt = (int)check_num(0, str);
+	cnt = (int)check_num(5, str);
 	if (cnt > 12)
 	{
 		MessageBox::Show("Число не может быть больше 12.", "Ошибка", MessageBoxButtons::OK);

@@ -5,6 +5,7 @@
 #include "HomeWork4.h" //Модуль Д/з 4
 #include "Settings.h"  //Модуль настроек
 #include "main.h"
+#include <msclr\marshal_cppstd.h>
 
 
 float chek(int type, std::string cons_out, bool i);

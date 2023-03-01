@@ -2,13 +2,6 @@
 
 using namespace std;
 
-extern int TextColor;
-extern int TextBackgroundColor;
-extern int KeyExit;
-extern int KeyEnter;
-extern int KeyUp;
-extern int KeyDown;
-
 enum ConsoleColor {
     Black, Blue, Green, Cyan, Red, Magenta, Brown, LightGray,
     DarkGray, LightBlue, LightGreen, LightCyan, LightRed, LightMagenta, Yellow, White
@@ -595,13 +588,13 @@ string interpreter(double num, int base_out)
     if (num_befor_dot == 0) res = '0';
     else
     {
-        cout << "Перевод целой части:" << endl << endl;
+        //cout << "Перевод целой части:" << endl << endl;
         while (num_befor_dot > 0)
         {
             f = num_befor_dot % base_out;
-            cout << num_befor_dot << " / " << base_out << " = \t" << num_befor_dot / base_out;
-            if (num_befor_dot / base_out >= 10000000) cout << "\t остаток: " << f << endl;
-            else cout << "\t\t остаток: " << f << endl;
+            //cout << num_befor_dot << " / " << base_out << " = \t" << num_befor_dot / base_out;
+            //if (num_befor_dot / base_out >= 10000000) cout << "\t остаток: " << f << endl;
+            //else cout << "\t\t остаток: " << f << endl;
 
             if (f >= 10)
             {
@@ -650,18 +643,18 @@ string interpreter(double num, int base_out)
     
     if (num_after_dot > 0)
     {
-        cout << "Перевод дробной части:" << endl << endl;
+        //cout << "Перевод дробной части:" << endl << endl;
         res += '.';
         L = log(pow(10, (to_string(num_after_dot).length() - 3)))/log(base_out);
-        cout << "Количество знаков после запятой, L = " << L << endl << endl;
+        //cout << "Количество знаков после запятой, L = " << L << endl << endl;
         L_chek = L;
         L++;
         while (L > 0)
         {
-            cout << num_after_dot;
+            //cout << num_after_dot;
             num_after_dot_chek = num_after_dot * base_out;
             num_after_dot = num_after_dot * base_out;
-            cout << " * " << base_out << " = " << num_after_dot << " целая часть: " << num_after_dot_chek << endl;
+            //cout << " * " << base_out << " = " << num_after_dot << " целая часть: " << num_after_dot_chek << endl;
 
             if (num_after_dot_chek > 0) num_after_dot -= num_after_dot_chek;
             if (num_after_dot_chek >= 10)
@@ -698,9 +691,8 @@ string interpreter(double num, int base_out)
             }
         }
         else res += res_chek;
-        
     }
-    cout << endl;
+    //cout << endl;
     if (flag) res = '-' + res;
     return res;
 }
@@ -783,33 +775,36 @@ double interpreter_10(string num, int base_in, bool flag)
 void number_system()
 {
     setlocale(LC_NUMERIC, "eng");
-    system_cls();
-    string input_num;
+    
     int input_base_from = 0, input_base_to = 0, a = 0;
     bool flag = true;
     double num = 0;
 
-    cout << "Задание 'Системы счисления'\n";
-    while (true)
+    string input_num = msclr::interop::marshal_as<std::string>(ProjectWin::main::textBox_num_for_convert->Text);
+    if (input_num == "")
     {
-        bool flag2 = true;
-        cout << "Введите число: ";
-        cin >> input_num;
-        for (int i = 0; i < input_num.length(); i++)
-        {
-            char x = input_num[i];
-            a = x;
-            if (a < 0)
-            {
-                cout << input_num << " - В числе не могут использоваться русские буквы." << endl;
-                flag2 = false;
-                break;
-            }
-        }
-        if (flag2) break;
+        MessageBox::Show("Не введено число для перевода.", "Ошибка", MessageBoxButtons::OK);
+        return;
     }
 
-    input_base_from = (int)chek(4, "Введите систему счисления введённого числа: ", false);
+    if (ProjectWin::main::radioButton_from_2->Checked) input_base_from = 2;
+    else if (ProjectWin::main::radioButton_from_8->Checked) input_base_from = 8;
+    else if (ProjectWin::main::radioButton_from_10->Checked) input_base_from = 10;
+    else if (ProjectWin::main::radioButton_from_16->Checked) input_base_from = 16;
+    else if (ProjectWin::main::radioButton_from_another->Checked)
+    {
+        if (ProjectWin::main::textBox_from_another->Text == "")
+        {
+            MessageBox::Show("Не введена исходная система счисления.", "Ошибка", MessageBoxButtons::OK);
+            return;
+        }
+        input_base_from = (int)check_num(4, ProjectWin::main::textBox_from_another->Text);
+    }
+    else
+    {
+        MessageBox::Show("Не выбрана исходная система счисления.", "Ошибка", MessageBoxButtons::OK);
+        return;
+    }
 
     for (int j = 0; j < input_num.length(); j++)
     {
@@ -827,41 +822,52 @@ void number_system()
         }
         if (a >= input_base_from)
         {
-            cout << "Число не соответствует системе счисления." << endl;
-            flag = false;
-            break;
+            MessageBox::Show("Число не соответствует системе счисления.", "Ошибка", MessageBoxButtons::OK);
+            return;
         }
     }
 
-    if (flag)
+    if (ProjectWin::main::radioButton_to_2->Checked) input_base_to = 2;
+    else if (ProjectWin::main::radioButton_to_8->Checked) input_base_to = 8;
+    else if (ProjectWin::main::radioButton_to_10->Checked) input_base_to = 10;
+    else if (ProjectWin::main::radioButton_to_16->Checked) input_base_to = 16;
+    else if (ProjectWin::main::radioButton_to_another->Checked)
     {
-        input_base_to = (int)chek(4, "Введите желаемую систему счисления: ", false);
-        cout << endl;
-        if (input_base_from == input_base_to) cout << "Число в " << input_base_to << " системе счисления: " << input_num << endl;
-        else
+        if (ProjectWin::main::textBox_to_another->Text == "")
         {
-            if (input_base_from != 10)
+            MessageBox::Show("Не введена желаемая система счисления.", "Ошибка", MessageBoxButtons::OK);
+            return;
+        }
+        input_base_to = (int)check_num(4, ProjectWin::main::textBox_to_another->Text);
+    }
+    else
+    {
+        MessageBox::Show("Не выбрана желаемая система счисления.", "Ошибка", MessageBoxButtons::OK);
+        return;
+    }
+
+    if (input_base_from == input_base_to) ProjectWin::main::label_result->Text = ProjectWin::main::textBox_num_for_convert->Text;
+    else
+    {
+        if (input_base_from != 10)
+        {
+            if (input_base_to == 10)
             {
-                if (input_base_to == 10)
-                {
-                    cout << "Перевод из " << input_base_from << " в 10 систему счисления:" << endl << endl;
-                    num = interpreter_10(input_num, input_base_from, false);
-                }
-                else
-                {
-                    cout << "Перевод из " << input_base_from << " в 10 систему счисления:" << endl << endl;
-                    num = interpreter_10(input_num, input_base_from, true);
-                }
+                num = interpreter_10(input_num, input_base_from, false);
             }
-            else num = stof(input_num);
-            if (input_base_to == 10) cout << "Число в 10 системе счисления: " << num << endl;
             else
             {
-                cout << "Перевод из 10 в " << input_base_to << " систему счисления:" << endl << endl;
-                cout << "Введённое число в " << input_base_to << " системе счисления: " << interpreter(num, input_base_to) << endl;
+                num = interpreter_10(input_num, input_base_from, true);
             }
         }
+        else num = stof(input_num);
+        if (input_base_to == 10) ProjectWin::main::label_result->Text = Convert::ToString(num) ;
+        else
+        {
+            ProjectWin::main::label_result->Text = msclr::interop::marshal_as<System::String^>(interpreter(num, input_base_to).c_str());
+        }
     }
+    
 
     ExitToMenu();
 }

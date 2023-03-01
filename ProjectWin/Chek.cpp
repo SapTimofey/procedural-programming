@@ -128,7 +128,7 @@ float chek(int type, string cons_out, bool main)
 float check_num(int type, String^ str)
 {
     String^ num = str;
-    float Fnum = 0;
+    double Fnum = 0;
     float s = 0, n = 0;
     bool flag = true;
 
@@ -136,7 +136,7 @@ float check_num(int type, String^ str)
     {
         for (int i = 0; i < num->Length; i++)
         {
-            if (num[0] == '.')
+            if (num[0] == ',')
             {
                 flag = false;
                 MessageBox::Show(str + " - число не может начинаться с точки.", "Ошибка", MessageBoxButtons::OK);
@@ -148,7 +148,7 @@ float check_num(int type, String^ str)
                 MessageBox::Show(str + " - число не содержит целой части.", "Ошибка", MessageBoxButtons::OK);
                 break;
             }
-            else if (num[i] == '.' || isdigit(num[i]) || (num[0] == '-' && num->Length > 1))
+            else if (num[i] == ',' || isdigit(num[i]) || (num[0] == '-' && num->Length > 1))
             {
                 continue;
             }
@@ -161,8 +161,8 @@ float check_num(int type, String^ str)
         }
 
         if (flag)
-        {
-            Fnum = Convert::ToDouble(num);
+        {            
+            Fnum = Convert::ToDouble(str);
             n = modf(Fnum, &s);
             switch (type)
             {
@@ -230,6 +230,6 @@ float check_num(int type, String^ str)
     }
     catch (...)
     {
-        MessageBox::Show(Convert::ToString(Convert::ToDouble("1.12")), "Ошибка", MessageBoxButtons::OK);
+        MessageBox::Show("Произошла ошибка.", "Ошибка", MessageBoxButtons::OK);
     }
 }
